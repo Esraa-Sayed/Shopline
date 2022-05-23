@@ -1,1 +1,1 @@
-# The-Shopify-App
+# Shopify
