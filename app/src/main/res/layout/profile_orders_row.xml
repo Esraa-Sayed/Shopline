@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/p_orders_row_cardview"
+    android:background="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        >
+        <TextView
+            android:id="@+id/p_row_order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="29/03/2022"
+            android:textColor="@color/gray"
+            android:paddingLeft="20dp"
+            android:textSize="25sp"
+            android:fontFamily="@font/cairo_bold"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/p_row_order_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="2000$"
+            android:textColor="@color/gray"
+            android:paddingRight="20dp"
+            android:textSize="25sp"
+            android:fontFamily="@font/cairo_bold"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
