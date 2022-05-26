@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/p_wishlist_row"
+    android:layout_marginTop="10dp"
+    android:layout_marginHorizontal="10dp"
+    app:cardElevation="5dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/p_wishlist_row_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="5dp"
+        android:elevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/p_wishlist_row_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/p_wishlist_row_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/p_wishlist_row_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/cairo_semi_bold"
+                android:gravity="center"
+                android:text="T-shirt"
+                android:textColor="@color/dark_gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/p_wishlist_row_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:fontFamily="@font/cairo_semi_bold"
+                android:paddingHorizontal="20dp"
+                android:text="200$"
+                android:textColor="@color/dark_gray"
+                android:textSize="15sp"
+                android:layout_below="@+id/p_wishlist_row_name"/>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_favorite"
+        android:layout_marginTop="-30dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/p_wishlist_row_cardview"
+        android:layout_alignParentRight="true"
+        android:elevation="10dp"/>
+
+</RelativeLayout>
