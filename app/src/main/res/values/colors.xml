@@ -15,5 +15,6 @@
     <color name="dark_blue">#515C6F</color>
     <color name="gradient_color1">#7F5B99</color>
     <color name="gradient_color2">#402E4D</color>
+    <color name="light_blue">#F3F3FA</color>
 
 </resources>
