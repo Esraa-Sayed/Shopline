@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Shopify</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="total">TOTAL</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 </resources>
