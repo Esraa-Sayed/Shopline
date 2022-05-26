@@ -13,4 +13,8 @@
     <string name="you_have_an_account">you have an account ! </string>
     <string name="log_in">LOG IN</string>
     <string name="register">register</string>
+    <string name="total">TOTAL</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 </resources>
