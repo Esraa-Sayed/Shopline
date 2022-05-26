@@ -13,13 +13,20 @@
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_group_left_arrow.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_group_right_arrow.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_house_gray.xml" value="0.26614583333333336" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_img_auth_2.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_left_arrow.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_location.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_maps_and_location.xml" value="0.26614583333333336" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_name.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_password.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_phone.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_right_arrow.xml" value="0.26614583333333336" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/ic_t_shirt.xml" value="0.26614583333333336" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/drawable/rounded_corners.xml" value="0.26614583333333336" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/activity_main.xml" value="0.72" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/favorite_item_layout.xml" value="0.4" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/fragment_favorite.xml" value="0.25" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/fragment_register.xml" value="0.4" />
       </map>
     </option>
   </component>
