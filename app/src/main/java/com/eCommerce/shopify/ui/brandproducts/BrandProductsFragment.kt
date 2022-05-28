@@ -1,4 +1,4 @@
-package com.eCommerce.shopify.ui.favorite
+package com.eCommerce.shopify.ui.brandproducts
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,14 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
+import com.eCommerce.shopify.R
+import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
+import com.eCommerce.shopify.ui.favorite.FavoriteAdapter
 import com.eCommerce.shopify.ui.favorite.model.Product
 
-class FavoriteFragment : Fragment() {
+class BrandProductsFragment : Fragment() {
 
-    private lateinit var binding:FragmentFavoriteBinding
-    private lateinit var favAdapter: FavoriteAdapter
-    private lateinit var gridManager:GridLayoutManager
+    private lateinit var binding:FragmentBrandProductsBinding
+    private lateinit var brandProductsAdapter: BrandProductsAdapter
+    private lateinit var gridLayoutManager: GridLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +25,8 @@ class FavoriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFavoriteBinding.inflate(inflater,container,false)
+        // Inflate the layout for this fragment
+        binding = FragmentBrandProductsBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -32,21 +35,25 @@ class FavoriteFragment : Fragment() {
 
         setupFavRecycler()
 
-        val favList = listOf(
+        val productsList = listOf(
             Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
             Product("shoes",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
             Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
+            Product("dress",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
+            Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
             Product("dress",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg")
+
         )
 
-        favAdapter.setFavProductList(favList)
-        favAdapter.notifyDataSetChanged()
+        brandProductsAdapter.setBrandProductsList(productsList)
+        brandProductsAdapter.notifyDataSetChanged()
+
     }
 
     fun setupFavRecycler(){
-        favAdapter = FavoriteAdapter(requireContext(), emptyList())
-        gridManager = GridLayoutManager(requireContext(),2)
-        binding.favRecycler.adapter = favAdapter
-        binding.favRecycler.layoutManager = gridManager
+        brandProductsAdapter = BrandProductsAdapter(requireContext(), emptyList())
+        gridLayoutManager = GridLayoutManager(requireContext(),2)
+        binding.brandProductsRecycler.adapter = brandProductsAdapter
+        binding.brandProductsRecycler.layoutManager = gridLayoutManager
     }
 }
