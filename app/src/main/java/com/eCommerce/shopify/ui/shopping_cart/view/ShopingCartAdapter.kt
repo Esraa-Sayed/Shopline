@@ -26,19 +26,6 @@ class ShopingCartAdapter(var listner: Listner) : RecyclerView.Adapter<ShopingCar
                 145.5)
 
     }
-//    fun bindy(imageUrl: String, name: String, amount: Int, price: Double, holder: ShoppingCartViewHolder){
-//        if (imageUrl !== null) {
-//            Glide.with(holder.itemView.context)
-//                .load(imageUrl)
-//                .into(holder._bindView.scRowItemImage)
-//        } else {
-//            holder._bindView.scRowItemImage.setImageResource(R.drawable.ic_launcher_background)
-//        }
-//        holder._bindView.scRowItemName.text = name
-//        holder._bindView.scRowItemPrice.text = price.toString()
-//        holder._bindView.scRowItemCount.text = amount.toString()
-//    }
-
     override fun getItemCount(): Int {
         //return shoppingCarts.size
         return 10
