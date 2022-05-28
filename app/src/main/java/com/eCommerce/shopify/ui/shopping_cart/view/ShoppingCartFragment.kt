@@ -28,21 +28,26 @@ class ShoppingCartFragment : Fragment(), Listner {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(ShoppingCartViewModel::class.java)
+        initShoppingCartRecyclerView()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ShoppingCartViewModel::class.java)
-        adapter = ShopingCartAdapter(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     fun initShoppingCartRecyclerView(){
+        adapter = ShopingCartAdapter(this)
         _binding?.scRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation =  LinearLayoutManager.VERTICAL
         }
+
         _binding?.scRecyclerView?.adapter = adapter
     }
 
