@@ -22,4 +22,8 @@
     <string name="wishlist">Wishlist</string>
     <string name="login_required">Login Required</string>
     <string name="login_register_msg">You need to login to view your profile\nGo to setting to login or register</string>
+    <string name="shipping_to">Shipping to:</string>
+    <string name="ahmed_ali">Ahmed ALi</string>
+    <string name="add_address">Add New Address</string>
+    <string name="address">Address:</string>
 </resources>
