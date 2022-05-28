@@ -6,38 +6,37 @@
     android:id="@+id/p_orders_row_cardview"
     android:background="@color/white"
     app:cardCornerRadius="10dp"
-    app:cardElevation="5dp"
-    android:layout_marginVertical="5dp"
+    app:cardElevation="8dp"
+    android:layout_marginTop="10dp"
     android:layout_marginHorizontal="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         >
-
         <TextView
             android:id="@+id/p_row_order_date"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:fontFamily="@font/cairo_bold"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dp"
             android:text="29/03/2022"
             android:textColor="@color/gray"
-            android:textSize="20sp" />
+            android:paddingLeft="20dp"
+            android:textSize="25sp"
+            android:fontFamily="@font/cairo_bold"
+            android:gravity="center_vertical"
+            android:layout_alignParentLeft="true"/>
 
         <TextView
             android:id="@+id/p_row_order_price"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:fontFamily="@font/cairo_bold"
-            android:gravity="center_vertical"
-            android:paddingRight="20dp"
             android:text="2000$"
             android:textColor="@color/gray"
-            android:textSize="20sp" />
+            android:paddingRight="20dp"
+            android:textSize="25sp"
+            android:fontFamily="@font/cairo_bold"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>
