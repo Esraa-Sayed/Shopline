@@ -26,4 +26,9 @@
     <string name="ahmed_ali">Ahmed ALi</string>
     <string name="add_address">Add New Address</string>
     <string name="address">Address:</string>
+    <string name="hello_welcome_back">Hello, Welcome back.</string>
+    <string name="use_an_account_or_register_now_to_enjoy_more_features">Use an account or register now, To enjoy more features</string>
+    <string name="login">Login</string>
+    <string name="not_registered">Not registered</string>
+    <string name="create_account">CREATE ACCOUNT</string>
 </resources>
