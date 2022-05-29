@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
+import com.eCommerce.shopify.ui.OnProductClickListener
 import com.eCommerce.shopify.ui.favorite.FavoriteAdapter
 import com.eCommerce.shopify.ui.favorite.model.Product
 
-class BrandProductsFragment : Fragment() {
+class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     private lateinit var binding:FragmentBrandProductsBinding
     private lateinit var brandProductsAdapter: BrandProductsAdapter
@@ -33,7 +34,7 @@ class BrandProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupFavRecycler()
+        setupBrandProductsRecycler()
 
         val productsList = listOf(
             Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
@@ -50,10 +51,18 @@ class BrandProductsFragment : Fragment() {
 
     }
 
-    fun setupFavRecycler(){
-        brandProductsAdapter = BrandProductsAdapter(requireContext(), emptyList())
+    fun setupBrandProductsRecycler(){
+        brandProductsAdapter = BrandProductsAdapter(requireContext(), emptyList(),this)
         gridLayoutManager = GridLayoutManager(requireContext(),2)
         binding.brandProductsRecycler.adapter = brandProductsAdapter
         binding.brandProductsRecycler.layoutManager = gridLayoutManager
+    }
+
+    override fun onProductItemClick() {
+
+    }
+
+    override fun onFavBtnClick() {
+
     }
 }

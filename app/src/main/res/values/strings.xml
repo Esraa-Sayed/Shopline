@@ -22,4 +22,7 @@
     <string name="wishlist">Wishlist</string>
     <string name="login_required">Login Required</string>
     <string name="login_register_msg">You need to login to view your profile\nGo to setting to login or register</string>
+    <string name="success_screen_title">Order Placed!</string>
+    <string name="success_screen_msg">Your order was placed successfully. For more details, check All My Orders page under Profile tab</string>
+    <string name="btn_in_success_screen">my orders</string>
 </resources>

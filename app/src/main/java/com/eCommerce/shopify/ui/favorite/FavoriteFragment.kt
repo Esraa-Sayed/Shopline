@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
+import com.eCommerce.shopify.ui.OnProductClickListener
 import com.eCommerce.shopify.ui.favorite.model.Product
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment() ,OnProductClickListener{
 
     private lateinit var binding:FragmentFavoriteBinding
     private lateinit var favAdapter: FavoriteAdapter
@@ -44,9 +45,17 @@ class FavoriteFragment : Fragment() {
     }
 
     fun setupFavRecycler(){
-        favAdapter = FavoriteAdapter(requireContext(), emptyList())
+        favAdapter = FavoriteAdapter(requireContext(), emptyList(),this)
         gridManager = GridLayoutManager(requireContext(),2)
         binding.favRecycler.adapter = favAdapter
         binding.favRecycler.layoutManager = gridManager
+    }
+
+    override fun onProductItemClick() {
+
+    }
+
+    override fun onFavBtnClick() {
+
     }
 }
