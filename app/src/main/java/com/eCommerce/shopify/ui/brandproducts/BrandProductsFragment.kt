@@ -1,10 +1,12 @@
 package com.eCommerce.shopify.ui.brandproducts
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
@@ -18,6 +20,8 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     private lateinit var brandProductsAdapter: BrandProductsAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
 
+    private val args by navArgs<BrandProductsFragmentArgs>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,7 +29,7 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentBrandProductsBinding.inflate(inflater,container,false)
         return binding.root
@@ -33,6 +37,8 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d("HelloFromAhmed:", "Brand Id => ${args.brandId}")
 
         setupBrandProductsRecycler()
 

@@ -45,6 +45,13 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_brandProductsFragment"
+            app:destination="@id/brandProductsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -59,10 +66,18 @@
         android:id="@+id/shoppingCartFragment"
         android:name="com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragment"
         android:label="shopping_cart_fragment"
-        tools:layout="@layout/shopping_cart_fragment" >
-        <action
+        tools:layout="@layout/shopping_cart_fragment"
+            <action
             android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment" />
+            app:destination="@id/checkoutFragment"/>
+    <fragment
+        android:id="@+id/brandProductsFragment"
+        android:name="com.eCommerce.shopify.ui.brandproducts.BrandProductsFragment"
+        android:label="fragment_brand_products"
+        tools:layout="@layout/fragment_brand_products" >
+        <argument
+            android:name="brandId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
