@@ -58,7 +58,7 @@ class MainFragment : Fragment() {
                 R.id.navigation_home,
                 R.id.navigation_categories,
                 R.id.navigation_profile,
-                R.id.navigation_settings
+                R.id.navigation_setting
             )
         )
         (activity as AppCompatActivity).setupActionBarWithNavController(navController, appBarConfiguration)
