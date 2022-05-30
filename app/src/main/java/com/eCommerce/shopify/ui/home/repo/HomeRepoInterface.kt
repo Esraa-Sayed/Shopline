@@ -1,9 +1,8 @@
-package com.eCommerce.shopify.network
+package com.eCommerce.shopify.ui.home.repo
 
 import com.eCommerce.shopify.model.SmartCollectionsBrand
 import retrofit2.Response
 
-interface RemoteSource {
-
+interface HomeRepoInterface {
     suspend fun getSmartCollectionsBrand(): Response<SmartCollectionsBrand>
 }
