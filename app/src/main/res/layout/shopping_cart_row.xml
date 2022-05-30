@@ -2,11 +2,11 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sc_row_cardview"
     android:backgroundTint="@color/white"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="15dp"
     app:cardElevation="8dp"
     android:layout_marginTop="10dp"
     android:layout_marginHorizontal="10dp">
@@ -15,11 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/sc_row_item_image"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -31,7 +30,7 @@
             android:text="Tag Heuer wriskwer"
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/dark_gray"
             android:fontFamily="@font/cairo_semi_bold"
             app:layout_constraintStart_toEndOf="@+id/sc_row_item_image"
@@ -44,9 +43,9 @@
             android:text="$1100"
             android:layout_marginTop="8dp"
             android:layout_marginStart="20dp"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/secondary_color"
-            android:fontFamily="@font/cairo_semi_bold"
+            android:fontFamily="@font/cairo_regular"
             app:layout_constraintStart_toEndOf="@+id/sc_row_item_image"
             app:layout_constraintTop_toBottomOf="@+id/sc_row_item_name"/>
 
@@ -63,7 +62,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="150dp"
+            android:layout_width="120dp"
             android:layout_height="40dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
@@ -77,19 +76,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="3">
-
-                <!--                <Button-->
-                <!--                    android:layout_width="0dp"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:layout_weight="1"-->
-                <!--                    style="@android:style/Animation"-->
-                <!--                    android:text="-"-->
-                <!--                    android:textSize="20sp"-->
-                <!--                    android:textColor="@color/dark_gray"-->
-                <!--                    android:gravity="center"-->
-                <!--                    android:fontFamily="@font/cairo_extra_bold"-->
-                <!--                    android:background="@android:color/transparent"/>-->
-
                 <TextView
                     android:id="@+id/sc_row_plus_item"
                     android:layout_width="0dp"
@@ -107,7 +93,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="3"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/cairo_semi_bold"/>
                 <TextView
                     android:id="@+id/sc_row_minus_item"

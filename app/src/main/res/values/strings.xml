@@ -53,4 +53,7 @@
     <string name="btn_in_success_screen">my orders</string>
     <string name="ok">OK</string>
     <string name="shipping_address">SHIPPING ADDRESS</string>
+    <string name="city">City</string>
+    <string name="add_adress">Add Adress</string>
+    <string name="_total">Total</string>
 </resources>
