@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
@@ -15,7 +17,7 @@ import com.eCommerce.shopify.ui.shopping_cart.view_model.ShoppingCartViewModel
 class ShoppingCartFragment : Fragment(), Listner {
     private var _binding: ShoppingCartFragmentBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var navController: NavController
     private lateinit var viewModel: ShoppingCartViewModel
     lateinit var adapter: ShopingCartAdapter
 
@@ -41,6 +43,14 @@ class ShoppingCartFragment : Fragment(), Listner {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initShoppingCartRecyclerView()
+        addCheckoutListener()
+    }
+
+    private fun addCheckoutListener() {
+        this.navController = findNavController()
+        binding.shCheckoutCard.setOnClickListener {
+            navController.navigate(R.id.action_shoppingCartFragment_to_checkoutFragment)
+        }
     }
 
     fun initShoppingCartRecyclerView(){
