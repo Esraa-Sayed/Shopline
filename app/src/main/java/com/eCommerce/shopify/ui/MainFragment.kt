@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -22,6 +24,8 @@ class MainFragment : Fragment() {
 
     private lateinit var myView: View
 
+    private lateinit var navController: NavController
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,12 +40,24 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         this.myView = view
+        this.navController = findNavController()
         setupToolbar()
+        handleToolbarEvent()
         configureBottomNavView()
     }
 
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
+    }
+
+    private fun handleToolbarEvent() {
+        binding.appBarHome.cardViewFavorite.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_favoriteFragment)
+        }
+
+        binding.appBarHome.cardViewShoppingCart.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_shoppingCartFragment)
+        }
     }
 
     private fun configureBottomNavView() {

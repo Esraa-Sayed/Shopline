@@ -21,5 +21,29 @@
         android:id="@+id/mainFragment"
         android:name="com.eCommerce.shopify.ui.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.eCommerce.shopify.ui.login.view.LoginFragment"
+        android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.eCommerce.shopify.ui.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragment"
+        android:label="shopping_cart_fragment"
+        tools:layout="@layout/shopping_cart_fragment" />
 </navigation>

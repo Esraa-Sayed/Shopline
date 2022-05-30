@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.databinding.SettingFragmentBinding
@@ -18,13 +19,17 @@ class SettingFragment : Fragment() {
     }
 
     private lateinit var _binding: SettingFragmentBinding
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var viewModel: SettingViewModel
+
+    private val mNavController by lazy {
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = SettingFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -34,6 +39,14 @@ class SettingFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.loginBtn.setOnClickListener {
+            mNavController.navigate(R.id.action_mainFragment_to_loginFragment)
+        }
     }
 
 }

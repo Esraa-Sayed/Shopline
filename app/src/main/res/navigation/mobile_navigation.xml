@@ -20,11 +20,11 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.eCommerce.shopify.ui.profile.view.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="@string/title_profile"
         tools:layout="@layout/profile_fragment" />
     <fragment
         android:id="@+id/navigation_setting"
         android:name="com.eCommerce.shopify.ui.setting.view.SettingFragment"
-        android:label="setting_fragment"
+        android:label="@string/title_settings"
         tools:layout="@layout/setting_fragment" />
 </navigation>
