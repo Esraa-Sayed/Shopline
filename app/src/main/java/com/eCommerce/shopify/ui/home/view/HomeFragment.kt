@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -15,10 +17,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentHomeBinding
 import com.eCommerce.shopify.model.SliderItem
+import com.eCommerce.shopify.model.SmartCollectionsBrand
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.home.repo.HomeRepo
 import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModel
 import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModelFactory
+import com.eCommerce.shopify.utils.AppConstants.showAlert
 import kotlin.math.abs
 
 class HomeFragment : Fragment() {
@@ -26,6 +30,9 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModelFactory: HomeViewModelFactory
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
+
+//    private lateinit var homeAdapter: HomeAdapter
+//    private lateinit var gridLayoutManager: GridLayoutManager
 
     private lateinit var myView: View
     private val sliderItems = mutableListOf(
@@ -65,22 +72,34 @@ class HomeFragment : Fragment() {
         )
         viewModel = ViewModelProvider(this, homeViewModelFactory)[HomeViewModel::class.java]
 
-        /*viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
-            binding.progressBar.visibility = View.GONE
-            Toast.makeText(myView.context, it, Toast.LENGTH_LONG).show()
+        viewModel.getSmartCollectionsBrand()
+
+        viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
+            showAlert(
+                myView.context,
+                R.string.error,
+                it,
+                R.drawable.ic_error
+            )
         })
         viewModel.showProgressBar.observe(viewLifecycleOwner, {
             if (it) {
                 binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
             }
         })
-        viewModel.weatherModelResponse.observe(viewLifecycleOwner, {
+        viewModel.smartCollectionsBrandResponse.observe(viewLifecycleOwner, {
             renderDataOnScreen(it)
-        })*/
+        })
+    }
+
+    private fun renderDataOnScreen(it: SmartCollectionsBrand) {
+
     }
 
     private fun handleUIViewPager() {
-        binding.viewPagerAdsSlider.adapter = SliderAdapter(sliderItems, binding.viewPagerAdsSlider)
+        binding.viewPagerAdsSlider.adapter = SliderAdapter(sliderItems)
         binding.viewPagerAdsSlider.clipToPadding = false
         binding.viewPagerAdsSlider.clipChildren = false
         binding.viewPagerAdsSlider.offscreenPageLimit = 3

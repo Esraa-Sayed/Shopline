@@ -8,6 +8,8 @@ import com.eCommerce.shopify.R
 object AppConstants {
 
     const val BASE_URL: String = BuildConfig.BASE_URL
+    const val API_KEY: String = BuildConfig.API_KEY
+    const val PASSWORD: String = BuildConfig.PASSWORD
 
     const val SPLASH_TIME_OUT: Long = 3000
 
