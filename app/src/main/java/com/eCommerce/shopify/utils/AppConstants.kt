@@ -1,6 +1,8 @@
 package com.eCommerce.shopify.utils
 
 import android.content.Context
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import com.eCommerce.shopify.BuildConfig
 import com.eCommerce.shopify.R
@@ -20,5 +22,9 @@ object AppConstants {
             .setPositiveButton(R.string.ok) { _, _ -> }
             .setIcon(icon)
             .show()
+    }
+
+    fun playAnimation(view: View, context: Context, animation: Int) {
+        view.startAnimation(AnimationUtils.loadAnimation(context, animation))
     }
 }

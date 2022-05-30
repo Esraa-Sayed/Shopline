@@ -26,6 +26,7 @@ class HomeViewModel(private val _repo: HomeRepoInterface) : ViewModel() {
         run {
             t.printStackTrace()
             _errorMsgResponse.postValue(t.message)
+            _showProgressBar.postValue(false)
         }
     }
 
@@ -34,10 +35,8 @@ class HomeViewModel(private val _repo: HomeRepoInterface) : ViewModel() {
             _showProgressBar.postValue(true)
             val collectionBrands = _repo.getSmartCollectionsBrand()
             if (collectionBrands.isSuccessful) {
-                Log.d("asssssss:", collectionBrands.toString())
                 _smartCollectionsBrandResponse.postValue(collectionBrands.body())
             } else {
-                Log.d("assssssshh:", collectionBrands.toString())
                 _errorMsgResponse.postValue(collectionBrands.message())
             }
             _showProgressBar.postValue(false)
