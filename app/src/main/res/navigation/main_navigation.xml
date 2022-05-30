@@ -66,7 +66,10 @@
         android:id="@+id/shoppingCartFragment"
         android:name="com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragment"
         android:label="shopping_cart_fragment"
-        tools:layout="@layout/shopping_cart_fragment" />
+        tools:layout="@layout/shopping_cart_fragment"
+            <action
+            android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment"/>
     <fragment
         android:id="@+id/brandProductsFragment"
         android:name="com.eCommerce.shopify.ui.brandproducts.BrandProductsFragment"
@@ -76,4 +79,9 @@
             android:name="brandId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.eCommerce.shopify.ui.checkout.view.CheckoutFragment"
+        android:label="checkout_fragment"
+        tools:layout="@layout/checkout_fragment" />
 </navigation>

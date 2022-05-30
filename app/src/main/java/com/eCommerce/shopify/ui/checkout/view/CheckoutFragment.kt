@@ -11,9 +11,6 @@ import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
 
 class CheckoutFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CheckoutFragment()
-    }
 
     private lateinit var viewModel: CheckoutViewModel
 
@@ -24,10 +21,9 @@ class CheckoutFragment : Fragment() {
         return inflater.inflate(R.layout.checkout_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CheckoutViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
