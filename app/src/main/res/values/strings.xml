@@ -7,7 +7,6 @@
     <string name="hint_msg_in_register">Use an account or register now, To enjoy more features</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
-    <string name="phone">Phone</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="you_have_an_account">you have an account ! </string>
@@ -22,6 +21,11 @@
     <string name="wishlist">Wishlist</string>
     <string name="login_required">Login Required</string>
     <string name="login_register_msg">You need to login to view your profile\nGo to setting to login or register</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_category">Categories</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_settings">Settings</string>
     <string name="shipping_to">Shipping to:</string>
     <string name="ahmed_ali">Ahmed ALi</string>
     <string name="add_address">Add New Address</string>
@@ -31,4 +35,17 @@
     <string name="login">Login</string>
     <string name="not_registered">Not registered</string>
     <string name="create_account">CREATE ACCOUNT</string>
+    <string name="currency">Currency</string>
+    <string name="aboutUs">This application is our graduation\n project, try to use this application and if you\n found any problem, please contact us or\n comment on google play to solve it and\n improve our service.</string>
+    <string name="our_team">Our Team:\n Ahmed Ali El-Sayed\n Esraa Sayed Ahmed\n Sara Nassrat\n Thoraya Hamdy Elsayed</string>
+    <string name="about_us">About Us</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="let_access_your_location">Let Access your location</string>
+    <string name="no_access_location_msg">We need your permission in order to open\nmap and pick up your location or specify any\nother location you want.</string>
+    <string name="phone">Phone</string>
+    <string name="country">Country</string>
+    <string name="confirm_add_address">Add Address</string>
+    <string name="location_access">Location Access</string>
+    <string name="enable">Enable</string>
 </resources>

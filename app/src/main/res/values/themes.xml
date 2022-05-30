@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Shopify" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Shopify" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#A53FA3</item>
-        <item name="colorPrimaryVariant">#A53FA3</item>
+        <item name="colorPrimary">@color/plum</item>
+        <item name="colorPrimaryVariant">@color/plum</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,4 +13,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.Shopify.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Shopify.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

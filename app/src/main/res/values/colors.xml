@@ -11,10 +11,15 @@
     <color name="light_gray">#EDEDED</color>
     <color name="gray">#AAAAAA</color>
     <color name="main_color">#A53FA3</color>
+    <color name="main_color_transparent">#36982992</color>
     <color name="secondary_color">#982992</color>
     <color name="dark_blue">#515C6F</color>
     <color name="gradient_color1">#7F5B99</color>
     <color name="gradient_color2">#402E4D</color>
     <color name="light_blue">#F3F3FA</color>
 
+    <color name="plum">#982992</color>
+    <color name="vivid_violet">#A53FA3</color>
+    <color name="mine_shaft">#222222</color>
+    <color name="lola">#E6DBE6</color>
 </resources>
