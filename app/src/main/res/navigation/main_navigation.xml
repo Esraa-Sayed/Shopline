@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/shoppingCartFragment"
         android:name="com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragment"
-        android:label="shopping_cart_fragment"
+        android:label="@string/Shoppingcart"
         tools:layout="@layout/shopping_cart_fragment" >
         <action
             android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
@@ -53,6 +53,6 @@
     <fragment
         android:id="@+id/checkoutFragment"
         android:name="com.eCommerce.shopify.ui.checkout.view.CheckoutFragment"
-        android:label="checkout_fragment"
+        android:label="@string/Checkout"
         tools:layout="@layout/checkout_fragment" />
 </navigation>
