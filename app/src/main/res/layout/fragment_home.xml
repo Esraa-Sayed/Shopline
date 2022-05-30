@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.view.HomeFragment">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="24dp"
+        android:indeterminateTint="@color/plum"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPagerAdsSlider"
         android:layout_width="match_parent"
@@ -43,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewPagerAdsSlider"
         app:layout_constraintStart_toStartOf="@+id/viewPagerAdsSlider"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" >
+        app:layout_constraintTop_toBottomOf="@+id/textView7">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

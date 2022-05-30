@@ -1,20 +1,15 @@
 package com.eCommerce.shopify.ui.home.view
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.model.SliderItem
 import com.makeramen.roundedimageview.RoundedImageView
 
 class SliderAdapter(
-    private var sliderItems: MutableList<SliderItem>,
-    private var viewPager2: ViewPager2
+    private var sliderItems: MutableList<SliderItem>
 ) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
