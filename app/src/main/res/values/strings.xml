@@ -30,6 +30,11 @@
     <string name="ahmed_ali">Ahmed ALi</string>
     <string name="add_address">Add New Address</string>
     <string name="address">Address:</string>
+    <string name="hello_welcome_back">Hello, Welcome back.</string>
+    <string name="use_an_account_or_register_now_to_enjoy_more_features">Use an account or register now, To enjoy more features</string>
+    <string name="login">Login</string>
+    <string name="not_registered">Not registered</string>
+    <string name="create_account">CREATE ACCOUNT</string>
     <string name="currency">Currency</string>
     <string name="aboutUs">This application is our graduation\n project, try to use this application and if you\n found any problem, please contact us or\n comment on google play to solve it and\n improve our service.</string>
     <string name="our_team">Our Team:\n Ahmed Ali El-Sayed\n Esraa Sayed Ahmed\n Sara Nassrat\n Thoraya Hamdy Elsayed</string>

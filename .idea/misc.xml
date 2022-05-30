@@ -3,12 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/drawable/ic_baseline_remove_red_eye_24.xml" value="0.2703125" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/drawable/ic_baseline_visibility_off_24.xml" value="0.2703125" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/drawable/rounded_corners.xml" value="0.21944444444444444" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/drawable/show_password.xml" value="0.2703125" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/address_row.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/addresses_fragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/checkout_fragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/choose_address_dialog_checkout_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/choose_payment_method_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/favorite_item_layout.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/fragment_favorite.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/login_fragment.xml" value="0.264" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/orders_details_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/orders_details_row.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/orders_fragment.xml" value="0.1" />
