@@ -18,7 +18,7 @@ class ProfileFragment : Fragment() {
         fun newInstance() = ProfileFragment()
     }
     private lateinit var _binding: ProfileFragmentBinding
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var viewModel: ProfileViewModel
     lateinit var ordersAdapter: OrdersAdapter
     lateinit var wishlistAdapter: WishlistAdapter
@@ -26,7 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = ProfileFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         return view

@@ -51,4 +51,5 @@
     <string name="success_screen_title">Order Placed!</string>
     <string name="success_screen_msg">Your order was placed successfully. For more details, check All My Orders page under Profile tab</string>
     <string name="btn_in_success_screen">my orders</string>
+    <string name="ok">OK</string>
 </resources>
