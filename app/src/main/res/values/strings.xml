@@ -67,4 +67,6 @@
     <string name="total_amount">Total Amount:</string>
     <string name="place_order">Place Order</string>
     <string name="back">Back</string>
+    <string name="cant_be_empty">Can\'t be empty</string>
+    <string name="OrderDetails">Order Details</string>
 </resources>

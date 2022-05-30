@@ -33,7 +33,7 @@
                 android:focusable="true"
                 android:padding="@dimen/_10sdp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -105,25 +105,24 @@
                         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/address_click_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:focusable="true"
-                        android:padding="@dimen/_10sdp"
-                        app:cardCornerRadius="@dimen/_10sdp"
-
+                        android:backgroundTint="#E3E5E8"
+                        app:cardCornerRadius="@dimen/_15sdp"
+                        android:elevation="@dimen/_4sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
-                            android:layout_marginEnd="1dp"
-                            android:background="@drawable/ic_round_arrow_forward_ios_24" />
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/ic_round_arrow_forward_ios_24"
+                             />
                     </androidx.cardview.widget.CardView>
 
 
@@ -140,7 +139,7 @@
                 android:focusable="true"
                 android:padding="@dimen/_10sdp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/go_to_choose_address">
@@ -183,24 +182,23 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/payment_method_click_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:focusable="true"
-                        android:padding="@dimen/_10sdp"
+                        android:padding="@dimen/_15sdp"
+                        android:backgroundTint="#E3E5E8"
                         app:cardCornerRadius="@dimen/_10sdp"
-
+                        android:elevation="@dimen/_4sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
-                            android:layout_marginEnd="1dp"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
                             android:background="@drawable/ic_round_arrow_forward_ios_24" />
                     </androidx.cardview.widget.CardView>
 
@@ -218,7 +216,7 @@
                 android:focusable="true"
                 android:padding="@dimen/_10sdp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/go_to_payment_method">
@@ -301,7 +299,7 @@
                 android:focusable="true"
                 android:padding="@dimen/_10sdp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView3">
@@ -363,7 +361,7 @@
                 android:focusable="true"
                 android:padding="@dimen/_10sdp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView4">
@@ -421,7 +419,7 @@
                 android:focusable="true"
                 android:padding="@dimen/_10sdp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView7">

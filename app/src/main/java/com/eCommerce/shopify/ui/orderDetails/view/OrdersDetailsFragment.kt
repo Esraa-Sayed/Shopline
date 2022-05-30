@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.OrdersDetailsFragmentBinding
 import com.eCommerce.shopify.model.OrderDetailsItems
 import com.eCommerce.shopify.ui.orderDetails.viewModel.OrdersDetailsViewModel
@@ -40,6 +41,7 @@ class OrdersDetailsFragment : Fragment() {
         val items = listOf<OrderDetailsItems>(OrderDetailsItems("AyHaga","Bag","$250","6"),OrderDetailsItems("AyHaga","Bag","$250","6"))
         orderDetailsAdapter = OrderDetailsAdapter(myView.context,items)
         var layoutMan = LinearLayoutManager(activity)
+        getString(R.string.OrderDetails).also { binding.appBar.toolbar.title = it }
         binding.orderDetailsRecyclerView.apply {
             setHasFixedSize(true)
             layoutMan.orientation = RecyclerView.VERTICAL

@@ -54,5 +54,14 @@
         android:id="@+id/checkoutFragment"
         android:name="com.eCommerce.shopify.ui.checkout.view.CheckoutFragment"
         android:label="@string/Checkout"
-        tools:layout="@layout/checkout_fragment" />
+        tools:layout="@layout/checkout_fragment" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_successFragment2"
+            app:destination="@id/successFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment2"
+        android:name="com.eCommerce.shopify.ui.success.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" />
 </navigation>
