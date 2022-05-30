@@ -10,9 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -167,7 +165,5 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     override fun onBrandClick(smartCollection: SmartCollection) {
         val action = MainFragmentDirections.actionMainFragmentToBrandProductsFragment(smartCollection.id)
         mNavController.navigate(action)
-
-        Toast.makeText(myView.context, smartCollection.title, Toast.LENGTH_LONG).show()
     }
 }
