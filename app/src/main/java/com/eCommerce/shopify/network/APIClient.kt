@@ -1,6 +1,7 @@
 package com.eCommerce.shopify.network
 
 import com.eCommerce.shopify.model.CustomCollectionsCategory
+import com.eCommerce.shopify.model.OrderModel
 import com.eCommerce.shopify.model.SmartCollectionsBrand
 import com.eCommerce.shopify.model.UserData
 import retrofit2.Response
@@ -25,5 +26,9 @@ class APIClient private constructor(): RemoteSource {
     }
     override suspend fun getCustomCollectionsCategory(): Response<CustomCollectionsCategory> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getCustomCollectionsCategory()
+    }
+
+    override suspend fun getUserOrders(id: Long): Response<OrderModel> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).getUserOrders(id)
     }
 }
