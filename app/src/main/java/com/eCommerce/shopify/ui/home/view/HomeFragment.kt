@@ -163,7 +163,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     }
 
     override fun onBrandClick(smartCollection: SmartCollection) {
-        val action = MainFragmentDirections.actionMainFragmentToBrandProductsFragment(smartCollection.id)
+        val action = MainFragmentDirections.actionMainFragmentToBrandProductsFragment(smartCollection.title)
         mNavController.navigate(action)
     }
 }
