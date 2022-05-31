@@ -20,7 +20,9 @@ class APIClient private constructor(): RemoteSource {
 
 
     override suspend fun getUserWithEmail(userEmail: String): Response<UserData> {
-        return BaseRetrofitHelper.getInstance().create(APIService::class.java).getUserWithEmail(userEmail)
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java)
+            .getUserWithEmail(userEmail)
+    }
     override suspend fun getCustomCollectionsCategory(): Response<CustomCollectionsCategory> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getCustomCollectionsCategory()
     }
