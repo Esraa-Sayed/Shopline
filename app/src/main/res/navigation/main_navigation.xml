@@ -45,6 +45,12 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_brandProductsFragment"
+            app:destination="@id/brandProductsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -69,4 +75,14 @@
         android:name="com.eCommerce.shopify.ui.checkout.view.CheckoutFragment"
         android:label="checkout_fragment"
         tools:layout="@layout/checkout_fragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.eCommerce.shopify.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/brandProductsFragment"
+        android:name="com.eCommerce.shopify.ui.brandproducts.view.BrandProductsFragment"
+        android:label="fragment_brand_products"
+        tools:layout="@layout/fragment_brand_products" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.network
 
+import com.eCommerce.shopify.model.BrandCollectionResponse
 import com.eCommerce.shopify.model.SmartCollectionsBrand
 import retrofit2.Response
 
@@ -15,4 +16,9 @@ class APIClient private constructor(): RemoteSource {
     override suspend fun getSmartCollectionsBrand(): Response<SmartCollectionsBrand> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getSmartCollectionsBrand()
     }
+
+    override suspend fun getCollectionWithId(collectionId: Long): Response<BrandCollectionResponse> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).getCollectionWithId(collectionId)
+    }
+
 }
