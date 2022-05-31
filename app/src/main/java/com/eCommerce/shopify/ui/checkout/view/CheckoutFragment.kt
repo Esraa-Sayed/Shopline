@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.CheckoutFragmentBinding
-import com.eCommerce.shopify.model.address
+import com.eCommerce.shopify.model.Addresse
 import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.AddressesAdapter
 import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.OnRowClicked
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
@@ -83,8 +83,7 @@ class CheckoutFragment : Fragment(),OnRowClicked{
         dialogAddress.setContentView(R.layout.choose_address_dialog_checkout_screen)
         dialogAddress.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialogRecyclerView = dialogAddress.findViewById(R.id.checkoutScreenChooseAddressRecyclerView)
-        val addresses = listOf<address>(address("Egypt","Cairo,Helwan"), address("Eqypt","M,R"))
-        addressesAdapter = AddressesAdapter(myView.context, addresses,this)
+        addressesAdapter = AddressesAdapter(myView.context, emptyList(),this)
         val layoutManag = LinearLayoutManager(activity)
         dialogRecyclerView.apply {
             setHasFixedSize(true)
@@ -129,9 +128,9 @@ class CheckoutFragment : Fragment(),OnRowClicked{
 
     }
 
-    override fun onRowClickedListener(address: address) {
+    override fun onRowClickedListener(address: Addresse) {
         dialogAddress.dismiss()
         binding.countryName.text = address.country
-        binding.fullAddress.text = address.fullAddress
+        binding.fullAddress.text = address.address1.toString()
     }
 }

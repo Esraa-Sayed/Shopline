@@ -13,4 +13,6 @@ interface RemoteSource {
 
     suspend fun getUserOrders(id:Long):Response<OrderModel>
 
+    suspend fun getUserAddresses(id:Long):Response<AddressesUserModel>
+
 }
