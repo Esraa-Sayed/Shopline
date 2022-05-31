@@ -1,9 +1,7 @@
 package com.eCommerce.shopify.network
 
-import com.eCommerce.shopify.model.CustomCollectionsCategory
-import com.eCommerce.shopify.model.BrandProductsResponse
-import com.eCommerce.shopify.model.SmartCollectionsBrand
-import com.eCommerce.shopify.model.UserData
+import com.eCommerce.shopify.model.*
+
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -21,6 +19,11 @@ interface APIService {
     @GET("custom_collections.json")
     suspend fun getCustomCollectionsCategory(): Response<CustomCollectionsCategory>
 
+
     @GET("products.json")
     suspend fun getCollectionWithId(@Query("vendor") vendor:String):Response<BrandProductsResponse>
+
+    @GET("customers/{id}/orders.json")
+    suspend fun getUserOrders( @Path("id")id: Long):Response<OrderModel>
+
 }

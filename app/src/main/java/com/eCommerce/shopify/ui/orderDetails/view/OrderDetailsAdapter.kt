@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.OrdersDetailsRowBinding
 import com.eCommerce.shopify.model.OrderDetailsItems
-import com.eCommerce.shopify.model.OrderModel
 
 class OrderDetailsAdapter(val context: Context,var itemsInOrder:List<OrderDetailsItems>):
     RecyclerView.Adapter<OrderDetailsAdapter.OrderDetailsViewHolder>() {

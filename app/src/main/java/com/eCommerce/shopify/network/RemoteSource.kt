@@ -1,9 +1,7 @@
 package com.eCommerce.shopify.network
 
-import com.eCommerce.shopify.model.CustomCollectionsCategory
-import com.eCommerce.shopify.model.BrandProductsResponse
-import com.eCommerce.shopify.model.SmartCollectionsBrand
-import com.eCommerce.shopify.model.UserData
+import com.eCommerce.shopify.model.*
+
 import retrofit2.Response
 
 interface RemoteSource {
@@ -14,5 +12,9 @@ interface RemoteSource {
 
     suspend fun getCustomCollectionsCategory(): Response<CustomCollectionsCategory>
 
+
     suspend fun getCollectionWithId(vendor:String):Response<BrandProductsResponse>
+
+    suspend fun getUserOrders(id:Long):Response<OrderModel>
+
 }
