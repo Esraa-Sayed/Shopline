@@ -7,6 +7,15 @@
     tools:context=".ui.brandproducts.view.BrandProductsFragment"
     android:background="@color/light_gray">
 
+    <include
+        android:id="@+id/app_bar_home"
+        layout="@layout/app_bar_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <SeekBar
         android:id="@+id/brandProductsSeekbar"
         android:layout_width="match_parent"
@@ -17,7 +26,7 @@
         android:layout_margin="10dp"
         android:min="0"
         android:max="10000"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

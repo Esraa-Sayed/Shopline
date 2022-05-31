@@ -34,7 +34,7 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         position: Int
     ) {
         holder.productTitle.text = brandProducts[position].title
-        //holder.productPrice.text = brandProducts[position].price.toString()
+        holder.productPrice.text = brandProducts[position].variants[0].price
         //holder.productImg.setImageResource(R.drawable.t_shirt_pink)
         Glide.with(context)
             .load(brandProducts[position].productImage.src)

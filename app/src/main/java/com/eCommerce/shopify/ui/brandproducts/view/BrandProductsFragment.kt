@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.OnProductClickListener
@@ -22,6 +26,7 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var brandProductsViewModel: BrandProductsViewModel
     private lateinit var brandProductsViewModelFactory: BrandProductsViewModelFactory
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,17 +44,23 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*brandProductsViewModelFactory = BrandProductsViewModelFactory(
+        this.navController = findNavController()
+        setupToolbar()
+        handleToolbarEvent()
+
+        binding.appBarHome.toolbar.title = getString(R.string.products)
+
+        brandProductsViewModelFactory = BrandProductsViewModelFactory(
             BrandProductsRepository.getInstance(APIClient.getInstance())
         )
         brandProductsViewModel = ViewModelProvider(this,brandProductsViewModelFactory).get(BrandProductsViewModel::class.java)
         setupBrandProductsRecycler()
 
-        brandProductsViewModel.getBrandProductsCollectionList(400220946667)
+        brandProductsViewModel.getBrandProductsCollectionList("ADIDAS")
         brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner){
             brandProductsAdapter.setBrandProductsList(it.products)
             brandProductsAdapter.notifyDataSetChanged()
-        }*/
+        }
 
         /*val productsList = listOf(
             Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
@@ -66,6 +77,20 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         gridLayoutManager = GridLayoutManager(requireContext(),2)
         binding.brandProductsRecycler.adapter = brandProductsAdapter
         binding.brandProductsRecycler.layoutManager = gridLayoutManager
+    }
+
+    private fun setupToolbar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
+    }
+
+    private fun handleToolbarEvent() {
+        binding.appBarHome.cardViewFavorite.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_favoriteFragment)
+        }
+
+        binding.appBarHome.cardViewShoppingCart.setOnClickListener {
+            navController.navigate(R.id.action_mainFragment_to_shoppingCartFragment)
+        }
     }
 
     override fun onProductItemClick() {

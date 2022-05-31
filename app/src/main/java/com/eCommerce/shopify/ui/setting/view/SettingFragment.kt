@@ -48,10 +48,6 @@ class SettingFragment : Fragment() {
         binding.loginBtn.setOnClickListener {
             mNavController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
-        binding.registerBtn.setOnClickListener {
-            Log.i("TAG", "registerBtn pressed")
-            mNavController.navigate(R.id.action_mainFragment_to_brandProductsFragment)
-        }
     }
 
 }

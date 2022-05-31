@@ -19,7 +19,7 @@ data class Product(
     @SerializedName("images")
     val productImages: List<ProductImage>,
     @SerializedName("options")
-    val options: List<Option>,
+    val productOptions: List<ProductOption>,
     @SerializedName("product_type")
     val productType: String,
     @SerializedName("published_at")
@@ -36,6 +36,8 @@ data class Product(
     val title: String,
     @SerializedName("updated_at")
     val updatedAt: String,
+    @SerializedName("variants")
+    val variants: List<Variant>,
     @SerializedName("vendor")
     val vendor: String
 )

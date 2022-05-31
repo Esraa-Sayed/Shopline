@@ -1,6 +1,6 @@
 package com.eCommerce.shopify.ui.brandproducts.repo
 
-import com.eCommerce.shopify.model.BrandCollectionResponse
+import com.eCommerce.shopify.model.BrandProductsResponse
 import com.eCommerce.shopify.network.RemoteSource
 import retrofit2.Response
 
@@ -15,7 +15,7 @@ class BrandProductsRepository private constructor(
         }
     }
 
-    override suspend fun getCollectionWithId(collectionId: Long): Response<BrandCollectionResponse> {
-        return remoteSource.getCollectionWithId(collectionId)
+    override suspend fun getCollectionWithId(vendor:String): Response<BrandProductsResponse> {
+        return remoteSource.getCollectionWithId(vendor)
     }
 }
