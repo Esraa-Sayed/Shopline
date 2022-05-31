@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
 import com.eCommerce.shopify.ui.OnProductClickListener
-import com.eCommerce.shopify.ui.favorite.model.Product
 
 class FavoriteFragment : Fragment() ,OnProductClickListener{
 
@@ -33,7 +32,7 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
 
         setupFavRecycler()
 
-        val favList = listOf(
+        /*val favList = listOf(
             Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
             Product("shoes",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
             Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
@@ -41,7 +40,7 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
         )
 
         favAdapter.setFavProductList(favList)
-        favAdapter.notifyDataSetChanged()
+        favAdapter.notifyDataSetChanged()*/
     }
 
     fun setupFavRecycler(){
