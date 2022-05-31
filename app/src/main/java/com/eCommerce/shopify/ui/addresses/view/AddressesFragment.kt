@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.AddressesAdapter
 import com.eCommerce.shopify.databinding.AddressesFragmentBinding
 import com.eCommerce.shopify.model.address
 import com.eCommerce.shopify.ui.addresses.viewModel.AddressesViewModel
@@ -40,7 +41,7 @@ class AddressesFragment : Fragment() {
         }
 
         val addresses = listOf<address>(address("Egypt","Cairo,Helwan"),address("Eqypt","M,R"))
-        addressesAdapter = AddressesAdapter(myView.context, addresses)
+        addressesAdapter = AddressesAdapter(myView.context, addresses,null)
         val layoutManag = LinearLayoutManager(activity)
         binding.addressesRecyclerView.apply {
             setHasFixedSize(true)

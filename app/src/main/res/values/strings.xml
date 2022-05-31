@@ -69,4 +69,7 @@
     <string name="back">Back</string>
     <string name="cant_be_empty">Can\'t be empty</string>
     <string name="OrderDetails">Order Details</string>
+    <string name="cash_on_delivery_cod">Cash On Delivery (COD)</string>
+    <string name="paypal">PayPal</string>
+    <string name="Cash_on_delivery">Cash on delivery</string>
 </resources>
