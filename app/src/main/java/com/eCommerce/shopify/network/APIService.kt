@@ -18,6 +18,6 @@ interface APIService {
     @GET("custom_collections.json")
     suspend fun getCustomCollectionsCategory(): Response<CustomCollectionsCategory>
 
-    @GET("collections/{id}/products.json")
+    @GET("customers/{id}/orders.json")
     suspend fun getUserOrders( @Path("id")id: Long):Response<OrderModel>
 }

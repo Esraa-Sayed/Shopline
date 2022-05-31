@@ -91,7 +91,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         mNavController.navigate(R.id.action_mainFragment_to_favoriteFragment2)
     }
     fun onMoreOrdersClicked(){
-        //mNavController.navigate(R.id.action_mainFragment_to_ordersFragment)
+        mNavController.navigate(R.id.action_mainFragment_to_ordersFragment)
     }
 
 }

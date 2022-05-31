@@ -19,6 +19,7 @@ import com.eCommerce.shopify.ui.login.viewModel.LoginViewModelFactory
 import com.eCommerce.shopify.ui.order.repo.OrdersRepo
 import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModel
 import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModelFactory
+import com.eCommerce.shopify.utils.AppConstants
 
 class OrdersFragment : Fragment() {
     private lateinit var bindingFragment: OrdersFragmentBinding
@@ -41,7 +42,16 @@ class OrdersFragment : Fragment() {
         myView = view
         init()
     }
-
+    fun noDataFound(){
+        bindingFragment.noOrdersFound.visibility = View.VISIBLE
+        bindingFragment.noOrdersFoundText.visibility = View.VISIBLE
+        bindingFragment.ordersRecyclerView.visibility = View.GONE
+    }
+    fun dataFound(){
+        bindingFragment.noOrdersFound.visibility = View.GONE
+        bindingFragment.noOrdersFoundText.visibility = View.GONE
+        bindingFragment.ordersRecyclerView.visibility = View.VISIBLE
+    }
     private fun init() {
         ordersViewModelFactory = OrdersViewModelFactory(
             OrdersRepo.getInstance(
@@ -66,7 +76,21 @@ class OrdersFragment : Fragment() {
     private fun getUserOrders() {
         viewModel.getUserOrders(myView.context)
         viewModel.UserOrders.observe(viewLifecycleOwner, Observer {
+            if (it.orders.isNotEmpty()){
+                dataFound()
+                ordersAdapter.updateData(it.orders)
+            }else{
+                noDataFound()
+            }
             Log.e("TAG", "getUserOrders: ${it.orders.size}" )
+        })
+        viewModel.errorMsgResponse.observe(viewLifecycleOwner, Observer {
+            AppConstants.showAlert(
+                myView.context,
+                R.string.error,
+                it,
+                R.drawable.ic_error
+            )
         })
     }
 
