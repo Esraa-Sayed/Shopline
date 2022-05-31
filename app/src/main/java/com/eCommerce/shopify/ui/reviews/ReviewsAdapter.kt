@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eCommerce.shopify.databinding.ReviewsItemLayoutBinding
-import com.eCommerce.shopify.ui.favorite.model.Product
 import org.w3c.dom.Text
 
 class ReviewsAdapter:RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder> {

@@ -21,6 +21,7 @@ data class Product(
     val publishedAt: String,
     @SerializedName("published_scope")
     val publishedScope: String,
+
     val status: String,
     val tags: String,
     @SerializedName("template_suffix")
@@ -28,5 +29,8 @@ data class Product(
     val title: String,
     @SerializedName("updated_at")
     val updatedAt: String,
+
+    @SerializedName("variants")
+    val variants: List<Variant>,
     val vendor: String
 )

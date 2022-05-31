@@ -75,7 +75,6 @@
     <string name="city">City</string>
     <string name="add_adress">Add Adress</string>
     <string name="_total">Total</string>
-
     <string name="error">Error</string>
     <string name="no_internet_access">No Internet Access</string>
     <string name="check_connection">Check your connection settings \n and try again</string>
@@ -83,4 +82,7 @@
     <string name="accessories">Accessories</string>
     <string name="t_shirts">T-Shirts</string>
     <string name="shoes">Shoes</string>
+    <string name="EmailOrPasswordIsIncorrect">Email or password is incorrect</string>
+    <string name="products">Products</string>
+    <string name="no_orders_found">No orders found</string>
 </resources>
