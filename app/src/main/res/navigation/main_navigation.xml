@@ -56,7 +56,11 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.eCommerce.shopify.ui.login.view.LoginFragment"
-        android:label="LoginFragment" />
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.eCommerce.shopify.ui.favorite.FavoriteFragment"
@@ -94,4 +98,9 @@
         android:name="com.eCommerce.shopify.ui.success.SuccessFragment"
         android:label="fragment_success"
         tools:layout="@layout/fragment_success" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.eCommerce.shopify.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
 </navigation>

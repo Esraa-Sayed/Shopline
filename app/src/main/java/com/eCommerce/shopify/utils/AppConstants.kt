@@ -12,6 +12,10 @@ object AppConstants {
     const val BASE_URL: String = BuildConfig.BASE_URL
     const val API_KEY: String = BuildConfig.API_KEY
     const val PASSWORD: String = BuildConfig.PASSWORD
+    const val IS_LOGIN: String = "Is_login"
+    const val PREFRENCE_File = "User_Data"
+    const val USER_ID: String = "User_id"
+    const val USER_EMAIL: String = "User_email"
 
     const val SPLASH_TIME_OUT: Long = 3000
 
