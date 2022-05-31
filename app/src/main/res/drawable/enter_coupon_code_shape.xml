@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:autoMirrored="true">
+<item>
+    <shape android:shape="rectangle">
+        <solid android:color="#F3F3FA" />
+        <stroke android:width="@dimen/_1sdp"
+            android:color="@color/main_color" />
+        <corners android:radius="50dp" />
+    <padding
+        android:left="@dimen/_8sdp"
+        android:right="@dimen/_8sdp"
+        android:top="@dimen/_8sdp"
+        android:bottom="@dimen/_8sdp"/>
+</shape>
+</item>
+    </selector>

@@ -1,4 +1,4 @@
-package com.eCommerce.shopify.ui.addresses.view
+package com.eCommerce.shopify.ui.AddressAndCheckoutAdapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.AddressRowBinding
 import com.eCommerce.shopify.model.address
 
-class AddressesAdapter(val context: Context, var addresses:List<address>):
+class AddressesAdapter(val context: Context, var addresses:List<address>,var onRowClicked:OnRowClicked?):
     RecyclerView.Adapter<AddressesAdapter.AddressViewHolder>() {
 
 
@@ -20,6 +20,9 @@ class AddressesAdapter(val context: Context, var addresses:List<address>):
        val address = addresses[position]
         holder.binding.countryName.text = address.country
         holder.binding.fullAddress.text = address.fullAddress
+        holder.itemView.setOnClickListener {
+            onRowClicked?.onRowClickedListener(address)
+        }
     }
 
     override fun getItemCount(): Int {

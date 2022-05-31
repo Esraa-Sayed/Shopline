@@ -65,9 +65,9 @@
     <fragment
         android:id="@+id/shoppingCartFragment"
         android:name="com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragment"
-        android:label="shopping_cart_fragment"
-        tools:layout="@layout/shopping_cart_fragment">
-            <action
+        android:label="@string/Shoppingcart"
+        tools:layout="@layout/shopping_cart_fragment" >
+        <action
             android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
             app:destination="@id/checkoutFragment"/>
     </fragment>
@@ -83,6 +83,15 @@
     <fragment
         android:id="@+id/checkoutFragment"
         android:name="com.eCommerce.shopify.ui.checkout.view.CheckoutFragment"
-        android:label="checkout_fragment"
-        tools:layout="@layout/checkout_fragment" />
+        android:label="@string/Checkout"
+        tools:layout="@layout/checkout_fragment" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_successFragment2"
+            app:destination="@id/successFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment2"
+        android:name="com.eCommerce.shopify.ui.success.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" />
 </navigation>
