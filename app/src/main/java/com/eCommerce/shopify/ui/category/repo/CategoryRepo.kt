@@ -1,7 +1,6 @@
 package com.eCommerce.shopify.ui.category.repo
 
 import com.eCommerce.shopify.model.CustomCollectionsCategory
-import com.eCommerce.shopify.model.SmartCollectionsBrand
 import com.eCommerce.shopify.network.RemoteSource
 import retrofit2.Response
 
