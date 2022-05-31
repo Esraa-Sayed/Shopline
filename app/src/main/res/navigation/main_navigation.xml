@@ -52,6 +52,18 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_favoriteFragment2"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_registerFragment2"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
+            app:destination="@id/ordersDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -94,4 +106,19 @@
         android:name="com.eCommerce.shopify.ui.success.SuccessFragment"
         android:label="fragment_success"
         tools:layout="@layout/fragment_success" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.eCommerce.shopify.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.eCommerce.shopify.ui.order.view.OrdersFragment"
+        android:label="orders_fragment"
+        tools:layout="@layout/orders_fragment" />
+    <fragment
+        android:id="@+id/ordersDetailsFragment"
+        android:name="com.eCommerce.shopify.ui.orderDetails.view.OrdersDetailsFragment"
+        android:label="orders_details_fragment"
+        tools:layout="@layout/orders_details_fragment" />
 </navigation>
