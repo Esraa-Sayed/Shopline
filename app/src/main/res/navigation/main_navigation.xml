@@ -77,8 +77,8 @@
         android:label="fragment_brand_products"
         tools:layout="@layout/fragment_brand_products" >
         <argument
-            android:name="brandId"
-            app:argType="long" />
+            android:name="brandTitle"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
