@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentReviewsBinding
 import com.eCommerce.shopify.ui.favorite.FavoriteAdapter
-import com.eCommerce.shopify.ui.favorite.model.Product
 
 class ReviewsFragment : Fragment() {
 

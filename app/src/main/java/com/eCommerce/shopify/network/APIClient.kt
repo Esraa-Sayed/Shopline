@@ -25,8 +25,21 @@ class APIClient private constructor(): RemoteSource {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getCustomCollectionsCategory()
     }
 
+
+    override suspend fun getCategoryProducts(id: Long): Response<Products> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java)
+            .getCategoryProducts(id)
+    }
+
+    override suspend fun getCollectionWithId(vendor:String): Response<BrandProductsResponse> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).getCollectionWithId(vendor)
+    }
+
+
+
     override suspend fun getUserOrders(id: Long): Response<OrderModel> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getUserOrders(id)
+
     }
 
     override suspend fun getUserAddresses(id: Long): Response<AddressesUserModel> {

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.model.Order
-import com.eCommerce.shopify.ui.favorite.model.Product
+import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 
 class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
