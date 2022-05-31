@@ -6,8 +6,11 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -15,17 +18,24 @@ import androidx.viewpager2.widget.ViewPager2
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentHomeBinding
 import com.eCommerce.shopify.model.SliderItem
+import com.eCommerce.shopify.model.SmartCollection
+import com.eCommerce.shopify.model.SmartCollectionsBrand
 import com.eCommerce.shopify.network.APIClient
+import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.home.repo.HomeRepo
 import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModel
 import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModelFactory
+import com.eCommerce.shopify.utils.AppConstants.showAlert
 import kotlin.math.abs
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnBrandClickListener {
 
     private lateinit var homeViewModelFactory: HomeViewModelFactory
     private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
+
+    private lateinit var homeBrandAdapter: HomeBrandAdapter
+    private lateinit var gridLayoutManager: GridLayoutManager
 
     private lateinit var myView: View
     private val sliderItems = mutableListOf(
@@ -34,6 +44,10 @@ class HomeFragment : Fragment() {
         SliderItem(R.drawable.banner3)
     )
     private var sliderHandler = Handler(Looper.getMainLooper())
+
+    private val mNavController by lazy {
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -55,6 +69,7 @@ class HomeFragment : Fragment() {
         this.myView = view
         gettingViewModelReady()
         handleUIViewPager()
+        initRecyclerView()
     }
 
     private fun gettingViewModelReady() {
@@ -65,22 +80,43 @@ class HomeFragment : Fragment() {
         )
         viewModel = ViewModelProvider(this, homeViewModelFactory)[HomeViewModel::class.java]
 
-        /*viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
-            binding.progressBar.visibility = View.GONE
-            Toast.makeText(myView.context, it, Toast.LENGTH_LONG).show()
+        viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
+            showAlert(
+                myView.context,
+                R.string.error,
+                it,
+                R.drawable.ic_error
+            )
         })
         viewModel.showProgressBar.observe(viewLifecycleOwner, {
             if (it) {
                 binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
             }
         })
-        viewModel.weatherModelResponse.observe(viewLifecycleOwner, {
+        viewModel.smartCollectionsBrandResponse.observe(viewLifecycleOwner, {
             renderDataOnScreen(it)
-        })*/
+        })
+    }
+
+    private fun initRecyclerView() {
+        homeBrandAdapter = HomeBrandAdapter(myView.context, emptyList(), this)
+        gridLayoutManager = GridLayoutManager(myView.context, 2, RecyclerView.HORIZONTAL, false)
+        binding.recyclerView.apply {
+            adapter = homeBrandAdapter
+            layoutManager = gridLayoutManager
+        }
+
+        viewModel.getSmartCollectionsBrand()
+    }
+
+    private fun renderDataOnScreen(it: SmartCollectionsBrand) {
+        homeBrandAdapter.setDataToAdapter(it.smartCollections)
     }
 
     private fun handleUIViewPager() {
-        binding.viewPagerAdsSlider.adapter = SliderAdapter(sliderItems, binding.viewPagerAdsSlider)
+        binding.viewPagerAdsSlider.adapter = SliderAdapter(sliderItems)
         binding.viewPagerAdsSlider.clipToPadding = false
         binding.viewPagerAdsSlider.clipChildren = false
         binding.viewPagerAdsSlider.offscreenPageLimit = 3
@@ -124,5 +160,10 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onBrandClick(smartCollection: SmartCollection) {
+        val action = MainFragmentDirections.actionMainFragmentToBrandProductsFragment(smartCollection.id)
+        mNavController.navigate(action)
     }
 }

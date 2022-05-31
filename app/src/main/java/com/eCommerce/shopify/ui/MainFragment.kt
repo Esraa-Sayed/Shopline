@@ -14,7 +14,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentMainBinding
+import com.eCommerce.shopify.utils.NetworkConnectionLiveData
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
 
@@ -44,6 +46,19 @@ class MainFragment : Fragment() {
         setupToolbar()
         handleToolbarEvent()
         configureBottomNavView()
+        listenerOnNetwork()
+    }
+
+    private fun listenerOnNetwork() {
+        NetworkConnectionLiveData(myView.context).observe(this, {
+            if (it) {
+                binding.containerView.visibility = View.VISIBLE
+                binding.connectionLostMain.root.visibility = View.GONE
+            } else {
+                binding.containerView.visibility = View.GONE
+                binding.connectionLostMain.root.visibility = View.VISIBLE
+            }
+        })
     }
 
     private fun setupToolbar() {

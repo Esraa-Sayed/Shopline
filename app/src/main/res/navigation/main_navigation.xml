@@ -13,6 +13,8 @@
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:enterAnim="@anim/open_view_zoom_in_fade_in"
+            app:exitAnim="@anim/close_view_zoom_out_fade_out"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -24,13 +26,32 @@
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_shoppingCartFragment"
-            app:destination="@id/shoppingCartFragment" />
+            app:destination="@id/shoppingCartFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_mainFragment_to_brandProductsFragment"
+            app:destination="@id/brandProductsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -48,7 +69,16 @@
         tools:layout="@layout/shopping_cart_fragment" >
         <action
             android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment" />
+            app:destination="@id/checkoutFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/brandProductsFragment"
+        android:name="com.eCommerce.shopify.ui.brandproducts.BrandProductsFragment"
+        android:label="fragment_brand_products"
+        tools:layout="@layout/fragment_brand_products" >
+        <argument
+            android:name="brandId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"

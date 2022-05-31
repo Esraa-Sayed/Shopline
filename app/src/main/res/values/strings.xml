@@ -72,4 +72,11 @@
     <string name="cash_on_delivery_cod">Cash On Delivery (COD)</string>
     <string name="paypal">PayPal</string>
     <string name="Cash_on_delivery">Cash on delivery</string>
+    <string name="city">City</string>
+    <string name="add_adress">Add Adress</string>
+    <string name="_total">Total</string>
+
+    <string name="error">Error</string>
+    <string name="no_internet_access">No Internet Access</string>
+    <string name="check_connection">Check your connection settings \n and try again</string>
 </resources>

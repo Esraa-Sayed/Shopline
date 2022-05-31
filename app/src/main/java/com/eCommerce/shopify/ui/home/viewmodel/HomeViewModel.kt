@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.home.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val _repo: HomeRepoInterface) : ViewModel() {
 
-    private var _smartCollectionsBrand = MutableLiveData<SmartCollectionsBrand>()
-    val smartCollectionsBrand: LiveData<SmartCollectionsBrand> = _smartCollectionsBrand
+    private var _smartCollectionsBrandResponse = MutableLiveData<SmartCollectionsBrand>()
+    val smartCollectionsBrandResponse: LiveData<SmartCollectionsBrand> = _smartCollectionsBrandResponse
 
     private var _showProgressBar = MutableLiveData<Boolean>()
     val showProgressBar: LiveData<Boolean> = _showProgressBar
@@ -25,18 +26,20 @@ class HomeViewModel(private val _repo: HomeRepoInterface) : ViewModel() {
         run {
             t.printStackTrace()
             _errorMsgResponse.postValue(t.message)
+            _showProgressBar.postValue(false)
         }
     }
 
-    private fun getSmartCollectionsBrand() {
+    fun getSmartCollectionsBrand() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             _showProgressBar.postValue(true)
             val collectionBrands = _repo.getSmartCollectionsBrand()
             if (collectionBrands.isSuccessful) {
-                _smartCollectionsBrand.postValue(collectionBrands.body())
+                _smartCollectionsBrandResponse.postValue(collectionBrands.body())
             } else {
                 _errorMsgResponse.postValue(collectionBrands.message())
             }
+            _showProgressBar.postValue(false)
         }
     }
 }

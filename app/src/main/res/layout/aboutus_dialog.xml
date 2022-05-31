@@ -18,56 +18,72 @@
 
         <ImageView
             android:id="@+id/aboutus_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/ic_about"
-            android:layout_marginTop="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_about" />
+
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/aboutus_image"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/cairo_bold"
             android:text="@string/about_us"
-            android:textSize="20sp"
-            android:fontFamily="@font/cairo_extra_bold"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/aboutus_image"/>
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/aboutus_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:text="@string/aboutUs"
-            android:textSize="15sp"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/cairo_regular"
+            android:layout_below="@+id/text"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/text"/>
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/cairo_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/aboutUs"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/aboutus_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/cairo_bold"
+            android:text="@string/about_us"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/team_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/our_team"
-            android:textSize="15sp"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/cairo_regular"
+            android:layout_below="@+id/textt"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/aboutus_text"/>
+            android:fontFamily="@font/cairo_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/our_team"
+            android:textSize="15sp" />
 
         <Button
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="@string/dismiss"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_rectangle"
+            android:id="@+id/dismiss_btn"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/team_text"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/team_text"/>
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/rounded_rectangle"
+            android:fontFamily="@font/cairo_semi_bold"
+            android:text="Dismiss"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
