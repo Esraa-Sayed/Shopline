@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_categories"
-        android:name="com.eCommerce.shopify.ui.category.CategoryFragment"
+        android:name="com.eCommerce.shopify.ui.category.view.CategoryFragment"
         android:label="@string/title_category"
         tools:layout="@layout/fragment_category" />
 

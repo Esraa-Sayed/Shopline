@@ -38,7 +38,7 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("HelloFromAhmed:", "Brand Id => ${args.brandId}")
+        Log.d("HelloFromAhmed:", "Brand Id => ${args.brandTitle}")
 
         setupBrandProductsRecycler()
 

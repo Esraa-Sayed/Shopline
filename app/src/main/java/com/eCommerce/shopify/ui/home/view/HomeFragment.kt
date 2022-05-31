@@ -95,9 +95,9 @@ class HomeFragment : Fragment(), OnBrandClickListener {
                 binding.progressBar.visibility = View.GONE
             }
         })
-        viewModel.smartCollectionsBrandResponse.observe(viewLifecycleOwner, {
+        viewModel.smartCollectionsBrandResponse.observe(viewLifecycleOwner) {
             renderDataOnScreen(it)
-        })
+        }
     }
 
     private fun initRecyclerView() {
@@ -163,7 +163,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     }
 
     override fun onBrandClick(smartCollection: SmartCollection) {
-        val action = MainFragmentDirections.actionMainFragmentToBrandProductsFragment(smartCollection.id)
+        val action = MainFragmentDirections.actionMainFragmentToBrandProductsFragment(smartCollection.title)
         mNavController.navigate(action)
     }
 }
