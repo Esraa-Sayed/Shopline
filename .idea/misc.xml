@@ -110,6 +110,14 @@
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/favorite_item_layout.xml" value="0.4" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/fragment_favorite.xml" value="0.25" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/fragment_register.xml" value="0.4" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/ic_delete_forever_red_24dp.xml" value="0.20625" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/app_bar_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/connection_lost.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_brand_products.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_category.xml" value="0.18611111111111112" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/app_bar_home.xml" value="0.20416666666666666" />
@@ -118,6 +126,8 @@
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_settings.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/profile_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/row_brand.xml" value="0.25" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/row_category.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
