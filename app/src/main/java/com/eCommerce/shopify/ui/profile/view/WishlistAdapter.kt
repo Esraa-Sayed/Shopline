@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileWishlistRowBinding
+import com.eCommerce.shopify.ui.favorite.model.Product
 
 class WishlistAdapter : RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>() {
 
-    //var wishlist: MutableList<Wishlist> = mutableListOf()
+    var wishlist: MutableList<Product> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
         val itemBinding = ProfileWishlistRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,7 +20,7 @@ class WishlistAdapter : RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>
     override fun onBindViewHolder(holder: WishlistViewHolder, position: Int) {
 //        holder.bind(wishlist[position].imageUrl, wishlist[position].name, wishlist[position].price,
 //                wishlist[position].isFavourite)
-        holder.bind("kkj", "My item",
+        holder.bind("https://media.istockphoto.com/photos/elegance-peach-vintage-dress-isolated-on-white-background-picture-id1217970962?k=20&m=1217970962&s=612x612&w=0&h=XJeWZiOrycXuEawk2SnjXqCFpjZ9mMUPNKJqnx82ziU=", "My item",
             145.5, true)
 
     }

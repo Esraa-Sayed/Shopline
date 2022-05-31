@@ -47,6 +47,9 @@ class SettingFragment : Fragment() {
         binding.loginBtn.setOnClickListener {
             mNavController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
+        binding.registerBtn.setOnClickListener {
+            mNavController.navigate(R.id.action_mainFragment_to_registerFragment2)
+        }
     }
 
 }

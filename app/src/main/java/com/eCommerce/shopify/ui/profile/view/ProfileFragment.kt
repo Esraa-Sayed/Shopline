@@ -6,13 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
+import com.eCommerce.shopify.model.OrderModel
+import com.eCommerce.shopify.ui.favorite.model.Product
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
     companion object {
         fun newInstance() = ProfileFragment()
@@ -22,6 +25,10 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
     lateinit var ordersAdapter: OrdersAdapter
     lateinit var wishlistAdapter: WishlistAdapter
+
+    private val mNavController by lazy {
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,10 +49,12 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initWishlistRecyclerView()
         initOrdersRecyclerView()
+        listenToMoreOrdersBtn()
+        listenToMoreWishlistBtn()
     }
 
     fun initOrdersRecyclerView(){
-        ordersAdapter = OrdersAdapter()
+        ordersAdapter = OrdersAdapter(this, this)
         _binding?.pOrdersRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation =  LinearLayoutManager.VERTICAL
         }
@@ -57,6 +66,32 @@ class ProfileFragment : Fragment() {
         _binding?.pWishlistRecyclerView?.layoutManager = GridLayoutManager(this.requireContext(), 2)
 
         _binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
+    }
+
+    override fun onOrderClicked(order: OrderModel) {
+        mNavController.navigate(R.id.action_mainFragment_to_ordersDetailsFragment)
+    }
+
+    override fun onProductClicked(product: Product) {
+//        val action = ProfileFragmentDirections.actionNavigationProfileToOrdersDetailsFragment()
+//        mNavController.navigate(action)
+    }
+
+    fun listenToMoreWishlistBtn(){
+        _binding.pMoreWishlistBtn.setOnClickListener{
+            onMoreWishlistClicked()
+        }
+    }
+    fun listenToMoreOrdersBtn(){
+        _binding.pMoreOrdersBtn.setOnClickListener{
+            onMoreOrdersClicked()
+        }
+    }
+    fun onMoreWishlistClicked(){
+        mNavController.navigate(R.id.action_mainFragment_to_favoriteFragment2)
+    }
+    fun onMoreOrdersClicked(){
+        //mNavController.navigate(R.id.action_mainFragment_to_ordersFragment)
     }
 
 }

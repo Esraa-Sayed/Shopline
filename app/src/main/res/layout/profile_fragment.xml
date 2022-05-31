@@ -1,164 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.profile.view.ProfileFragment"
     android:background="@drawable/rounded_corners_top_white">
+
+<!--    <include-->
+<!--        android:id="@+id/app_bar"-->
+<!--        layout="@layout/app_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/rounded_corners_top_white">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profile_internet_constraintlayout"
+        app:layout_constraintStart_toStartOf="parent">
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rounded_corners_top_gray">
-            <TextView
-                android:id="@+id/p_welcome_name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:textSize="20sp"
-                android:fontFamily="@font/cairo_bold"
-                android:textColor="@color/dark_gray"
-                android:text="Welcome Thoraya"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:id="@+id/p_orders_relative_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/p_welcome_name_text">
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corners_top_white"
+                app:layout_constraintTop_toBottomOf="@+id/app_bar">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/profile_internet_constraintlayout"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/cairo_semi_bold"
-                    android:gravity="center_vertical"
-                    android:text="@string/orders"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="18sp" />
+                    android:background="@drawable/rounded_corners_top_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <Button
-                    android:id="@+id/p_more_orders_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:background="@android:color/transparent"
-                    android:drawableEnd="@drawable/ic_right_arrow"
-                    android:fontFamily="@font/cairo_semi_bold"
-                    android:text="@string/more"
-                    android:textAllCaps="false"
-                    android:textColor="@color/main_color"
-                    android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/p_welcome_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/cairo_bold"
+                        android:text="Welcome Thoraya"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/p_orders_relative_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/p_welcome_name_text">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/p_orders_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="10dp"
-                android:paddingBottom="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/p_orders_relative_layout"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/cairo_semi_bold"
+                            android:gravity="center_vertical"
+                            android:text="@string/orders"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="18sp" />
 
-            <RelativeLayout
-                android:id="@+id/p_wishlist_relative_layout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/p_orders_recycler_view">
+                        <Button
+                            android:id="@+id/p_more_orders_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:background="@android:color/transparent"
+                            android:drawableEnd="@drawable/ic_right_arrow"
+                            android:fontFamily="@font/cairo_semi_bold"
+                            android:text="@string/more"
+                            android:textAllCaps="false"
+                            android:textColor="@color/main_color"
+                            android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/p_orders_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingBottom="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/p_orders_relative_layout" />
+
+                    <RelativeLayout
+                        android:id="@+id/p_wishlist_relative_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/p_orders_recycler_view">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/cairo_semi_bold"
+                            android:gravity="center_vertical"
+                            android:text="@string/wishlist"
+                            android:textColor="@color/dark_gray"
+                            android:textSize="18sp" />
+
+                        <Button
+                            android:id="@+id/p_more_wishlist_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:background="@android:color/transparent"
+                            android:drawableEnd="@drawable/ic_right_arrow"
+                            android:fontFamily="@font/cairo_semi_bold"
+                            android:text="@string/more"
+                            android:textAllCaps="false"
+                            android:textColor="@color/main_color"
+                            android:textSize="18sp" />
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/p_wishlist_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingBottom="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/p_wishlist_relative_layout" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RelativeLayout
+                    android:id="@+id/profile_nointernet_relativelayout"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/cairo_semi_bold"
-                    android:gravity="center_vertical"
-                    android:text="@string/wishlist"
-                    android:textColor="@color/dark_gray"
-                    android:textSize="18sp" />
+                    android:background="@drawable/rounded_corners_top_white"
+                    android:visibility="gone">
 
-                <Button
-                    android:id="@+id/p_more_wishlist_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:background="@android:color/transparent"
-                    android:drawableEnd="@drawable/ic_right_arrow"
-                    android:fontFamily="@font/cairo_semi_bold"
-                    android:text="@string/more"
-                    android:textAllCaps="false"
-                    android:textColor="@color/main_color"
-                    android:textSize="18sp" />
+                    <ImageView
+                        android:id="@+id/no_login_image"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="50dp"
+                        android:src="@drawable/ic_img_auth_1" />
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/login_required_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/no_login_image"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="70dp"
+                        android:fontFamily="@font/cairo_bold"
+                        android:text="@string/login_required"
+                        android:textSize="20sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/p_wishlist_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="10dp"
-                android:paddingBottom="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/p_wishlist_relative_layout"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <RelativeLayout
-            android:id="@+id/profile_nointernet_relativelayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/rounded_corners_top_white">
-
-            <ImageView
-                android:id="@+id/no_login_image"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:src="@drawable/ic_img_auth_1" />
-
-            <TextView
-                android:id="@+id/login_required_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/no_login_image"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="70dp"
-                android:fontFamily="@font/cairo_bold"
-                android:text="@string/login_required"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/login_required_text"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/cairo_regular"
-                android:gravity="center_horizontal"
-                android:text="@string/login_register_msg"
-                android:textSize="15sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/login_required_text"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/cairo_regular"
+                        android:gravity="center_horizontal"
+                        android:text="@string/login_register_msg"
+                        android:textSize="15sp" />
 
 
-        </RelativeLayout>
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
