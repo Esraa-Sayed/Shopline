@@ -2,6 +2,7 @@ package com.eCommerce.shopify.ui.product.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,12 @@ import com.bumptech.glide.Glide
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.SmartCollection
+import com.eCommerce.shopify.utils.AppConstants.MAX
+import com.eCommerce.shopify.utils.AppConstants.MIN
 import com.eCommerce.shopify.utils.AppConstants.playAnimation
+import java.lang.String
+import java.util.*
+import kotlin.math.roundToInt
 
 class ProductAdapter(
     var context: Context,
@@ -48,8 +54,11 @@ class ProductAdapter(
 
         holder.txtViewProduct?.text = companyName.trim()
 
-        holder.ratingBarProduct
-        holder.txtViewRating
+        val randomRate: Double = MIN + Math.random() * (MAX - MIN)
+
+        holder.ratingBarProduct?.stepSize = 0.1f
+        holder.ratingBarProduct?.rating = randomRate.toFloat()
+        holder.txtViewRating?.text = "(".plus((randomRate * 100.0).roundToInt() / 100.0).plus(")")
 
         holder.itemView.setOnClickListener {
             onCategoryProductClickListener.onCategoryProductClick(productList[position])

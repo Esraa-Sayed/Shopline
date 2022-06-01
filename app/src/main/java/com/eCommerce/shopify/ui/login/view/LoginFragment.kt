@@ -59,12 +59,12 @@ class LoginFragment : Fragment() {
             var flag= true
             if (binding.email.text.isNullOrEmpty())
             {
-                binding.email.error = "required"
+                binding.email.error = getString(R.string.required)
                 flag = false
             }
             if (binding.password.text.isNullOrEmpty())
             {
-                binding.password.error = "required"
+                binding.password.error = getString(R.string.required)
                 flag = false
             }
             if(flag){
@@ -93,14 +93,14 @@ class LoginFragment : Fragment() {
             if(it.customers.isNotEmpty()){
                 viewModel.UserDataResponse.removeObservers(viewLifecycleOwner)
                 if(it.customers[0].tags == password){
-                    saveDataInSharedPref(email,it.customers[0].id,it.customers[0].first_name)
+                    saveDataInSharedPref(email,it.customers[0].id as Long,it.customers[0].first_name)
                     navController.navigate(R.id.action_loginFragment_to_mainFragment)
                     //action_loginFragment_to_mainFragment
+
                 }
                 else{
                     showErrorMessage(getString(R.string.EmailOrPasswordIsIncorrect))
                     setLoginButtonEnableOrDisable(true)
-
                 }
             }
             else{

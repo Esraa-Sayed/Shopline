@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
             app:destination="@id/ordersDetailsFragment" />
+        <argument
+            android:name="incomingCustomer"
+            app:argType="com.eCommerce.shopify.model.Customer" />
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -105,7 +108,7 @@
         android:id="@+id/brandProductsFragment"
         android:name="com.eCommerce.shopify.ui.brandproducts.view.BrandProductsFragment"
         android:label="fragment_brand_products"
-        tools:layout="@layout/fragment_brand_products" >
+        tools:layout="@layout/fragment_brand_products">
         <argument
             android:name="brandTitle"
             app:argType="string" />
@@ -128,7 +131,11 @@
         android:id="@+id/registerFragment"
         android:name="com.eCommerce.shopify.ui.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="com.eCommerce.shopify.ui.order.view.OrdersFragment"
@@ -165,6 +172,9 @@
         <argument
             android:name="categoryId"
             app:argType="long" />
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addressesFragment"

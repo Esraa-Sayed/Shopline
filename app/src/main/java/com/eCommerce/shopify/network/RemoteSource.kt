@@ -16,6 +16,7 @@ interface RemoteSource {
 	
     suspend fun getCollectionWithId(vendor:String):Response<BrandProductsResponse>
 
+    suspend fun registerCustomer(customer:CustomerResponse):Response<CustomerResponse>
     suspend fun getUserAddresses(id:Long):Response<AddressesUserModel>
 	
     suspend fun getUserOrders(id:Long):Response<OrderModel>

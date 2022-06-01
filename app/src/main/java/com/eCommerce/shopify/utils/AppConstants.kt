@@ -19,6 +19,11 @@ object AppConstants {
     const val USER_NAME: String = "User_name"
 
     const val SPLASH_TIME_OUT: Long = 3000
+    const val MIN = 0
+    const val MAX = 5
+    const val SHOES = "SHOES"
+    const val ACCESSORIES = "ACCESSORIES"
+    const val T_SHIRTS = "T-SHIRTS"
 
     fun showAlert(context: Context, title: Int, message: String, icon: Int) {
         AlertDialog.Builder(context)

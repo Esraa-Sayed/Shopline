@@ -16,7 +16,6 @@ class APIClient private constructor(): RemoteSource {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getSmartCollectionsBrand()
     }
 
-
     override suspend fun getUserWithEmail(userEmail: String): Response<UserData> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java)
             .getUserWithEmail(userEmail)
@@ -34,6 +33,11 @@ class APIClient private constructor(): RemoteSource {
     override suspend fun getCollectionWithId(vendor:String): Response<BrandProductsResponse> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getCollectionWithId(vendor)
     }
+
+    override suspend fun registerCustomer(customer: CustomerResponse): Response<CustomerResponse> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).registerCustomer(customer)
+    }
+
 
 
 
