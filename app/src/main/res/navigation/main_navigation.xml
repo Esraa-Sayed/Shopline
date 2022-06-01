@@ -67,6 +67,7 @@
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
             android:id="@+id/action_mainFragment_to_productFragment"
             app:destination="@id/productFragment" />
     </fragment>
@@ -99,7 +100,7 @@
     </fragment>
     <fragment
         android:id="@+id/brandProductsFragment"
-        android:name="com.eCommerce.shopify.ui.brandproducts.BrandProductsFragment"
+        android:name="com.eCommerce.shopify.ui.brandproducts.view.BrandProductsFragment"
         android:label="fragment_brand_products"
         tools:layout="@layout/fragment_brand_products" >
         <argument
@@ -143,6 +144,8 @@
         <action
             android:id="@+id/action_searchFragment_to_brandProductsFragment"
             app:destination="@id/brandProductsFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/productFragment"
         android:name="com.eCommerce.shopify.ui.product.view.ProductFragment"
         android:label="fragment_product"

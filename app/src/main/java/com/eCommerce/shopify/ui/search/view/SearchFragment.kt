@@ -16,9 +16,8 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentHomeBinding
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.databinding.SearchFragmentBinding
+import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.SmartCollection
-import com.eCommerce.shopify.ui.MainFragmentDirections
-import com.eCommerce.shopify.ui.favorite.model.Product
 import com.eCommerce.shopify.ui.home.view.HomeBrandAdapter
 import com.eCommerce.shopify.ui.home.view.OnBrandClickListener
 import com.eCommerce.shopify.ui.search.view_model.SearchViewModel

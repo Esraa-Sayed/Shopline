@@ -3,8 +3,8 @@ package com.eCommerce.shopify.ui.search.view_model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.SmartCollection
-import com.eCommerce.shopify.ui.favorite.model.Product
 
 class SearchViewModel(val allBrands: List<SmartCollection>,val allProduct: List<Product>) : ViewModel() {
 

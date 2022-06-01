@@ -20,10 +20,6 @@ import com.eCommerce.shopify.model.CustomCollectionsCategory
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.Products
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.brandproducts.BrandProductsFragmentArgs
-import com.eCommerce.shopify.ui.category.view.CategoryAdapter
-import com.eCommerce.shopify.ui.category.viewmodel.CategoryViewModel
-import com.eCommerce.shopify.ui.home.view.HomeBrandAdapter
 import com.eCommerce.shopify.ui.product.repo.ProductRepo
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModel
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModelFactory
