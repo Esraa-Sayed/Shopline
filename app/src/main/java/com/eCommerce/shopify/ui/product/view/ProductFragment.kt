@@ -1,33 +1,28 @@
 package com.eCommerce.shopify.ui.product.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentProductBinding
-import com.eCommerce.shopify.model.CustomCollectionsCategory
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.Products
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.brandproducts.BrandProductsFragmentArgs
-import com.eCommerce.shopify.ui.category.view.CategoryAdapter
-import com.eCommerce.shopify.ui.category.viewmodel.CategoryViewModel
-import com.eCommerce.shopify.ui.home.view.HomeBrandAdapter
 import com.eCommerce.shopify.ui.product.repo.ProductRepo
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModel
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModelFactory
 import com.eCommerce.shopify.utils.AppConstants
+import com.eCommerce.shopify.utils.AppConstants.ACCESSORIES
+import com.eCommerce.shopify.utils.AppConstants.SHOES
+import com.eCommerce.shopify.utils.AppConstants.T_SHIRTS
 
 class ProductFragment : Fragment(), OnCategoryProductClickListener {
 
@@ -39,6 +34,10 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
     private lateinit var gridLayoutManager: GridLayoutManager
 
     private lateinit var myView: View
+    private var allProductList = mutableListOf<Product>()
+    private var accessoriesList = mutableListOf<Product>()
+    private var tShirtsList = mutableListOf<Product>()
+    private var shoesList = mutableListOf<Product>()
 
     private val mNavController by lazy {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
@@ -63,9 +62,19 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         this.myView = view
+        setupToolbar()
         gettingViewModelReady()
         handleUIEvents()
         initRecyclerView()
+    }
+
+    private fun setupToolbar() {
+        val words = args.categoryName.lowercase().split(" ")
+        var productTitleName = ""
+        words.forEach { word ->
+            productTitleName += word.replaceFirstChar { it.uppercase() } + " "
+        }
+        binding.appBarHome.toolbar.title = productTitleName.trim().plus(" ").plus(getString(R.string.products))
     }
 
     private fun gettingViewModelReady() {
@@ -92,12 +101,26 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
             }
         })
         viewModel.categoryProductsResponse.observe(viewLifecycleOwner) {
-            renderDataOnScreen(it)
+            allProductList.addAll(it.products)
+            renderDataOnScreen(allProductList)
+            for (product in it.products) {
+                when (product.productType) {
+                    SHOES -> {
+                        shoesList.add(product)
+                    }
+                    ACCESSORIES -> {
+                        accessoriesList.add(product)
+                    }
+                    T_SHIRTS -> {
+                        tShirtsList.add(product)
+                    }
+                }
+            }
         }
     }
 
-    private fun renderDataOnScreen(it: Products) {
-        productAdapter.setDataToAdapter(it.products)
+    private fun renderDataOnScreen(it: MutableList<Product>) {
+        productAdapter.setDataToAdapter(it)
     }
 
     private fun initRecyclerView() {
@@ -115,16 +138,16 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
         binding.subCategoryRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
                 R.id.radioBtnAll -> {
-
+                    renderDataOnScreen(allProductList)
                 }
                 R.id.radioBtnAccessories -> {
-
+                    renderDataOnScreen(accessoriesList)
                 }
                 R.id.radioBtnTShirts -> {
-
+                    renderDataOnScreen(tShirtsList)
                 }
                 R.id.radioBtnShoes -> {
-
+                    renderDataOnScreen(shoesList)
                 }
             }
         }

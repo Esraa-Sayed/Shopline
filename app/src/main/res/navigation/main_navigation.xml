@@ -132,5 +132,8 @@
         <argument
             android:name="categoryId"
             app:argType="long" />
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
     </fragment>
 </navigation>

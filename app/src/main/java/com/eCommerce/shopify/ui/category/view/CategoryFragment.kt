@@ -107,7 +107,7 @@ class CategoryFragment : Fragment(), OnCategoryClickListener {
     }
 
     override fun onCategoryClick(customCollection: CustomCollection) {
-        val action = MainFragmentDirections.actionMainFragmentToProductFragment(customCollection.id)
+        val action = MainFragmentDirections.actionMainFragmentToProductFragment(customCollection.id, customCollection.title)
         mNavController.navigate(action)
     }
 }
