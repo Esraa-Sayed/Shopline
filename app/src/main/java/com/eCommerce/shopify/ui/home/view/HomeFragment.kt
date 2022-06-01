@@ -95,9 +95,9 @@ class HomeFragment : Fragment(), OnBrandClickListener {
                 binding.progressBar.visibility = View.GONE
             }
         })
-        viewModel.smartCollectionsBrandResponse.observe(viewLifecycleOwner, {
+        viewModel.smartCollectionsBrandResponse.observe(viewLifecycleOwner) {
             renderDataOnScreen(it)
-        })
+        }
     }
 
     private fun initRecyclerView() {

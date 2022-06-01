@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.ProfileOrdersRowBinding
-import com.eCommerce.shopify.model.OrderModel
+import com.eCommerce.shopify.model.Order
 
 class OrdersAdapter(val OnOrderListner: OnOrderListner, val onProductListner: OnProductListner): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
 
-    var orders: List<OrderModel> =listOf()
+    var orders: List<Order> =listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
         val itemBinding = ProfileOrdersRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
