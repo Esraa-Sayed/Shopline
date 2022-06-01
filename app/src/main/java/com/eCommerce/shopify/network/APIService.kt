@@ -19,18 +19,22 @@ interface APIService {
     @GET("custom_collections.json")
     suspend fun getCustomCollectionsCategory(): Response<CustomCollectionsCategory>
 
-
     @GET("collections/{id}/products.json")
     suspend fun getCategoryProducts(
         @Path("id") id: Long
     ): Response<Products>
 
+    @GET("products/{id}.json")
+    suspend fun getProductDetails(
+        @Path("id") id: Long
+    ): Response<ProductDetails>
 
     @GET("products.json")
     suspend fun getCollectionWithId(@Query("vendor") vendor:String):Response<BrandProductsResponse>
 
     @POST("customers.json")
     suspend fun registerCustomer(@Body customer: CustomerResponse): Response<CustomerResponse>
+
     @GET("customers/{id}/orders.json")
     suspend fun getUserOrders( @Path("id")id: Long):Response<OrderModel>
 

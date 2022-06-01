@@ -36,4 +36,5 @@ data class Product(
     val variants: List<Variant>,
     val vendor: String,
     var isFavorite:Boolean = false
+    val quantity:Int
 )

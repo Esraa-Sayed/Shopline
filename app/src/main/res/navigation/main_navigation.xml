@@ -72,7 +72,11 @@
             app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_mainFragment_to_productFragment"
-            app:destination="@id/productFragment" />
+            app:destination="@id/productFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_addressesFragment"
             app:destination="@id/addressesFragment" />
@@ -181,6 +185,13 @@
         <argument
             android:name="categoryName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_productFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/addressesFragment"
@@ -193,6 +204,27 @@
     </fragment>
     <fragment
         android:id="@+id/addAddressFragment"
-        android:name="com.eCommerce.shopify.ui.add_address.AddAddressFragment"
+        android:name="com.eCommerce.shopify.ui.add_address.view.AddAddressFragment"
         android:label="AddAddressFragment" />
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.eCommerce.shopify.ui.productdetails.view.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="categoryProductId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.eCommerce.shopify.ui.reviews.ReviewsFragment"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews" />
 </navigation>

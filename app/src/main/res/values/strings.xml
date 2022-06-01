@@ -37,7 +37,7 @@
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="currency">Currency</string>
     <string name="aboutUs">This application is our graduation\n project, try to use this application and if you\n found any problem, please contact us or\n comment on google play to solve it and\n improve our service.</string>
-    <string name="our_team">Our Team:\n Ahmed Ali El-Sayed\n Esraa Sayed Ahmed\n Sara Nassrat\n Thoraya Hamdy Elsayed</string>
+    <string name="our_team">Ahmed Ali El-Sayed\n Esraa Sayed Ahmed\n Sara Nassrat\n Thoraya Hamdy Elsayed</string>
     <string name="about_us">About Us</string>
     <string name="dismiss">Dismiss</string>
     <string name="contact_us">Contact Us</string>
@@ -90,4 +90,11 @@
     <string name="no_orders_found">No orders found</string>
     <string name="addressTitle">Address</string>
     <string name="no_addresses_found">No addresses found</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="egp">EGP</string>
+    <string name="doller">$</string>
+    <string name="choose_your_currency">Choose your currency</string>
+    <string name="todo">TODO</string>
+    <string name="our_team_n">Our Team</string>
 </resources>

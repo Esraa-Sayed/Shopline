@@ -24,11 +24,13 @@ class LoginRepo private constructor(
         return remoteSource.getUserWithEmail(email)
     }
 
-    override fun saveDataInSharedPref(context: Context,email: String, userId: Long) {
+    override fun saveDataInSharedPref(context: Context,email: String, userId: Long,userName:String) {
         val fileSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
         fileSharedPref.setValue(AppConstants.IS_LOGIN,true)
         fileSharedPref.setValue(AppConstants.USER_EMAIL,email)
         fileSharedPref.setValue(AppConstants.USER_ID,userId)
+        fileSharedPref.setValue(AppConstants.USER_NAME,userName)
+
     }
 
 }

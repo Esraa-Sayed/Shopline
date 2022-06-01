@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/titan_white"
+    tools:context=".ui.productdetails.view.ProductDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="24dp"
+            android:indeterminateTint="@color/plum"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:elevation="24dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPagerAdsSlider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="366dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewIsFavorite"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="-24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/white"
+            android:elevation="32dp"
+            app:cardCornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_favorite_border"
+                tools:ignore="ContentDescription" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtViewProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:maxLines="2"
+            android:text="Adidas dress leather"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/txtViewProductPrice"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toTopOf="@+id/txtViewProductPrice" />
+
+        <TextView
+            android:id="@+id/txtViewProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="345"
+            android:textAlignment="viewStart"
+            android:textColor="@color/plum"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/txtViewCurrency"
+            app:layout_constraintTop_toTopOf="@+id/txtViewCurrency" />
+
+        <TextView
+            android:id="@+id/txtViewCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="EGP"
+            android:textAlignment="viewStart"
+            android:textColor="@color/plum"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewIsFavorite" />
+
+        <TextView
+            android:id="@+id/txtViewTitleDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:maxLines="2"
+            android:text="Description"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewProductName" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:elevation="32dp"
+            app:cardCornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView2"
+            app:layout_constraintStart_toStartOf="@+id/cardView2"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewTitleDescription">
+
+            <TextView
+                android:id="@+id/txtViewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:text="Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator."
+                android:textAlignment="viewStart"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtViewTitleReviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="Reviews"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnReviewsMore"
+            app:layout_constraintStart_toStartOf="@+id/cardView8"
+            app:layout_constraintTop_toTopOf="@+id/btnReviewsMore" />
+
+        <Button
+            android:id="@+id/btnReviewsMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_rectangle"
+            android:text="More"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/cardView8"
+            app:layout_constraintTop_toBottomOf="@+id/cardView8" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewsRecycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/btnReviewsMore"
+            app:layout_constraintStart_toStartOf="@+id/txtViewTitleReviews"
+            app:layout_constraintTop_toBottomOf="@+id/btnReviewsMore"
+            tools:itemCount="1"
+            tools:listitem="@layout/row_review_item" />
+
+        <Button
+            android:id="@+id/btnReviewsAddToBag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_rectangle"
+            android:text="Add To Bag"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/reviewsRecycler"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/reviewsRecycler"
+            app:layout_constraintTop_toBottomOf="@+id/reviewsRecycler" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
