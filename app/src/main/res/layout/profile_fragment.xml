@@ -142,7 +142,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <RelativeLayout
-                    android:id="@+id/profile_nointernet_relativelayout"
+                    android:id="@+id/profile_nologin_relativelayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/rounded_corners_top_white"
