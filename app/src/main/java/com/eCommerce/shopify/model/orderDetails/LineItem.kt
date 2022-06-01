@@ -1,12 +1,13 @@
 package com.eCommerce.shopify.model.orderDetails
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class LineItem(
-    val admin_graphql_api_id: String,
     val discount_allocations: List<DiscountAllocation>,
-    val duties: List<Any>,
     val fulfillable_quantity: Int,
     val fulfillment_service: String,
-    val fulfillment_status: Any,
     val gift_card: Boolean,
     val grams: Int,
     val id: Int,
@@ -27,5 +28,4 @@ data class LineItem(
     val variant_id: Int,
     val variant_inventory_management: String,
     val variant_title: String,
-    val vendor: Any
-)
+):Parcelable

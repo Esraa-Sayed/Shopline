@@ -151,9 +151,16 @@
         android:label="orders_details_fragment"
         tools:layout="@layout/orders_details_fragment" >
         <argument
-            android:name="orderId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="created_at"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="shippingTo"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="items"
+            app:argType="com.eCommerce.shopify.model.orderDetails.LineItem[]" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
