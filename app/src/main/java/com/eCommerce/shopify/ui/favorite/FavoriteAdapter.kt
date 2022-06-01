@@ -35,7 +35,7 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> 
         //holder.productPrice.text = favProducts[position].price.toString()
         //holder.productImg.setImageResource(R.drawable.t_shirt_pink)
         Glide.with(context)
-            .load(favProducts[position].productImage.src)
+            .load(favProducts[position].image?.src)
             .into(holder.productImg)
         //holder.productRate.rating = favProducts[position].rate.toFloat()
 

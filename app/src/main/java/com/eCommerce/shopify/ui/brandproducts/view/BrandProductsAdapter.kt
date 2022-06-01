@@ -37,7 +37,7 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         holder.productPrice.text = brandProducts[position].variants[0].price
         //holder.productImg.setImageResource(R.drawable.t_shirt_pink)
         Glide.with(context)
-            .load(brandProducts[position].productImage.src)
+            .load(brandProducts[position].image?.src)
             .into(holder.productImg)
         //holder.productRate.rating = brandProducts[position].rate.toFloat()
 

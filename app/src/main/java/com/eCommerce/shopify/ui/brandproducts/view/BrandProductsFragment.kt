@@ -18,7 +18,6 @@ import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.OnProductClickListener
 import com.eCommerce.shopify.ui.brandproducts.view.BrandProductsFragmentArgs
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepository
-import com.eCommerce.shopify.ui.brandproducts.view.BrandProductsAdapter
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFactory
 

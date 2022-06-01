@@ -8,6 +8,7 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileWishlistRowBinding
 import com.eCommerce.shopify.model.Product
 
+
 class WishlistAdapter : RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>() {
 
     var wishlist: MutableList<Product> = mutableListOf()

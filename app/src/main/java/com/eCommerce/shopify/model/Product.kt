@@ -10,34 +10,27 @@ data class Product(
     val bodyHtml: String,
     @SerializedName("created_at")
     val createdAt: String,
-    @SerializedName("handle")
     val handle: String,
-    @SerializedName("id")
     val id: Long,
-    @SerializedName("image")
-    val productImage: ProductImage,
-    @SerializedName("images")
-    val productImages: List<ProductImage>,
-    @SerializedName("options")
-    val productOptions: List<ProductOption>,
+    val image: ImageProduct?,
+    val images: List<ImageProduct>,
+    val options: List<Option>,
     @SerializedName("product_type")
     val productType: String,
     @SerializedName("published_at")
     val publishedAt: String,
     @SerializedName("published_scope")
     val publishedScope: String,
-    @SerializedName("status")
+
     val status: String,
-    @SerializedName("tags")
     val tags: String,
     @SerializedName("template_suffix")
     val templateSuffix: Any,
-    @SerializedName("title")
     val title: String,
     @SerializedName("updated_at")
     val updatedAt: String,
+
     @SerializedName("variants")
     val variants: List<Variant>,
-    @SerializedName("vendor")
     val vendor: String
 )

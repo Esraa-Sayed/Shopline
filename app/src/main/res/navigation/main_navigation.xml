@@ -67,6 +67,15 @@
         <argument
             android:name="incomingCustomer"
             app:argType="com.eCommerce.shopify.model.Customer" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_addressesFragment"
+            app:destination="@id/addressesFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -75,6 +84,11 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -126,10 +140,50 @@
         android:id="@+id/ordersFragment"
         android:name="com.eCommerce.shopify.ui.order.view.OrdersFragment"
         android:label="orders_fragment"
-        tools:layout="@layout/orders_fragment" />
+        tools:layout="@layout/orders_fragment" >
+        <action
+            android:id="@+id/action_ordersFragment_to_ordersDetailsFragment"
+            app:destination="@id/ordersDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ordersDetailsFragment"
         android:name="com.eCommerce.shopify.ui.orderDetails.view.OrdersDetailsFragment"
         android:label="orders_details_fragment"
-        tools:layout="@layout/orders_details_fragment" />
+        tools:layout="@layout/orders_details_fragment" >
+        <argument
+            android:name="orderId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.eCommerce.shopify.ui.search.view.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_brandProductsFragment"
+            app:destination="@id/brandProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.eCommerce.shopify.ui.product.view.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" >
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressesFragment"
+        android:name="com.eCommerce.shopify.ui.addresses.view.AddressesFragment"
+        android:label="addresses_fragment"
+        tools:layout="@layout/addresses_fragment" >
+        <action
+            android:id="@+id/action_addressesFragment_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.eCommerce.shopify.ui.add_address.AddAddressFragment"
+        android:label="AddAddressFragment" />
 </navigation>

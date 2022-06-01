@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.login.viewModel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -33,5 +34,8 @@ class LoginViewModel(var _repo: LoginRepoInterface) : ViewModel() {
                 _errorMsgResponse.postValue(user.message())
             }
         }
+    }
+    fun saveDataInSharedPref(context:Context,email: String, userId: Long){
+        _repo.saveDataInSharedPref(context,email,userId)
     }
 }

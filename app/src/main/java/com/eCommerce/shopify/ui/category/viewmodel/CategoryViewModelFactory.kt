@@ -3,7 +3,6 @@ package com.eCommerce.shopify.ui.category.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.eCommerce.shopify.ui.category.repo.CategoryRepoInterface
-import com.eCommerce.shopify.ui.home.repo.HomeRepoInterface
 
 class CategoryViewModelFactory (private val _repo: CategoryRepoInterface): ViewModelProvider.Factory {
 

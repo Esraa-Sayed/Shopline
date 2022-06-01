@@ -2,6 +2,7 @@ package com.eCommerce.shopify.network
 
 import com.eCommerce.shopify.model.*
 import retrofit2.Response
+import retrofit2.http.Path
 
 interface RemoteSource {
 
@@ -11,7 +12,12 @@ interface RemoteSource {
 
     suspend fun getCustomCollectionsCategory(): Response<CustomCollectionsCategory>
 
+    suspend fun getCategoryProducts(id: Long): Response<Products>
+	
     suspend fun getCollectionWithId(vendor:String):Response<BrandProductsResponse>
 
     suspend fun registerCustomer(customer:CustomerResponse):Response<CustomerResponse>
+    suspend fun getUserAddresses(id:Long):Response<AddressesUserModel>
+	
+    suspend fun getUserOrders(id:Long):Response<OrderModel>
 }

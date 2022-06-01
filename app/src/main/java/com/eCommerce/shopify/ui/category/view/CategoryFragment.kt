@@ -8,28 +8,18 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
-import androidx.viewpager2.widget.ViewPager2
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentCategoryBinding
 import com.eCommerce.shopify.model.CustomCollection
 import com.eCommerce.shopify.model.CustomCollectionsCategory
-import com.eCommerce.shopify.model.SmartCollectionsBrand
 import com.eCommerce.shopify.network.APIClient
+import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.category.repo.CategoryRepo
 import com.eCommerce.shopify.ui.category.viewmodel.CategoryViewModel
 import com.eCommerce.shopify.ui.category.viewmodel.CategoryViewModelFactory
-import com.eCommerce.shopify.ui.home.repo.HomeRepo
-import com.eCommerce.shopify.ui.home.view.HomeBrandAdapter
-import com.eCommerce.shopify.ui.home.view.SliderAdapter
-import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModel
-import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModelFactory
 import com.eCommerce.shopify.utils.AppConstants
-import kotlin.math.abs
 
 class CategoryFragment : Fragment(), OnCategoryClickListener {
 
@@ -117,6 +107,7 @@ class CategoryFragment : Fragment(), OnCategoryClickListener {
     }
 
     override fun onCategoryClick(customCollection: CustomCollection) {
-        Toast.makeText(myView.context, customCollection.title, Toast.LENGTH_LONG).show()
+        val action = MainFragmentDirections.actionMainFragmentToProductFragment(customCollection.id)
+        mNavController.navigate(action)
     }
 }

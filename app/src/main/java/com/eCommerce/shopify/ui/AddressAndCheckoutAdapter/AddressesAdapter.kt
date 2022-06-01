@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.AddressRowBinding
-import com.eCommerce.shopify.model.address
+import com.eCommerce.shopify.model.Addresse
 
-class AddressesAdapter(val context: Context, var addresses:List<address>,var onRowClicked:OnRowClicked?):
+class AddressesAdapter(val context: Context, var addresses:List<Addresse>,var onRowClicked: OnRowClicked?):
     RecyclerView.Adapter<AddressesAdapter.AddressViewHolder>() {
 
 
@@ -19,19 +19,18 @@ class AddressesAdapter(val context: Context, var addresses:List<address>,var onR
     override fun onBindViewHolder(holder: AddressViewHolder, position: Int) {
        val address = addresses[position]
         holder.binding.countryName.text = address.country
-        holder.binding.fullAddress.text = address.fullAddress
+        holder.binding.fullAddress.text = address.address1.toString()
         holder.itemView.setOnClickListener {
-            onRowClicked?.onRowClickedListener(address)
+            onRowClicked?.onRowClickedListenerAddress(address)
         }
     }
 
     override fun getItemCount(): Int {
         return addresses.size
     }
-    fun updateData(addresses:List<address>){
+    fun updateData(addresses:List<Addresse>){
         this.addresses = addresses
+        notifyDataSetChanged()
     }
-    class AddressViewHolder(val binding: AddressRowBinding):RecyclerView.ViewHolder(binding.root) {
-
-    }
+    class AddressViewHolder(val binding: AddressRowBinding):RecyclerView.ViewHolder(binding.root)
 }

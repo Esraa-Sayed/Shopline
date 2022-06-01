@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.ProfileOrdersRowBinding
-import com.eCommerce.shopify.model.OrderModel
+import com.eCommerce.shopify.model.Order
+import com.eCommerce.shopify.ui.MainFragmentDirections
 
-class OrdersAdapter(private val context: Context,private var  orders:List<OrderModel>): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
+class OrdersAdapter(private val context: Context,private var  orders:List<Order>,private var onOrderRowClicked:OnOrderRowClicked): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
 
-    //private lateinit var itemBinding:
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -21,20 +21,21 @@ class OrdersAdapter(private val context: Context,private var  orders:List<OrderM
 
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
         val order = orders[position]
-        holder.viewBinding.pRowOrderDate.text = order.date
-        holder.viewBinding.pRowOrderPrice.text = order.price
+        holder.viewBinding.pRowOrderDate.text = order.created_at.split("T")[0]
+        holder.viewBinding.pRowOrderPrice.text = order.total_price
         holder.viewBinding.pOrdersRowCardview.setOnClickListener{
             Log.e("TAG", "onBindViewHolder: YEss")
+            onOrderRowClicked.onRowClickedListener(order)
         }
     }
 
     override fun getItemCount(): Int {
         return orders.size
     }
-    fun updateData(orders:List<OrderModel>){
-        this.orders = orders
-    }
-    class OrdersViewHolder(var viewBinding:ProfileOrdersRowBinding):RecyclerView.ViewHolder(viewBinding.root) {
 
+    fun updateData(orders:List<Order>){
+        this.orders = orders
+        notifyDataSetChanged()
     }
+    class OrdersViewHolder(var viewBinding:ProfileOrdersRowBinding):RecyclerView.ViewHolder(viewBinding.root)
 }

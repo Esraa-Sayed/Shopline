@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.model.OrderModel
+import com.eCommerce.shopify.model.Order
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 
@@ -68,7 +69,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         _binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
     }
 
-    override fun onOrderClicked(order: OrderModel) {
+    override fun onOrderClicked(order: Order) {
         mNavController.navigate(R.id.action_mainFragment_to_ordersDetailsFragment)
     }
 
@@ -91,7 +92,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         mNavController.navigate(R.id.action_mainFragment_to_favoriteFragment2)
     }
     fun onMoreOrdersClicked(){
-        //mNavController.navigate(R.id.action_mainFragment_to_ordersFragment)
+        mNavController.navigate(R.id.action_mainFragment_to_ordersFragment)
     }
 
 }

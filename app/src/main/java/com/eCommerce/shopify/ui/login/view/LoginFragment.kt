@@ -47,12 +47,13 @@ class LoginFragment : Fragment() {
     }
     fun init(){
         this.navController = findNavController()
+        loginButton = myView.findViewById(R.id.logIn)
         loginViewModelFactory = LoginViewModelFactory(
             LoginRepo.getInstance(
                 APIClient.getInstance()
             )
         )
-        loginButton = myView.findViewById(R.id.logIn)
+
         viewModel = ViewModelProvider(this, loginViewModelFactory)[LoginViewModel::class.java]
         binding.logIn.setOnClickListener {
             var flag= true
@@ -92,7 +93,11 @@ class LoginFragment : Fragment() {
             if(it.customers.isNotEmpty()){
                 viewModel.UserDataResponse.removeObservers(viewLifecycleOwner)
                 if(it.customers[0].tags == password){
+
                     saveDataInSharedPref(email,it.customers[0].id as Long)
+                    navController.navigate(R.id.action_loginFragment_to_mainFragment)
+                    //action_loginFragment_to_mainFragment
+
                 }
                 else{
                     showErrorMessage(getString(R.string.EmailOrPasswordIsIncorrect))
@@ -106,10 +111,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun saveDataInSharedPref(email: String, userId: Long) {
-        val fileSharedPref = AppSharedPref.getInstance(myView.context,AppConstants.PREFRENCE_File)
-        fileSharedPref.setValue(AppConstants.IS_LOGIN,true)
-        fileSharedPref.setValue(AppConstants.USER_EMAIL,email)
-        fileSharedPref.setValue(AppConstants.USER_ID,userId)
+       viewModel.saveDataInSharedPref(myView.context,email,userId)
     }
     private fun showErrorMessage(message: String){
         AppConstants.showAlert(
