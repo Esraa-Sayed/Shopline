@@ -1,55 +1,83 @@
 package com.eCommerce.shopify.ui.reviews
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.eCommerce.shopify.databinding.ReviewsItemLayoutBinding
-import org.w3c.dom.Text
+import com.eCommerce.shopify.R
+import com.eCommerce.shopify.model.Product
 
-class ReviewsAdapter:RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder> {
-
-    private var context:Context
-    private var reviewsList:List<Review>
-
-    constructor(context:Context,reviewsList:List<Review>){
-        this.context = context
-        this.reviewsList = reviewsList
-    }
+class ReviewsAdapter(
+    private var context: Context,
+    private var reviewsList: List<Review>
+    ): RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ReviewsAdapter.ReviewsViewHolder {
-        val itemBinding = ReviewsItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return ReviewsViewHolder(itemBinding)
+    ): ReviewsViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.row_review_item, parent, false)
+        return ReviewsViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ReviewsAdapter.ReviewsViewHolder, position: Int) {
-        holder.reviewerName.text = reviewsList[position].reviewerName
-        holder.reviewerRate.rating = reviewsList[position].reviewerRate.toFloat()
-        holder.reviewerComment.text = reviewsList[position].reviewerComment
+    override fun onBindViewHolder(holder: ReviewsViewHolder, position: Int) {
+        holder.txtViewReviewerName?.text = reviewsList[position].reviewerName
+        holder.reviewRate?.rating = reviewsList[position].reviewerRate.toFloat()
+        holder.reviewerComment?.text = reviewsList[position].reviewerComment
         Glide.with(context)
             .load(reviewsList[position].reviewerImg)
-            .into(holder.reviewerImg)
+            .into(holder.imgViewCategory!!)
     }
 
     override fun getItemCount(): Int {
         return reviewsList.size
     }
 
-    fun setReviewsList(reviewsList:List<Review>){
+    @SuppressLint("NotifyDataSetChanged")
+    fun setDataToAdapter(reviewsList: List<Review>) {
         this.reviewsList = reviewsList
+        notifyDataSetChanged()
     }
 
-    inner class ReviewsViewHolder(private val itemBinding: ReviewsItemLayoutBinding): RecyclerView.ViewHolder(itemBinding.root) {
-        val reviewerName = itemBinding.reviewerName
-        val reviewerRate = itemBinding.reviewRate
-        val reviewerImg = itemBinding.reviewerImg
-        val reviewerComment = itemBinding.reviewerComment
+    class ReviewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var imgViewCategory: ImageView? = null
+            get() {
+                if (field == null) {
+                    field = itemView.findViewById(R.id.imgViewCategory)
+                }
+                return field
+            }
+            private set
+        var txtViewReviewerName: TextView? = null
+            get() {
+                if (field == null) {
+                    field = itemView.findViewById(R.id.txtViewReviewerName)
+                }
+                return field
+            }
+            private set
+        var reviewRate: RatingBar? = null
+            get() {
+                if (field == null) {
+                    field = itemView.findViewById(R.id.reviewRate)
+                }
+                return field
+            }
+            private set
+        var reviewerComment: TextView? = null
+            get() {
+                if (field == null) {
+                    field = itemView.findViewById(R.id.reviewerComment)
+                }
+                return field
+            }
+            private set
     }
 }

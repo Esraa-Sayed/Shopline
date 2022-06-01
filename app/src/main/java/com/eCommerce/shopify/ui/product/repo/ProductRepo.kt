@@ -1,7 +1,12 @@
 package com.eCommerce.shopify.ui.product.repo
 
+import android.content.Context
 import com.eCommerce.shopify.model.Products
+import com.eCommerce.shopify.model.UserData
 import com.eCommerce.shopify.network.RemoteSource
+import com.eCommerce.shopify.utils.AppConstants.PREFRENCE_File
+import com.eCommerce.shopify.utils.AppConstants.USER_EMAIL
+import com.eCommerce.shopify.utils.AppSharedPref
 import retrofit2.Response
 
 class ProductRepo private constructor(

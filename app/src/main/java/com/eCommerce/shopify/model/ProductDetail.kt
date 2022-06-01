@@ -3,7 +3,7 @@ package com.eCommerce.shopify.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Product(
+data class ProductDetail(
     @SerializedName("admin_graphql_api_id")
     val adminGraphqlApiId: String,
     @SerializedName("body_html")
@@ -12,7 +12,7 @@ data class Product(
     val createdAt: String,
     val handle: String,
     val id: Long,
-    val image: ImageProduct?,
+    val image: ImageProduct,
     val images: List<ImageProduct>,
     val options: List<Option>,
     @SerializedName("product_type")
@@ -23,11 +23,11 @@ data class Product(
     val publishedScope: String,
     val status: String,
     val tags: String,
+    @SerializedName("template_suffix")
+    val templateSuffix: Any,
     val title: String,
     @SerializedName("updated_at")
     val updatedAt: String,
-    @SerializedName("variants")
-    val variants: List<Variant>,
-    val vendor: String,
-    val quantity:Int
+    val variants: List<VariantProductDetail>,
+    val vendor: String
 )
