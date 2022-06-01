@@ -58,12 +58,12 @@ class LoginFragment : Fragment() {
             var flag= true
             if (binding.email.text.isNullOrEmpty())
             {
-                binding.email.error = "required"
+                binding.email.error = getString(R.string.required)
                 flag = false
             }
             if (binding.password.text.isNullOrEmpty())
             {
-                binding.password.error = "required"
+                binding.password.error = getString(R.string.required)
                 flag = false
             }
             if(flag){
@@ -92,12 +92,11 @@ class LoginFragment : Fragment() {
             if(it.customers.isNotEmpty()){
                 viewModel.UserDataResponse.removeObservers(viewLifecycleOwner)
                 if(it.customers[0].tags == password){
-                    saveDataInSharedPref(email,it.customers[0].id)
+                    saveDataInSharedPref(email,it.customers[0].id as Long)
                 }
                 else{
                     showErrorMessage(getString(R.string.EmailOrPasswordIsIncorrect))
                     setLoginButtonEnableOrDisable(true)
-
                 }
             }
             else{

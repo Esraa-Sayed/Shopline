@@ -16,6 +16,7 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.OnProductClickListener
+import com.eCommerce.shopify.ui.brandproducts.view.BrandProductsFragmentArgs
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepository
 import com.eCommerce.shopify.ui.brandproducts.view.BrandProductsAdapter
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
@@ -62,7 +63,7 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         brandProductsViewModel = ViewModelProvider(this,brandProductsViewModelFactory).get(BrandProductsViewModel::class.java)
         setupBrandProductsRecycler()
 
-        brandProductsViewModel.getBrandProductsCollectionList("ADIDAS")
+        brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
         brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner){
             brandProductsAdapter.setBrandProductsList(it.products)
             brandProductsAdapter.notifyDataSetChanged()

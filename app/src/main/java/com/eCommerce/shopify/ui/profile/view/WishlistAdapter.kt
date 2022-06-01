@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileWishlistRowBinding
-import com.eCommerce.shopify.ui.favorite.model.Product
+import com.eCommerce.shopify.model.Product
 
 class WishlistAdapter : RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>() {
 
