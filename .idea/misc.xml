@@ -10,12 +10,14 @@
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/fragment_favorite.xml" value="0.25416666666666665" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/orders_details_fragment.xml" value="0.25416666666666665" />
-        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/orders_details_row.xml" value="0.25416666666666665" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/orders_details_row.xml" value="0.2" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/orders_fragment.xml" value="0.1" />
+        <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/profile_fragment.xml" value="0.13020833333333334" />
         <entry key="..\:/5th year ITI/GraduationProject/app/src/main/res/layout/profile_orders_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/drawable/custom_background.xml" value="0.17864583333333334" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/drawable/ic_settings.xml" value="0.17864583333333334" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/drawable/round_corner_search.xml" value="0.17864583333333334" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/drawable/rounded_corner_gray.xml" value="0.25833333333333336" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/drawable/rounded_corners.xml" value="0.17864583333333334" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/drawable/rounded_corners_product.xml" value="0.17864583333333334" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/drawable/rounded_corners_top.xml" value="0.17864583333333334" />
@@ -26,18 +28,29 @@
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/add_address_fragment.xml" value="0.2" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/address_row.xml" value="0.18614130434782608" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/addresses_fragment.xml" value="0.18614130434782608" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/app_bar.xml" value="0.1625" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/app_bar_home.xml" value="0.1625" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/checkout_fragment.xml" value="0.16802536231884058" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/choose_address_dialog_checkout_screen.xml" value="0.16802536231884058" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/choose_payment_method_dialog.xml" value="0.16802536231884058" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/confirm_dialog.xml" value="0.264" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/connection_lost.xml" value="0.16802536231884058" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/contact_us.xml" value="0.18614130434782608" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/currency_dialog.xml" value="0.18614130434782608" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/fragment_favorite.xml" value="0.1743659420289855" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/fragment_home.xml" value="0.1625" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/fragment_main.xml" value="0.1625" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/fragment_register.xml" value="0.1743659420289855" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/location_access_dialog.xml" value="0.264" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/login_fragment.xml" value="0.1743659420289855" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/orders_details_fragment.xml" value="0.16302083333333334" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/profile_fragment.xml" value="0.18614130434782608" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/profile_orders_row.xml" value="0.18614130434782608" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/profile_wishlist_row.xml" value="0.4" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/setting_fragment.xml" value="0.264" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/shopping_cart_fragment.xml" value="0.18614130434782608" />
         <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/shopping_cart_row.xml" value="0.18614130434782608" />
+        <entry key="..\:/Graduation_Project/GP/Shopify/app/src/main/res/layout/slide_item_container.xml" value="0.1625" />
         <entry key="..\:/Graduation_Project/GP/The-Shopify-App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25416666666666665" />
         <entry key="..\:/Graduation_Project/GP/The-Shopify-App/app/src/main/res/drawable/ic_app_bar_background.xml" value="0.25416666666666665" />
         <entry key="..\:/Graduation_Project/GP/The-Shopify-App/app/src/main/res/drawable/ic_category.xml" value="0.25416666666666665" />
@@ -103,6 +116,7 @@
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/favorite_item_layout.xml" value="0.4" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/fragment_favorite.xml" value="0.25" />
         <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/fragment_register.xml" value="0.4" />
+        <entry key="..\:/ITI/Graduation Project/The-Shopify-App/app/src/main/res/layout/setting_fragment.xml" value="0.25" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/btn_selected_background.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/btn_unselected_background.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/ic_back_arrow.xml" value="0.2203125" />
@@ -116,11 +130,6 @@
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/add_address_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/app_bar_home.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/connection_lost.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/favorite_item_layout.xml" value="0.33" />
-        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_brand_products.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_category.xml" value="0.18611111111111112" />
-        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_product.xml" value="0.25" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/fragment_product_details.xml" value="0.20416666666666666" />
@@ -148,5 +157,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
   </component>
 </project>

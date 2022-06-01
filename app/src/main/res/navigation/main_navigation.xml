@@ -198,7 +198,7 @@
     </fragment>
     <fragment
         android:id="@+id/addAddressFragment"
-        android:name="com.eCommerce.shopify.ui.add_address.AddAddressFragment"
+        android:name="com.eCommerce.shopify.ui.add_address.view.AddAddressFragment"
         android:label="AddAddressFragment" />
     <fragment
         android:id="@+id/productDetailsFragment"
