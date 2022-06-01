@@ -9,7 +9,7 @@ data class Customer(
     var admin_graphql_api_id: String? = null,
     var created_at: String? = null,
     var currency: String? = null,
-    var default_address: DefaultAddress? = null,
+    var default_address: Addresse? = null,
     var email: String? = null,
     var email_marketing_consent: EmailMarketingConsent? = null,
     var first_name: String? = null,
