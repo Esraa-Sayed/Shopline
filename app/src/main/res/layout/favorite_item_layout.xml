@@ -33,12 +33,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="product name"
+        android:maxLines="2"
         android:fontFamily="@font/cairo_semi_bold"
         android:textColor="@color/black"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
         android:textSize="15sp"
         android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
     <TextView
         android:id="@+id/productPrice"
@@ -47,9 +53,22 @@
         android:text="24.99"
         android:fontFamily="@font/cairo_semi_bold"
         android:textColor="@color/dark_blue"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginVertical="10dp"
         android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/ProductCurrency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$"
+            android:fontFamily="@font/cairo_semi_bold"
+            android:textColor="@color/dark_blue"
+            android:layout_marginVertical="10dp"
+            android:textSize="13sp"/>
+
+        </LinearLayout>
 
         <RatingBar
             android:id="@+id/productRate"

@@ -62,7 +62,7 @@
     <string name="coupon">Coupon</string>
     <string name="enter_coupon_code">Enter Coupon Code</string>
     <string name="validate">Validate</string>
-    <string name="discound">Discound:</string>
+    <string name="discound">Discount:</string>
     <string name="grand_total">Grand Total</string>
     <string name="total_amount">Total Amount:</string>
     <string name="place_order">Place Order</string>
@@ -73,9 +73,8 @@
     <string name="paypal">PayPal</string>
     <string name="Cash_on_delivery">Cash on delivery</string>
     <string name="city">City</string>
-    <string name="add_adress">Add Adress</string>
+    <string name="add_adress">Add Address</string>
     <string name="_total">Total</string>
-
     <string name="error">Error</string>
     <string name="no_internet_access">No Internet Access</string>
     <string name="check_connection">Check your connection settings \n and try again</string>
@@ -84,4 +83,6 @@
     <string name="t_shirts">T-Shirts</string>
     <string name="shoes">Shoes</string>
     <string name="products">Products</string>
+    <string name="EmailOrPasswordIsIncorrect">Email or password is incorrect</string>
+    <string name="no_orders_found">No orders found</string>
 </resources>
