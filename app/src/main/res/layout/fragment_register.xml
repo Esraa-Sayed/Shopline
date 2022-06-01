@@ -182,16 +182,23 @@
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"/>
 
-        <EditText
-            android:id="@+id/passwordInRegister"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue"
-            android:hint="@string/password"
-            android:textSize="15sp"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:scrollHorizontally="true"/>
+            app:passwordToggleDrawable="@drawable/show_password"
+            app:passwordToggleEnabled="true"
+            android:id="@+id/tilPass">
+            <EditText
+                android:id="@+id/passwordInRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_blue"
+                android:hint="@string/password"
+                android:textSize="15sp"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:scrollHorizontally="true"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
@@ -217,16 +224,25 @@
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"/>
 
-        <EditText
-            android:id="@+id/confirmPassInRegister"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/light_blue"
-            android:hint="@string/confirm_password"
-            android:textSize="15sp"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:scrollHorizontally="true"/>
+            app:passwordToggleDrawable="@drawable/show_password"
+            app:passwordToggleEnabled="true"
+            android:id="@+id/confirmPass">
+
+            <EditText
+                android:id="@+id/confirmPassInRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/light_blue"
+                android:hint="@string/confirm_password"
+                android:textSize="15sp"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:scrollHorizontally="true"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

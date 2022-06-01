@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.ProfileOrdersRowBinding
 import com.eCommerce.shopify.model.Order
-import com.eCommerce.shopify.model.OrderModel
+import com.eCommerce.shopify.ui.MainFragmentDirections
 
-class OrdersAdapter(private val context: Context,private var  orders:List<Order>): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
+class OrdersAdapter(private val context: Context,private var  orders:List<Order>,private var onOrderRowClicked:OnOrderRowClicked): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
 
-    //private lateinit var itemBinding:
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -26,6 +25,7 @@ class OrdersAdapter(private val context: Context,private var  orders:List<Order>
         holder.viewBinding.pRowOrderPrice.text = order.total_price
         holder.viewBinding.pOrdersRowCardview.setOnClickListener{
             Log.e("TAG", "onBindViewHolder: YEss")
+            onOrderRowClicked.onRowClickedListener(order)
         }
     }
 
@@ -37,7 +37,5 @@ class OrdersAdapter(private val context: Context,private var  orders:List<Order>
         this.orders = orders
         notifyDataSetChanged()
     }
-    class OrdersViewHolder(var viewBinding:ProfileOrdersRowBinding):RecyclerView.ViewHolder(viewBinding.root) {
-
-    }
+    class OrdersViewHolder(var viewBinding:ProfileOrdersRowBinding):RecyclerView.ViewHolder(viewBinding.root)
 }

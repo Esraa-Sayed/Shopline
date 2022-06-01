@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
+import com.eCommerce.shopify.model.OrderModel
 import com.eCommerce.shopify.model.Order
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel

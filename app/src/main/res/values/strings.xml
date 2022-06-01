@@ -84,5 +84,10 @@
     <string name="shoes">Shoes</string>
     <string name="products">Products</string>
     <string name="EmailOrPasswordIsIncorrect">Email or password is incorrect</string>
+    <string name="required">required</string>
+    <string name="passwordWarning">passowrd should be at least 8 characters!</string>
+    <string name="confirmPasswordWarning">sould match password!</string>
     <string name="no_orders_found">No orders found</string>
+    <string name="addressTitle">Address</string>
+    <string name="no_addresses_found">No addresses found</string>
 </resources>
