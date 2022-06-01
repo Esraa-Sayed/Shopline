@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.OrdersFragmentBinding
+import com.eCommerce.shopify.model.Order
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.login.repo.LoginRepo
 import com.eCommerce.shopify.ui.login.viewModel.LoginViewModel
@@ -21,7 +23,7 @@ import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModel
 import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModelFactory
 import com.eCommerce.shopify.utils.AppConstants
 
-class OrdersFragment : Fragment() {
+class OrdersFragment : Fragment(),OnOrderRowClicked {
     private lateinit var bindingFragment: OrdersFragmentBinding
     private lateinit var viewModel: OrdersViewModel
     private lateinit var ordersViewModelFactory: OrdersViewModelFactory
@@ -62,7 +64,7 @@ class OrdersFragment : Fragment() {
 
         getString(R.string.orders).also { bindingFragment.appBar.toolbar.title = it }
 
-        ordersAdapter = OrdersAdapter(myView.context, emptyList())
+        ordersAdapter = OrdersAdapter(myView.context, emptyList(),this)
         var linearManager = LinearLayoutManager(activity)
         bindingFragment.ordersRecyclerView.apply {
             setHasFixedSize(true)
@@ -93,5 +95,8 @@ class OrdersFragment : Fragment() {
             )
         })
     }
-
+    override fun onRowClickedListener(order: Order) {
+        val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment(order.id)
+        findNavController().navigate(action)
+    }
 }

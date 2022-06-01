@@ -22,7 +22,7 @@ import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.AddressesAdapter
 import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.OnRowClicked
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
 
-class CheckoutFragment : Fragment(),OnRowClicked{
+class CheckoutFragment : Fragment(), OnRowClicked {
 
 
     private lateinit var viewModel: CheckoutViewModel
@@ -128,7 +128,7 @@ class CheckoutFragment : Fragment(),OnRowClicked{
 
     }
 
-    override fun onRowClickedListener(address: Addresse) {
+    override fun onRowClickedListenerAddress(address: Addresse) {
         dialogAddress.dismiss()
         binding.countryName.text = address.country
         binding.fullAddress.text = address.address1.toString()
