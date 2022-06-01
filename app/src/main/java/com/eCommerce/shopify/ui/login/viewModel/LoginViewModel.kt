@@ -35,7 +35,7 @@ class LoginViewModel(var _repo: LoginRepoInterface) : ViewModel() {
             }
         }
     }
-    fun saveDataInSharedPref(context:Context,email: String, userId: Long){
-        _repo.saveDataInSharedPref(context,email,userId)
+    fun saveDataInSharedPref(context:Context,email: String, userId: Long, userName:String){
+        _repo.saveDataInSharedPref(context,email,userId,userName)
     }
 }

@@ -93,7 +93,7 @@ class LoginFragment : Fragment() {
             if(it.customers.isNotEmpty()){
                 viewModel.UserDataResponse.removeObservers(viewLifecycleOwner)
                 if(it.customers[0].tags == password){
-                    saveDataInSharedPref(email,it.customers[0].id)
+                    saveDataInSharedPref(email,it.customers[0].id,it.customers[0].first_name)
                     navController.navigate(R.id.action_loginFragment_to_mainFragment)
                     //action_loginFragment_to_mainFragment
                 }
@@ -109,8 +109,8 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun saveDataInSharedPref(email: String, userId: Long) {
-       viewModel.saveDataInSharedPref(myView.context,email,userId)
+    private fun saveDataInSharedPref(email: String, userId: Long, userName:String) {
+       viewModel.saveDataInSharedPref(myView.context,email,userId,userName)
     }
     private fun showErrorMessage(message: String){
         AppConstants.showAlert(

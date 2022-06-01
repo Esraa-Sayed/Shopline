@@ -16,6 +16,7 @@ object AppConstants {
     const val PREFRENCE_File = "User_Data"
     const val USER_ID: String = "User_id"
     const val USER_EMAIL: String = "User_email"
+    const val USER_NAME: String = "User_name"
 
     const val SPLASH_TIME_OUT: Long = 3000
 
