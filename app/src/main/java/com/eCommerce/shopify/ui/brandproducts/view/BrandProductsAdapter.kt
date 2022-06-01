@@ -42,7 +42,7 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         //holder.productRate.rating = brandProducts[position].rate.toFloat()
 
         holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick() }
-        holder.favoriteBtn.setOnClickListener { onClickHandler.onFavBtnClick() }
+        holder.favoriteBtn.setOnClickListener { onClickHandler.onFavBtnClick(brandProducts[position]) }
     }
 
     override fun getItemCount(): Int {

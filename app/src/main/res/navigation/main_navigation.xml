@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.eCommerce.shopify.ui.favorite.FavoriteFragment"
+        android:name="com.eCommerce.shopify.ui.favorite.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
@@ -112,6 +112,12 @@
         <argument
             android:name="brandTitle"
             app:argType="string" />
+        <action
+            android:id="@+id/action_brandProductsFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_brandProductsFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
@@ -129,7 +135,7 @@
         tools:layout="@layout/fragment_success" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.eCommerce.shopify.ui.register.RegisterFragment"
+        android:name="com.eCommerce.shopify.ui.register.view.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action

@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class Variant(
     @SerializedName("admin_graphql_api_id")
     val adminGraphqlApiId: String,
-    @SerializedName("barcode")
+    /*@SerializedName("barcode")
     val barcode: Any,
     @SerializedName("compare_at_price")
-    val compareAtPrice: Any,
+    val compareAtPrice: Any,*/
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("fulfillment_service")
@@ -19,7 +19,7 @@ data class Variant(
     @SerializedName("id")
     val id: Long,
     @SerializedName("image_id")
-    val imageId: Any,
+    val imageId: Long,
     @SerializedName("inventory_item_id")
     val inventoryItemId: Long,
     @SerializedName("inventory_management")
@@ -35,7 +35,7 @@ data class Variant(
     @SerializedName("option2")
     val option2: String,
     @SerializedName("option3")
-    val option3: Any,
+    val option3: String,
     @SerializedName("position")
     val position: Int,
     @SerializedName("price")
