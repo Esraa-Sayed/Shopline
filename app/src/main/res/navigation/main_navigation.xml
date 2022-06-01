@@ -64,6 +64,9 @@
         <action
             android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
             app:destination="@id/ordersDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -121,4 +124,13 @@
         android:name="com.eCommerce.shopify.ui.orderDetails.view.OrdersDetailsFragment"
         android:label="orders_details_fragment"
         tools:layout="@layout/orders_details_fragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.eCommerce.shopify.ui.search.view.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_brandProductsFragment"
+            app:destination="@id/brandProductsFragment" />
+    </fragment>
 </navigation>
