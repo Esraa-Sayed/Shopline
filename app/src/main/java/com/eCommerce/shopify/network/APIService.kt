@@ -19,5 +19,5 @@ interface APIService {
     suspend fun getCollectionWithId(@Query("vendor") vendor:String):Response<BrandProductsResponse>
 
     @POST("customers.json")
-    suspend fun registerCustomer(@Body customer: CustomerResponse): Response<UserData>
+    suspend fun registerCustomer(@Body customer: CustomerResponse): Response<CustomerResponse>
 }

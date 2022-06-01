@@ -14,7 +14,7 @@ class RegisterRepo private constructor(private val remoteSource:RemoteSource):Re
         }
     }
 
-    override suspend fun registerCustomer(customer: CustomerResponse): Response<UserData> {
+    override suspend fun registerCustomer(customer: CustomerResponse): Response<CustomerResponse> {
         return remoteSource.registerCustomer(customer)
     }
 

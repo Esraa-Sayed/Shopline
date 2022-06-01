@@ -6,5 +6,5 @@ import retrofit2.Response
 
 interface RegisterRepoInterface {
 
-    suspend fun registerCustomer(customer: CustomerResponse): Response<UserData>
+    suspend fun registerCustomer(customer: CustomerResponse): Response<CustomerResponse>
 }

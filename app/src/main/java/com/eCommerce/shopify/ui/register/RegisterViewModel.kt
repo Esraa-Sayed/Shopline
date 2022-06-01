@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val repo:RegisterRepoInterface):ViewModel() {
 
-    private val _customerResponse = MutableLiveData<UserData>()
-    val customerRespoonse:LiveData<UserData> = _customerResponse
+    private val _customerResponse = MutableLiveData<CustomerResponse>()
+    val customerRespoonse:LiveData<CustomerResponse> = _customerResponse
 
     private var _errorMsgResponse = MutableLiveData<String>()
     val errorMsgResponse: LiveData<String> = _errorMsgResponse

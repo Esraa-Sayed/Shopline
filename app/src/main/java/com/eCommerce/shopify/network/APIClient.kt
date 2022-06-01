@@ -27,7 +27,7 @@ class APIClient private constructor(): RemoteSource {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getCollectionWithId(vendor)
     }
 
-    override suspend fun registerCustomer(customer: CustomerResponse): Response<UserData> {
+    override suspend fun registerCustomer(customer: CustomerResponse): Response<CustomerResponse> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).registerCustomer(customer)
     }
 

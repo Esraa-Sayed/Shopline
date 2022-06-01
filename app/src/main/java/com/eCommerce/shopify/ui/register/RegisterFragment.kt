@@ -91,9 +91,9 @@ class RegisterFragment : Fragment() {
             }
             registerViewModel.postNewCustomer(incommingCustomer as CustomerResponse)
             registerViewModel.customerRespoonse.observe(viewLifecycleOwner) {
-                if(!it.customers.isNullOrEmpty()) {
-                    Log.i("TAG", "register ssssssuccessssssssssssfulllllll " + it.customers[0].email)
-                    val goToHome = RegisterFragmentDirections.actionRegisterFragmentToMainFragment(it.customers[0])
+                if(!it.customer.email.isNullOrEmpty()) {
+                    Log.i("TAG", "register ssssssuccessssssssssssfulllllll " + it.customer.email)
+                    val goToHome = RegisterFragmentDirections.actionRegisterFragmentToMainFragment(it.customer)
                     navController.navigate(goToHome)
                 }
                 else{
