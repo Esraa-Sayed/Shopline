@@ -47,6 +47,7 @@ class MainFragment : Fragment() {
         handleToolbarEvent()
         configureBottomNavView()
         listenerOnNetwork()
+        listenToSearch()
     }
 
     private fun listenerOnNetwork() {
@@ -63,6 +64,12 @@ class MainFragment : Fragment() {
 
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
+    }
+
+    private fun listenToSearch(){
+        binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
+            navController.navigate(R.id.action_mainFragment_to_searchFragment)
+        }
     }
 
     private fun handleToolbarEvent() {

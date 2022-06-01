@@ -16,7 +16,6 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.OnProductClickListener
-import com.eCommerce.shopify.ui.brandproducts.BrandProductsFragmentArgs
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepository
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFactory
