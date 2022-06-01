@@ -94,6 +94,8 @@ class LoginFragment : Fragment() {
                 viewModel.UserDataResponse.removeObservers(viewLifecycleOwner)
                 if(it.customers[0].tags == password){
                     saveDataInSharedPref(email,it.customers[0].id)
+                    navController.navigate(R.id.action_loginFragment_to_mainFragment)
+                    //action_loginFragment_to_mainFragment
                 }
                 else{
                     showErrorMessage(getString(R.string.EmailOrPasswordIsIncorrect))
