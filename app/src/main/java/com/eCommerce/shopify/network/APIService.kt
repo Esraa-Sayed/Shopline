@@ -2,9 +2,8 @@ package com.eCommerce.shopify.network
 
 import retrofit2.http.*
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
 import com.eCommerce.shopify.model.*
+import com.eCommerce.shopify.model.orderDetails.Order
 import retrofit2.http.Query
 
 
@@ -40,4 +39,7 @@ interface APIService {
 
     @GET("customers/{id}/addresses.json")
     suspend fun getUserAddresses(@Path("id")id:Long):Response<AddressesUserModel>
+
+    @POST("orders.json")
+    suspend fun postOrder(@Body order:Order):Response<Order>
 }

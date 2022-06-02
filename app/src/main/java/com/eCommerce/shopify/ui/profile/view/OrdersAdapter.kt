@@ -17,7 +17,7 @@ class OrdersAdapter(val OnOrderListner: OnOrderListner, val onProductListner: On
     }
 
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
-        holder.bind(orders[position].created_at.split("T")[0], orders[position].total_price)
+        holder.bind(orders[position].created_at!!.split("T")[0], orders[position].total_price!!)
         //holder.bind("25/01/2021", "145.32")
         holder._bindView.pOrdersRowCardview.setOnClickListener{
             OnOrderListner.onOrderClicked(orders[position])
