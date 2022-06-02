@@ -35,6 +35,6 @@ data class Product(
     @SerializedName("variants")
     val variants: List<Variant>,
     val vendor: String,
-    var isFavorite:Boolean = false
+    var isFavorite:Boolean = false,
     val quantity:Int
 )

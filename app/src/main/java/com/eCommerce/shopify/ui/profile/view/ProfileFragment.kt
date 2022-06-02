@@ -13,11 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
-import com.eCommerce.shopify.model.OrderModel
-import com.eCommerce.shopify.model.Order
+import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.order.repo.OrdersRepo
 import com.eCommerce.shopify.ui.profile.repo.ProfileRepo
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModelFactory
@@ -49,7 +47,6 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         val remoteSource = ProfileRepo.getInstance(APIClient.getInstance())
         val profileFactory = ProfileViewModelFactory(remoteSource)
 
@@ -103,7 +100,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         _binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
     }
 
-    override fun onOrderClicked(order: com.eCommerce.shopify.model.orderDetails.Order) {
+    override fun onOrderClicked(order: Order) {
         //mNavController.navigate(R.id.action_mainFragment_to_ordersDetailsFragment)
     }
 
