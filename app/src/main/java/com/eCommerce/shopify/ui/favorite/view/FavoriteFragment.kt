@@ -1,12 +1,15 @@
 package com.eCommerce.shopify.ui.favorite.view
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.LocalSource
 import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
 import com.eCommerce.shopify.model.Product
@@ -42,6 +45,10 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.appBarHome.cardViewFavorite.visibility = View.GONE
+        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
+        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+        binding.appBarHome.toolbar.title = getString(R.string.wishlist)
 
         favoriteViewModelFactory = FavoriteViewModelFactory(FavoriteRepo.getInstance(LocalSource.getInstance(requireContext())))
         favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory).get(FavoriteViewModel::class.java)
@@ -60,6 +67,10 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
         gridManager = GridLayoutManager(requireContext(),2)
         binding.favRecycler.adapter = favAdapter
         binding.favRecycler.layoutManager = gridManager
+    }
+
+    private fun setupToolbar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
     }
 
     override fun onProductItemClick() {

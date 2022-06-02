@@ -1,10 +1,12 @@
 package com.eCommerce.shopify.ui.brandproducts.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FavoriteItemLayoutBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.OnProductClickListener
@@ -42,7 +44,17 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         //holder.productRate.rating = brandProducts[position].rate.toFloat()
 
         holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick() }
-        holder.favoriteBtn.setOnClickListener { onClickHandler.onFavBtnClick(brandProducts[position]) }
+        holder.favoriteBtn.setOnClickListener {
+            onClickHandler.onFavBtnClick(brandProducts[position])
+            if(brandProducts[position].isFavorite){
+                holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
+                Log.i("TAG", "onBindViewHolder: adddddddddddddddddddddddddddddddded to favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+            }
+            else{
+                holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_border_group)
+                Log.i("TAG", "onBindViewHolder: remmmmmmmmmmmmmmmmmoooooooooooove from favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+            }
+        }
     }
 
     override fun getItemCount(): Int {
