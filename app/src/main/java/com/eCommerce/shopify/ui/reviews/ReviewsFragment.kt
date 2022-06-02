@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentReviewsBinding
-import com.eCommerce.shopify.ui.favorite.FavoriteAdapter
-import com.eCommerce.shopify.ui.home.view.HomeBrandAdapter
 
 class ReviewsFragment : Fragment() {
 
