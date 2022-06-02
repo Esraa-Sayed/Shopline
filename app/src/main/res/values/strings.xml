@@ -100,4 +100,5 @@
     <string name="payment_Method">Payment Method</string>
     <string name="contact_us">Contact Us</string>
     <string name="about_us">About Us</string>
+    <string name="quantity">Quantity:</string>
 </resources>

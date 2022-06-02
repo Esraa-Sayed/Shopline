@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_150sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sc_row_cardview"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="15dp"
+    android:padding="@dimen/_10sdp"
+    app:cardElevation="8dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:layout_marginHorizontal="10dp">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,7 +19,9 @@
         android:id="@+id/imageView"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,12 +29,16 @@
 
     <TextView
         android:id="@+id/brandOrderName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:text="Tag Heuer Wristwatch"
-        android:textSize="@dimen/_16ssp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="Tag Heuer Wristwatch Tag Heuer WristwatchTag Heuer "
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,9 +57,11 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Quantity:"
-        android:textSize="@dimen/_16ssp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/quantity"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/brandOrderPrice"
         app:layout_constraintTop_toBottomOf="@+id/brandOrderPrice" />
 
@@ -51,10 +69,11 @@
         android:id="@+id/brandOrderPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="$1100"
         android:textColor="#982992"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintStart_toStartOf="@+id/brandOrderName"
         app:layout_constraintTop_toBottomOf="@+id/brandOrderName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
