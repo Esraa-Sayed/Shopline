@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.profile.view
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -58,8 +59,6 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         initWishlistRecyclerView()
         initOrdersRecyclerView()
         listenToAllBtn()
-        getUserOrders()
-        getUserWishlist()
     }
 
     private fun getUserOrders() {
@@ -149,19 +148,24 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         }
     }
     private fun onMoreWishlistClicked(){
-        mNavController.navigate(R.id.action_mainFragment_to_favoriteFragment2)
+        //val action = ProfileFragmentBinding.
     }
     private fun onMoreOrdersClicked(){
-        mNavController.navigate(R.id.action_mainFragment_to_ordersFragment)
+        //val action = ProfileFragmentDest
     }
+    @SuppressLint("SetTextI18n")
     private fun checkIfUserLogin() {
         if(viewModel.getIsLogin(requireContext())){
             binding.profileNologinRelativelayout.visibility = View.GONE
             binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+            binding.pWelcomeNameText.text = "Welcome " + viewModel.getUserName(requireContext())
+            getUserOrders()
+            getUserWishlist()
         }
         else{
             binding.profileNologinRelativelayout.visibility = View.VISIBLE
             binding.profileLoginConstraintlayout.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
         }
     }
     private fun listenToLoginBtn(){

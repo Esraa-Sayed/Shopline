@@ -34,6 +34,7 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent">
         <ScrollView
+            android:id="@+id/scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rounded_corners_top_gray">
@@ -96,7 +97,6 @@
                             android:drawableEnd="@drawable/ic_right_arrow"
                             android:fontFamily="@font/cairo_semi_bold"
                             android:text="@string/more"
-                            android:visibility="gone"
                             android:textAllCaps="false"
                             android:textColor="@color/main_color"
                             android:textSize="18sp" />

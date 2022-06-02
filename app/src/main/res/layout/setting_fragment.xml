@@ -59,20 +59,20 @@
                                 android:layout_width="23dp"
                                 android:layout_height="23dp"
                                 android:layout_below="@+id/hello_name"
-                                android:layout_marginLeft="20dp"
+                                android:layout_marginStart="20dp"
                                 android:layout_marginTop="5dp"
-                                android:src="@drawable/ic_address" />
+                                android:src="@drawable/ic_email" />
 
                             <TextView
-                                android:id="@+id/address_name"
+                                android:id="@+id/email"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/hello_name"
                                 android:layout_marginHorizontal="20dp"
                                 android:layout_marginTop="5dp"
-                                android:layout_toRightOf="@+id/address_icon"
+                                android:layout_toEndOf="@+id/address_icon"
                                 android:fontFamily="@font/cairo_semi_bold"
-                                android:text="Please choose your address"
+                                android:text="thorayahamdy743@gmail.com"
                                 android:textSize="16sp" />
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -126,9 +126,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
                                         android:layout_marginHorizontal="20dp"
-                                        android:layout_toRightOf="@+id/address_image"
+                                        android:layout_toEndOf="@+id/address_image"
                                         android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="Address"
+                                        android:text="@string/address"
                                         android:textSize="18sp" />
                                 </RelativeLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -162,9 +162,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
                                         android:layout_marginHorizontal="20dp"
-                                        android:layout_toRightOf="@+id/currency_image"
+                                        android:layout_toEndOf="@+id/currency_image"
                                         android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="Currency"
+                                        android:text="@string/currency"
                                         android:textSize="18sp" />
                                 </RelativeLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -177,6 +177,7 @@
                                 android:layout_marginVertical="10dp"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="4dp"
+                                android:visibility="gone"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/currency_card_view">
 
@@ -198,9 +199,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
                                         android:layout_marginHorizontal="20dp"
-                                        android:layout_toRightOf="@+id/payment_image"
+                                        android:layout_toEndOf="@+id/payment_image"
                                         android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="Payment Method"
+                                        android:text="@string/payment_Method"
                                         android:textSize="18sp" />
                                 </RelativeLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -234,9 +235,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
                                         android:layout_marginHorizontal="20dp"
-                                        android:layout_toRightOf="@+id/contactus_image"
+                                        android:layout_toEndOf="@+id/contactus_image"
                                         android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="Contact Us"
+                                        android:text="@string/contact_us"
                                         android:textSize="18sp" />
                                 </RelativeLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -270,9 +271,9 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
                                         android:layout_marginHorizontal="20dp"
-                                        android:layout_toRightOf="@+id/aboutus_image"
+                                        android:layout_toEndOf="@+id/aboutus_image"
                                         android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="About Us"
+                                        android:text="@string/about_us"
                                         android:textSize="18sp" />
                                 </RelativeLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -290,6 +291,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginVertical="30dp"
+                    android:layout_alignParentBottom="true"
                     android:background="@drawable/rounded_corners"
                     android:fontFamily="@font/cairo_bold"
                     android:text="@string/logout"
