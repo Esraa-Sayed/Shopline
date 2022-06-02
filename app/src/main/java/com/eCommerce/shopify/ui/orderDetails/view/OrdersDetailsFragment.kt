@@ -18,6 +18,7 @@ class OrdersDetailsFragment : Fragment() {
     private lateinit var binding:OrdersDetailsFragmentBinding
     private lateinit var myView: View
     private lateinit var orderDetailsAdapter: OrderDetailsAdapter
+    private lateinit var ordersDetailsFragmentArgs:OrdersDetailsFragmentArgs
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,10 +35,10 @@ class OrdersDetailsFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this).get(OrdersDetailsViewModel::class.java)
-        binding.orderCreatedDate.text = "20/10/2021"
-        binding.userShippingToName.text = "Esraa Sayed"
-        orderDetailsAdapter = OrderDetailsAdapter(myView.context, emptyList())
+        /*viewModel = ViewModelProvider(this).get(OrdersDetailsViewModel::class.java)
+        binding.orderCreatedDate.text = ordersDetailsFragmentArgs.createdAt.split("T")[0]
+        binding.userShippingToName.text = ordersDetailsFragmentArgs.shippingTo
+        orderDetailsAdapter = OrderDetailsAdapter(myView.context, ordersDetailsFragmentArgs.items)
         var layoutMan = LinearLayoutManager(activity)
         getString(R.string.OrderDetails).also { binding.appBar.toolbar.title = it }
         binding.orderDetailsRecyclerView.apply {
@@ -45,7 +46,7 @@ class OrdersDetailsFragment : Fragment() {
             layoutMan.orientation = RecyclerView.VERTICAL
             layoutManager = layoutMan
             adapter = orderDetailsAdapter
-        }
+        }*/
 
     }
 }

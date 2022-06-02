@@ -1,5 +1,4 @@
 package com.eCommerce.shopify.model.orderDetails
-
 import com.eCommerce.shopify.model.Customer
 
 data class Order(
@@ -38,7 +37,7 @@ data class Order(
     val financial_status: String,
     val fulfillment_status: Any,
     val gateway: String,
-    val id: Int,
+    val id: Long,
     val landing_site: String,
     val landing_site_ref: String,
     val line_items: List<LineItem>,

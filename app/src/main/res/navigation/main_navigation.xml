@@ -61,9 +61,6 @@
         <action
             android:id="@+id/action_mainFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
-            app:destination="@id/ordersDetailsFragment" />
         <argument
             android:name="incomingCustomer"
             app:argType="com.eCommerce.shopify.model.Customer" />
@@ -80,6 +77,9 @@
         <action
             android:id="@+id/action_mainFragment_to_addressesFragment"
             app:destination="@id/addressesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
+            app:destination="@id/ordersDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -96,7 +96,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.eCommerce.shopify.ui.favorite.FavoriteFragment"
+        android:name="com.eCommerce.shopify.ui.favorite.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
@@ -116,6 +116,12 @@
         <argument
             android:name="brandTitle"
             app:argType="string" />
+        <action
+            android:id="@+id/action_brandProductsFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_brandProductsFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
@@ -133,7 +139,7 @@
         tools:layout="@layout/fragment_success" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.eCommerce.shopify.ui.register.RegisterFragment"
+        android:name="com.eCommerce.shopify.ui.register.view.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -146,7 +152,7 @@
         android:label="orders_fragment"
         tools:layout="@layout/orders_fragment" >
         <action
-            android:id="@+id/action_ordersFragment_to_ordersDetailsFragment"
+            android:id="@+id/action_ordersFragment_to_ordersDetailsFragment2"
             app:destination="@id/ordersDetailsFragment" />
     </fragment>
     <fragment
@@ -155,9 +161,14 @@
         android:label="orders_details_fragment"
         tools:layout="@layout/orders_details_fragment" >
         <argument
-            android:name="orderId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="createdAt"
+            app:argType="string" />
+        <argument
+            android:name="shippingTo"
+            app:argType="string" />
+        <argument
+            android:name="items"
+            app:argType="com.eCommerce.shopify.model.orderDetails.LineItem[]" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"

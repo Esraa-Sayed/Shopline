@@ -13,13 +13,17 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
+import com.eCommerce.shopify.database.LocalSource
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
+import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.OnProductClickListener
-import com.eCommerce.shopify.ui.brandproducts.view.BrandProductsFragmentArgs
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepository
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFactory
+import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
+import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
+import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
 
 class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
@@ -29,6 +33,9 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     private lateinit var brandProductsViewModel: BrandProductsViewModel
     private lateinit var brandProductsViewModelFactory: BrandProductsViewModelFactory
     private lateinit var navController: NavController
+
+    private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var favoriteViewModelFactory: FavoriteViewModelFactory
 
     private val args by navArgs<BrandProductsFragmentArgs>()
 
@@ -60,6 +67,10 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
             BrandProductsRepository.getInstance(APIClient.getInstance())
         )
         brandProductsViewModel = ViewModelProvider(this,brandProductsViewModelFactory).get(BrandProductsViewModel::class.java)
+
+        favoriteViewModelFactory = FavoriteViewModelFactory(FavoriteRepo.getInstance(LocalSource.getInstance(requireContext())))
+        favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory).get(FavoriteViewModel::class.java)
+
         setupBrandProductsRecycler()
 
         brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
@@ -91,11 +102,11 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     private fun handleToolbarEvent() {
         binding.appBarHome.cardViewFavorite.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_favoriteFragment)
+            navController.navigate(R.id.action_brandProductsFragment_to_favoriteFragment)
         }
 
         binding.appBarHome.cardViewShoppingCart.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_shoppingCartFragment)
+            navController.navigate(R.id.action_brandProductsFragment_to_shoppingCartFragment)
         }
     }
 
@@ -103,7 +114,14 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     }
 
-    override fun onFavBtnClick() {
-
+    override fun onFavBtnClick(product:Product) {
+        if(product.isFavorite){
+            product.isFavorite=false
+            favoriteViewModel.deleteFromFavorite(product)
+        }
+        else{
+            product.isFavorite=true
+            favoriteViewModel.insertToFavorite(product)
+        }
     }
 }
