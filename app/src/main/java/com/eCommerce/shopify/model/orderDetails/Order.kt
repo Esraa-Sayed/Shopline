@@ -1,5 +1,4 @@
 package com.eCommerce.shopify.model.orderDetails
-
 import com.eCommerce.shopify.model.Customer
 
 data class Order(

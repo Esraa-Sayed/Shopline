@@ -61,9 +61,6 @@
         <action
             android:id="@+id/action_mainFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
-            app:destination="@id/ordersDetailsFragment" />
         <argument
             android:name="incomingCustomer"
             app:argType="com.eCommerce.shopify.model.Customer" />
@@ -80,6 +77,9 @@
         <action
             android:id="@+id/action_mainFragment_to_addressesFragment"
             app:destination="@id/addressesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
+            app:destination="@id/ordersDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -152,7 +152,7 @@
         android:label="orders_fragment"
         tools:layout="@layout/orders_fragment" >
         <action
-            android:id="@+id/action_ordersFragment_to_ordersDetailsFragment"
+            android:id="@+id/action_ordersFragment_to_ordersDetailsFragment2"
             app:destination="@id/ordersDetailsFragment" />
     </fragment>
     <fragment
@@ -161,9 +161,14 @@
         android:label="orders_details_fragment"
         tools:layout="@layout/orders_details_fragment" >
         <argument
-            android:name="orderId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="createdAt"
+            app:argType="string" />
+        <argument
+            android:name="shippingTo"
+            app:argType="string" />
+        <argument
+            android:name="items"
+            app:argType="com.eCommerce.shopify.model.orderDetails.LineItem[]" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -217,10 +222,10 @@
         <action
             android:id="@+id/action_productDetailsFragment_to_reviewsFragment"
             app:destination="@id/reviewsFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/reviewsFragment"

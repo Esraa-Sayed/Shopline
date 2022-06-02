@@ -67,9 +67,14 @@ class ProductDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         this.myView = view
+        setupToolbar()
         gettingViewModelReady()
         handleUIActions()
         initRecyclerView()
+    }
+
+    private fun setupToolbar() {
+        binding.appBarHome.toolbar.title = getString(R.string.product_details)
     }
 
     private fun gettingViewModelReady() {
