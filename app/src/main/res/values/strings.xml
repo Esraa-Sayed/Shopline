@@ -98,4 +98,6 @@
     <string name="choose_your_currency">Choose your currency</string>
     <string name="todo">TODO</string>
     <string name="our_team_n">Our Team</string>
+    <string name="add_to_bag">Add To Bag</string>
+    <string name="remove_from_bag">Remove From Bag</string>
 </resources>

@@ -37,7 +37,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="152dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -47,14 +47,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/app_bar_home">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPagerAdsSlider"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="366dp" />
+                android:layout_height="152dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPagerAdsSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="112dp"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewPagerAdsSlider"
+                    app:tabBackground="@drawable/tab_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -70,7 +90,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/imgViewFavoriteIcon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
@@ -156,25 +176,25 @@
             android:id="@+id/txtViewTitleReviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:maxLines="2"
             android:text="Reviews"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/btnReviewsMore"
             app:layout_constraintStart_toStartOf="@+id/cardView8"
-            app:layout_constraintTop_toTopOf="@+id/btnReviewsMore" />
+            app:layout_constraintTop_toBottomOf="@+id/cardView8" />
 
         <Button
             android:id="@+id/btnReviewsMore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/rounded_rectangle"
             android:text="More"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/cardView8"
-            app:layout_constraintTop_toBottomOf="@+id/cardView8" />
+            app:layout_constraintTop_toBottomOf="@+id/reviewsRecycler" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reviewsRecycler"
@@ -183,7 +203,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/btnReviewsMore"
             app:layout_constraintStart_toStartOf="@+id/txtViewTitleReviews"
-            app:layout_constraintTop_toBottomOf="@+id/btnReviewsMore"
+            app:layout_constraintTop_toBottomOf="@+id/txtViewTitleReviews"
             tools:itemCount="1"
             tools:listitem="@layout/row_review_item" />
 
@@ -194,13 +214,13 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/rounded_rectangle"
-            android:text="Add To Bag"
+            android:text="@string/add_to_bag"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/reviewsRecycler"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/reviewsRecycler"
-            app:layout_constraintTop_toBottomOf="@+id/reviewsRecycler" />
+            app:layout_constraintTop_toBottomOf="@+id/btnReviewsMore" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

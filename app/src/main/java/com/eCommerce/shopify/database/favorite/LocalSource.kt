@@ -1,13 +1,13 @@
-package com.eCommerce.shopify.database
+package com.eCommerce.shopify.database.favorite
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import com.eCommerce.shopify.database.ShopifyDatabase
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.Products
 
-class LocalSource(context: Context):LocalSourceInterface {
+class LocalSource(context: Context): LocalSourceInterface {
 
-    private var favoriteDao:FavoriteDao
+    private var favoriteDao: FavoriteDao
 
     init {
         val db = ShopifyDatabase.getInstance(context.applicationContext)
@@ -15,16 +15,20 @@ class LocalSource(context: Context):LocalSourceInterface {
     }
 
     companion object{
-        private var localSourceInstance:LocalSourceInterface? = null
+        private var localSourceInstance: LocalSourceInterface? = null
 
-        fun getInstance(context: Context):LocalSourceInterface{
-            return localSourceInstance?:LocalSource(context)
+        fun getInstance(context: Context): LocalSourceInterface {
+            return localSourceInstance ?: LocalSource(context)
         }
     }
 
 
     override fun getAllFavorites(): LiveData<List<Product>> {
         return favoriteDao.getAllFavorites()
+    }
+
+    override fun getFavoriteProduct(id: Long): LiveData<Product> {
+        return favoriteDao.getFavoriteProduct(id)
     }
 
     override fun insertToFavorite(product: Product) {

@@ -16,17 +16,23 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.eCommerce.shopify.R
+import com.eCommerce.shopify.database.favorite.LocalSource
+import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
 import com.eCommerce.shopify.databinding.FragmentProductDetailsBinding
 import com.eCommerce.shopify.model.ImageProduct
+import com.eCommerce.shopify.model.Product
+import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.ProductDetails
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.productdetails.repo.ProductDetailsRepo
 import com.eCommerce.shopify.ui.productdetails.viewmodel.ProductDetailsViewModel
 import com.eCommerce.shopify.ui.productdetails.viewmodel.ProductDetailsViewModelFactory
 import com.eCommerce.shopify.ui.reviews.Review
 import com.eCommerce.shopify.ui.reviews.ReviewsAdapter
 import com.eCommerce.shopify.utils.AppConstants
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import kotlin.math.abs
 
 class ProductDetailsFragment : Fragment() {
@@ -49,6 +55,11 @@ class ProductDetailsFragment : Fragment() {
     private lateinit var linearManager: LinearLayoutManager
 
     private val args by navArgs<ProductDetailsFragmentArgs>()
+
+    private var isFavoriteProduct = false
+    private var isAddingToShoppingCart = false
+    private lateinit var product: Product
+    private lateinit var productDetail: ProductDetail
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -80,7 +91,7 @@ class ProductDetailsFragment : Fragment() {
     private fun gettingViewModelReady() {
         productDetailsViewModelFactory = ProductDetailsViewModelFactory(
             ProductDetailsRepo.getInstance(
-                APIClient.getInstance()
+                APIClient.getInstance(), LocalSource(myView.context), ShoppingCartLocalSource(myView.context)
             )
         )
         viewModel = ViewModelProvider(this, productDetailsViewModelFactory)[ProductDetailsViewModel::class.java]
@@ -105,6 +116,20 @@ class ProductDetailsFragment : Fragment() {
         })
         viewModel.productDetailsResponse.observe(viewLifecycleOwner) {
             renderDataOnScreen(it)
+            viewModel.getFavoriteProduct(it.product.id).observe(viewLifecycleOwner) { product ->
+                if (product == null) {
+                    handleFavorite(false, R.drawable.ic_favorite_border)
+                } else {
+                    handleFavorite(true, R.drawable.ic_favorite)
+                }
+            }
+            viewModel.getProductInShoppingCart(it.product.id).observe(viewLifecycleOwner) { productInBag ->
+                if (productInBag == null) {
+                    handleBag(false, getString(R.string.add_to_bag))
+                } else {
+                    handleBag(true, getString(R.string.remove_from_bag))
+                }
+            }
         }
         viewModel.currencyResponse.observe(viewLifecycleOwner) {
             binding.txtViewCurrency.text = it
@@ -112,6 +137,12 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun renderDataOnScreen(it: ProductDetails) {
+        productDetail = it.product
+        product = Product(it.product.adminGraphqlApiId, it.product.bodyHtml, it.product.createdAt,
+            it.product.handle, it.product.id, it.product.image, it.product.images,
+            it.product.options, it.product.productType, it.product.publishedAt,
+            it.product.publishedScope, it.product.status, it.product.tags, it.product.title,
+            it.product.updatedAt, it.product.variants, it.product.vendor, false, 0)
         handleUIViewPager(it.product.images)
         binding.txtViewProductName.text = it.product.title
         binding.txtViewProductPrice.text = it.product.variants[0].price
@@ -128,7 +159,13 @@ class ProductDetailsFragment : Fragment() {
 
     private fun handleUIActions() {
         binding.cardViewIsFavorite.setOnClickListener {
-
+            if (isFavoriteProduct) {
+                viewModel.deleteFromFavorite(product)
+                handleFavorite(false, R.drawable.ic_favorite_border)
+            } else {
+                viewModel.insertToFavorite(product)
+                handleFavorite(true, R.drawable.ic_favorite)
+            }
         }
 
         binding.btnReviewsMore.setOnClickListener {
@@ -137,8 +174,24 @@ class ProductDetailsFragment : Fragment() {
         }
 
         binding.btnReviewsAddToBag.setOnClickListener {
-
+            if (isAddingToShoppingCart) {
+                viewModel.deleteProductFromShoppingCart(productDetail)
+                handleBag(false, getString(R.string.add_to_bag))
+            } else {
+                viewModel.insertProductInShoppingCart(productDetail)
+                handleBag(true, getString(R.string.remove_from_bag))
+            }
         }
+    }
+
+    private fun handleFavorite(isAddToFav: Boolean, imgResourceId: Int) {
+        isFavoriteProduct = isAddToFav
+        binding.imgViewFavoriteIcon.setImageResource(imgResourceId)
+    }
+
+    private fun handleBag(isAddToShopCart: Boolean, btnText: String) {
+        isAddingToShoppingCart = isAddToShopCart
+        binding.btnReviewsAddToBag.text = btnText
     }
 
     private fun initRecyclerView() {
@@ -173,6 +226,10 @@ class ProductDetailsFragment : Fragment() {
                 sliderHandler.postDelayed(sliderRunnable, 3000)
             }
         })
+
+        TabLayoutMediator(
+            binding.tabLayout, binding.viewPagerAdsSlider
+        ) { tab: TabLayout.Tab?, position: Int -> }.attach()
     }
 
     private var sliderRunnable = Runnable {

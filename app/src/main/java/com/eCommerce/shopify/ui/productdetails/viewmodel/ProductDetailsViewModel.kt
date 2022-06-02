@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eCommerce.shopify.model.CustomCollectionsCategory
-import com.eCommerce.shopify.model.ProductDetails
-import com.eCommerce.shopify.model.Products
+import com.eCommerce.shopify.model.*
 import com.eCommerce.shopify.ui.product.repo.ProductRepoInterface
 import com.eCommerce.shopify.ui.productdetails.repo.ProductDetailsRepoInterface
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -53,6 +51,38 @@ class ProductDetailsViewModel(private val _repo: ProductDetailsRepoInterface) : 
                 _errorMsgResponse.postValue(productDetails.message())
             }
             _showProgressBar.postValue(false)
+        }
+    }
+
+    fun getFavoriteProduct(id: Long): LiveData<Product> {
+        return _repo.getFavoriteProduct(id)
+    }
+
+    fun insertToFavorite(product: Product) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _repo.insertToFavorite(product)
+        }
+    }
+
+    fun deleteFromFavorite(product: Product) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _repo.deleteFromFavorite(product)
+        }
+    }
+
+    fun getProductInShoppingCart(id: Long): LiveData<ProductDetail> {
+        return _repo.getProductInShoppingCart(id)
+    }
+
+    fun insertProductInShoppingCart(productDetail: ProductDetail) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _repo.insertProductInShoppingCart(productDetail)
+        }
+    }
+
+    fun deleteProductFromShoppingCart(productDetail: ProductDetail) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _repo.deleteProductFromShoppingCart(productDetail)
         }
     }
 }
