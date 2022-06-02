@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
@@ -18,7 +19,7 @@ class OrdersDetailsFragment : Fragment() {
     private lateinit var binding:OrdersDetailsFragmentBinding
     private lateinit var myView: View
     private lateinit var orderDetailsAdapter: OrderDetailsAdapter
-    private lateinit var ordersDetailsFragmentArgs:OrdersDetailsFragmentArgs
+    private val ordersDetailsFragmentArgs by navArgs<OrdersDetailsFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +36,7 @@ class OrdersDetailsFragment : Fragment() {
     }
 
     private fun init() {
-        /*viewModel = ViewModelProvider(this).get(OrdersDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(OrdersDetailsViewModel::class.java)
         binding.orderCreatedDate.text = ordersDetailsFragmentArgs.createdAt.split("T")[0]
         binding.userShippingToName.text = ordersDetailsFragmentArgs.shippingTo
         orderDetailsAdapter = OrderDetailsAdapter(myView.context, ordersDetailsFragmentArgs.items)
@@ -46,7 +47,7 @@ class OrdersDetailsFragment : Fragment() {
             layoutMan.orientation = RecyclerView.VERTICAL
             layoutManager = layoutMan
             adapter = orderDetailsAdapter
-        }*/
+        }
 
     }
 }

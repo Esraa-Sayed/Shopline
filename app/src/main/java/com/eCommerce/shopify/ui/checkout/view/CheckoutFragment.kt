@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,14 +19,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.CheckoutFragmentBinding
 import com.eCommerce.shopify.model.Addresse
+import com.eCommerce.shopify.model.orderDetails.LineItem
+import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.AddressesAdapter
 import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.OnRowClicked
+import com.eCommerce.shopify.ui.checkout.repo.CheckoutRepo
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
+import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModelFactory
 
 class CheckoutFragment : Fragment(), OnRowClicked {
 
 
     private lateinit var viewModel: CheckoutViewModel
+    private lateinit var  checkoutViewModelFactory: CheckoutViewModelFactory
+
     private lateinit var binding: CheckoutFragmentBinding
     private lateinit var myView: View
     private lateinit var navController: NavController
@@ -94,6 +102,23 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     }
 
     fun init(){
+        checkoutViewModelFactory = CheckoutViewModelFactory(
+            CheckoutRepo.getInstance(
+                APIClient.getInstance()
+            )
+        )
+        viewModel = ViewModelProvider(this, checkoutViewModelFactory)[CheckoutViewModel::class.java]
+       /* {"order":
+            {"line_items":[{"variant_id":42851028271339,"quantity":1,"price": "90.00"}]*/
+        var lineItems = listOf(LineItem(variant_id = 42851028271339, quantity = 5, price = "5252.00"))
+        val order = Order(line_items = lineItems, shipping_address = Addresse(address1 = "Helwan,Arab elwalda"), billing_address = Addresse(address1 = "Helwan,Arab elwalda"), created_at = "1234355", processed_at = "2022-06-02T15:42:28+02:00")
+        viewModel.postOrderWithUserIdAndEmail(order,myView.context)
+        viewModel.postOrderResponse.observe(viewLifecycleOwner, Observer {
+            Log.e("TAG", "init I'm here************ : ${it.order.created_at}" )
+        })
+        viewModel.errorMsgResponse.observe(viewLifecycleOwner, Observer {
+            Log.e("TAG", "initldsjflsk: $it" )
+        })
         this.navController = findNavController()
         dialogAddress = Dialog(myView.context)
         dialogPayment = Dialog(myView.context)
@@ -106,11 +131,9 @@ class CheckoutFragment : Fragment(), OnRowClicked {
             navController.navigateUp()
         }
         binding.goToChooseAddress.setOnClickListener {
-            Log.e("TAG", "buttonsListener:goToChooseAddress " )
             dialogAddress.show()
         }
         binding.goToPaymentMethod.setOnClickListener {
-            Log.e("TAG", "buttonsListener: goToPaymentMethod" )
             dialogPayment.show()
         }
         binding.checkValidate.setOnClickListener {
@@ -118,11 +141,9 @@ class CheckoutFragment : Fragment(), OnRowClicked {
                     getString(R.string.cant_be_empty).also { binding.couponCode.error = it }
                 }else{
                     couponCode = binding.couponCode.text.toString()
-                    Log.e("TAG", "buttonsListener: checkValidate : $couponCode" )
                 }
         }
         binding.placeOrder.setOnClickListener {
-            Log.e("TAG", "buttonsListener: placeOrder" )
             navController.navigate(R.id.action_checkoutFragment_to_successFragment2)
         }
 

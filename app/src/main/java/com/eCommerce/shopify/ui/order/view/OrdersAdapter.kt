@@ -20,7 +20,7 @@ class OrdersAdapter(private val context: Context, private var  orders:List<Order
 
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
         val order = orders[position]
-        holder.viewBinding.pRowOrderDate.text = order.created_at.split("T")[0]
+        holder.viewBinding.pRowOrderDate.text = order.created_at!!.split("T")[0]
         holder.viewBinding.pRowOrderPrice.text = order.total_price
         holder.viewBinding.pOrdersRowCardview.setOnClickListener{
             Log.e("TAG", "onBindViewHolder: YEss")

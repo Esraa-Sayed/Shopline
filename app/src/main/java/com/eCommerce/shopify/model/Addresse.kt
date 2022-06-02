@@ -1,21 +1,24 @@
 package com.eCommerce.shopify.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Addresse(
-    val address1: Any,
-    val address2: Any,
-    val city: String,
-    val company: Any,
-    val country: String,
-    val country_code: String,
-    val country_name: String,
-    val customer_id: Long,
-    val default: Boolean,
-    val first_name: String,
-    val id: Long,
-    val last_name: String,
-    val name: String,
-    val phone: Any,
-    val province: Any,
-    val province_code: Any,
-    val zip: String
-)
+    val address1: String? = null,
+    val address2: String? = null,
+    val city: String? = null,
+    val country: String? = null,
+    val country_code: String? = null,
+    val country_name: String? = null,
+    val customer_id: Long? = null,
+    val default: Boolean? = null,
+    val first_name: String? = null,
+    val id: Long? = null,
+    val last_name: String? = null,
+    val name: String? = null,
+    val phone: String? = null,
+    val province: String? = null,
+    val province_code: String? = null,
+    val zip: String? = null
+): Parcelable

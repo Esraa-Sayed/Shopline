@@ -19,7 +19,12 @@ class OrderDetailsAdapter(val context: Context, var itemsInOrder: Array<LineItem
 
     override fun onBindViewHolder(holder: OrderDetailsViewHolder, position: Int) {
        val item = itemsInOrder[position]
-        holder.binding.brandOrderName.text = item.name
+        val words = item.name?.lowercase()?.split(" ")
+        var orderName = ""
+        words?.forEach { word ->
+            orderName += word.replaceFirstChar { it.uppercase() } + " "
+        }
+        holder.binding.brandOrderName.text = orderName
         holder.binding.brandOrderPrice.text = item.price
         holder.binding.brandOrderQuantity.text = item.fulfillable_quantity.toString()
     }
