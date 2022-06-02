@@ -2,10 +2,12 @@ package com.eCommerce.shopify.ui.profile.view
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +16,12 @@ import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.model.OrderModel
 import com.eCommerce.shopify.model.Order
 import com.eCommerce.shopify.model.Product
+import com.eCommerce.shopify.network.APIClient
+import com.eCommerce.shopify.ui.order.repo.OrdersRepo
+import com.eCommerce.shopify.ui.profile.repo.ProfileRepo
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
+import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModelFactory
+import com.eCommerce.shopify.utils.AppConstants
 
 class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
@@ -40,21 +47,47 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val remoteSource = ProfileRepo.getInstance(APIClient.getInstance())
+        val profileFactory = ProfileViewModelFactory(remoteSource)
+
+        viewModel = ViewModelProvider(this, profileFactory)
+            .get(ProfileViewModel::class.java)
+
+        checkIfUserLogin()
         initWishlistRecyclerView()
         initOrdersRecyclerView()
-        listenToMoreOrdersBtn()
-        listenToMoreWishlistBtn()
+        listenToAllBtn()
+        getUserOrders()
     }
 
-    fun initOrdersRecyclerView(){
+    private fun getUserOrders() {
+        viewModel.getUserOrders(requireContext())
+        viewModel.UserOrders.observe(viewLifecycleOwner, Observer {
+            if (it.orders.isNotEmpty()){
+                ordersAdapter.setOrders(it.orders)
+            }
+            Log.e("TAG", "getUserOrders: ${it.orders.size}" )
+        })
+        viewModel.errorMsgResponse.observe(viewLifecycleOwner, Observer {
+            AppConstants.showAlert(
+                requireContext(),
+                R.string.error,
+                it,
+                R.drawable.ic_error
+            )
+        })
+    }
+
+    private fun listenToAllBtn(){
+        listenToMoreOrdersBtn()
+        listenToMoreWishlistBtn()
+        listenToLoginBtn()
+        listenToRegisterBtn()
+    }
+
+    private fun initOrdersRecyclerView(){
         ordersAdapter = OrdersAdapter(this, this)
         _binding?.pOrdersRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation =  LinearLayoutManager.VERTICAL
@@ -62,7 +95,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
         _binding?.pOrdersRecyclerView?.adapter = ordersAdapter
     }
-    fun initWishlistRecyclerView(){
+    private fun initWishlistRecyclerView(){
         wishlistAdapter = WishlistAdapter()
         _binding?.pWishlistRecyclerView?.layoutManager = GridLayoutManager(this.requireContext(), 2)
 
@@ -78,21 +111,41 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 //        mNavController.navigate(action)
     }
 
-    fun listenToMoreWishlistBtn(){
+    private fun listenToMoreWishlistBtn(){
         _binding.pMoreWishlistBtn.setOnClickListener{
             onMoreWishlistClicked()
         }
     }
-    fun listenToMoreOrdersBtn(){
+    private fun listenToMoreOrdersBtn(){
         _binding.pMoreOrdersBtn.setOnClickListener{
             onMoreOrdersClicked()
         }
     }
-    fun onMoreWishlistClicked(){
+    private fun onMoreWishlistClicked(){
         mNavController.navigate(R.id.action_mainFragment_to_favoriteFragment2)
     }
-    fun onMoreOrdersClicked(){
+    private fun onMoreOrdersClicked(){
         mNavController.navigate(R.id.action_mainFragment_to_ordersFragment)
+    }
+    private fun checkIfUserLogin() {
+        if(viewModel.getIsLogin(requireContext())){
+            binding.profileNologinRelativelayout.visibility = View.GONE
+            binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+        }
+        else{
+            binding.profileNologinRelativelayout.visibility = View.VISIBLE
+            binding.profileLoginConstraintlayout.visibility = View.GONE
+        }
+    }
+    private fun listenToLoginBtn(){
+        binding.loginBtn.setOnClickListener {
+            mNavController.navigate(R.id.action_mainFragment_to_loginFragment)
+        }
+    }
+    private fun listenToRegisterBtn(){
+        binding.registerBtn.setOnClickListener {
+            mNavController.navigate(R.id.action_mainFragment_to_registerFragment2)
+        }
     }
 
 }

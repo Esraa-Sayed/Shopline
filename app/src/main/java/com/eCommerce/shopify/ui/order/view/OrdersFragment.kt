@@ -96,7 +96,7 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
         })
     }
     override fun onRowClickedListener(order: Order) {
-        val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment(order.id)
-        findNavController().navigate(action)
+//        val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment(order.id.toInt())
+//        findNavController().navigate(action)
     }
 }
