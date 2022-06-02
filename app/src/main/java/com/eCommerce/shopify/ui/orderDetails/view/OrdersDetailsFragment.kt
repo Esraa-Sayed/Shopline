@@ -35,7 +35,7 @@ class OrdersDetailsFragment : Fragment() {
     }
 
     private fun init() {
-        viewModel = ViewModelProvider(this).get(OrdersDetailsViewModel::class.java)
+        /*viewModel = ViewModelProvider(this).get(OrdersDetailsViewModel::class.java)
         binding.orderCreatedDate.text = ordersDetailsFragmentArgs.createdAt.split("T")[0]
         binding.userShippingToName.text = ordersDetailsFragmentArgs.shippingTo
         orderDetailsAdapter = OrderDetailsAdapter(myView.context, ordersDetailsFragmentArgs.items)
@@ -46,7 +46,7 @@ class OrdersDetailsFragment : Fragment() {
             layoutMan.orientation = RecyclerView.VERTICAL
             layoutManager = layoutMan
             adapter = orderDetailsAdapter
-        }
+        }*/
 
     }
 }

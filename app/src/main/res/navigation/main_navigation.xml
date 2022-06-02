@@ -61,9 +61,6 @@
         <action
             android:id="@+id/action_mainFragment_to_registerFragment2"
             app:destination="@id/registerFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
-            app:destination="@id/ordersDetailsFragment" />
         <argument
             android:name="incomingCustomer"
             app:argType="com.eCommerce.shopify.model.Customer" />
@@ -80,6 +77,9 @@
         <action
             android:id="@+id/action_mainFragment_to_addressesFragment"
             app:destination="@id/addressesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
+            app:destination="@id/ordersDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -152,7 +152,7 @@
         android:label="orders_fragment"
         tools:layout="@layout/orders_fragment" >
         <action
-            android:id="@+id/action_ordersFragment_to_ordersDetailsFragment"
+            android:id="@+id/action_ordersFragment_to_ordersDetailsFragment2"
             app:destination="@id/ordersDetailsFragment" />
     </fragment>
     <fragment
@@ -161,13 +161,11 @@
         android:label="orders_details_fragment"
         tools:layout="@layout/orders_details_fragment" >
         <argument
-            android:name="created_at"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:name="createdAt"
+            app:argType="string" />
         <argument
             android:name="shippingTo"
-            app:argType="string"
-            android:defaultValue='""' />
+            app:argType="string" />
         <argument
             android:name="items"
             app:argType="com.eCommerce.shopify.model.orderDetails.LineItem[]" />
