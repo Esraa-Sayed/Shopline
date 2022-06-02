@@ -1,9 +1,11 @@
 package com.eCommerce.shopify.model.orderDetails
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+
 data class LineItem(
     val discount_allocations: List<DiscountAllocation>? = null,
     val fulfillable_quantity: Int? = null,

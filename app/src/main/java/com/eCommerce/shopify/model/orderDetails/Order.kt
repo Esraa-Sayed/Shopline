@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.model.orderDetails
 import com.eCommerce.shopify.model.Customer
+import com.google.gson.annotations.SerializedName
 
 data class Order(
     val admin_graphql_api_id: String? = null,

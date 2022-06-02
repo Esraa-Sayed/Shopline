@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import com.eCommerce.shopify.ui.checkout.repo.CheckoutRepoInterface
 import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.AppSharedPref
@@ -15,8 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CheckoutViewModel(var _repo: CheckoutRepoInterface) : ViewModel() {
-    private var _postOrderResponse = MutableLiveData<Order>()
-    val postOrderResponse: LiveData<Order> = _postOrderResponse
+    private var _postOrderResponse = MutableLiveData<OrderDetails>()
+    val postOrderResponse: LiveData<OrderDetails> = _postOrderResponse
 
     private var _errorMsgResponse = MutableLiveData<String>()
     val errorMsgResponse: LiveData<String> = _errorMsgResponse

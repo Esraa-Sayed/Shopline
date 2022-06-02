@@ -2,6 +2,7 @@ package com.eCommerce.shopify.network
 
 import com.eCommerce.shopify.model.*
 import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import retrofit2.Response
 
 interface RemoteSource {
@@ -24,5 +25,5 @@ interface RemoteSource {
 
     suspend fun getUserOrders(id:Long):Response<OrderModel>
 
-    suspend fun postOrder(order: Order):Response<Order>
+    suspend fun postOrder(order: OrderDetails):Response<OrderDetails>
 }

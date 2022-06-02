@@ -4,6 +4,7 @@ import retrofit2.http.*
 import retrofit2.Response
 import com.eCommerce.shopify.model.*
 import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import retrofit2.http.Query
 
 
@@ -41,5 +42,5 @@ interface APIService {
     suspend fun getUserAddresses(@Path("id")id:Long):Response<AddressesUserModel>
 
     @POST("orders.json")
-    suspend fun postOrder(@Body order:Order):Response<Order>
+    suspend fun postOrder(@Body order:OrderDetails):Response<OrderDetails>
 }

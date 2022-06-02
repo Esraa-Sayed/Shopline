@@ -114,11 +114,11 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         viewModel = ViewModelProvider(this, checkoutViewModelFactory)[CheckoutViewModel::class.java]
        /* {"order":
             {"line_items":[{"variant_id":42851028271339,"quantity":1,"price": "90.00"}]*/
-        var lineItems = listOf<LineItem>(LineItem(variant_id = 42851028271339, quantity = 1, price = "90.00"))
+        var lineItems = listOf(LineItem(variant_id = 42851028271339, quantity = 1, price = "90.00"))
         val order = Order(line_items = lineItems)
         viewModel.postOrderWithUserIdAndEmail(order,myView.context)
         viewModel.postOrderResponse.observe(viewLifecycleOwner, Observer {
-            Log.e("TAG", "init: ${it.checkout_id}" )
+            Log.e("TAG", "init I'm here************ : ${it.order.created_at}" )
         })
         viewModel.errorMsgResponse.observe(viewLifecycleOwner, Observer {
             Log.e("TAG", "init: $it" )
