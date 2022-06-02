@@ -70,6 +70,9 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
             adapter = ordersAdapter
         }
         getUserOrders()
+        bindingFragment.appBar.backArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun getUserOrders() {
