@@ -1,10 +1,12 @@
-package com.eCommerce.shopify.ui.favorite
+package com.eCommerce.shopify.ui.favorite.view
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FavoriteItemLayoutBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.OnProductClickListener
@@ -32,15 +34,18 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> 
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         holder.productTitle.text = favProducts[position].title
-        //holder.productPrice.text = favProducts[position].price.toString()
+        holder.productPrice.text = favProducts[position].variants[0].price
         //holder.productImg.setImageResource(R.drawable.t_shirt_pink)
         Glide.with(context)
             .load(favProducts[position].image?.src)
             .into(holder.productImg)
+        holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
         //holder.productRate.rating = favProducts[position].rate.toFloat()
 
         holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick() }
-        holder.favoriteBtn.setOnClickListener { onClickHandler.onFavBtnClick() }
+        holder.favoriteBtn.setOnClickListener {
+            onClickHandler.onFavBtnClick(favProducts[position])
+        }
     }
 
     override fun getItemCount(): Int {

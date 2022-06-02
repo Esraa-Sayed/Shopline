@@ -34,11 +34,11 @@ class ProductViewModel(private val _repo: ProductRepoInterface) : ViewModel() {
     fun getCategoryProducts(id: Long) {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             _showProgressBar.postValue(true)
-            val collectionBrands = _repo.getCategoryProducts(id)
-            if (collectionBrands.isSuccessful) {
-                _categoryProductsResponse.postValue(collectionBrands.body())
+            val categoryProducts = _repo.getCategoryProducts(id)
+            if (categoryProducts.isSuccessful) {
+                _categoryProductsResponse.postValue(categoryProducts.body())
             } else {
-                _errorMsgResponse.postValue(collectionBrands.message())
+                _errorMsgResponse.postValue(categoryProducts.message())
             }
             _showProgressBar.postValue(false)
         }

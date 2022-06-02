@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName
 data class ImageProduct(
     @SerializedName("admin_graphql_api_id")
     val adminGraphqlApiId: String,
-    val alt: Any,
     @SerializedName("created_at")
     val createdAt: String,
     val height: Int,
@@ -18,6 +17,6 @@ data class ImageProduct(
     @SerializedName("updated_at")
     val updatedAt: String,
     @SerializedName("variant_ids")
-    val variantIds: List<Any>,
+    val variantIds: List<Long>,
     val width: Int
 )

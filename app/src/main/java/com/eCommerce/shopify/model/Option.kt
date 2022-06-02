@@ -1,6 +1,5 @@
 package com.eCommerce.shopify.model
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Option(
@@ -8,5 +7,6 @@ data class Option(
     val name: String,
     val position: Int,
     @SerializedName("product_id")
-    val productId: Long
+    val productId: Long,
+    val values: List<String>
 )

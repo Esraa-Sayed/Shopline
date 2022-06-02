@@ -16,13 +16,27 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="24dp"
+        android:indeterminateTint="@color/plum"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent">
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_corners_top_gray">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -31,9 +45,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/app_bar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/profile_internet_constraintlayout"
+                    android:id="@+id/profile_login_constraintlayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:visibility="gone"
                     android:background="@drawable/rounded_corners_top_gray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -81,6 +96,7 @@
                             android:drawableEnd="@drawable/ic_right_arrow"
                             android:fontFamily="@font/cairo_semi_bold"
                             android:text="@string/more"
+                            android:visibility="gone"
                             android:textAllCaps="false"
                             android:textColor="@color/main_color"
                             android:textSize="18sp" />
@@ -125,6 +141,7 @@
                             android:drawableEnd="@drawable/ic_right_arrow"
                             android:fontFamily="@font/cairo_semi_bold"
                             android:text="@string/more"
+                            android:visibility="gone"
                             android:textAllCaps="false"
                             android:textColor="@color/main_color"
                             android:textSize="18sp" />
@@ -163,12 +180,13 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/no_login_image"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/cairo_bold"
                         android:text="@string/login_required"
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/text1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/login_required_text"
@@ -180,6 +198,38 @@
                         android:text="@string/login_register_msg"
                         android:textSize="15sp" />
 
+                    <Button
+                        android:id="@+id/login_btn"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/cairo_semi_bold"
+                        android:text="@string/login"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/register_btn"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/cairo_semi_bold"
+                        android:text="@string/register"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

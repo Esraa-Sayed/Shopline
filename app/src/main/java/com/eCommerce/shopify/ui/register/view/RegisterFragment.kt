@@ -1,4 +1,4 @@
-package com.eCommerce.shopify.ui.register
+package com.eCommerce.shopify.ui.register.view
 
 import android.os.Bundle
 import android.util.Log
@@ -9,16 +9,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
-import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
 import com.eCommerce.shopify.databinding.FragmentRegisterBinding
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.brandproducts.view.BrandProductsAdapter
-import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
-import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFactory
+import com.eCommerce.shopify.ui.register.repo.RegisterRepo
+import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModel
+import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModelFactory
 
 class RegisterFragment : Fragment() {
 

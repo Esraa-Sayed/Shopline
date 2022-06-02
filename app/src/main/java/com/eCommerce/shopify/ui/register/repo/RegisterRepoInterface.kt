@@ -1,4 +1,4 @@
-package com.eCommerce.shopify.ui.register
+package com.eCommerce.shopify.ui.register.repo
 
 import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.model.UserData
