@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
+import com.eCommerce.shopify.database.LocalSource
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.model.Product
@@ -47,7 +48,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val remoteSource = ProfileRepo.getInstance(APIClient.getInstance())
+        val remoteSource = ProfileRepo.getInstance(APIClient.getInstance(), LocalSource.getInstance(requireContext()))
         val profileFactory = ProfileViewModelFactory(remoteSource)
 
         viewModel = ViewModelProvider(this, profileFactory)
@@ -58,23 +59,46 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         initOrdersRecyclerView()
         listenToAllBtn()
         getUserOrders()
+        getUserWishlist()
     }
 
     private fun getUserOrders() {
         viewModel.getUserOrders(requireContext())
-        viewModel.UserOrders.observe(viewLifecycleOwner, Observer {
+        viewModel.UserOrders.observe(viewLifecycleOwner, {
             if (it.orders.isNotEmpty()){
                 ordersAdapter.setOrders(it.orders)
+                if(it.orders.size > 2){
+                    binding.pMoreOrdersBtn.visibility = View.VISIBLE
+                }
+                binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
             }
             Log.e("TAG", "getUserOrders: ${it.orders.size}" )
         })
-        viewModel.errorMsgResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
             AppConstants.showAlert(
                 requireContext(),
                 R.string.error,
                 it,
                 R.drawable.ic_error
             )
+        })
+    }
+
+    private fun getUserWishlist(){
+        viewModel.getAllFavorites().observe(viewLifecycleOwner, {
+            if (it.isNotEmpty()){
+                wishlistAdapter.setWishlist(it)
+                if(it.size > 4){
+                    binding.pMoreWishlistBtn.visibility = View.VISIBLE
+                }
+            }
+            else{
+
+            }
+            binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
+            Log.e("TAG", "getUserWishlist: ${it.size}" )
         })
     }
 
@@ -87,17 +111,17 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
     private fun initOrdersRecyclerView(){
         ordersAdapter = OrdersAdapter(this, this)
-        _binding?.pOrdersRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
+        binding?.pOrdersRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation =  LinearLayoutManager.VERTICAL
         }
 
-        _binding?.pOrdersRecyclerView?.adapter = ordersAdapter
+        binding?.pOrdersRecyclerView?.adapter = ordersAdapter
     }
     private fun initWishlistRecyclerView(){
-        wishlistAdapter = WishlistAdapter()
-        _binding?.pWishlistRecyclerView?.layoutManager = GridLayoutManager(this.requireContext(), 2)
+        wishlistAdapter = WishlistAdapter(this)
+        binding?.pWishlistRecyclerView?.layoutManager = GridLayoutManager(this.requireContext(), 2)
 
-        _binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
+        binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
     }
 
     override fun onOrderClicked(order: Order) {
@@ -109,13 +133,18 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 //        mNavController.navigate(action)
     }
 
+    override fun onFavBtnClick(product: Product) {
+        product.isFavorite = false
+        viewModel.deleteFromFavorite(product)
+    }
+
     private fun listenToMoreWishlistBtn(){
-        _binding.pMoreWishlistBtn.setOnClickListener{
+        binding.pMoreWishlistBtn.setOnClickListener{
             onMoreWishlistClicked()
         }
     }
     private fun listenToMoreOrdersBtn(){
-        _binding.pMoreOrdersBtn.setOnClickListener{
+        binding.pMoreOrdersBtn.setOnClickListener{
             onMoreOrdersClicked()
         }
     }
