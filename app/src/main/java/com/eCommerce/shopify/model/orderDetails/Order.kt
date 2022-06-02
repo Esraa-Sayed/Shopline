@@ -1,7 +1,9 @@
 package com.eCommerce.shopify.model.orderDetails
+import android.os.Parcelable
 import com.eCommerce.shopify.model.Customer
-import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
+@Parcelize
 data class Order(
     val admin_graphql_api_id: String? = null,
     val app_id: Any? = null,
@@ -85,4 +87,4 @@ data class Order(
     val total_weight: Int? = null,
     val updated_at: String? = null,
     val user_id: Any? = null
-)
+): Parcelable

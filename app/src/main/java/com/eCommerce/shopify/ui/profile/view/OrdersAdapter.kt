@@ -31,6 +31,10 @@ class OrdersAdapter(val OnOrderListner: OnOrderListner, val onProductListner: On
         notifyDataSetChanged()
     }
 
+    fun getOrders(): List<Order>{
+        return orders
+    }
+
     override fun getItemCount(): Int {
         if(orders.isEmpty())
             return 0
