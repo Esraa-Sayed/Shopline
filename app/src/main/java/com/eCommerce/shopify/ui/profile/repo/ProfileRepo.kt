@@ -49,5 +49,9 @@ class ProfileRepo(private val remoteSource: RemoteSource, private val localSourc
     override fun deleteFromFavorite(product: Product) {
         localSource.deleteFromFavorite(product)
     }
+    override fun getUserName(context: Context): String {
+        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
+        return sharedPreferences.getStringValue(AppConstants.USER_NAME, "NoName")
+    }
 
 }

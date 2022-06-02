@@ -2,6 +2,7 @@ package com.eCommerce.shopify.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,7 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentMainBinding
 import com.eCommerce.shopify.utils.NetworkConnectionLiveData
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.navigation.NavigationView
 
 class MainFragment : Fragment() {
 
@@ -27,6 +28,8 @@ class MainFragment : Fragment() {
     private lateinit var myView: View
 
     private lateinit var navController: NavController
+
+    //lateinit var navigationView: NavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,11 +46,17 @@ class MainFragment : Fragment() {
 
         this.myView = view
         this.navController = findNavController()
+//        navigationView = binding.navView as NavigationView
+//        navigationView.setNavigationItemSelectedListener(this)
+
+        //binding.navView.set
         setupToolbar()
         handleToolbarEvent()
         configureBottomNavView()
+
         listenerOnNetwork()
         listenToSearch()
+        //listenOnBottomNavigation()
     }
 
     private fun listenerOnNetwork() {
@@ -101,6 +110,27 @@ class MainFragment : Fragment() {
         )
         (activity as AppCompatActivity).setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id){
+                R.id.navigation_home -> {
+                    binding.appBarHome.textInputLayout.visibility = View.VISIBLE
+                    binding.appBarHome.cardViewFavorite.visibility = View.VISIBLE
+                }
+                R.id.navigation_categories -> {
+                    binding.appBarHome.textInputLayout.visibility = View.VISIBLE
+                    binding.appBarHome.cardViewFavorite.visibility = View.VISIBLE
+                }
+                R.id.navigation_profile -> {
+                    binding.appBarHome.textInputLayout.visibility = View.GONE
+                    binding.appBarHome.cardViewFavorite.visibility = View.GONE
+                }
+                R.id.navigation_setting -> {
+                    binding.appBarHome.textInputLayout.visibility = View.GONE
+                    binding.appBarHome.cardViewFavorite.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
