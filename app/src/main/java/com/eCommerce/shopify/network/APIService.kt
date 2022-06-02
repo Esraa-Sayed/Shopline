@@ -40,4 +40,7 @@ interface APIService {
 
     @GET("customers/{id}/addresses.json")
     suspend fun getUserAddresses(@Path("id")id:Long):Response<AddressesUserModel>
+
+    @PUT("customers/{id}.json")
+    suspend fun updateUser(@Path("id")id:Long, @Body customer: Customer): Response<Customer>
 }

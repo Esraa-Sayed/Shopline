@@ -6,12 +6,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.*
@@ -71,6 +73,7 @@ class SettingFragment : Fragment() {
             mNavController.navigate(R.id.action_mainFragment_to_registerFragment2)
         }
     }
+
     @SuppressLint("SetTextI18n")
     private fun checkIfUserLoginAndInitInfo() {
         if(viewModel.getIsLogin(requireContext())){
@@ -127,15 +130,34 @@ class SettingFragment : Fragment() {
             dialog.setContentView(bind.root)
             dialog.setTitle("Change currency")
 
-            bind.eurBtn.setOnClickListener {
-                confirmDialog("Are you sure you want to change currency to EUR ?")
-
-                //change customer currency here
+            bind.dollerBtn.setOnClickListener {
+                if(viewModel.getCurrencyFromSharedPref(requireContext()) == "$"){
+                    confirmDialog("The currency already $ !!          ")
+                }
+                else{
+                    Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                    confirmDialog("Are you sure you want to change currency to $ ?").observe(viewLifecycleOwner, {
+                        if(it == true){
+                            viewModel.setCurrencyToSharedPref(requireContext(), "$")
+                            Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                        }
+                    })
+                }
                 dialog.dismiss()
             }
             bind.egpBtn.setOnClickListener{
-                confirmDialog("Are you sure you want to change currency to EGP ?")
-                //change customer currency here
+                if(viewModel.getCurrencyFromSharedPref(requireContext()) == "EGP"){
+                    confirmDialog("The currency already EGP !!         ")
+                }
+                else{
+                    Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                    confirmDialog("Are you sure you want to change currency to EGP ?").observe(viewLifecycleOwner, {
+                        if(it == true){
+                            viewModel.setCurrencyToSharedPref(requireContext(), "EGP")
+                            Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                        }
+                    })
+                }
                 dialog.dismiss()
             }
             dialog.setCanceledOnTouchOutside(true)
@@ -176,8 +198,8 @@ class SettingFragment : Fragment() {
         }
     }
 
-    private fun confirmDialog(title: String): Boolean{
-        var isOk: Boolean = false
+    private fun confirmDialog(title: String): LiveData<Boolean>{
+        var isOk: MutableLiveData<Boolean> = MutableLiveData()
         val inflater = requireActivity().layoutInflater
         val dialog = Dialog(requireActivity())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -187,13 +209,13 @@ class SettingFragment : Fragment() {
         dialog.setTitle("Confirmation")
         bind.confirmText.text = title
         bind.okBtn.setOnClickListener {
-            isOk = true
-            print("in ok button")
+            with(isOk) { postValue(true) }
+            Log.i("Confirm","in ok button")
             dialog.dismiss()
         }
         bind.cancelBtn.setOnClickListener{
-            isOk = false
-            print("in cancel button")
+            with(isOk) { postValue(false) }
+            Log.i("Confirm","in cancel button")
             dialog.dismiss()
         }
 
@@ -203,24 +225,3 @@ class SettingFragment : Fragment() {
         return isOk
     }
 }
-
-
-//val builder = AlertDialog.Builder(it)
-//alert confirm dialog
-//        val alertDialog: AlertDialog? = activity?.let {
-//            val builder = AlertDialog.Builder(it)
-//            builder.apply {
-//
-//                setView(inflater.inflate(R.layout.confirm_dialog, null))
-//                setTitle(title)
-//                setPositiveButton(R.string.ok,
-//                    DialogInterface.OnClickListener { dialog, id ->
-//                        isOk = true
-//                    })
-//                setNegativeButton(getString(R.string.cancel),
-//                    DialogInterface.OnClickListener { dialog, id ->
-//                        isOk = false
-//                    })
-//            }.show()
-//            builder.create()
-//        }

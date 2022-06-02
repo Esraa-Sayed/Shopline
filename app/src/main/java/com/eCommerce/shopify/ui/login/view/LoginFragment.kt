@@ -22,6 +22,7 @@ import com.eCommerce.shopify.ui.login.viewModel.LoginViewModel
 import com.eCommerce.shopify.ui.login.viewModel.LoginViewModelFactory
 import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.AppSharedPref
+import java.util.*
 
 class LoginFragment : Fragment() {
 
@@ -93,7 +94,7 @@ class LoginFragment : Fragment() {
             if(it.customers.isNotEmpty()){
                 viewModel.UserDataResponse.removeObservers(viewLifecycleOwner)
                 if(it.customers[0].tags == password){
-                    saveDataInSharedPref(email,it.customers[0].id as Long,it.customers[0].first_name ?: "Not found")
+                    saveDataInSharedPref(email,it.customers[0].id as Long,it.customers[0].first_name ?: "Not found", it.customers[0].currency.toString())
                     navController.navigate(R.id.action_loginFragment_to_mainFragment)
                 }
                 else{
@@ -107,8 +108,8 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun saveDataInSharedPref(email: String, userId: Long, userName:String) {
-       viewModel.saveDataInSharedPref(myView.context,email,userId,userName)
+    private fun saveDataInSharedPref(email: String, userId: Long, userName:String, currency: String) {
+       viewModel.saveDataInSharedPref(myView.context,email,userId,userName, currency)
     }
     private fun showErrorMessage(message: String){
         AppConstants.showAlert(
