@@ -127,7 +127,10 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
     }
 
     override fun onOrderClicked(order: Order) {
-        val action = MainFragmentDirections.actionMainFragmentToOrdersDetailsFragment(order.created_at, order.customer.first_name!!, order.line_items.toTypedArray())
+        val action = MainFragmentDirections.actionMainFragmentToOrdersDetailsFragment(
+            order.created_at!!,
+            order.customer!!.first_name?: "Not found",
+            order.line_items!!.toTypedArray())
         mNavController.navigate(action)
     }
 

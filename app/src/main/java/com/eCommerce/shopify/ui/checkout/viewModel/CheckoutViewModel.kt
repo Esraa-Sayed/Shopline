@@ -33,7 +33,7 @@ class CheckoutViewModel(var _repo: CheckoutRepoInterface) : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val userEmailAndId = getUserEmailAndId(context)
-            val customer = Customer(id = userEmailAndId.second, email = userEmailAndId.first)
+            val customer = Customer(id = userEmailAndId.third, email = userEmailAndId.first, first_name = userEmailAndId.second)
             order.customer = customer
             val orderResponse = _repo.postOrder(order)
             if (orderResponse.isSuccessful) {
@@ -43,10 +43,11 @@ class CheckoutViewModel(var _repo: CheckoutRepoInterface) : ViewModel() {
             }
         }
     }
-    private fun getUserEmailAndId(context: Context):Pair<String,Long>{
+    private fun getUserEmailAndId(context: Context):Triple<String,String,Long>{
         val shared = AppSharedPref.getInstance(context,AppConstants.PREFRENCE_File)
         val email = shared.getStringValue(AppConstants.USER_EMAIL,"not found")
+        val name = shared.getStringValue(AppConstants.USER_NAME,"not found")
         val id = shared.getLongValue(AppConstants.USER_ID,0)
-        return Pair(email,id)
+        return Triple(email,name,id)
     }
 }

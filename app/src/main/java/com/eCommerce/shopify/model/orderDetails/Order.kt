@@ -1,22 +1,20 @@
 package com.eCommerce.shopify.model.orderDetails
 import android.os.Parcelable
+import com.eCommerce.shopify.model.Addresse
 import com.eCommerce.shopify.model.Customer
+import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
 @Parcelize
 data class Order(
     val admin_graphql_api_id: String? = null,
-    val app_id: Any? = null,
-    val billing_address: BillingAddress? = null,
+    val billing_address: Addresse? = null,
     val browser_ip: String? = null,
     val buyer_accepts_marketing: Boolean? = null,
-    val cancel_reason: Any? = null,
-    val cancelled_at: Any? = null,
     val cart_token: String? = null,
     val checkout_id: Int? = null,
     val checkout_token: String? = null,
     val client_details: ClientDetails? = null,
-    val closed_at: Any? = null,
     val confirmed: Boolean? = null,
     val contact_email: String? = null,
     val created_at: String? = null,
@@ -25,33 +23,27 @@ data class Order(
     val current_subtotal_price_set: CurrentSubtotalPriceSet? = null,
     val current_total_discounts: String? = null,
     val current_total_discounts_set: CurrentTotalDiscountsSet? = null,
-    val current_total_duties_set: Any? = null,
     val current_total_price: String? = null,
     val current_total_price_set: CurrentTotalPriceSet? = null,
     val current_total_tax: String? = null,
     val current_total_tax_set: CurrentTotalTaxSet? = null,
     var customer: Customer? = null,
-    val customer_locale: Any? = null,
-    val device_id: Any? = null,
+    val customer_locale: String? = null,
     val discount_applications: List<DiscountApplication>? = null,
     val discount_codes: List<DiscountCode>? = null,
     val email: String? = null,
     val estimated_taxes: Boolean? = null,
     val financial_status: String? = null,
-    val fulfillment_status: Any? = null,
     val gateway: String? = null,
     val id: Long? = null,
     val landing_site: String? = null,
     val landing_site_ref: String? = null,
     val line_items: List<LineItem>? = null,
-    val location_id: Any? = null,
     val name: String? = null,
-    val note: Any? = null,
     val note_attributes: List<NoteAttribute>? = null,
     val number: Int? = null,
     val order_number: Int? = null,
     val order_status_url: String? = null,
-    val original_total_duties_set: Any? = null,
     val payment_details: PaymentDetails? = null,
     val payment_gateway_names: List<String>? = null,
     val phone: String? = null,
@@ -60,11 +52,10 @@ data class Order(
     val processing_method: String? = null,
     val reference: String? = null,
     val referring_site: String? = null,
-    val shipping_address: ShippingAddress? = null,
+    val shipping_address: Addresse? = null,
     val shipping_lines: List<ShippingLine>? = null,
     val source_identifier: String? = null,
     val source_name: String? = null,
-    val source_url: Any? = null,
     val subtotal_price: String? = null,
     val subtotal_price_set: SubtotalPriceSet? = null,
     val tags: String? = null,
@@ -86,5 +77,5 @@ data class Order(
     val total_tip_received: String? = null,
     val total_weight: Int? = null,
     val updated_at: String? = null,
-    val user_id: Any? = null
+    val user_id: Long? = null
 ): Parcelable

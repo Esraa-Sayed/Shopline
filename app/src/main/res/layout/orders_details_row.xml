@@ -17,15 +17,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="@dimen/_72sdp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shopping_bag" />
+        app:srcCompat="@drawable/shopping_cart" />
 
     <TextView
         android:id="@+id/brandOrderName"
