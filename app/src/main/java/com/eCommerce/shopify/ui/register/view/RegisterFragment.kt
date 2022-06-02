@@ -21,9 +21,12 @@ import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModelFactory
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
+    private lateinit var myView: View
+    private lateinit var navController: NavController
+
     private lateinit var registerViewModel: RegisterViewModel
     private lateinit var registerViewModelFactory: RegisterViewModelFactory
-    private lateinit var navController: NavController
+
     private var incommingCustomer:CustomerResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +36,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(inflater,container,false)
         return binding.root
@@ -42,15 +45,19 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.myView = view
         this.navController = findNavController()
-
-        registerViewModelFactory = RegisterViewModelFactory(RegisterRepo.getInstance(APIClient.getInstance()))
-        registerViewModel = ViewModelProvider(this,registerViewModelFactory).get(RegisterViewModel::class.java)
+        setupViewModel()
 
         binding.registerBtn.setOnClickListener {
             registrationHandling()
         }
 
+    }
+
+    fun setupViewModel(){
+        registerViewModelFactory = RegisterViewModelFactory(RegisterRepo.getInstance(APIClient.getInstance()))
+        registerViewModel = ViewModelProvider(this,registerViewModelFactory).get(RegisterViewModel::class.java)
     }
 
     fun registrationHandling(){

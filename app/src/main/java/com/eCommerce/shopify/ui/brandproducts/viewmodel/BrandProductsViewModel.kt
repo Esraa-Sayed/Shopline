@@ -5,11 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.BrandProductsResponse
+import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepositoryInterface
+import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepoInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface) : ViewModel() {
+class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface,private val favRepo: FavoriteRepoInterface) : ViewModel() {
 
     private var _brandProductsCollectionResponse = MutableLiveData<BrandProductsResponse>()
     var brandProductsCollectionResponse:LiveData<BrandProductsResponse> = _brandProductsCollectionResponse
@@ -30,5 +32,18 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
             }
         }
     }
+
+    fun insertToFavorite(product: Product){
+        viewModelScope.launch(Dispatchers.IO){
+            favRepo.insertToFavorite(product)
+        }
+    }
+
+    fun deleteFromFavorite(product: Product){
+        viewModelScope.launch(Dispatchers.IO){
+            favRepo.deleteFromFavorite(product)
+        }
+    }
+
 
 }
