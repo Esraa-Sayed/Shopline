@@ -14,4 +14,5 @@ interface ProfileRepoInterface {
     fun getAllFavorites(): LiveData<List<Product>>
     fun insertToFavorite(product: Product)
     fun deleteFromFavorite(product: Product)
+    fun getUserName(context: Context): String
 }

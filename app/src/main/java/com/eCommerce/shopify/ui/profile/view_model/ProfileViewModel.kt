@@ -67,4 +67,7 @@ class ProfileViewModel(val _repo: ProfileRepoInterface) : ViewModel() {
             _repo.deleteFromFavorite(product)
         }
     }
+    fun getUserName(requireContext: Context): String{
+        return _repo.getUserName(requireContext)
+    }
 }

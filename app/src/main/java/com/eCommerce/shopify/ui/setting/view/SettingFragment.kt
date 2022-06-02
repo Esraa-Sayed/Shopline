@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.setting.view
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,8 +15,10 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.*
+import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.setting.repo.SettingRepo
 import com.eCommerce.shopify.ui.setting.view_model.SettingViewModel
+import com.eCommerce.shopify.ui.setting.view_model.SettingViewModelFactory
 
 class SettingFragment : Fragment() {
 
@@ -42,11 +45,12 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
-        viewModel.setRepo(SettingRepo())
-        checkIfUserLogin()
+        val factory = SettingViewModelFactory(SettingRepo(APIClient.getInstance()))
+        viewModel = ViewModelProvider(this, factory).get(SettingViewModel::class.java)
+        checkIfUserLoginAndInitInfo()
         listenToAllBtn()
     }
+
     private fun listenToAllBtn(){
         listenToLoginBtn()
         listenToRegisterBtn()
@@ -67,10 +71,14 @@ class SettingFragment : Fragment() {
             mNavController.navigate(R.id.action_mainFragment_to_registerFragment2)
         }
     }
-    private fun checkIfUserLogin() {
+    @SuppressLint("SetTextI18n")
+    private fun checkIfUserLoginAndInitInfo() {
         if(viewModel.getIsLogin(requireContext())){
             binding.settingNoLogin.visibility = View.GONE
             binding.loginLayout.visibility = View.VISIBLE
+            binding.helloName.text = "Hello, " + viewModel.getUserName(requireContext())
+            binding.email.text = viewModel.getUserEmail(requireContext())
+
         }
         else{
             binding.settingNoLogin.visibility = View.VISIBLE
@@ -89,7 +97,7 @@ class SettingFragment : Fragment() {
             bind.confirmText.text = "Are you sure you want to logout?"
             bind.okBtn.setOnClickListener {
                 viewModel.setIsLogin(requireContext(), false)
-                checkIfUserLogin()
+                checkIfUserLoginAndInitInfo()
                 print("in ok button")
                 dialog.dismiss()
             }
@@ -119,8 +127,8 @@ class SettingFragment : Fragment() {
             dialog.setContentView(bind.root)
             dialog.setTitle("Change currency")
 
-            bind.dollerBtn.setOnClickListener {
-                confirmDialog("Are you sure you want to change currency to $ ?")
+            bind.eurBtn.setOnClickListener {
+                confirmDialog("Are you sure you want to change currency to EUR ?")
 
                 //change customer currency here
                 dialog.dismiss()

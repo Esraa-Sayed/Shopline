@@ -47,6 +47,11 @@ class WishlistAdapter(val listener: OnProductListner) : RecyclerView.Adapter<Wis
         notifyDataSetChanged()
     }
 
+    @JvmName("getWishlist1")
+    fun getWishlist(): List<Product>{
+        return wishlist
+    }
+
     class WishlistViewHolder(val _bindView: ProfileWishlistRowBinding)
         : RecyclerView.ViewHolder(_bindView.root) {
 
