@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
@@ -18,6 +19,8 @@ import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.network.APIClient
+import com.eCommerce.shopify.ui.MainFragmentDirections
+import com.eCommerce.shopify.ui.order.view.OrdersFragmentDirections
 import com.eCommerce.shopify.ui.profile.repo.ProfileRepo
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModelFactory
@@ -124,12 +127,13 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
     }
 
     override fun onOrderClicked(order: Order) {
-        //mNavController.navigate(R.id.action_mainFragment_to_ordersDetailsFragment)
+        val action = MainFragmentDirections.actionMainFragmentToOrdersDetailsFragment(order.created_at, order.customer.first_name!!, order.line_items.toTypedArray())
+        mNavController.navigate(action)
     }
 
     override fun onProductClicked(product: Product) {
-//        val action = ProfileFragmentDirections.actionNavigationProfileToOrdersDetailsFragment()
-//        mNavController.navigate(action)
+        val action = MainFragmentDirections.actionMainFragmentToProductDetailsFragment(product.id)
+        mNavController.navigate(action)
     }
 
     override fun onFavBtnClick(product: Product) {
@@ -148,10 +152,11 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         }
     }
     private fun onMoreWishlistClicked(){
-        //val action = ProfileFragmentBinding.
+        mNavController.navigate(R.id.action_mainFragment_to_favoriteFragment)
     }
     private fun onMoreOrdersClicked(){
-        //val action = ProfileFragmentDest
+        val action = MainFragmentDirections.actionMainFragmentToOrdersFragment(ordersAdapter.getOrders().toTypedArray())
+        mNavController.navigate(action)
     }
     @SuppressLint("SetTextI18n")
     private fun checkIfUserLogin() {

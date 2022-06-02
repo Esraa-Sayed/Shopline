@@ -80,6 +80,15 @@
         <action
             android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
             app:destination="@id/ordersDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ordersDetailsFragment2"
+            app:destination="@id/ordersDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ordersFragment2"
+            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -154,6 +163,9 @@
         <action
             android:id="@+id/action_ordersFragment_to_ordersDetailsFragment2"
             app:destination="@id/ordersDetailsFragment" />
+        <argument
+            android:name="orders"
+            app:argType="com.eCommerce.shopify.model.orderDetails.Order[]" />
     </fragment>
     <fragment
         android:id="@+id/ordersDetailsFragment"
