@@ -70,11 +70,11 @@ class SettingFragment : Fragment() {
     private fun checkIfUserLogin() {
         if(viewModel.getIsLogin(requireContext())){
             binding.settingNoLogin.visibility = View.GONE
-            binding.settingLogin.visibility = View.VISIBLE
+            binding.loginLayout.visibility = View.VISIBLE
         }
         else{
             binding.settingNoLogin.visibility = View.VISIBLE
-            binding.settingLogin.visibility = View.GONE
+            binding.loginLayout.visibility = View.GONE
         }
     }
     private fun listenToLogoutBtn(){

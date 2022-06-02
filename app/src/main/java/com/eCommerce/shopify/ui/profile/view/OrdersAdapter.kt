@@ -34,7 +34,9 @@ class OrdersAdapter(val OnOrderListner: OnOrderListner, val onProductListner: On
     override fun getItemCount(): Int {
         if(orders.isEmpty())
             return 0
-        return 2
+        else if(orders.size > 2)
+            return 2
+        return orders.size
     }
 
     class OrdersViewHolder(val _bindView: ProfileOrdersRowBinding)

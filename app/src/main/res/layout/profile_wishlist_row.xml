@@ -11,9 +11,10 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/p_wishlist_row_cardview"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         app:cardCornerRadius="10dp"
         android:layout_margin="5dp"
+        android:background="@color/white"
         app:cardElevation="5dp">
 
         <RelativeLayout
@@ -36,17 +37,19 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/cairo_semi_bold"
                 android:gravity="center"
+                android:paddingHorizontal="20dp"
                 android:text="T-shirt"
                 android:textColor="@color/dark_gray"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/p_wishlist_row_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/p_wishlist_row_name"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/cairo_semi_bold"
                 android:paddingHorizontal="20dp"
                 android:text="200$"
@@ -57,12 +60,13 @@
     </com.google.android.material.card.MaterialCardView>
 
     <ImageButton
+        android:id="@+id/favorite_btn"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_below="@+id/p_wishlist_row_cardview"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="-35dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@android:color/transparent"
         android:elevation="10dp"
         android:src="@drawable/ic_favorite_group" />
