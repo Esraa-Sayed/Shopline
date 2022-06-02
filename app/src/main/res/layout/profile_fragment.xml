@@ -31,8 +31,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/app_bar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/profile_internet_constraintlayout"
+                    android:id="@+id/profile_login_constraintlayout"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="match_parent"
                     android:background="@drawable/rounded_corners_top_gray"
                     app:layout_constraintStart_toStartOf="parent"
@@ -146,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/rounded_corners_top_white"
-                    android:visibility="gone">
+                    >
 
                     <ImageView
                         android:id="@+id/no_login_image"
@@ -163,12 +164,13 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/no_login_image"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/cairo_bold"
                         android:text="@string/login_required"
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/text1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/login_required_text"
@@ -180,6 +182,38 @@
                         android:text="@string/login_register_msg"
                         android:textSize="15sp" />
 
+                    <Button
+                        android:id="@+id/login_btn"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/cairo_semi_bold"
+                        android:text="@string/login"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/register_btn"
+                        android:layout_width="160dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/text1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/rounded_rectangle"
+                        android:fontFamily="@font/cairo_semi_bold"
+                        android:text="@string/register"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

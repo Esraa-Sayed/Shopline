@@ -42,4 +42,9 @@ class AddAddressFragment : Fragment() {
         viewModel.setRepo(AddAddressRepo())
     }
 
+    fun listenToAddAddressButton(){
+
+    }
+
+
 }
