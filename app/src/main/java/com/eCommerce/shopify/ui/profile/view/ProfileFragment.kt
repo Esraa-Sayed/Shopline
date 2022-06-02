@@ -49,6 +49,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         val remoteSource = ProfileRepo.getInstance(APIClient.getInstance())
         val profileFactory = ProfileViewModelFactory(remoteSource)
 
@@ -102,8 +103,8 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         _binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
     }
 
-    override fun onOrderClicked(order: Order) {
-        mNavController.navigate(R.id.action_mainFragment_to_ordersDetailsFragment)
+    override fun onOrderClicked(order: com.eCommerce.shopify.model.orderDetails.Order) {
+        //mNavController.navigate(R.id.action_mainFragment_to_ordersDetailsFragment)
     }
 
     override fun onProductClicked(product: Product) {

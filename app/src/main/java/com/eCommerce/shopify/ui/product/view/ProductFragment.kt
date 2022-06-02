@@ -16,6 +16,7 @@ import com.eCommerce.shopify.databinding.FragmentProductBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.Products
 import com.eCommerce.shopify.network.APIClient
+import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.product.repo.ProductRepo
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModel
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModelFactory
@@ -159,6 +160,7 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
     }
 
     override fun onCategoryProductClick(product: Product) {
-
+        val action = ProductFragmentDirections.actionProductFragmentToProductDetailsFragment(product.id)
+        mNavController.navigate(action)
     }
 }

@@ -1,19 +1,32 @@
-package com.eCommerce.shopify.ui.favorite
+package com.eCommerce.shopify.ui.favorite.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.eCommerce.shopify.database.LocalSource
 import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
+import com.eCommerce.shopify.model.Product
+import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.OnProductClickListener
+import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
+import com.eCommerce.shopify.ui.favorite.view.FavoriteAdapter
+import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
+import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
+import com.eCommerce.shopify.ui.register.repo.RegisterRepo
+import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModel
+import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModelFactory
 
 class FavoriteFragment : Fragment() ,OnProductClickListener{
 
     private lateinit var binding:FragmentFavoriteBinding
     private lateinit var favAdapter: FavoriteAdapter
     private lateinit var gridManager:GridLayoutManager
+    private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var favoriteViewModelFactory: FavoriteViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +43,16 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        favoriteViewModelFactory = FavoriteViewModelFactory(FavoriteRepo.getInstance(LocalSource.getInstance(requireContext())))
+        favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory).get(FavoriteViewModel::class.java)
+
         setupFavRecycler()
 
-        /*val favList = listOf(
-            Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("shoes",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
-            Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("dress",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg")
-        )
+        favoriteViewModel.getAllFavorites().observe(viewLifecycleOwner){
+            favAdapter.setFavProductList(it)
+            favAdapter.notifyDataSetChanged()
+        }
 
-        favAdapter.setFavProductList(favList)
-        favAdapter.notifyDataSetChanged()*/
     }
 
     fun setupFavRecycler(){
@@ -54,7 +66,8 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
 
     }
 
-    override fun onFavBtnClick() {
-
+    override fun onFavBtnClick(product: Product) {
+        product.isFavorite = false
+        favoriteViewModel.deleteFromFavorite(product)
     }
 }

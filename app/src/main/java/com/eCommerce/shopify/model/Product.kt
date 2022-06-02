@@ -1,8 +1,11 @@
 package com.eCommerce.shopify.model
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "favorites")
 data class Product(
     @SerializedName("admin_graphql_api_id")
     val adminGraphqlApiId: String,
@@ -11,6 +14,7 @@ data class Product(
     @SerializedName("created_at")
     val createdAt: String,
     val handle: String,
+    @PrimaryKey
     val id: Long,
     val image: ImageProduct?,
     val images: List<ImageProduct>,
@@ -21,16 +25,16 @@ data class Product(
     val publishedAt: String,
     @SerializedName("published_scope")
     val publishedScope: String,
-
     val status: String,
     val tags: String,
-    @SerializedName("template_suffix")
-    val templateSuffix: Any,
+    //@SerializedName("template_suffix")
+    //val templateSuffix: Any,
     val title: String,
     @SerializedName("updated_at")
     val updatedAt: String,
-
     @SerializedName("variants")
     val variants: List<Variant>,
-    val vendor: String
+    val vendor: String,
+    var isFavorite:Boolean = false
+    val quantity:Int
 )

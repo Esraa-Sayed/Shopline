@@ -13,11 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.OrdersFragmentBinding
-import com.eCommerce.shopify.model.Order
+import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.login.repo.LoginRepo
-import com.eCommerce.shopify.ui.login.viewModel.LoginViewModel
-import com.eCommerce.shopify.ui.login.viewModel.LoginViewModelFactory
 import com.eCommerce.shopify.ui.order.repo.OrdersRepo
 import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModel
 import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModelFactory

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.OrdersDetailsFragmentBinding
-import com.eCommerce.shopify.model.OrderDetailsItems
 import com.eCommerce.shopify.ui.orderDetails.viewModel.OrdersDetailsViewModel
 
 class OrdersDetailsFragment : Fragment() {
@@ -38,8 +37,7 @@ class OrdersDetailsFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(OrdersDetailsViewModel::class.java)
         binding.orderCreatedDate.text = "20/10/2021"
         binding.userShippingToName.text = "Esraa Sayed"
-        val items = listOf<OrderDetailsItems>(OrderDetailsItems("AyHaga","Bag","$250","6"),OrderDetailsItems("AyHaga","Bag","$250","6"))
-        orderDetailsAdapter = OrderDetailsAdapter(myView.context,items)
+        orderDetailsAdapter = OrderDetailsAdapter(myView.context, emptyList())
         var layoutMan = LinearLayoutManager(activity)
         getString(R.string.OrderDetails).also { binding.appBar.toolbar.title = it }
         binding.orderDetailsRecyclerView.apply {

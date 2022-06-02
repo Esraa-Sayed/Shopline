@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.ProfileOrdersRowBinding
-import com.eCommerce.shopify.model.Order
-import com.eCommerce.shopify.ui.MainFragmentDirections
+import com.eCommerce.shopify.model.orderDetails.Order
 
-class OrdersAdapter(private val context: Context,private var  orders:List<Order>,private var onOrderRowClicked:OnOrderRowClicked): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
+class OrdersAdapter(private val context: Context, private var  orders:List<Order>, private var onOrderRowClicked:OnOrderRowClicked): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

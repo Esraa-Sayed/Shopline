@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.ProfileOrdersRowBinding
-import com.eCommerce.shopify.model.Order
+import com.eCommerce.shopify.model.orderDetails.Order
 
 class OrdersAdapter(val OnOrderListner: OnOrderListner, val onProductListner: OnProductListner): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
 

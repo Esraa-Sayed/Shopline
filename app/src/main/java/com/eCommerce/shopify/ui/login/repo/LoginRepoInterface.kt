@@ -5,5 +5,5 @@ import retrofit2.Response
 
 interface LoginRepoInterface {
     suspend fun getUserDataWithEmail(email:String): Response<UserData>
-    fun saveDataInSharedPref(context: Context,email: String, userId: Long)
+    fun saveDataInSharedPref(context: Context,email: String, userId: Long, userName:String)
 }
