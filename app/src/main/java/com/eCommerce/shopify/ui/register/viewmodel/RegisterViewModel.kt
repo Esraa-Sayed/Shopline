@@ -1,13 +1,17 @@
 package com.eCommerce.shopify.ui.register.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.ui.register.repo.RegisterRepoInterface
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import retrofit2.Response
 
 class RegisterViewModel(private val repo: RegisterRepoInterface):ViewModel() {
 
@@ -17,6 +21,13 @@ class RegisterViewModel(private val repo: RegisterRepoInterface):ViewModel() {
     private var _errorMsgResponse = MutableLiveData<String>()
     val errorMsgResponse: LiveData<String> = _errorMsgResponse
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, t ->
+        run {
+            t.printStackTrace()
+            _errorMsgResponse.postValue(t.message)
+        }
+    }
+
     fun postNewCustomer(customer: CustomerResponse){
         viewModelScope.launch(Dispatchers.IO){
             val newResponseCustomer = repo.registerCustomer(customer)
@@ -25,8 +36,13 @@ class RegisterViewModel(private val repo: RegisterRepoInterface):ViewModel() {
                 _customerResponse.postValue(newResponseCustomer.body())
             }
             else{
-                _errorMsgResponse.postValue(newResponseCustomer.message())
+                var jsonError = JSONObject(newResponseCustomer.errorBody()?.string() as String)
+                _errorMsgResponse.postValue("")
             }
         }
+    }
+
+    fun saveDataInSharedPref(context: Context,email:String,userId: Long, userName:String){
+        repo.saveDataInSharedPref(context,email,userId,userName)
     }
 }

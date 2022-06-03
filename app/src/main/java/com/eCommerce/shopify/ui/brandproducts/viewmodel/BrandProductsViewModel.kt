@@ -33,6 +33,10 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface,
         }
     }
 
+    fun getAllFavorites():LiveData<List<Product>>{
+        return favRepo.getAllFavorites()
+    }
+
     fun insertToFavorite(product: Product){
         viewModelScope.launch(Dispatchers.IO){
             favRepo.insertToFavorite(product)

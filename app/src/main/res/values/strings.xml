@@ -99,4 +99,5 @@
     <string name="todo">TODO</string>
     <string name="our_team_n">Our Team</string>
     <string name="reviews">Reviews</string>
+    <string name="phone_validation">invalid phone number</string>
 </resources>

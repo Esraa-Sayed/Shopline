@@ -62,20 +62,23 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         setupViewModel()
         setupBrandProductsRecycler()
 
-        brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
-        brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner){
-            brandProductsAdapter.setBrandProductsList(it.products)
-            brandProductsAdapter.notifyDataSetChanged()
+
+        brandProductsViewModel.getAllFavorites().observe(viewLifecycleOwner) {favItems ->
+            brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
+            brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
+                for(favItem in favItems) {
+                    for(item in it.products) {
+                        if(favItem.id == item.id){
+                            Log.i("TAG", "fav truuuuuuuuuuuuuuuuuuue")
+                            item.isFavorite = true
+                        }
+                    }
+                }
+                brandProductsAdapter.setBrandProductsList(it.products)
+                brandProductsAdapter.notifyDataSetChanged()
+            }
         }
 
-        /*val productsList = listOf(
-            Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("shoes",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
-            Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("dress",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
-            Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("dress",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg")
-        )*/
     }
 
     private fun setupToolbar() {
@@ -95,7 +98,7 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     fun setupViewModel(){
         brandProductsViewModelFactory = BrandProductsViewModelFactory(
-            BrandProductsRepository.getInstance(APIClient.getInstance()),
+            BrandProductsRepository.getInstance(APIClient.getInstance(),LocalSource.getInstance(myView.context)),
             FavoriteRepo.getInstance(LocalSource.getInstance(myView.context))
         )
         brandProductsViewModel = ViewModelProvider(this,brandProductsViewModelFactory).get(BrandProductsViewModel::class.java)

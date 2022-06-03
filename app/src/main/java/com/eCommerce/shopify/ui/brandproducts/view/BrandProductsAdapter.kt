@@ -41,6 +41,14 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         Glide.with(context)
             .load(brandProducts[position].image?.src)
             .into(holder.productImg)
+        if(brandProducts[position].isFavorite){
+            holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
+            Log.i("TAG", "onBindViewHolder: adddddddddddddddddddddddddddddddded to favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+        }
+        else{
+            holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_border_group)
+            Log.i("TAG", "onBindViewHolder: remmmmmmmmmmmmmmmmmoooooooooooove from favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+        }
         //holder.productRate.rating = brandProducts[position].rate.toFloat()
 
         holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick() }

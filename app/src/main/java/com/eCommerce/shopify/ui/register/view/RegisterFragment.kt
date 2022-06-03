@@ -17,6 +17,7 @@ import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.register.repo.RegisterRepo
 import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModel
 import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModelFactory
+import com.eCommerce.shopify.utils.AppConstants
 
 class RegisterFragment : Fragment() {
 
@@ -52,7 +53,12 @@ class RegisterFragment : Fragment() {
         binding.registerBtn.setOnClickListener {
             registrationHandling()
         }
-
+        binding.goToLoginLinear.setOnClickListener {
+            navController.navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+        binding.backInRegister.setOnClickListener {
+            navController.popBackStack()
+        }
     }
 
     fun setupViewModel(){
@@ -75,6 +81,7 @@ class RegisterFragment : Fragment() {
             phone.isNullOrEmpty() -> binding.phoneInRegister.error = getString(R.string.required)
             password.isNullOrEmpty() -> binding.passwordInRegister.error = getString(R.string.required)
             confirm.isNullOrEmpty() -> binding.confirmPassInRegister.error = getString(R.string.required)
+            phone.length < 11 -> binding.phoneInRegister.error = getString(R.string.phone_validation)
             password.length < 8 -> binding.passwordInRegister.error = getString(R.string.passwordWarning)
             confirm.toString() != password.toString() -> binding.confirmPassInRegister.error = getString(R.string.confirmPasswordWarning)
             else -> validUserData = true
@@ -85,24 +92,36 @@ class RegisterFragment : Fragment() {
             subIncommingCustomer.first_name = fName.toString()
             subIncommingCustomer.last_name = lName.toString()
             subIncommingCustomer.email = email.toString()
-            subIncommingCustomer.phone = ""
+            subIncommingCustomer.phone = phone.toString()
             subIncommingCustomer.verified_email = true
             subIncommingCustomer.tags = password.toString()
 
             incommingCustomer = CustomerResponse(subIncommingCustomer)
 
             registerViewModel.errorMsgResponse.observe(viewLifecycleOwner){
-                Log.i("TAG", "errrrrrrrrrrrror in post user!!!!!!!")
+                Log.i("TAG", "errrrrrrrrrrrror in post user!!!!!$it")
+                AppConstants.showAlert(
+                    myView.context,
+                    R.string.error,
+                    it,
+                    R.drawable.ic_error
+                )
             }
             registerViewModel.postNewCustomer(incommingCustomer as CustomerResponse)
             registerViewModel.customerRespoonse.observe(viewLifecycleOwner) {
                 if(!it.customer.email.isNullOrEmpty()) {
-                    Log.i("TAG", "register ssssssuccessssssssssssfulllllll " + it.customer.email)
-                    val goToHome = RegisterFragmentDirections.actionRegisterFragmentToMainFragment(it.customer)
-                    navController.navigate(goToHome)
+                    Log.i("TAG", "register ssssssuccessssssssssssfulllllllyyy " + it.customer.email)
+                    registerViewModel.saveDataInSharedPref(myView.context,it.customer.email!!,it.customer.id!!,it.customer.first_name!!)
+                    navController.navigate(R.id.action_registerFragment_to_mainFragment)
                 }
                 else{
                     Log.i("TAG", "Response is null or empety!!!!!")
+                    AppConstants.showAlert(
+                        myView.context,
+                        R.string.error,
+                        "this email is already registered!",
+                        R.drawable.ic_error
+                    )
                 }
             }
         }
