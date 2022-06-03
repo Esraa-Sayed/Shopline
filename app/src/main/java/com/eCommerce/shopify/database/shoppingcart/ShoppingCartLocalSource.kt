@@ -8,10 +8,12 @@ import com.eCommerce.shopify.model.ProductDetail
 class ShoppingCartLocalSource(context: Context): ShoppingCartLocalSourceInterface {
 
     private var shoppingCartDao: ShoppingCartDao
+    override val allProductInShoppingCart: LiveData<List<ProductDetail>>
 
     init {
         val db = ShopifyDatabase.getInstance(context.applicationContext)
         shoppingCartDao = db.shoppingCartDao()
+        allProductInShoppingCart = shoppingCartDao.allProductInShoppingCart
     }
 
     companion object{
@@ -20,10 +22,6 @@ class ShoppingCartLocalSource(context: Context): ShoppingCartLocalSourceInterfac
         fun getInstance(context: Context): ShoppingCartLocalSourceInterface {
             return localSourceInstance ?: ShoppingCartLocalSource(context)
         }
-    }
-
-    override fun getAllProductInShoppingCart(): LiveData<List<ProductDetail>> {
-        return shoppingCartDao.getAllProductInShoppingCart()
     }
 
     override fun getProductInShoppingCart(id: Long): LiveData<ProductDetail> {

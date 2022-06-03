@@ -1,12 +1,12 @@
-package com.eCommerce.shopify.ui
+package com.eCommerce.shopify.ui.main.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -14,13 +14,19 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.eCommerce.shopify.R
+import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
 import com.eCommerce.shopify.databinding.FragmentMainBinding
+import com.eCommerce.shopify.ui.main.repo.MainRepo
+import com.eCommerce.shopify.ui.main.viewmodel.MainViewModel
+import com.eCommerce.shopify.ui.main.viewmodel.MainViewModelFactory
+import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.NetworkConnectionLiveData
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 class MainFragment : Fragment() {
 
+    private lateinit var mainViewModelFactory: MainViewModelFactory
+    private lateinit var viewModel: MainViewModel
     private var _binding: FragmentMainBinding? = null
 
     private val binding get() = _binding!!
@@ -56,6 +62,7 @@ class MainFragment : Fragment() {
 
         listenerOnNetwork()
         listenToSearch()
+        gettingViewModelReady()
         //listenOnBottomNavigation()
     }
 
@@ -78,6 +85,33 @@ class MainFragment : Fragment() {
     private fun listenToSearch(){
         binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
             navController.navigate(R.id.action_mainFragment_to_searchFragment)
+        }
+    }
+
+    private fun gettingViewModelReady() {
+        mainViewModelFactory = MainViewModelFactory(
+            MainRepo.getInstance(
+                ShoppingCartLocalSource(myView.context)
+            )
+        )
+        viewModel = ViewModelProvider(this, mainViewModelFactory)[MainViewModel::class.java]
+
+        viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
+            AppConstants.showAlert(
+                myView.context,
+                R.string.error,
+                it,
+                R.drawable.ic_error
+            )
+        })
+
+        viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                binding.appBarHome.txtViewCartCount.text = it.size.toString()
+                binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
+            } else {
+                binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+            }
         }
     }
 

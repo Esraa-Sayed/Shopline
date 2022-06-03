@@ -11,7 +11,7 @@
     tools:context=".ui.login.view.LoginFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtViewCartCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -35,8 +35,8 @@
         android:textColor="@color/gray"
         android:textSize="@dimen/_14ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/txtViewCartCount"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewCartCount" />
 
     <ImageView
         android:id="@+id/imageView2"

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainFragment">
+    tools:context=".ui.main.view.MainFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -91,17 +91,18 @@
                     android:layout_marginEnd="-12dp"
                     android:layout_marginBottom="-12dp"
                     android:backgroundTint="@color/plum"
+                    android:visibility="gone"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/cardViewShoppingCart"
                     app:layout_constraintEnd_toStartOf="@+id/cardViewShoppingCart">
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/txtViewCartCount"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="99"
+                        android:text="0"
                         android:textAlignment="center"
                         android:textColor="@color/white" />
                 </androidx.cardview.widget.CardView>

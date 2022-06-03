@@ -103,5 +103,5 @@
     <string name="add_to_bag">Add To Bag</string>
     <string name="remove_from_bag">Remove From Bag</string>
     <string name="quantity">Quantity:</string>
-
+    <string name="login_error">You need to login first!</string>
 </resources>

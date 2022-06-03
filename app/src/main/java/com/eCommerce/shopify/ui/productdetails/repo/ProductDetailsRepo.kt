@@ -10,6 +10,7 @@ import com.eCommerce.shopify.model.ProductDetails
 import com.eCommerce.shopify.network.RemoteSource
 import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.AppConstants.EGP
+import com.eCommerce.shopify.utils.AppConstants.IS_LOGIN
 import com.eCommerce.shopify.utils.AppSharedPref
 import retrofit2.Response
 
@@ -41,8 +42,14 @@ class ProductDetailsRepo private constructor(
         return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY, EGP)
     }
 
-    override suspend fun getProductDetails(id: Long): Response<ProductDetails> {
-        return remoteSource.getProductDetails(id)
+    override suspend fun getProductDetails(context: Context, id: Long): Response<ProductDetails> {
+        val productDetails = remoteSource.getProductDetails(id)
+
+        if (getCurrencyWithUserEmail(context) != EGP) {
+            productDetails.body()?.product?.variants?.get(0)?.price = (productDetails.body()?.product?.variants?.get(0)?.price.toString().toDouble() / 18).toString()
+        }
+
+        return productDetails
     }
 
     override fun getFavoriteProduct(id: Long): LiveData<Product> {
@@ -67,5 +74,9 @@ class ProductDetailsRepo private constructor(
 
     override fun deleteProductFromShoppingCart(productDetail: ProductDetail) {
         shoppingCartLocalSource.deleteProductFromShoppingCart(productDetail)
+    }
+
+    override fun isUserLogin(context: Context): Boolean {
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getBooleanValue(IS_LOGIN, false)
     }
 }

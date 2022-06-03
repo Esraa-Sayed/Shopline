@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.CustomCollectionsCategory
+import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.Products
 import com.eCommerce.shopify.ui.product.repo.ProductRepoInterface
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -42,5 +43,9 @@ class ProductViewModel(private val _repo: ProductRepoInterface) : ViewModel() {
             }
             _showProgressBar.postValue(false)
         }
+    }
+
+    fun getAllProductInShoppingCartList(): LiveData<List<ProductDetail>> {
+        return _repo.allProductInShoppingCart
     }
 }

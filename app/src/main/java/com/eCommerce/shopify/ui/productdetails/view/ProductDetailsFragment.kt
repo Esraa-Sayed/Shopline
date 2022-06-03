@@ -29,10 +29,9 @@ import com.eCommerce.shopify.ui.productdetails.viewmodel.ProductDetailsViewModel
 import com.eCommerce.shopify.ui.productdetails.viewmodel.ProductDetailsViewModelFactory
 import com.eCommerce.shopify.ui.reviews.Review
 import com.eCommerce.shopify.ui.reviews.ReviewsAdapter
-import com.eCommerce.shopify.utils.AppConstants
+import com.eCommerce.shopify.utils.AppConstants.showAlert
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import kotlin.math.abs
 
 class ProductDetailsFragment : Fragment() {
@@ -96,10 +95,10 @@ class ProductDetailsFragment : Fragment() {
         )
         viewModel = ViewModelProvider(this, productDetailsViewModelFactory)[ProductDetailsViewModel::class.java]
 
-        viewModel.getCategoryProducts(args.categoryProductId)
+        viewModel.getCategoryProducts(myView.context, args.categoryProductId)
 
         viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
-            AppConstants.showAlert(
+            showAlert(
                 myView.context,
                 R.string.error,
                 it,
@@ -159,12 +158,21 @@ class ProductDetailsFragment : Fragment() {
 
     private fun handleUIActions() {
         binding.cardViewIsFavorite.setOnClickListener {
-            if (isFavoriteProduct) {
-                viewModel.deleteFromFavorite(product)
-                handleFavorite(false, R.drawable.ic_favorite_border)
+            if (viewModel.isUserLogin(myView.context)) {
+                if (isFavoriteProduct) {
+                    viewModel.deleteFromFavorite(product)
+                    handleFavorite(false, R.drawable.ic_favorite_border)
+                } else {
+                    viewModel.insertToFavorite(product)
+                    handleFavorite(true, R.drawable.ic_favorite)
+                }
             } else {
-                viewModel.insertToFavorite(product)
-                handleFavorite(true, R.drawable.ic_favorite)
+                showAlert(
+                    myView.context,
+                    R.string.error,
+                    getString(R.string.login_error),
+                    R.drawable.ic_error
+                )
             }
         }
 
@@ -174,12 +182,21 @@ class ProductDetailsFragment : Fragment() {
         }
 
         binding.btnReviewsAddToBag.setOnClickListener {
-            if (isAddingToShoppingCart) {
-                viewModel.deleteProductFromShoppingCart(productDetail)
-                handleBag(false, getString(R.string.add_to_bag))
+            if (viewModel.isUserLogin(myView.context)) {
+                if (isAddingToShoppingCart) {
+                    viewModel.deleteProductFromShoppingCart(productDetail)
+                    handleBag(false, getString(R.string.add_to_bag))
+                } else {
+                    viewModel.insertProductInShoppingCart(productDetail)
+                    handleBag(true, getString(R.string.remove_from_bag))
+                }
             } else {
-                viewModel.insertProductInShoppingCart(productDetail)
-                handleBag(true, getString(R.string.remove_from_bag))
+                showAlert(
+                    myView.context,
+                    R.string.error,
+                    getString(R.string.login_error),
+                    R.drawable.ic_error
+                )
             }
         }
     }
@@ -233,7 +250,7 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private var sliderRunnable = Runnable {
-        if (binding.viewPagerAdsSlider.currentItem + 1 >= sliderImages.size) {
+        if (binding.viewPagerAdsSlider.currentItem + 1 == sliderImages.size) {
             binding.viewPagerAdsSlider.currentItem = 0
         } else {
             binding.viewPagerAdsSlider.currentItem++

@@ -11,8 +11,8 @@ import com.eCommerce.shopify.model.ProductDetail
 @Dao
 interface ShoppingCartDao {
 
-    @Query("SELECT * FROM shopping_cart")
-    fun getAllProductInShoppingCart(): LiveData<List<ProductDetail>>
+    @get:Query("SELECT * FROM shopping_cart")
+    val allProductInShoppingCart: LiveData<List<ProductDetail>>
 
     @Query("select * from shopping_cart where id = :id")
     fun getProductInShoppingCart(id: Long): LiveData<ProductDetail>

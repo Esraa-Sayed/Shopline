@@ -20,10 +20,10 @@ import com.eCommerce.shopify.model.SliderItem
 import com.eCommerce.shopify.model.SmartCollection
 import com.eCommerce.shopify.model.SmartCollectionsBrand
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.home.repo.HomeRepo
 import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModel
 import com.eCommerce.shopify.ui.home.viewmodel.HomeViewModelFactory
+import com.eCommerce.shopify.ui.main.view.MainFragmentDirections
 import com.eCommerce.shopify.utils.AppConstants.showAlert
 import kotlin.math.abs
 
@@ -41,7 +41,12 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     private val sliderItems = mutableListOf(
         SliderItem(R.drawable.banner1),
         SliderItem(R.drawable.banner2),
-        SliderItem(R.drawable.banner3)
+        SliderItem(R.drawable.banner3),
+        SliderItem(R.drawable.ad1),
+        SliderItem(R.drawable.ad2),
+        SliderItem(R.drawable.ad3),
+        SliderItem(R.drawable.ad4),
+        SliderItem(R.drawable.ad5)
     )
     private var sliderHandler = Handler(Looper.getMainLooper())
 
@@ -142,7 +147,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
     }
 
     private var sliderRunnable = Runnable {
-        if (binding.viewPagerAdsSlider.currentItem + 1 > 2) {
+        if (binding.viewPagerAdsSlider.currentItem + 1 == sliderItems.size) {
             binding.viewPagerAdsSlider.currentItem = 0
         } else {
             binding.viewPagerAdsSlider.currentItem++
