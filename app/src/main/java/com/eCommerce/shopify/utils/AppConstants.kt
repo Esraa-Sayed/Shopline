@@ -6,6 +6,8 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
 import com.eCommerce.shopify.BuildConfig
 import com.eCommerce.shopify.R
+import com.eCommerce.shopify.model.Product
+import com.eCommerce.shopify.model.orderDetails.LineItem
 
 object AppConstants {
 
@@ -37,4 +39,12 @@ object AppConstants {
     fun playAnimation(view: View, context: Context, animation: Int) {
         view.startAnimation(AnimationUtils.loadAnimation(context, animation))
     }
+    /*fun convertFromProdcutsToLineItems(products: Array<Product>):List<LineItem>{
+        var items:List<LineItem> = emptyList()
+        for (product in products){
+            val lineItem = LineItem(variant_id = product.variants[0].id, price = product.variants[0].price)
+        }
+        return items
+    }*/
+
 }
