@@ -1,13 +1,19 @@
 package com.eCommerce.shopify.ui.profile.view
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.ColorStateListDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+import androidx.annotation.ColorRes
+import androidx.lifecycle.Observer
+
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -165,12 +171,14 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         if(viewModel.getIsLogin(requireContext())){
             binding.profileNologinRelativelayout.visibility = View.GONE
             binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+            binding.profilePage.setBackgroundResource(R.color.titan_white)
             binding.pWelcomeNameText.text = "Welcome " + viewModel.getUserName(requireContext())
             getUserOrders()
             getUserWishlist()
         }
         else{
             binding.profileNologinRelativelayout.visibility = View.VISIBLE
+            binding.profilePage.setBackgroundResource(R.color.white)
             binding.profileLoginConstraintlayout.visibility = View.GONE
             binding.progressBar.visibility = View.GONE
         }

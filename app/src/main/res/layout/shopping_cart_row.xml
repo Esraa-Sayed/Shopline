@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="240dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/sc_row_cardview"
     android:backgroundTint="@color/white"
@@ -12,101 +12,105 @@
     android:layout_marginHorizontal="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="402dp"
         android:layout_height="match_parent">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/sc_row_item_image"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_width="120dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
             android:src="@mipmap/ic_launcher"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/sc_row_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tag Heuer wriskwer"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
-            android:textSize="18sp"
-            android:textColor="@color/dark_gray"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="20dp"
             android:fontFamily="@font/cairo_semi_bold"
+            android:text="Tag Heuer wriskwer"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/sc_row_item_image"
-            app:layout_constraintTop_toTopOf="@+id/sc_row_item_image"/>
+            app:layout_constraintTop_toTopOf="@+id/sc_row_item_image" />
 
         <TextView
             android:id="@+id/sc_row_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$1100"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="20dp"
-            android:textSize="18sp"
-            android:textColor="@color/secondary_color"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/cairo_regular"
+            android:text="$1100"
+            android:textColor="@color/secondary_color"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/sc_row_item_image"
-            app:layout_constraintTop_toBottomOf="@+id/sc_row_item_name"/>
+            app:layout_constraintTop_toBottomOf="@+id/sc_row_item_name" />
 
         <ImageButton
             android:id="@+id/sc_row_delete_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginTop="1dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_delete_from_cart"
+            android:src="@drawable/close_icon3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/light_gray"
-            app:cardCornerRadius="10dp"
+        <TextView
+            android:id="@+id/textQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/cairo_regular"
+            android:text="@string/quantity"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:weightSum="3">
-                <TextView
-                    android:id="@+id/sc_row_plus_item"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/plus"
-                    android:textSize="25sp"
-                    android:fontFamily="@font/cairo_extra_bold"/>
+        <ImageButton
+            android:id="@+id/minus_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/minus_circle_fill_icon"
+            app:layout_constraintEnd_toStartOf="@+id/amount"
+            app:layout_constraintStart_toEndOf="@+id/textQ"
+            app:layout_constraintTop_toTopOf="@+id/textQ" />
 
-                <TextView
-                    android:id="@+id/sc_row_item_count"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="3"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/cairo_semi_bold"/>
-                <TextView
-                    android:id="@+id/sc_row_minus_item"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/minus"
-                    android:textSize="25sp"
-                    android:fontFamily="@font/cairo_extra_bold"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/cairo_semi_bold"
+            android:text="0"
+            android:textSize="23sp"
+            app:layout_constraintStart_toEndOf="@+id/minus_btn"
+            app:layout_constraintTop_toTopOf="@+id/minus_btn" />
 
-        </com.google.android.material.card.MaterialCardView>
+        <ImageButton
+            android:id="@+id/plus_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/plus_circle_fill_icon"
+            app:layout_constraintStart_toEndOf="@+id/amount"
+            app:layout_constraintTop_toTopOf="@+id/minus_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
