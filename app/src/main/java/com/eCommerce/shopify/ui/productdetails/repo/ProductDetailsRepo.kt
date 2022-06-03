@@ -9,6 +9,7 @@ import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.ProductDetails
 import com.eCommerce.shopify.network.RemoteSource
 import com.eCommerce.shopify.utils.AppConstants
+import com.eCommerce.shopify.utils.AppConstants.EGP
 import com.eCommerce.shopify.utils.AppSharedPref
 import retrofit2.Response
 
@@ -25,8 +26,8 @@ class ProductDetailsRepo private constructor(
         }
     }
 
-    override suspend fun getCurrencyWithUserEmail(context: Context): String {
-        val currentCurrency: String
+    override /*suspend*/ fun getCurrencyWithUserEmail(context: Context): String {
+        /*val currentCurrency: String
         val userEmail =
             AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(
                 AppConstants.USER_EMAIL, "")
@@ -35,9 +36,9 @@ class ProductDetailsRepo private constructor(
         } else {
             val userWithEmail = remoteSource.getUserWithEmail(userEmail)
             userWithEmail.body()?.customers?.get(0)?.currency.toString()
-        }
+        }*/
 
-        return currentCurrency
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY, EGP)
     }
 
     override suspend fun getProductDetails(id: Long): Response<ProductDetails> {

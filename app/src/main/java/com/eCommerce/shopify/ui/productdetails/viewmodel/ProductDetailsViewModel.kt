@@ -35,10 +35,11 @@ class ProductDetailsViewModel(private val _repo: ProductDetailsRepoInterface) : 
         }
     }
 
-    fun getCurrencyWithUserEmail(context: Context) {
-        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+    fun getCurrencyWithUserEmail(context: Context): String {
+        /*viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             _currencyResponse.postValue(_repo.getCurrencyWithUserEmail(context))
-        }
+        }*/
+        return _repo.getCurrencyWithUserEmail(context)
     }
 
     fun getCategoryProducts(id: Long) {

@@ -20,6 +20,7 @@ object AppConstants {
     const val USER_EMAIL: String = "User_email"
     const val USER_NAME: String = "User_name"
     const val CURRENCY: String = "Currency"
+    const val EGP: String = "EGP"
 
     const val SPLASH_TIME_OUT: Long = 3000
     const val MIN = 0

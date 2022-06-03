@@ -96,7 +96,6 @@ class ProductDetailsFragment : Fragment() {
         )
         viewModel = ViewModelProvider(this, productDetailsViewModelFactory)[ProductDetailsViewModel::class.java]
 
-        viewModel.getCurrencyWithUserEmail(myView.context)
         viewModel.getCategoryProducts(args.categoryProductId)
 
         viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
@@ -131,9 +130,9 @@ class ProductDetailsFragment : Fragment() {
                 }
             }
         }
-        viewModel.currencyResponse.observe(viewLifecycleOwner) {
+        /*viewModel.currencyResponse.observe(viewLifecycleOwner) {
             binding.txtViewCurrency.text = it
-        }
+        }*/
     }
 
     private fun renderDataOnScreen(it: ProductDetails) {
@@ -146,6 +145,7 @@ class ProductDetailsFragment : Fragment() {
         handleUIViewPager(it.product.images)
         binding.txtViewProductName.text = it.product.title
         binding.txtViewProductPrice.text = it.product.variants[0].price
+        binding.txtViewCurrency.text = viewModel.getCurrencyWithUserEmail(myView.context)
         binding.txtViewDescription.text = it.product.bodyHtml
 
         val reviewsList = listOf(
