@@ -15,10 +15,10 @@ import com.eCommerce.shopify.databinding.FragmentCategoryBinding
 import com.eCommerce.shopify.model.CustomCollection
 import com.eCommerce.shopify.model.CustomCollectionsCategory
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.category.repo.CategoryRepo
 import com.eCommerce.shopify.ui.category.viewmodel.CategoryViewModel
 import com.eCommerce.shopify.ui.category.viewmodel.CategoryViewModelFactory
+import com.eCommerce.shopify.ui.main.view.MainFragmentDirections
 import com.eCommerce.shopify.utils.AppConstants
 
 class CategoryFragment : Fragment(), OnCategoryClickListener {

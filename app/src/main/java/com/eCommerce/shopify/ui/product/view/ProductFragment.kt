@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -12,11 +11,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
+import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
 import com.eCommerce.shopify.databinding.FragmentProductBinding
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.Products
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.product.repo.ProductRepo
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModel
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModelFactory
@@ -66,6 +64,7 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
         setupToolbar()
         gettingViewModelReady()
         handleUIEvents()
+        handleToolbarEvent()
         initRecyclerView()
     }
 
@@ -81,7 +80,7 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
     private fun gettingViewModelReady() {
         productViewModelFactory = ProductViewModelFactory(
             ProductRepo.getInstance(
-                APIClient.getInstance()
+                APIClient.getInstance(), ShoppingCartLocalSource(myView.context)
             )
         )
         viewModel = ViewModelProvider(this, productViewModelFactory)[ProductViewModel::class.java]
@@ -102,20 +101,31 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
             }
         })
         viewModel.categoryProductsResponse.observe(viewLifecycleOwner) {
-            allProductList.addAll(it.products)
-            renderDataOnScreen(allProductList)
-            for (product in it.products) {
-                when (product.productType) {
-                    SHOES -> {
-                        shoesList.add(product)
-                    }
-                    ACCESSORIES -> {
-                        accessoriesList.add(product)
-                    }
-                    T_SHIRTS -> {
-                        tShirtsList.add(product)
+            if (allProductList.isEmpty()) {
+                allProductList.addAll(it.products)
+                for (product in it.products) {
+                    when (product.productType) {
+                        SHOES -> {
+                            shoesList.add(product)
+                        }
+                        ACCESSORIES -> {
+                            accessoriesList.add(product)
+                        }
+                        T_SHIRTS -> {
+                            tShirtsList.add(product)
+                        }
                     }
                 }
+            }
+            renderDataOnScreen(allProductList)
+        }
+
+        viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                binding.appBarHome.txtViewCartCount.text = it.size.toString()
+                binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
+            } else {
+                binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
             }
         }
     }
@@ -132,7 +142,9 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
             layoutManager = gridLayoutManager
         }
 
-        viewModel.getCategoryProducts(args.categoryId)
+        if (allProductList.isEmpty()) {
+            viewModel.getCategoryProducts(args.categoryId)
+        }
     }
 
     private fun handleUIEvents() {
@@ -151,6 +163,18 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
                     renderDataOnScreen(shoesList)
                 }
             }
+        }
+    }
+
+    private fun handleToolbarEvent() {
+        binding.appBarHome.cardViewFavorite.setOnClickListener {
+            val action = ProductFragmentDirections.actionProductFragmentToFavoriteFragment()
+            mNavController.navigate(action)
+        }
+
+        binding.appBarHome.cardViewShoppingCart.setOnClickListener {
+            val action = ProductFragmentDirections.actionProductFragmentToShoppingCartFragment()
+            mNavController.navigate(action)
         }
     }
 

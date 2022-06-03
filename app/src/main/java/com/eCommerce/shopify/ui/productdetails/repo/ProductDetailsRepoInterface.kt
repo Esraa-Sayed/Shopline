@@ -9,7 +9,7 @@ import retrofit2.Response
 
 interface ProductDetailsRepoInterface {
     /*suspend*/ fun getCurrencyWithUserEmail(context: Context): String
-    suspend fun getProductDetails(id: Long): Response<ProductDetails>
+    suspend fun getProductDetails(context: Context, id: Long): Response<ProductDetails>
     fun getFavoriteProduct(id: Long): LiveData<Product>
     fun insertToFavorite(product: Product)
     fun deleteFromFavorite(product: Product)
@@ -17,4 +17,5 @@ interface ProductDetailsRepoInterface {
     fun getProductInShoppingCart(id: Long): LiveData<ProductDetail>
     fun insertProductInShoppingCart(productDetail: ProductDetail)
     fun deleteProductFromShoppingCart(productDetail: ProductDetail)
+    fun isUserLogin(context: Context): Boolean
 }
