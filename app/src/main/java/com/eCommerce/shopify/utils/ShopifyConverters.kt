@@ -2,12 +2,10 @@ package com.eCommerce.shopify.utils
 
 import android.graphics.Path
 import androidx.room.TypeConverter
-import com.eCommerce.shopify.model.ImageProduct
-import com.eCommerce.shopify.model.Option
-import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.Variant
+import com.eCommerce.shopify.model.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 class ShopifyConverters {
     var gson = Gson()
@@ -92,4 +90,11 @@ class ShopifyConverters {
         return gson.fromJson(imgListString,list)
     }
 
+    @TypeConverter
+    fun convertToProductDetailList(value: String): ProductDetail? {
+        val type: Type = object : TypeToken<ProductDetail>() {}.type
+        return Gson().fromJson(value, type)
+    }
+    @TypeConverter
+    fun convertProductDetailToString(list: ProductDetail?): String = Gson().toJson(list)
 }

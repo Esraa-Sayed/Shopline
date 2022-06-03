@@ -1,9 +1,8 @@
 package com.eCommerce.shopify.ui.favorite.repo
 
 import androidx.lifecycle.LiveData
-import com.eCommerce.shopify.database.LocalSourceInterface
+import com.eCommerce.shopify.database.favorite.LocalSourceInterface
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.Products
 
 class FavoriteRepo private constructor(private val localSource: LocalSourceInterface):FavoriteRepoInterface {
 

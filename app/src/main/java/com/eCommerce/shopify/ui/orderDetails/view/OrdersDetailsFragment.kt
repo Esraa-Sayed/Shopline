@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,6 +48,9 @@ class OrdersDetailsFragment : Fragment() {
             layoutMan.orientation = RecyclerView.VERTICAL
             layoutManager = layoutMan
             adapter = orderDetailsAdapter
+        }
+        binding.appBar.backArrow.setOnClickListener {
+            findNavController().navigateUp()
         }
 
     }

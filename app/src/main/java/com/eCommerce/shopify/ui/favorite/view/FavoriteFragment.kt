@@ -1,6 +1,5 @@
 package com.eCommerce.shopify.ui.favorite.view
 
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,18 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
-import com.eCommerce.shopify.database.LocalSource
+import com.eCommerce.shopify.database.favorite.LocalSource
 import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.OnProductClickListener
 import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
-import com.eCommerce.shopify.ui.favorite.view.FavoriteAdapter
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
-import com.eCommerce.shopify.ui.register.repo.RegisterRepo
-import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModel
-import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModelFactory
 
 class FavoriteFragment : Fragment() ,OnProductClickListener{
 

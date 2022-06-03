@@ -2,12 +2,10 @@ package com.eCommerce.shopify.ui.profile.repo
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import com.eCommerce.shopify.database.LocalSourceInterface
+import com.eCommerce.shopify.database.favorite.LocalSourceInterface
 import com.eCommerce.shopify.model.OrderModel
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.network.RemoteSource
-import com.eCommerce.shopify.ui.order.repo.OrdersRepo
-import com.eCommerce.shopify.ui.order.repo.OrdersRepoInterface
 import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.AppSharedPref
 import retrofit2.Response

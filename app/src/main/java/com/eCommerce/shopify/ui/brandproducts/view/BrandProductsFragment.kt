@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
-import com.eCommerce.shopify.database.LocalSource
+import com.eCommerce.shopify.database.favorite.LocalSource
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.network.APIClient
