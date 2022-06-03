@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
@@ -18,6 +19,7 @@ import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.order.repo.OrdersRepo
 import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModel
 import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModelFactory
+import com.eCommerce.shopify.ui.orderDetails.view.OrdersDetailsFragmentArgs
 import com.eCommerce.shopify.utils.AppConstants
 
 class OrdersFragment : Fragment(),OnOrderRowClicked {
@@ -25,7 +27,7 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
     private lateinit var viewModel: OrdersViewModel
     private lateinit var ordersViewModelFactory: OrdersViewModelFactory
     private lateinit var myView:View
-
+    private val ordersFragmentArgs by navArgs<OrdersFragmentArgs>()
     private lateinit var ordersAdapter:OrdersAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +63,7 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
 
         getString(R.string.orders).also { bindingFragment.appBar.toolbar.title = it }
 
-        ordersAdapter = OrdersAdapter(myView.context, emptyList(),this)
+        ordersAdapter = OrdersAdapter(myView.context, emptyList(),viewModel.getCurrency(myView.context),this)
         var linearManager = LinearLayoutManager(activity)
         bindingFragment.ordersRecyclerView.apply {
             setHasFixedSize(true)
@@ -76,7 +78,8 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
     }
 
     private fun getUserOrders() {
-        viewModel.getUserOrders(myView.context)
+        ordersAdapter.updateData(ordersFragmentArgs.orders.toList())
+        /*viewModel.getUserOrders(myView.context)
         viewModel.UserOrders.observe(viewLifecycleOwner, Observer {
             if (it.orders.isNotEmpty()){
                 dataFound()
@@ -93,7 +96,7 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
                 it,
                 R.drawable.ic_error
             )
-        })
+        })*/
     }
     override fun onRowClickedListener(order: Order) {
         val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment2(
