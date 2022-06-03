@@ -51,6 +51,11 @@ class APIClient private constructor(): RemoteSource {
 
     }
 
+
+    override suspend fun updateUser(id: Long, customer: Customer): Response<Customer> {
+        return BaseRetrofitHelper.getInstance().create(APIClient::class.java).updateUser(id, customer)
+		}
+		
     override suspend fun postOrder(order: OrderDetails): Response<OrderDetails> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).postOrder(order)
     }
