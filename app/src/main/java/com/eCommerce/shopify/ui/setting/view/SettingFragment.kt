@@ -74,17 +74,19 @@ class SettingFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ResourceAsColor")
     private fun checkIfUserLoginAndInitInfo() {
         if(viewModel.getIsLogin(requireContext())){
             binding.settingNoLogin.visibility = View.GONE
             binding.loginLayout.visibility = View.VISIBLE
+            binding.settingPage.setBackgroundResource(R.color.titan_white)
             binding.helloName.text = "Hello, " + viewModel.getUserName(requireContext())
             binding.email.text = viewModel.getUserEmail(requireContext())
 
         }
         else{
             binding.settingNoLogin.visibility = View.VISIBLE
+            binding.settingPage.setBackgroundResource(R.color.white)
             binding.loginLayout.visibility = View.GONE
         }
     }

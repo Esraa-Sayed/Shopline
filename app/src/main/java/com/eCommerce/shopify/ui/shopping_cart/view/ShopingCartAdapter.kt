@@ -56,10 +56,10 @@ class ShopingCartAdapter(var listner: Listner) : RecyclerView.Adapter<ShopingCar
             }
             _bindView.scRowItemName.text = name
             _bindView.scRowItemPrice.text = price.toString()
-            _bindView.scRowItemCount.text = amount.toString()
+            _bindView.amount.text = amount.toString()
         }
         fun bindAmount(amount: Int){
-            _bindView.scRowItemCount.text = amount.toString()
+            _bindView.amount.text = amount.toString()
         }
     }
 }
