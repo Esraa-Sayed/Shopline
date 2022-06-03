@@ -49,18 +49,23 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val factory = SettingViewModelFactory(SettingRepo(APIClient.getInstance()))
         viewModel = ViewModelProvider(this, factory).get(SettingViewModel::class.java)
-        checkIfUserLoginAndInitInfo()
-        listenToAllBtn()
+        if(checkIfUserLoginAndInitInfo()){
+            listenToAllBtn()
+        }
+        listenToLoginAndRegisterBtn()
+
     }
 
     private fun listenToAllBtn(){
-        listenToLoginBtn()
-        listenToRegisterBtn()
         listenToLogoutBtn()
         listenToAddressBtn()
         listenToCurrencyBtn()
         listenToContactUsBtn()
         listenToAboutUsBtn()
+    }
+    private fun listenToLoginAndRegisterBtn(){
+        listenToLoginBtn()
+        listenToRegisterBtn()
     }
 
     private fun listenToLoginBtn(){
@@ -75,8 +80,9 @@ class SettingFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n", "ResourceAsColor")
-    private fun checkIfUserLoginAndInitInfo() {
-        if(viewModel.getIsLogin(requireContext())){
+    private fun checkIfUserLoginAndInitInfo(): Boolean{
+        var isLogin: Boolean = viewModel.getIsLogin(requireContext())
+        if(isLogin){
             binding.settingNoLogin.visibility = View.GONE
             binding.loginLayout.visibility = View.VISIBLE
             binding.settingPage.setBackgroundResource(R.color.titan_white)
@@ -89,6 +95,7 @@ class SettingFragment : Fragment() {
             binding.settingPage.setBackgroundResource(R.color.white)
             binding.loginLayout.visibility = View.GONE
         }
+        return isLogin
     }
     private fun listenToLogoutBtn(){
         binding.logoutBtn.setOnClickListener {
@@ -99,7 +106,7 @@ class SettingFragment : Fragment() {
             val bind :ConfirmDialogBinding = ConfirmDialogBinding .inflate(inflater)
             dialog.setContentView(bind.root)
             dialog.setTitle("Confirmation")
-            bind.confirmText.text = "Are you sure you want to logout?"
+            bind.confirmText.text = getString(R.string.sure_logout)
             bind.okBtn.setOnClickListener {
                 viewModel.setIsLogin(requireContext(), false)
                 checkIfUserLoginAndInitInfo()
@@ -121,9 +128,11 @@ class SettingFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun listenToCurrencyBtn(){
         binding.currencyCardView.setOnClickListener {
 
+            val currency = viewModel.getCurrencyFromSharedPref(requireContext())
             val inflater = requireActivity().layoutInflater
             val dialog = Dialog(requireActivity())
             dialog.requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS)
@@ -132,16 +141,18 @@ class SettingFragment : Fragment() {
             dialog.setContentView(bind.root)
             dialog.setTitle("Change currency")
 
+            bind.currentCurrencyText.text = "The currency now is $currency"
+
             bind.dollerBtn.setOnClickListener {
-                if(viewModel.getCurrencyFromSharedPref(requireContext()) == "$"){
+                if(currency == "$"){
                     confirmDialog("The currency already $ !!          ")
                 }
                 else{
-                    Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                    Log.i("CURRENCY",currency)
                     confirmDialog("Are you sure you want to change currency to $ ?").observe(viewLifecycleOwner, {
                         if(it == true){
                             viewModel.setCurrencyToSharedPref(requireContext(), "$")
-                            Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                            Log.i("CURRENCY", currency)
                         }
                     })
                 }

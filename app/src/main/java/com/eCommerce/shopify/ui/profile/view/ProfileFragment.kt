@@ -1,6 +1,7 @@
 package com.eCommerce.shopify.ui.profile.view
 
 import android.annotation.SuppressLint
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,7 @@ import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.main.view.MainFragmentDirections
+import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.profile.repo.ProfileRepo
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModelFactory
@@ -33,6 +35,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
     private lateinit var viewModel: ProfileViewModel
     lateinit var ordersAdapter: OrdersAdapter
     lateinit var wishlistAdapter: WishlistAdapter
+    lateinit var currency: String
 
     private val mNavController by lazy {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
@@ -55,10 +58,17 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         viewModel = ViewModelProvider(this, profileFactory)
             .get(ProfileViewModel::class.java)
 
-        checkIfUserLogin()
-        initWishlistRecyclerView()
-        initOrdersRecyclerView()
-        listenToAllBtn()
+        if (checkIfUserLogin()){
+            currency = viewModel.getCurrencyFromSharedPref(requireContext())
+            initWishlistRecyclerView()
+            initOrdersRecyclerView()
+            listenToAllBtn()
+        }
+        listenToLoginAndRegisterBtn()
+    }
+    private fun listenToLoginAndRegisterBtn(){
+        listenToLoginBtn()
+        listenToRegisterBtn()
     }
 
     private fun getUserOrders() {
@@ -104,12 +114,10 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
     private fun listenToAllBtn(){
         listenToMoreOrdersBtn()
         listenToMoreWishlistBtn()
-        listenToLoginBtn()
-        listenToRegisterBtn()
     }
 
     private fun initOrdersRecyclerView(){
-        ordersAdapter = OrdersAdapter(this, this)
+        ordersAdapter = OrdersAdapter(this, this, currency)
         binding?.pOrdersRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation =  LinearLayoutManager.VERTICAL
         }
@@ -117,7 +125,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         binding?.pOrdersRecyclerView?.adapter = ordersAdapter
     }
     private fun initWishlistRecyclerView(){
-        wishlistAdapter = WishlistAdapter(this)
+        wishlistAdapter = WishlistAdapter(this, currency)
         binding?.pWishlistRecyclerView?.layoutManager = GridLayoutManager(this.requireContext(), 2)
 
         binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
@@ -159,8 +167,9 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         mNavController.navigate(action)
     }
     @SuppressLint("SetTextI18n")
-    private fun checkIfUserLogin() {
-        if(viewModel.getIsLogin(requireContext())){
+    private fun checkIfUserLogin(): Boolean {
+        var isLogin: Boolean = viewModel.getIsLogin(requireContext())
+        if(isLogin){
             binding.profileNologinRelativelayout.visibility = View.GONE
             binding.profileLoginConstraintlayout.visibility = View.VISIBLE
             binding.profilePage.setBackgroundResource(R.color.titan_white)
@@ -174,6 +183,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
             binding.profileLoginConstraintlayout.visibility = View.GONE
             binding.progressBar.visibility = View.GONE
         }
+        return isLogin
     }
     private fun listenToLoginBtn(){
         binding.loginBtn.setOnClickListener {

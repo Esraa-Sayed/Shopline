@@ -6,8 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.ProfileOrdersRowBinding
 import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.utils.AppConstants
 
-class OrdersAdapter(val OnOrderListner: OnOrderListner, val onProductListner: OnProductListner): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
+class OrdersAdapter(
+    val OnOrderListner: OnOrderListner,
+    val onProductListner: OnProductListner,
+    val currency: String
+): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
 
     private var orders: List<Order> =listOf()
 
@@ -17,7 +22,14 @@ class OrdersAdapter(val OnOrderListner: OnOrderListner, val onProductListner: On
     }
 
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
-        holder.bind(orders[position].created_at!!.split("T")[0], orders[position].total_price!!)
+        var priceMultiplier: Double = 1.0
+        if(currency != AppConstants.EGP){
+            priceMultiplier = priceMultiplier/10
+        }
+        val priceDouble = (orders[position].total_price!!).toDouble() * priceMultiplier
+        val price = String.format("%.2f", priceDouble) + " " + currency
+        holder.bind(orders[position].created_at!!.split("T")[0],
+            price)
         //holder.bind("25/01/2021", "145.32")
         holder._bindView.pOrdersRowCardview.setOnClickListener{
             OnOrderListner.onOrderClicked(orders[position])

@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.UserData
-import com.eCommerce.shopify.ui.setting.repo.AddAddressRepoInterface
-import com.eCommerce.shopify.ui.setting.repo.SettingRepo
 import com.eCommerce.shopify.ui.setting.repo.SettingRepoInterface
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers

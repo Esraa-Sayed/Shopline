@@ -54,13 +54,21 @@
             app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_ordersFragment"
-            app:destination="@id/ordersFragment" />
+            app:destination="@id/ordersFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_favoriteFragment2"
             app:destination="@id/favoriteFragment" />
         <action
             android:id="@+id/action_mainFragment_to_registerFragment2"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <argument
             android:name="incomingCustomer"
             app:argType="com.eCommerce.shopify.model.Customer" />
@@ -76,19 +84,35 @@
             app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_addressesFragment"
-            app:destination="@id/addressesFragment" />
+            app:destination="@id/addressesFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_ordersDetailsFragment"
             app:destination="@id/ordersDetailsFragment" />
         <action
             android:id="@+id/action_mainFragment_to_productDetailsFragment"
-            app:destination="@id/productDetailsFragment" />
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_ordersDetailsFragment2"
-            app:destination="@id/ordersDetailsFragment" />
+            app:destination="@id/ordersDetailsFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_mainFragment_to_ordersFragment2"
-            app:destination="@id/ordersFragment" />
+            app:destination="@id/ordersFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -115,7 +139,25 @@
         tools:layout="@layout/shopping_cart_fragment" >
         <action
             android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment"/>
+            app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/brandProductsFragment"
