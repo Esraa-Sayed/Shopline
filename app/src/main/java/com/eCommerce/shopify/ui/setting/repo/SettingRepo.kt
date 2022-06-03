@@ -12,43 +12,36 @@ import java.util.*
 class SettingRepo(val remoteSource: RemoteSource): SettingRepoInterface{
 
     override fun getIsLogin(context: Context): Boolean{
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return sharedPreferences.getBooleanValue(AppConstants.IS_LOGIN, false)
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getBooleanValue(AppConstants.IS_LOGIN, false)
     }
 
     override fun setIsLogin(context: Context, isLogin: Boolean) {
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        sharedPreferences.setValue(AppConstants.IS_LOGIN, false)
+        AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).setValue(AppConstants.IS_LOGIN, false)
     }
 
     override fun getUserName(context: Context): String {
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return sharedPreferences.getStringValue(AppConstants.USER_NAME, "NoName")
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.USER_NAME, "NoName")
     }
 
     override fun getUserEmail(context: Context): String {
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return sharedPreferences.getStringValue(AppConstants.USER_EMAIL, "NoEmail")
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.USER_EMAIL, "NoEmail")
     }
     fun getUserId(context: Context): Long {
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return sharedPreferences.getLongValue(AppConstants.USER_ID, 0)
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getLongValue(AppConstants.USER_ID, 0)
     }
     override suspend fun getUserDataWithEmail(email:String): Response<UserData> {
         return remoteSource.getUserWithEmail(email)
     }
 
     override fun setCurrencyToSharedPref(context: Context, value: String){
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        sharedPreferences.setValue(AppConstants.CURRENCY, value)
+        AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).setValue(AppConstants.CURRENCY, value)
     }
     override suspend fun updateCurrency(context: Context, currency: String){
         setCurrencyToSharedPref(context, currency)
     }
 
-    override fun getCurrencyFromSharedPref(context: Context): String{
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return sharedPreferences.getStringValue(AppConstants.CURRENCY, "NoCurrency")
+    override fun getCurrencyFromSharedPref(context: Context): String {
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY, AppConstants.EGP)
     }
 
     override suspend fun updateCustomerToApi(

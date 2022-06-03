@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.shopping_cart.view.ShoppingCartFragment"
-    android:background="@color/titan_white">
+    android:background="@color/titan_white"
+    android:id="@+id/shopping_cart_page">
 
     <include
         android:id="@+id/app_bar"
@@ -15,57 +16,143 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sc_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/sc_total"
+    <RelativeLayout
+        android:id="@+id/sc_login"
         android:layout_below="@+id/app_bar"
-        android:layout_alignParentStart="true"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="10dp"
-        android:paddingBottom="20dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/sc_total_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/cairo_regular"
-        android:text="$10,458"
-        android:textColor="@color/dark_gray"
-        android:textSize="18sp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sc_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sc_total"
 
-    <TextView
-        android:id="@+id/sc_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/sc_total_price"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="@font/cairo_semi_bold"
-        android:text="@string/_total"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
+            android:layout_alignParentStart="true"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="10dp"
+            android:paddingBottom="20dp" />
 
-    <Button
-        android:id="@+id/checkout_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/rounded_corners"
-        android:drawableEnd="@drawable/ic_group_right_arrow"
-        android:paddingHorizontal="20dp"
-        android:text="@string/Checkout"
-        android:textAllCaps="false"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/sc_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/cairo_regular"
+            android:text="$10,458"
+            android:textColor="@color/dark_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sc_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/sc_total_price"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/cairo_semi_bold"
+            android:text="@string/_total"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/checkout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/rounded_corners"
+            android:drawableEnd="@drawable/ic_group_right_arrow"
+            android:paddingHorizontal="20dp"
+            android:text="@string/Checkout"
+            android:textAllCaps="false"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/app_bar"
+        android:id="@+id/sc_no_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/no_login_image"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/ic_img_auth_1" />
+
+        <TextView
+            android:id="@+id/login_required_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/no_login_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/cairo_bold"
+            android:text="@string/login_required"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/login_required_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/cairo_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/login_register_msg"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/text1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rounded_rectangle"
+            android:fontFamily="@font/cairo_semi_bold"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/text1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rounded_rectangle"
+            android:fontFamily="@font/cairo_semi_bold"
+            android:text="@string/register2"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

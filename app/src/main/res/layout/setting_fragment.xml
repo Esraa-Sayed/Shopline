@@ -28,31 +28,29 @@
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent">
 
+                <Button
+                    android:id="@+id/logout_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/constraint"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/rounded_corners"
+                    android:fontFamily="@font/cairo_bold"
+                    android:text="@string/logout"
+                    app:backgroundTint="@color/main_color" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent">
-
-                    <Button
-                        android:id="@+id/logout_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:layout_marginVertical="30dp"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="30dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/rounded_corners"
-                        android:fontFamily="@font/cairo_bold"
-                        android:text="@string/logout"
-                        app:backgroundTint="@color/main_color"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/hello_card"
@@ -109,220 +107,215 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/materialCardView"
+                        android:id="@+id/contactus_card_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="70dp"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginVertical="30dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@android:color/transparent"
-                        android:backgroundTint="@color/titan_white"
-                        android:paddingBottom="10dp"
-                        app:cardCornerRadius="30dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/white"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/currency_card_view">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginVertical="10dp">
+
+                            <ImageView
+                                android:id="@+id/contactus_image"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_contact_us" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_toEndOf="@+id/contactus_image"
+                                android:fontFamily="@font/cairo_semi_bold"
+                                android:text="@string/contact_us"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/address_card_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/white"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/hello_card">
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginVertical="10dp"
-                            android:background="@android:color/transparent">
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginVertical="10dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/address_card_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="70dp"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@color/white"
-                                app:cardCornerRadius="10dp"
-                                app:cardElevation="4dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                            <ImageView
+                                android:id="@+id/address_image"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentStart="false"
+                                android:layout_alignParentBottom="false"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_address" />
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="20dp"
-                                    android:layout_marginVertical="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_toEndOf="@+id/address_image"
+                                android:fontFamily="@font/cairo_semi_bold"
+                                android:text="@string/addressTitle"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                                    <ImageView
-                                        android:id="@+id/address_image"
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:layout_alignParentStart="false"
-                                        android:layout_alignParentBottom="false"
-                                        android:layout_centerVertical="true"
-                                        android:src="@drawable/ic_address" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/payment_card_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="65dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/white"
+                        android:visibility="gone"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:layout_toEndOf="@+id/address_image"
-                                        android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="@string/addressTitle"
-                                        android:textSize="18sp" />
-                                </RelativeLayout>
-                            </com.google.android.material.card.MaterialCardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginVertical="10dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/currency_card_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="70dp"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_marginVertical="10dp"
-                                android:background="@color/white"
-                                app:cardCornerRadius="10dp"
-                                app:cardElevation="4dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/address_card_view">
+                            <ImageView
+                                android:id="@+id/payment_image"
+                                android:layout_width="23dp"
+                                android:layout_height="23dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_visa" />
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="20dp"
-                                    android:layout_marginVertical="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_toEndOf="@+id/payment_image"
+                                android:fontFamily="@font/cairo_semi_bold"
+                                android:text="@string/payment_Method"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                                    <ImageView
-                                        android:id="@+id/currency_image"
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:layout_centerVertical="true"
-                                        android:src="@drawable/ic_currency" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/aboutus_card_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@color/white"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/contactus_card_view"
+                        app:layout_constraintVertical_bias="1.0">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:layout_toEndOf="@+id/currency_image"
-                                        android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="@string/currency"
-                                        android:textSize="18sp" />
-                                </RelativeLayout>
-                            </com.google.android.material.card.MaterialCardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginVertical="10dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/payment_card_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="65dp"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_marginVertical="10dp"
-                                android:background="@color/white"
-                                android:visibility="gone"
-                                app:cardCornerRadius="10dp"
-                                app:cardElevation="4dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/currency_card_view">
+                            <ImageView
+                                android:id="@+id/aboutus_image"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_about" />
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="20dp"
-                                    android:layout_marginVertical="10dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_toEndOf="@+id/aboutus_image"
+                                android:fontFamily="@font/cairo_semi_bold"
+                                android:text="@string/about_us"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                                    <ImageView
-                                        android:id="@+id/payment_image"
-                                        android:layout_width="23dp"
-                                        android:layout_height="23dp"
-                                        android:layout_centerVertical="true"
-                                        android:src="@drawable/ic_visa" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/currency_card_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginVertical="10dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/white"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/address_card_view">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:layout_toEndOf="@+id/payment_image"
-                                        android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="@string/payment_Method"
-                                        android:textSize="18sp" />
-                                </RelativeLayout>
-                            </com.google.android.material.card.MaterialCardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginVertical="10dp">
 
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/contactus_card_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="70dp"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_marginVertical="10dp"
-                                android:background="@color/white"
-                                app:cardCornerRadius="10dp"
-                                app:cardElevation="4dp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/payment_card_view">
+                            <ImageView
+                                android:id="@+id/currency_image"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_currency" />
 
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="20dp"
-                                    android:layout_marginVertical="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/contactus_image"
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:layout_centerVertical="true"
-                                        android:src="@drawable/ic_contact_us" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:layout_toEndOf="@+id/contactus_image"
-                                        android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="@string/contact_us"
-                                        android:textSize="18sp" />
-                                </RelativeLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <com.google.android.material.card.MaterialCardView
-                                android:id="@+id/aboutus_card_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="70dp"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_marginVertical="10dp"
-                                android:layout_marginBottom="10dp"
-                                android:background="@color/white"
-                                app:cardCornerRadius="10dp"
-                                app:cardElevation="4dp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/contactus_card_view">
-
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="20dp"
-                                    android:layout_marginVertical="10dp">
-
-                                    <ImageView
-                                        android:id="@+id/aboutus_image"
-                                        android:layout_width="30dp"
-                                        android:layout_height="30dp"
-                                        android:layout_centerVertical="true"
-                                        android:src="@drawable/ic_about" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:layout_toEndOf="@+id/aboutus_image"
-                                        android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="@string/about_us"
-                                        android:textSize="18sp" />
-                                </RelativeLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginHorizontal="20dp"
+                                android:layout_toEndOf="@+id/currency_image"
+                                android:fontFamily="@font/cairo_semi_bold"
+                                android:text="@string/currency"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -334,7 +327,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:visibility="gone">
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/no_login_image"
@@ -342,7 +339,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="50dp"
                     android:src="@drawable/ic_img_auth_1" />
 
                 <TextView
@@ -351,33 +348,34 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/no_login_image"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="50dp"
-                    android:fontFamily="@font/cairo_semi_bold"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/cairo_bold"
                     android:text="@string/login_required"
-                    android:textSize="23sp" />
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/text"
+                    android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/login_required_text"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/cairo_semi_bold"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/cairo_regular"
                     android:gravity="center_horizontal"
                     android:text="@string/login_register_msg"
-                    android:textSize="14sp" />
-
+                    android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/login_btn"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/text"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/text1"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/rounded_rectangle"
                     android:fontFamily="@font/cairo_semi_bold"
@@ -388,12 +386,14 @@
 
                 <Button
                     android:id="@+id/register_btn"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/text"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/text1"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/rounded_rectangle"
                     android:fontFamily="@font/cairo_semi_bold"
