@@ -105,5 +105,8 @@
     <string name="quantity">Quantity:</string>
     <string name="login_error">You need to login first!</string>
     <string name="register2">Register</string>
+    <string name="sure_logout">Are you sure you want to logout?</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="address2">Address</string>
 
 </resources>

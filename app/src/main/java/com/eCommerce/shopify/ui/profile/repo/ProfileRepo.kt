@@ -23,18 +23,15 @@ class ProfileRepo(private val remoteSource: RemoteSource, private val localSourc
     }
 
     override fun getUserIdFromSharedPref(context:Context,key: String, defaultValue: Long): Long {
-        val fileSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return fileSharedPref.getLongValue(AppConstants.USER_ID, defaultValue)
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getLongValue(AppConstants.USER_ID, defaultValue)
     }
 
     override fun getIsLogin(context: Context): Boolean{
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return sharedPreferences.getBooleanValue(AppConstants.IS_LOGIN, false)
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getBooleanValue(AppConstants.IS_LOGIN, false)
     }
 
     override fun setIsLogin(context: Context, isLogin: Boolean) {
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        sharedPreferences.setValue(AppConstants.IS_LOGIN, false)
+        AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).setValue(AppConstants.IS_LOGIN, false)
     }
     override fun getAllFavorites(): LiveData<List<Product>> {
         return localSource.getAllFavorites()
@@ -48,8 +45,9 @@ class ProfileRepo(private val remoteSource: RemoteSource, private val localSourc
         localSource.deleteFromFavorite(product)
     }
     override fun getUserName(context: Context): String {
-        val sharedPreferences: AppSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
-        return sharedPreferences.getStringValue(AppConstants.USER_NAME, "NoName")
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.USER_NAME, "NoName")
     }
-
+    override fun getCurrencyFromSharedPref(context: Context): String {
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY, AppConstants.EGP)
+    }
 }

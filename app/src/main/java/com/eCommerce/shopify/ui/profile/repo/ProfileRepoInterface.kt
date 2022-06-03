@@ -15,4 +15,5 @@ interface ProfileRepoInterface {
     fun insertToFavorite(product: Product)
     fun deleteFromFavorite(product: Product)
     fun getUserName(context: Context): String
+    fun getCurrencyFromSharedPref(context: Context): String
 }
