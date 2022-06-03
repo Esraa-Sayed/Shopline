@@ -45,6 +45,9 @@ class AddressesFragment : Fragment() {
     }
 
     private fun init() {
+        binding.appBar.backArrow.setOnClickListener {
+            findNavController().popBackStack()
+        }
         getString(R.string.addressTitle).also { binding.appBar.toolbar.title = it }
         addressesViewModelFactory = AddressesViewModelFactory(
             AddressesRepo.getInstance(

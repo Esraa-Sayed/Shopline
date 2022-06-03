@@ -24,4 +24,9 @@ private var remoteSource: RemoteSource
         val fileSharedPref = AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File)
         return fileSharedPref.getLongValue(AppConstants.USER_ID, defaultValue)
     }
+    override fun getCurrency(context: Context): String {
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY,
+            AppConstants.EGP
+        )
+    }
 }

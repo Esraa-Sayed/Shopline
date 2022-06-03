@@ -38,4 +38,7 @@ class OrdersViewModel(var _repo: OrdersRepoInterface) : ViewModel() {
             }
         }
     }
+    fun getCurrency(context: Context): String{
+       return  _repo.getCurrency(context)
+    }
 }
