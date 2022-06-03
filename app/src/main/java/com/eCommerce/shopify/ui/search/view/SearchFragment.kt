@@ -50,25 +50,25 @@ class SearchFragment : Fragment(), OnBrandClickListener {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        viewModel = ViewModelProvider(this, SearchViewModelFactory(allBrands = brandList, allProduct = productList)).get(SearchViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listenToBackBtn()
-        initBrandRecyclerView()
-        initProductRecyclerView()
-        listenToSearchText()
-        observeOnSearchingDataToCallViewModelSearch()
+        "Search".also { binding.appBar.toolbar.title = it }
+
+        //viewModel = ViewModelProvider(this, SearchViewModelFactory(allBrands = brandList, allProduct = productList)).get(SearchViewModel::class.java)
+//        binding.appBar.backArrow.setOnClickListener{
+//            navController.popBackStack()
+//        }
+        //listenToBackBtn()
+//        initBrandRecyclerView()
+//        initProductRecyclerView()
+//        listenToSearchText()
+//        observeOnSearchingDataToCallViewModelSearch()
     }
 
     private fun listenToSearchText(){
-        binding.txtInputEditTextSearch.addTextChangedListener{
-            searchingName.value = binding.txtInputEditTextSearch.text.toString()
+        binding.appBar.txtInputEditTextSearch.addTextChangedListener{
+            searchingName.value = binding.appBar.txtInputEditTextSearch.text.toString()
         }
     }
     private fun observeOnSearchingDataToCallViewModelSearch(){
@@ -104,9 +104,9 @@ class SearchFragment : Fragment(), OnBrandClickListener {
     }
 
     private fun listenToBackBtn(){
-        binding.backBtn.setOnClickListener{
-           navController.navigate(R.id.navigation_home)
-        }
+//        binding.appBar.backBtn.setOnClickListener{
+//           navController.navigate(R.id.navigation_home)
+//        }
     }
 
     override fun onBrandClick(smartCollection: SmartCollection) {

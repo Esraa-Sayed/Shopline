@@ -1,47 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.setting.view.SettingFragment"
-    android:background="@drawable/rounded_corners_top_white">
+    android:background="@color/white"
+    tools:context=".ui.setting.view.SettingFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/rounded_corners_top_white">
-        <FrameLayout
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_corners_top_white">
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
 
             <RelativeLayout
                 android:id="@+id/login_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rounded_corners_top_white">
+                android:background="@android:color/transparent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraint"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rounded_corners_top_white">
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent">
+
+                    <Button
+                        android:id="@+id/logout_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="30dp"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/rounded_corners"
+                        android:fontFamily="@font/cairo_bold"
+                        android:text="@string/logout"
+                        app:backgroundTint="@color/main_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/hello_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@color/white"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
                             android:paddingVertical="10dp">
 
                             <TextView
@@ -78,13 +109,19 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/materialCardView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginVertical="30dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@color/titan_white"
                         android:paddingBottom="10dp"
-                        app:cardBackgroundColor="@color/main_color_transparent"
                         app:cardCornerRadius="30dp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/hello_card">
 
@@ -97,9 +134,11 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/address_card_view"
                                 android:layout_width="match_parent"
-                                android:layout_height="55dp"
+                                android:layout_height="70dp"
                                 android:layout_marginHorizontal="10dp"
                                 android:layout_marginVertical="10dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/white"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="4dp"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -109,15 +148,14 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginHorizontal="20dp"
-                                    android:layout_marginVertical="10dp"
-                                    android:background="@android:color/transparent">
+                                    android:layout_marginVertical="10dp">
 
                                     <ImageView
                                         android:id="@+id/address_image"
-                                        android:layout_width="23dp"
-                                        android:layout_height="23dp"
-                                        android:layout_alignParentStart="true"
-                                        android:layout_alignParentBottom="true"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:layout_alignParentStart="false"
+                                        android:layout_alignParentBottom="false"
                                         android:layout_centerVertical="true"
                                         android:src="@drawable/ic_address" />
 
@@ -128,7 +166,7 @@
                                         android:layout_marginHorizontal="20dp"
                                         android:layout_toEndOf="@+id/address_image"
                                         android:fontFamily="@font/cairo_semi_bold"
-                                        android:text="@string/address"
+                                        android:text="@string/addressTitle"
                                         android:textSize="18sp" />
                                 </RelativeLayout>
                             </com.google.android.material.card.MaterialCardView>
@@ -136,9 +174,10 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/currency_card_view"
                                 android:layout_width="match_parent"
-                                android:layout_height="55dp"
+                                android:layout_height="70dp"
                                 android:layout_marginHorizontal="10dp"
                                 android:layout_marginVertical="10dp"
+                                android:background="@color/white"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="4dp"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -152,8 +191,8 @@
 
                                     <ImageView
                                         android:id="@+id/currency_image"
-                                        android:layout_width="23dp"
-                                        android:layout_height="23dp"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
                                         android:layout_centerVertical="true"
                                         android:src="@drawable/ic_currency" />
 
@@ -172,12 +211,13 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/payment_card_view"
                                 android:layout_width="match_parent"
-                                android:layout_height="55dp"
+                                android:layout_height="65dp"
                                 android:layout_marginHorizontal="10dp"
                                 android:layout_marginVertical="10dp"
+                                android:background="@color/white"
+                                android:visibility="gone"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="4dp"
-                                android:visibility="gone"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/currency_card_view">
 
@@ -209,9 +249,10 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/contactus_card_view"
                                 android:layout_width="match_parent"
-                                android:layout_height="55dp"
+                                android:layout_height="70dp"
                                 android:layout_marginHorizontal="10dp"
                                 android:layout_marginVertical="10dp"
+                                android:background="@color/white"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="4dp"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -225,8 +266,8 @@
 
                                     <ImageView
                                         android:id="@+id/contactus_image"
-                                        android:layout_width="23dp"
-                                        android:layout_height="23dp"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
                                         android:layout_centerVertical="true"
                                         android:src="@drawable/ic_contact_us" />
 
@@ -245,11 +286,14 @@
                             <com.google.android.material.card.MaterialCardView
                                 android:id="@+id/aboutus_card_view"
                                 android:layout_width="match_parent"
-                                android:layout_height="55dp"
+                                android:layout_height="70dp"
                                 android:layout_marginHorizontal="10dp"
                                 android:layout_marginVertical="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@color/white"
                                 app:cardCornerRadius="10dp"
                                 app:cardElevation="4dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/contactus_card_view">
 
@@ -261,8 +305,8 @@
 
                                     <ImageView
                                         android:id="@+id/aboutus_image"
-                                        android:layout_width="23dp"
-                                        android:layout_height="23dp"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
                                         android:layout_centerVertical="true"
                                         android:src="@drawable/ic_about" />
 
@@ -283,26 +327,13 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <Button
-                    android:id="@+id/logout_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/constraint"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginHorizontal="30dp"
-                    android:layout_marginVertical="30dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/rounded_corners"
-                    android:fontFamily="@font/cairo_bold"
-                    android:text="@string/logout"
-                    app:backgroundTint="@color/main_color" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:background="@drawable/rounded_corners_top_white"
                 android:id="@+id/setting_no_login"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/transparent"
                 android:visibility="gone">
 
                 <ImageView
@@ -321,7 +352,7 @@
                     android:layout_below="@+id/no_login_image"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="50dp"
-                    android:fontFamily="@font/cairo_black"
+                    android:fontFamily="@font/cairo_semi_bold"
                     android:text="@string/login_required"
                     android:textSize="23sp" />
 
@@ -340,37 +371,37 @@
 
                 <Button
                     android:id="@+id/login_btn"
-                    android:layout_width="160dp"
+                    android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/text"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="60dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/rounded_rectangle"
                     android:fontFamily="@font/cairo_semi_bold"
-                    android:text="Login"
+                    android:text="@string/login"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <Button
                     android:id="@+id/register_btn"
-                    android:layout_width="160dp"
+                    android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:layout_below="@+id/text"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="60dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/rounded_rectangle"
                     android:fontFamily="@font/cairo_semi_bold"
-                    android:text="Register"
+                    android:text="@string/register2"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
-        </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

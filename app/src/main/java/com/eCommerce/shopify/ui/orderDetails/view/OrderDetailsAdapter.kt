@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.OrdersDetailsRowBinding
 import com.eCommerce.shopify.model.orderDetails.LineItem
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
+import com.eCommerce.shopify.utils.AppConstants
 
-class OrderDetailsAdapter(val context: Context, var itemsInOrder: Array<LineItem>):
+class OrderDetailsAdapter(val context: Context,private var userCurrency: String, var itemsInOrder: Array<LineItem>):
     RecyclerView.Adapter<OrderDetailsAdapter.OrderDetailsViewHolder>() {
 
 
@@ -25,7 +26,14 @@ class OrderDetailsAdapter(val context: Context, var itemsInOrder: Array<LineItem
             orderName += word.replaceFirstChar { it.uppercase() } + " "
         }
         holder.binding.brandOrderName.text = orderName
-        holder.binding.brandOrderPrice.text = item.price
+
+        if (userCurrency == AppConstants.EGP)
+            ("${item.price} ${AppConstants.EGP}").also {  holder.binding.brandOrderPrice.text = it }
+        else
+        {
+            val price = item.price?.toDouble()?.div(20)
+            ("${price} $").also {  holder.binding.brandOrderPrice.text = it }
+        }
         holder.binding.brandOrderQuantity.text = item.fulfillable_quantity.toString()
     }
     fun updateData(itemsInOrder:Array<LineItem>){

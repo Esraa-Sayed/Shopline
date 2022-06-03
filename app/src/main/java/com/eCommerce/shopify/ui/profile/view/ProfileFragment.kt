@@ -163,12 +163,14 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         if(viewModel.getIsLogin(requireContext())){
             binding.profileNologinRelativelayout.visibility = View.GONE
             binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+            binding.profilePage.setBackgroundResource(R.color.titan_white)
             binding.pWelcomeNameText.text = "Welcome " + viewModel.getUserName(requireContext())
             getUserOrders()
             getUserWishlist()
         }
         else{
             binding.profileNologinRelativelayout.visibility = View.VISIBLE
+            binding.profilePage.setBackgroundResource(R.color.white)
             binding.profileLoginConstraintlayout.visibility = View.GONE
             binding.progressBar.visibility = View.GONE
         }

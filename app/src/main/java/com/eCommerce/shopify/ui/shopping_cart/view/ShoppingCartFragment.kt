@@ -42,13 +42,17 @@ class ShoppingCartFragment : Fragment(), Listner {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        "Shopping Cart".also { binding.appBar.toolbar.title = it }
+        binding.appBar.backArrow.setOnClickListener{
+            navController.popBackStack()
+        }
         initShoppingCartRecyclerView()
         addCheckoutListener()
     }
 
     private fun addCheckoutListener() {
         this.navController = findNavController()
-        binding.shCheckoutCard.setOnClickListener {
+        binding.checkoutBtn.setOnClickListener {
             navController.navigate(R.id.action_shoppingCartFragment_to_checkoutFragment)
         }
     }
