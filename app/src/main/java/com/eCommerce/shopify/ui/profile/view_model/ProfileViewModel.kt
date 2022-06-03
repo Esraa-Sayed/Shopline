@@ -70,4 +70,7 @@ class ProfileViewModel(val _repo: ProfileRepoInterface) : ViewModel() {
     fun getUserName(requireContext: Context): String{
         return _repo.getUserName(requireContext)
     }
+    fun getCurrencyFromSharedPref(context: Context): String{
+        return _repo.getCurrencyFromSharedPref(context)
+    }
 }
