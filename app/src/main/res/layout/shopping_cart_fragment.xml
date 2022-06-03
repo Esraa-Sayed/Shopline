@@ -24,7 +24,8 @@
         android:layout_below="@+id/app_bar"
         android:layout_alignParentStart="true"
         android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="20dp" />
+        android:layout_marginVertical="10dp"
+        android:paddingBottom="20dp" />
 
     <TextView
         android:id="@+id/sc_total_price"
