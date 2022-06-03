@@ -1,8 +1,10 @@
 package com.eCommerce.shopify.network
 
-import android.content.Context
 import com.eCommerce.shopify.model.*
+import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.Path
 
 interface RemoteSource {
@@ -22,6 +24,10 @@ interface RemoteSource {
     suspend fun registerCustomer(customer:CustomerResponse):Response<CustomerResponse>
 
     suspend fun getUserAddresses(id:Long):Response<AddressesUserModel>
-	
+
     suspend fun getUserOrders(id:Long):Response<OrderModel>
+
+    suspend fun updateUser(id: Long, customer: Customer): Response<Customer>
+	
+    suspend fun postOrder(order: OrderDetails):Response<OrderDetails>
 }

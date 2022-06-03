@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.UserData
 import com.eCommerce.shopify.ui.setting.repo.AddAddressRepoInterface
 import com.eCommerce.shopify.ui.setting.repo.SettingRepo
@@ -50,7 +51,31 @@ class SettingViewModel(var repo: SettingRepoInterface) : ViewModel() {
             }
         }
     }
-    fun updateCurrencyToUserData(currency: String){
+    fun updateCurrencyToUser(context: Context, currency: String){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            repo.updateCurrency(context, currency)
+            //getUserByEmail(context, repo.getUserEmail(context), currency)
+        }
+    }
 
+    private fun getUserByEmail(context: Context, userEmail: String,  currency: String) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            val customer = repo.getUserDataWithEmail(userEmail).body()!!.customers[0]
+            customer.currency = currency
+            updateCustomerToApi(context, customer)
+        }
+    }
+
+    private fun updateCustomerToApi(context: Context,customer: Customer) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            repo.updateCustomerToApi(context, customer)
+        }
+    }
+
+    fun getCurrencyFromSharedPref(context: Context): String{
+        return repo.getCurrencyFromSharedPref(context)
+    }
+    fun setCurrencyToSharedPref(context: Context, currency: String){
+        repo.setCurrencyToSharedPref(context, currency)
     }
 }

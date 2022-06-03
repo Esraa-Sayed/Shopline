@@ -70,6 +70,9 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
             adapter = ordersAdapter
         }
         getUserOrders()
+        bindingFragment.appBar.backArrow.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun getUserOrders() {
@@ -93,7 +96,10 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
         })
     }
     override fun onRowClickedListener(order: Order) {
-        val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment2(order.created_at, order.customer.first_name!!, order.line_items.toTypedArray())
+        val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment2(
+            order.created_at!!,
+            order.customer!!.first_name?:"Not found",
+            order.line_items!!.toTypedArray())
         findNavController().navigate(action)
     }
 }
