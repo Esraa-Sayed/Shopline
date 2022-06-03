@@ -14,6 +14,7 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
 import com.eCommerce.shopify.databinding.FragmentProductBinding
 import com.eCommerce.shopify.model.Product
+import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.product.repo.ProductRepo
 import com.eCommerce.shopify.ui.product.viewmodel.ProductViewModel
@@ -41,6 +42,8 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
     private val mNavController by lazy {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
     }
+
+    private lateinit var productDetailList: List<ProductDetail>
 
     private val args by navArgs<ProductFragmentArgs>()
 
@@ -122,6 +125,7 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
 
         viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
+                productDetailList = it
                 binding.appBarHome.txtViewCartCount.text = it.size.toString()
                 binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
             } else {
@@ -173,6 +177,7 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
         }
 
         binding.appBarHome.cardViewShoppingCart.setOnClickListener {
+            // send productDetailsList to Shopping Cart Fragment
             val action = ProductFragmentDirections.actionProductFragmentToShoppingCartFragment()
             mNavController.navigate(action)
         }

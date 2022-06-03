@@ -16,6 +16,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
 import com.eCommerce.shopify.databinding.FragmentMainBinding
+import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.ui.main.repo.MainRepo
 import com.eCommerce.shopify.ui.main.viewmodel.MainViewModel
 import com.eCommerce.shopify.ui.main.viewmodel.MainViewModelFactory
@@ -34,6 +35,8 @@ class MainFragment : Fragment() {
     private lateinit var myView: View
 
     private lateinit var navController: NavController
+
+    private lateinit var productDetailList: List<ProductDetail>
 
     //lateinit var navigationView: NavigationView
 
@@ -107,6 +110,7 @@ class MainFragment : Fragment() {
 
         viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
+                productDetailList = it
                 binding.appBarHome.txtViewCartCount.text = it.size.toString()
                 binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
             } else {
@@ -121,6 +125,7 @@ class MainFragment : Fragment() {
         }
 
         binding.appBarHome.cardViewShoppingCart.setOnClickListener {
+            // send productDetailsList to Shopping Cart Fragment
             navController.navigate(R.id.action_mainFragment_to_shoppingCartFragment)
         }
     }
