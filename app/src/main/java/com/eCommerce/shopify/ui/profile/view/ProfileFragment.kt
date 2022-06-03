@@ -10,14 +10,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import androidx.annotation.ColorRes
 import androidx.lifecycle.Observer
+
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eCommerce.shopify.R
-import com.eCommerce.shopify.database.LocalSource
+import com.eCommerce.shopify.database.favorite.LocalSource
 import com.eCommerce.shopify.databinding.ProfileFragmentBinding
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.model.Product
