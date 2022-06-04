@@ -62,21 +62,10 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         setupViewModel()
         setupBrandProductsRecycler()
 
-
-        brandProductsViewModel.getAllFavorites().observe(viewLifecycleOwner) {favItems ->
-            brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
-            brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
-                for(favItem in favItems) {
-                    for(item in it.products) {
-                        if(favItem.id == item.id){
-                            Log.i("TAG", "fav truuuuuuuuuuuuuuuuuuue")
-                            item.isFavorite = true
-                        }
-                    }
-                }
-                brandProductsAdapter.setBrandProductsList(it.products)
-                brandProductsAdapter.notifyDataSetChanged()
-            }
+        brandProductsViewModel.getBrandProductsCollectionListWithFav(args.brandTitle,viewLifecycleOwner)
+        brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
+            brandProductsAdapter.setBrandProductsList(it.products)
+            brandProductsAdapter.notifyDataSetChanged()
         }
 
     }
@@ -98,8 +87,7 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     fun setupViewModel(){
         brandProductsViewModelFactory = BrandProductsViewModelFactory(
-            BrandProductsRepository.getInstance(APIClient.getInstance(),LocalSource.getInstance(myView.context)),
-            FavoriteRepo.getInstance(LocalSource.getInstance(myView.context))
+            BrandProductsRepository.getInstance(APIClient.getInstance(),LocalSource.getInstance(myView.context))
         )
         brandProductsViewModel = ViewModelProvider(this,brandProductsViewModelFactory).get(BrandProductsViewModel::class.java)
     }

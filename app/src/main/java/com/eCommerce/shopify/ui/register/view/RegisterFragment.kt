@@ -32,6 +32,7 @@ class RegisterFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("TAG", "onCreate: ")
     }
 
     override fun onCreateView(
@@ -39,13 +40,14 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        Log.i("TAG", "onCreateView: ")
         binding = FragmentRegisterBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.i("TAG", "onViewCreated: ")
         this.myView = view
         this.navController = findNavController()
         setupViewModel()
@@ -62,18 +64,19 @@ class RegisterFragment : Fragment() {
     }
 
     fun setupViewModel(){
+        Log.i("TAG", "setupViewModel: ")
         registerViewModelFactory = RegisterViewModelFactory(RegisterRepo.getInstance(APIClient.getInstance()))
         registerViewModel = ViewModelProvider(this,registerViewModelFactory).get(RegisterViewModel::class.java)
     }
 
     fun registrationHandling(){
+        Log.i("TAG", "registrationHandling: ")
         var fName = binding.username.text
         var lName = binding.username.text
         var email = binding.emailInRegister.text
         var phone = binding.phoneInRegister.text
         var password = binding.passwordInRegister.text
         var confirm = binding.confirmPassInRegister.text
-
         var validUserData = false
         when{
             fName.isNullOrEmpty() -> binding.username.error = getString(R.string.required)
@@ -86,8 +89,8 @@ class RegisterFragment : Fragment() {
             confirm.toString() != password.toString() -> binding.confirmPassInRegister.error = getString(R.string.confirmPasswordWarning)
             else -> validUserData = true
         }
-
         if(validUserData) {
+
             val subIncommingCustomer = Customer()
             subIncommingCustomer.first_name = fName.toString()
             subIncommingCustomer.last_name = lName.toString()
@@ -95,17 +98,14 @@ class RegisterFragment : Fragment() {
             subIncommingCustomer.phone = phone.toString()
             subIncommingCustomer.verified_email = true
             subIncommingCustomer.tags = password.toString()
-
             incommingCustomer = CustomerResponse(subIncommingCustomer)
 
+            Log.i("TAG", "registrationHandling:105")
             registerViewModel.errorMsgResponse.observe(viewLifecycleOwner){
-                Log.i("TAG", "errrrrrrrrrrrror in post user!!!!!$it")
-                AppConstants.showAlert(
-                    myView.context,
-                    R.string.error,
-                    it,
-                    R.drawable.ic_error
-                )
+                Log.i("TAG", "errrrrrrrrrrrror in post user!!!!!")
+                //registerViewModel.errorMsgResponse.removeObservers(viewLifecycleOwner)
+                showErrorMessage(it)
+                registerViewModel.errorMsgResponse.removeObservers(viewLifecycleOwner)
             }
             registerViewModel.postNewCustomer(incommingCustomer as CustomerResponse)
             registerViewModel.customerRespoonse.observe(viewLifecycleOwner) {
@@ -116,15 +116,19 @@ class RegisterFragment : Fragment() {
                 }
                 else{
                     Log.i("TAG", "Response is null or empety!!!!!")
-                    AppConstants.showAlert(
-                        myView.context,
-                        R.string.error,
-                        "this email is already registered!",
-                        R.drawable.ic_error
-                    )
+                    showErrorMessage("there is some invalid data!")
                 }
             }
         }
     }
 
+    fun showErrorMessage(message: String){
+        Log.i("TAG", "showErrorMessage: ")
+        AppConstants.showAlert(
+            myView.context,
+            R.string.error,
+            message,
+            R.drawable.ic_error
+        )
+    }
 }

@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepositoryInterface
 import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepoInterface
 
-class BrandProductsViewModelFactory(private val repo:BrandProductsRepositoryInterface,private val favRepo:FavoriteRepoInterface):ViewModelProvider.Factory {
+class BrandProductsViewModelFactory(private val repo:BrandProductsRepositoryInterface):ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(BrandProductsViewModel::class.java)) {
-            BrandProductsViewModel(repo,favRepo) as T
+            BrandProductsViewModel(repo) as T
         } else {
             throw IllegalArgumentException("BrandProductsViewModel Class not found")
         }
