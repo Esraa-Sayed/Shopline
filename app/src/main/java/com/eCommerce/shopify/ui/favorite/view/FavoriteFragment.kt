@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.favorite.LocalSource
@@ -20,8 +22,12 @@ import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
 class FavoriteFragment : Fragment() ,OnProductClickListener{
 
     private lateinit var binding:FragmentFavoriteBinding
+    private lateinit var myView: View
+    private lateinit var navController: NavController
+
     private lateinit var favAdapter: FavoriteAdapter
     private lateinit var gridManager:GridLayoutManager
+
     private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var favoriteViewModelFactory: FavoriteViewModelFactory
 
@@ -32,21 +38,18 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFavoriteBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.appBarHome.cardViewFavorite.visibility = View.GONE
-        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
-        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
-        binding.appBarHome.toolbar.title = getString(R.string.wishlist)
 
-        favoriteViewModelFactory = FavoriteViewModelFactory(FavoriteRepo.getInstance(LocalSource.getInstance(requireContext())))
-        favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory).get(FavoriteViewModel::class.java)
-
+        this.myView = view
+        this.navController = findNavController()
+        setupToolbar()
+        setupViewModel()
         setupFavRecycler()
 
         favoriteViewModel.getAllFavorites().observe(viewLifecycleOwner){
@@ -56,16 +59,26 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
 
     }
 
+    private fun setupToolbar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
+        binding.appBarHome.cardViewFavorite.visibility = View.GONE
+        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
+        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+        binding.appBarHome.toolbar.title = getString(R.string.wishlist)
+    }
+
+    fun setupViewModel(){
+        favoriteViewModelFactory = FavoriteViewModelFactory(FavoriteRepo.getInstance(LocalSource.getInstance(myView.context)))
+        favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory).get(FavoriteViewModel::class.java)
+    }
+
     fun setupFavRecycler(){
-        favAdapter = FavoriteAdapter(requireContext(), emptyList(),this)
-        gridManager = GridLayoutManager(requireContext(),2)
+        favAdapter = FavoriteAdapter(myView.context, emptyList(),this)
+        gridManager = GridLayoutManager(myView.context,2)
         binding.favRecycler.adapter = favAdapter
         binding.favRecycler.layoutManager = gridManager
     }
 
-    private fun setupToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
-    }
 
     override fun onProductItemClick() {
 
@@ -75,4 +88,5 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
         product.isFavorite = false
         favoriteViewModel.deleteFromFavorite(product)
     }
+
 }

@@ -28,14 +28,14 @@ import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
 class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     private lateinit var binding:FragmentBrandProductsBinding
-    private lateinit var brandProductsAdapter: BrandProductsAdapter
-    private lateinit var gridLayoutManager: GridLayoutManager
-    private lateinit var brandProductsViewModel: BrandProductsViewModel
-    private lateinit var brandProductsViewModelFactory: BrandProductsViewModelFactory
+    private lateinit var myView: View
     private lateinit var navController: NavController
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
-    private lateinit var favoriteViewModelFactory: FavoriteViewModelFactory
+    private lateinit var brandProductsAdapter: BrandProductsAdapter
+    private lateinit var gridLayoutManager: GridLayoutManager
+
+    private lateinit var brandProductsViewModel: BrandProductsViewModel
+    private lateinit var brandProductsViewModelFactory: BrandProductsViewModelFactory
 
     private val args by navArgs<BrandProductsFragmentArgs>()
 
@@ -55,49 +55,24 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("HelloFromAhmed:", "Brand Id => ${args.brandTitle}")
-
+        this.myView = view
         this.navController = findNavController()
         setupToolbar()
         handleToolbarEvent()
-
-        binding.appBarHome.toolbar.title = getString(R.string.products)
-
-        brandProductsViewModelFactory = BrandProductsViewModelFactory(
-            BrandProductsRepository.getInstance(APIClient.getInstance())
-        )
-        brandProductsViewModel = ViewModelProvider(this,brandProductsViewModelFactory).get(BrandProductsViewModel::class.java)
-
-        favoriteViewModelFactory = FavoriteViewModelFactory(FavoriteRepo.getInstance(LocalSource.getInstance(requireContext())))
-        favoriteViewModel = ViewModelProvider(this,favoriteViewModelFactory).get(FavoriteViewModel::class.java)
-
+        setupViewModel()
         setupBrandProductsRecycler()
 
-        brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
-        brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner){
+        brandProductsViewModel.getBrandProductsCollectionListWithFav(args.brandTitle,viewLifecycleOwner)
+        brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
             brandProductsAdapter.setBrandProductsList(it.products)
             brandProductsAdapter.notifyDataSetChanged()
         }
 
-        /*val productsList = listOf(
-            Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("shoes",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
-            Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("dress",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg"),
-            Product("bag",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
-            Product("dress",35.00,2.5,"https://image.shutterstock.com/image-vector/black-dress-icon-vector-260nw-224236432.jpg")
-        )*/
-    }
-
-    fun setupBrandProductsRecycler(){
-        brandProductsAdapter = BrandProductsAdapter(requireContext(), emptyList(),this)
-        gridLayoutManager = GridLayoutManager(requireContext(),2)
-        binding.brandProductsRecycler.adapter = brandProductsAdapter
-        binding.brandProductsRecycler.layoutManager = gridLayoutManager
     }
 
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
+        binding.appBarHome.toolbar.title = getString(R.string.products)
     }
 
     private fun handleToolbarEvent() {
@@ -110,6 +85,20 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         }
     }
 
+    fun setupViewModel(){
+        brandProductsViewModelFactory = BrandProductsViewModelFactory(
+            BrandProductsRepository.getInstance(APIClient.getInstance(),LocalSource.getInstance(myView.context))
+        )
+        brandProductsViewModel = ViewModelProvider(this,brandProductsViewModelFactory).get(BrandProductsViewModel::class.java)
+    }
+
+    fun setupBrandProductsRecycler(){
+        brandProductsAdapter = BrandProductsAdapter(myView.context, emptyList(),this)
+        gridLayoutManager = GridLayoutManager(myView.context,2)
+        binding.brandProductsRecycler.adapter = brandProductsAdapter
+        binding.brandProductsRecycler.layoutManager = gridLayoutManager
+    }
+
     override fun onProductItemClick() {
 
     }
@@ -117,11 +106,11 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
     override fun onFavBtnClick(product:Product) {
         if(product.isFavorite){
             product.isFavorite=false
-            favoriteViewModel.deleteFromFavorite(product)
+            brandProductsViewModel.deleteFromFavorite(product)
         }
         else{
             product.isFavorite=true
-            favoriteViewModel.insertToFavorite(product)
+            brandProductsViewModel.insertToFavorite(product)
         }
     }
 }

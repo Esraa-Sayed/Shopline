@@ -23,7 +23,7 @@
         android:id="@+id/mainFragment"
         android:name="com.eCommerce.shopify.ui.main.view.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/app_bar">
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -72,6 +72,7 @@
         <argument
             android:name="incomingCustomer"
             app:argType="com.eCommerce.shopify.model.Customer" />
+            app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -195,7 +196,10 @@
         android:id="@+id/registerFragment"
         android:name="com.eCommerce.shopify.ui.register.view.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_registerFragment_to_mainFragment"
             app:destination="@id/mainFragment" />

@@ -109,4 +109,6 @@
     <string name="enable_location">Enable Location</string>
     <string name="address2">Address</string>
 
+    <string name="reviews">Reviews</string>
+    <string name="phone_validation">invalid phone number</string>
 </resources>

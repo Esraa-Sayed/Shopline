@@ -22,4 +22,7 @@ interface FavoriteDao {
 
     @Delete
     fun deleteFromFavorite(product: Product)
+
+    @Query("DELETE from favorites")
+    fun deleteAllFavorites()
 }

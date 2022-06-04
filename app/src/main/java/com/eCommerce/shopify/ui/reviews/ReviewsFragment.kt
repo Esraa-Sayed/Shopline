@@ -5,18 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentReviewsBinding
 
 class ReviewsFragment : Fragment() {
 
     private lateinit var binding:FragmentReviewsBinding
+    private lateinit var myView: View
+    private lateinit var navController: NavController
 
     private lateinit var reviewsAdapter: ReviewsAdapter
     private lateinit var linearManager: LinearLayoutManager
-
-    private lateinit var myView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +35,8 @@ class ReviewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         this.myView = view
+        this.navController = findNavController()
+        setupToolbar()
         initRecyclerView()
 
         val reviewsList = listOf(
@@ -41,6 +47,14 @@ class ReviewsFragment : Fragment() {
         )
 
         reviewsAdapter.setDataToAdapter(reviewsList)
+    }
+
+    private fun setupToolbar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
+        binding.appBarHome.cardViewFavorite.visibility = View.GONE
+        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
+        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+        binding.appBarHome.toolbar.title = getString(R.string.reviews)
     }
 
     private fun initRecyclerView() {

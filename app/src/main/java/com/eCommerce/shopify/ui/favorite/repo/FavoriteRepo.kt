@@ -25,5 +25,4 @@ class FavoriteRepo private constructor(private val localSource: LocalSourceInter
         localSource.deleteFromFavorite(product)
     }
 
-
 }
