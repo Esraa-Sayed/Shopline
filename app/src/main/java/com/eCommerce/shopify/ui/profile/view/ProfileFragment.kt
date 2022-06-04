@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +18,6 @@ import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.main.view.MainFragmentDirections
-import com.eCommerce.shopify.ui.MainFragmentDirections
 import com.eCommerce.shopify.ui.profile.repo.ProfileRepo
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModelFactory
@@ -101,9 +99,6 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
                 if(it.size > 4){
                     binding.pMoreWishlistBtn.visibility = View.VISIBLE
                 }
-            }
-            else{
-
             }
             binding.profileLoginConstraintlayout.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE

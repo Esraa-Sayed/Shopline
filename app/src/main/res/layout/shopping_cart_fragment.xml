@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/sc_total"
-
+            android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_marginHorizontal="5dp"
             android:layout_marginVertical="10dp"
@@ -62,7 +62,7 @@
         <Button
             android:id="@+id/checkout_btn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="20dp"
@@ -79,6 +79,7 @@
         android:layout_below="@+id/app_bar"
         android:id="@+id/sc_no_login"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"

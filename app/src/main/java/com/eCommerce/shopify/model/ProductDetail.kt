@@ -1,11 +1,14 @@
 package com.eCommerce.shopify.model
 
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "shopping_cart")
 data class ProductDetail(
     @SerializedName("admin_graphql_api_id")
@@ -39,5 +42,6 @@ data class ProductDetail(
     @ColumnInfo(name = "updated_at")
     val updatedAt: String,
     val variants: List<Variant>,
-    val vendor: String
-)
+    val vendor: String,
+    var amount: Int = 0
+): Parcelable

@@ -129,6 +129,7 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
                 binding.appBarHome.txtViewCartCount.text = it.size.toString()
                 binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
             } else {
+                productDetailList = listOf()
                 binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
             }
         }
@@ -178,7 +179,7 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
 
         binding.appBarHome.cardViewShoppingCart.setOnClickListener {
             // send productDetailsList to Shopping Cart Fragment
-            val action = ProductFragmentDirections.actionProductFragmentToShoppingCartFragment()
+            val action = ProductFragmentDirections.actionProductFragmentToShoppingCartFragment(productDetail = productDetailList.toTypedArray())
             mNavController.navigate(action)
         }
     }
