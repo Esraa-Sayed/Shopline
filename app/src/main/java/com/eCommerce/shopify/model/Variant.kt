@@ -1,8 +1,11 @@
 package com.eCommerce.shopify.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Variant(
     @SerializedName("admin_graphql_api_id")
     val adminGraphqlApiId: String,
@@ -56,4 +59,4 @@ data class Variant(
     val weight: Double,
     @SerializedName("weight_unit")
     val weightUnit: String
-)
+): Parcelable

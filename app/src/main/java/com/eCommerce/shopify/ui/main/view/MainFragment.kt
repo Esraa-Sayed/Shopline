@@ -1,6 +1,7 @@
 package com.eCommerce.shopify.ui.main.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.ui.main.repo.MainRepo
 import com.eCommerce.shopify.ui.main.viewmodel.MainViewModel
 import com.eCommerce.shopify.ui.main.viewmodel.MainViewModelFactory
+import com.eCommerce.shopify.ui.product.view.ProductFragmentDirections
 import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.NetworkConnectionLiveData
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -111,9 +113,11 @@ class MainFragment : Fragment() {
         viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 productDetailList = it
+                Log.i("Produact Detail", productDetailList.toString())
                 binding.appBarHome.txtViewCartCount.text = it.size.toString()
                 binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
             } else {
+                productDetailList = listOf()
                 binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
             }
         }
@@ -126,7 +130,9 @@ class MainFragment : Fragment() {
 
         binding.appBarHome.cardViewShoppingCart.setOnClickListener {
             // send productDetailsList to Shopping Cart Fragment
-            navController.navigate(R.id.action_mainFragment_to_shoppingCartFragment)
+            val action = MainFragmentDirections.actionMainFragmentToShoppingCartFragment(productDetail = productDetailList.toTypedArray())
+            navController.navigate(action)
+            //navController.navigate(R.id.action_mainFragment_to_shoppingCartFragment)
         }
     }
 

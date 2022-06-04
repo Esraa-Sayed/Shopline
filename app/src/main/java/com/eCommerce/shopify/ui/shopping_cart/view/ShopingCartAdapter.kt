@@ -1,17 +1,16 @@
 package com.eCommerce.shopify.ui.shopping_cart.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
-import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.ShoppingCartRowBinding
+import com.eCommerce.shopify.model.ProductDetail
+import com.eCommerce.shopify.utils.AppConstants
 
-class ShopingCartAdapter(var listner: Listner) : RecyclerView.Adapter<ShopingCartAdapter.ShoppingCartViewHolder>() {
+class ShopingCartAdapter(var listner: Listner, var productDetail: List<ProductDetail>?, val currency: String) : RecyclerView.Adapter<ShopingCartAdapter.ShoppingCartViewHolder>() {
 
-    //var shoppingCarts: MutableList<CartItem> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingCartViewHolder {
         val itemBinding = ShoppingCartRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -19,43 +18,57 @@ class ShopingCartAdapter(var listner: Listner) : RecyclerView.Adapter<ShopingCar
     }
 
     override fun onBindViewHolder(holder: ShoppingCartViewHolder, position: Int) {
-//        holder.bind(shoppingCarts[position].imageUrl, shoppingCarts[position].name, shoppingCarts[position].amount,
-//                shoppingCarts[position].price)
-        holder.bind("kkj", "My shooping card", 10,
-                145.5)
 
+        var priceMultiplier = 1.0
+        if(currency != AppConstants.EGP){
+            priceMultiplier /= 10
+        }
+        val priceDouble = ((productDetail?.get(position)?.variants?.get(0)?.price)?.toDouble() ?: 00.00) * priceMultiplier
+        val price = String.format("%.2f", priceDouble) + " " + currency
+
+        productDetail?.get(position)?.let {
+            productDetail?.get(position)?.let { it1 ->
+                    holder.bind(productDetail?.get(position)!!.image.src, it.title, it1.amount,
+                        price)
+            }
+        }
+        holder._bindView.scRowDeleteBtn.setOnClickListener{
+            productDetail?.get(position)?.let { it1 -> listner.checkToDelete(it1) }
+        }
+        holder._bindView.minusBtn.setOnClickListener {
+            if(productDetail?.get(position)?.amount!! > 0){
+                productDetail?.get(position)?.let { it.amount-- }
+                holder._bindView.amount.text = productDetail?.get(position)?.amount.toString()
+                productDetail?.get(position)?.let { it1 -> listner.update(it1) }
+            }
+        }
+        holder._bindView.plusBtn.setOnClickListener {
+            productDetail?.get(position)?.let { it.amount++ }
+            holder._bindView.amount.text = productDetail?.get(position)?.amount.toString()
+            productDetail?.get(position)?.let { it1 -> listner.update(it1) }
+        }
     }
-//    fun bindy(imageUrl: String, name: String, amount: Int, price: Double, holder: ShoppingCartViewHolder){
-//        if (imageUrl !== null) {
-//            Glide.with(holder.itemView.context)
-//                .load(imageUrl)
-//                .into(holder._bindView.scRowItemImage)
-//        } else {
-//            holder._bindView.scRowItemImage.setImageResource(R.drawable.ic_launcher_background)
-//        }
-//        holder._bindView.scRowItemName.text = name
-//        holder._bindView.scRowItemPrice.text = price.toString()
-//        holder._bindView.scRowItemCount.text = amount.toString()
-//    }
 
     override fun getItemCount(): Int {
         //return shoppingCarts.size
-        return 10
+        return productDetail!!.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(data: List<ProductDetail>) {
+        productDetail = data
+        notifyDataSetChanged()
     }
 
     class ShoppingCartViewHolder(val _bindView: ShoppingCartRowBinding)
         : RecyclerView.ViewHolder(_bindView.root) {
 
-        fun bind(imageUrl: String, name: String, amount: Int, price: Double){
-            if (imageUrl !== null) {
-                Glide.with(_bindView.root.context)
-                    .load(imageUrl)
-                    .into(_bindView.scRowItemImage)
-            } else {
-                _bindView.scRowItemImage.setImageResource(R.drawable.ic_launcher_background)
-            }
+        fun bind(imageUrl: String, name: String, amount: Int, price: String){
+            Glide.with(_bindView.root.context)
+                .load(imageUrl)
+                .into(_bindView.scRowItemImage)
             _bindView.scRowItemName.text = name
-            _bindView.scRowItemPrice.text = price.toString()
+            _bindView.scRowItemPrice.text = price
             _bindView.amount.text = amount.toString()
         }
         fun bindAmount(amount: Int){
