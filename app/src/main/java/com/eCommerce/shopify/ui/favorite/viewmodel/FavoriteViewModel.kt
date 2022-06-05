@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.favorite.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel (private val repo:FavoriteRepoInterface):ViewModel(){
+
+    fun getIsLogin(requireContext: Context): Boolean {
+        return repo.getIsLogin(context = requireContext)
+    }
 
     fun getAllFavorites():LiveData<List<Product>>{
         return repo.getAllFavorites()

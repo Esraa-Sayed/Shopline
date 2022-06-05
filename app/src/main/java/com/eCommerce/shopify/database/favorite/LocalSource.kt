@@ -31,6 +31,10 @@ class LocalSource(context: Context): LocalSourceInterface {
         return favoriteDao.getFavoriteProduct(id)
     }
 
+    override fun getFavoriteWithUserId(userId: Long): LiveData<List<Product>> {
+        return favoriteDao.getFavoriteWithUserId(userId)
+    }
+
     override fun insertToFavorite(product: Product) {
         return favoriteDao.insertToFavorite(product)
     }
@@ -38,4 +42,9 @@ class LocalSource(context: Context): LocalSourceInterface {
     override fun deleteFromFavorite(product: Product) {
         return favoriteDao.deleteFromFavorite(product)
     }
+
+    override fun deleteAllFavorites() {
+        favoriteDao.deleteAllFavorites()
+    }
+
 }

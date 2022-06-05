@@ -16,6 +16,7 @@ data class Product(
     val handle: String,
     @PrimaryKey
     val id: Long,
+    var userId:Long? = null,
     val image: ImageProduct?,
     val images: List<ImageProduct>,
     val options: List<Option>,

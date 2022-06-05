@@ -1,8 +1,11 @@
 package com.eCommerce.shopify.ui.favorite.repo
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.eCommerce.shopify.database.favorite.LocalSourceInterface
 import com.eCommerce.shopify.model.Product
+import com.eCommerce.shopify.utils.AppConstants
+import com.eCommerce.shopify.utils.AppSharedPref
 
 class FavoriteRepo private constructor(private val localSource: LocalSourceInterface):FavoriteRepoInterface {
 
@@ -11,6 +14,11 @@ class FavoriteRepo private constructor(private val localSource: LocalSourceInter
         fun getInstance(localSource: LocalSourceInterface): FavoriteRepoInterface {
             return instance?: FavoriteRepo(localSource)
         }
+    }
+
+    override fun getIsLogin(context: Context): Boolean{
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getBooleanValue(
+            AppConstants.IS_LOGIN, false)
     }
 
     override fun getAllFavorites(): LiveData<List<Product>> {

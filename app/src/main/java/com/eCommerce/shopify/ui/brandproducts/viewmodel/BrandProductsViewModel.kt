@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.brandproducts.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.eCommerce.shopify.model.BrandProductsResponse
@@ -16,7 +17,7 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
     var brandProductsCollectionResponse:LiveData<BrandProductsResponse> = _brandProductsCollectionResponse
 
     private var _brandProductsCollectionResponse2 = MutableLiveData<BrandProductsResponse>()
-    private var brandProductsCollectionResponse2:LiveData<BrandProductsResponse> = _brandProductsCollectionResponse2
+    var brandProductsCollectionResponse2:LiveData<BrandProductsResponse> = _brandProductsCollectionResponse2
 
     private var _errorMsgResponse = MutableLiveData<String>()
     val errorMsgResponse: LiveData<String> = _errorMsgResponse
@@ -42,14 +43,18 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
         }
     }
 
-    fun getAllFavorites():LiveData<List<Product>>{
+    /*fun getAllFavorites():LiveData<List<Product>>{
         return repo.getAllFavorites()
+    }*/
+
+    fun getFavoritesWithUserId(userId: Long): LiveData<List<Product>> {
+        return repo.getFavoritesWithUserId(userId)
     }
 
-    fun getBrandProductsCollectionListWithFav(vendor:String,owner:LifecycleOwner){
+    fun getBrandProductsCollectionListWithFav(vendor:String,userId:Long,owner:LifecycleOwner){
         getBrandProductsCollectionList(vendor)
         brandProductsCollectionResponse2.observe(owner){
-            getAllFavorites().observe(owner) { favItems ->
+            getFavoritesWithUserId(userId).observe(owner) { favItems ->
                 for(favItem in favItems) {
                     for(item in it.products) {
                         if(favItem.id == item.id){
@@ -61,6 +66,14 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
             }
             _brandProductsCollectionResponse.postValue(it)
         }
+    }
+
+    fun getIsLogin(requireContext: Context): Boolean {
+        return repo.getIsLogin(context = requireContext)
+    }
+
+    fun getUserId(requireContext: Context):Long{
+        return repo.getUserId(context = requireContext)
     }
 
     fun insertToFavorite(product: Product){

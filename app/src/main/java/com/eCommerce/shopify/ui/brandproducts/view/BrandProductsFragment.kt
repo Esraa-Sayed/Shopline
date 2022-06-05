@@ -1,11 +1,15 @@
 package com.eCommerce.shopify.ui.brandproducts.view
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.navigation.fragment.navArgs
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -14,18 +18,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.favorite.LocalSource
+import com.eCommerce.shopify.databinding.ConfirmDialogBinding
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
+import com.eCommerce.shopify.databinding.GoToLoginDialogBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.ui.OnProductClickListener
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepository
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFactory
-import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
-import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
-import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
+import com.eCommerce.shopify.ui.favorite.view.FavoriteFragmentDirections
+import com.eCommerce.shopify.utils.AppConstants
 
-class BrandProductsFragment : Fragment() ,OnProductClickListener{
+class BrandProductsFragment : Fragment() , OnProductClickListener {
 
     private lateinit var binding:FragmentBrandProductsBinding
     private lateinit var myView: View
@@ -47,7 +51,6 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentBrandProductsBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -62,12 +65,35 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         setupViewModel()
         setupBrandProductsRecycler()
 
-        brandProductsViewModel.getBrandProductsCollectionListWithFav(args.brandTitle,viewLifecycleOwner)
-        brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
-            brandProductsAdapter.setBrandProductsList(it.products)
-            brandProductsAdapter.notifyDataSetChanged()
+        val isLogedin = brandProductsViewModel.getIsLogin(myView.context)
+        if(isLogedin) {
+            val user_id = brandProductsViewModel.getUserId(myView.context)
+            brandProductsViewModel.getBrandProductsCollectionListWithFav(
+                args.brandTitle,
+                user_id,
+                viewLifecycleOwner
+            )
+            brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
+                brandProductsAdapter.setBrandProductsList(it.products)
+                brandProductsAdapter.notifyDataSetChanged()
+            }
+        }
+        else{
+            brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
+            brandProductsViewModel.brandProductsCollectionResponse2.observe(viewLifecycleOwner){
+                brandProductsAdapter.setBrandProductsList(it.products)
+                brandProductsAdapter.notifyDataSetChanged()
+            }
         }
 
+        brandProductsViewModel.errorMsgResponse.observe(viewLifecycleOwner){
+            AppConstants.showAlert(
+                myView.context,
+                R.string.error,
+                "sorry, there is a problem while showing the products!",
+                R.drawable.ic_error
+            )
+        }
     }
 
     private fun setupToolbar() {
@@ -99,18 +125,41 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         binding.brandProductsRecycler.layoutManager = gridLayoutManager
     }
 
-    override fun onProductItemClick() {
-
+    override fun onProductItemClick(productId: Long) {
+        val action = BrandProductsFragmentDirections.actionBrandProductsFragmentToProductDetailsFragment(productId)
+        navController.navigate(action)
     }
 
     override fun onFavBtnClick(product:Product) {
-        if(product.isFavorite){
-            product.isFavorite=false
-            brandProductsViewModel.deleteFromFavorite(product)
+        val isLogedin = brandProductsViewModel.getIsLogin(myView.context)
+        if(isLogedin) {
+            if (product.isFavorite) {
+                product.isFavorite = false
+                brandProductsViewModel.deleteFromFavorite(product)
+            } else {
+                val user_id = brandProductsViewModel.getUserId(myView.context)
+                product.userId = user_id
+                product.isFavorite = true
+                brandProductsViewModel.insertToFavorite(product)
+            }
         }
         else{
-            product.isFavorite=true
-            brandProductsViewModel.insertToFavorite(product)
+            val inflater = requireActivity().layoutInflater
+            val dialog = Dialog(requireActivity())
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
+            dialog.setContentView(bind.root)
+            dialog.setTitle(getString(R.string.warning))
+            bind.okBtn.setOnClickListener {
+                dialog.dismiss()
+            }
+            bind.goToLogin.setOnClickListener{
+                navController.navigate(R.id.action_brandProductsFragment_to_loginFragment)
+                dialog.dismiss()
+            }
+            dialog.setCanceledOnTouchOutside(true)
+            dialog.show()
         }
     }
 }

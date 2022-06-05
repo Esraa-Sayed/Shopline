@@ -137,7 +137,7 @@ class ProductDetailsFragment : Fragment() {
     private fun renderDataOnScreen(it: ProductDetails) {
         productDetail = it.product
         product = Product(it.product.adminGraphqlApiId, it.product.bodyHtml, it.product.createdAt,
-            it.product.handle, it.product.id, it.product.image, it.product.images,
+            it.product.handle, it.product.id,, it.product.image, it.product.images,
             it.product.options, it.product.productType, it.product.publishedAt,
             it.product.publishedScope, it.product.status, it.product.tags, it.product.title,
             it.product.updatedAt, it.product.variants, it.product.vendor, false, 0)

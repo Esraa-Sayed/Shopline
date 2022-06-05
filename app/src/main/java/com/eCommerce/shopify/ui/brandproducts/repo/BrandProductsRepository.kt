@@ -1,15 +1,13 @@
 package com.eCommerce.shopify.ui.brandproducts.repo
 
-import android.util.Log
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
+import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelStoreOwner
-import com.eCommerce.shopify.database.LocalSourceInterface
+import com.eCommerce.shopify.database.favorite.LocalSourceInterface
 import com.eCommerce.shopify.model.BrandProductsResponse
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.Products
 import com.eCommerce.shopify.network.RemoteSource
+import com.eCommerce.shopify.utils.AppConstants
+import com.eCommerce.shopify.utils.AppSharedPref
 import retrofit2.Response
 
 class BrandProductsRepository private constructor(
@@ -28,8 +26,20 @@ class BrandProductsRepository private constructor(
         return remoteSource.getCollectionWithId(vendor)
     }
 
+    override fun getIsLogin(context: Context): Boolean {
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getBooleanValue(AppConstants.IS_LOGIN, false)
+    }
+
+    override fun getUserId(context: Context): Long {
+        return AppSharedPref.getInstance(context,AppConstants.PREFRENCE_File).getLongValue(AppConstants.USER_ID,0)
+    }
+
     override fun getAllFavorites(): LiveData<List<Product>> {
         return localSource.getAllFavorites()
+    }
+
+    override fun getFavoritesWithUserId(userId: Long): LiveData<List<Product>> {
+        return localSource.getFavoriteWithUserId(userId)
     }
 
     override fun insertToFavorite(product: Product) {

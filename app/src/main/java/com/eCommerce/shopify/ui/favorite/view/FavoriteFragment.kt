@@ -14,12 +14,12 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.favorite.LocalSource
 import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.ui.OnProductClickListener
+import com.eCommerce.shopify.ui.brandproducts.view.OnProductClickListener
 import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
 
-class FavoriteFragment : Fragment() ,OnProductClickListener{
+class FavoriteFragment : Fragment() , OnProductClickListener {
 
     private lateinit var binding:FragmentFavoriteBinding
     private lateinit var myView: View
@@ -50,11 +50,23 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
         this.navController = findNavController()
         setupToolbar()
         setupViewModel()
-        setupFavRecycler()
+        val isLogedin = favoriteViewModel.getIsLogin(myView.context)
+        if(isLogedin) {
+            binding.notLoginConstraint.visibility = View.GONE
+            setupFavRecycler()
+            favoriteViewModel.getAllFavorites().observe(viewLifecycleOwner){
+                favAdapter.setFavProductList(it)
+                favAdapter.notifyDataSetChanged()
+            }
+        }
+        else{
+            binding.loginBtn.setOnClickListener {
+                navController.navigate(R.id.action_favoriteFragment_to_loginFragment)
+            }
 
-        favoriteViewModel.getAllFavorites().observe(viewLifecycleOwner){
-            favAdapter.setFavProductList(it)
-            favAdapter.notifyDataSetChanged()
+            binding.registerBtn.setOnClickListener {
+                navController.navigate(R.id.action_favoriteFragment_to_registerFragment)
+            }
         }
 
     }
@@ -79,9 +91,9 @@ class FavoriteFragment : Fragment() ,OnProductClickListener{
         binding.favRecycler.layoutManager = gridManager
     }
 
-
-    override fun onProductItemClick() {
-
+    override fun onProductItemClick(productId:Long) {
+        val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment(productId)
+        navController.navigate(action)
     }
 
     override fun onFavBtnClick(product: Product) {
