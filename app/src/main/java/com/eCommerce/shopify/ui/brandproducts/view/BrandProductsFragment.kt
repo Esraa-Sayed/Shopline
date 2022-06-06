@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.SeekBar
 import androidx.navigation.fragment.navArgs
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -43,6 +44,8 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
 
     private val args by navArgs<BrandProductsFragmentArgs>()
 
+    private var productsList:List<Product> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -74,6 +77,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
                 viewLifecycleOwner
             )
             brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
+                productsList = it.products
                 brandProductsAdapter.setBrandProductsList(it.products)
                 brandProductsAdapter.notifyDataSetChanged()
             }
@@ -81,6 +85,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
         else{
             brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
             brandProductsViewModel.brandProductsCollectionResponse2.observe(viewLifecycleOwner){
+                productsList = it.products
                 brandProductsAdapter.setBrandProductsList(it.products)
                 brandProductsAdapter.notifyDataSetChanged()
             }
@@ -94,6 +99,31 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
                 R.drawable.ic_error
             )
         }
+
+        binding.brandProductsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                binding.seekbarProgress.text = p1.toString()
+                if(!productsList.isEmpty()) {
+                    if(p1 == 0){
+                        brandProductsAdapter.setBrandProductsList(productsList)
+                        brandProductsAdapter.notifyDataSetChanged()
+                    }
+                    else {
+                        Log.i("TAG", "onProgressChanged: $p1")
+                        brandProductsAdapter.setBrandProductsList(productsList.filter {
+                            val price: Double = it.variants[0].price.toDouble()
+                            price.toInt() == p1
+                        })
+                        brandProductsAdapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {}
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {}
+
+        })
     }
 
     private fun setupToolbar() {

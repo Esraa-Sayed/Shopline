@@ -13,6 +13,7 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentRegisterBinding
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
+import com.eCommerce.shopify.model.EmailMarketingConsent
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.register.repo.RegisterRepo
 import com.eCommerce.shopify.ui.register.viewmodel.RegisterViewModel
@@ -28,7 +29,7 @@ class RegisterFragment : Fragment() {
     private lateinit var registerViewModel: RegisterViewModel
     private lateinit var registerViewModelFactory: RegisterViewModelFactory
 
-    private var incommingCustomer:CustomerResponse? = null
+    private var incommingCustomer: CustomerResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

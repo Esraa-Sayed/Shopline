@@ -15,8 +15,16 @@ class FavoriteViewModel (private val repo:FavoriteRepoInterface):ViewModel(){
         return repo.getIsLogin(context = requireContext)
     }
 
+    fun getUserId(requireContext: Context):Long{
+        return repo.getUserId(context = requireContext)
+    }
+
     fun getAllFavorites():LiveData<List<Product>>{
         return repo.getAllFavorites()
+    }
+
+    fun getFavoritesWithUserId(userId: Long): LiveData<List<Product>> {
+        return repo.getFavoritesWithUserId(userId)
     }
 
     fun insertToFavorite(product: Product){
