@@ -18,7 +18,7 @@ class SliderProductDetailsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.slide_item_container, parent, false)
+        val view = inflater.inflate(R.layout.slide_product_details_item_container, parent, false)
         return ViewHolder(view)
     }
 

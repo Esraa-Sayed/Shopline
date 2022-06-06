@@ -11,6 +11,8 @@ import com.eCommerce.shopify.network.RemoteSource
 import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.AppConstants.EGP
 import com.eCommerce.shopify.utils.AppConstants.IS_LOGIN
+import com.eCommerce.shopify.utils.AppConstants.PREFRENCE_File
+import com.eCommerce.shopify.utils.AppConstants.USER_ID
 import com.eCommerce.shopify.utils.AppSharedPref
 import retrofit2.Response
 
@@ -39,7 +41,7 @@ class ProductDetailsRepo private constructor(
             userWithEmail.body()?.customers?.get(0)?.currency.toString()
         }*/
 
-        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY, EGP)
+        return AppSharedPref.getInstance(context, PREFRENCE_File).getStringValue(AppConstants.CURRENCY, EGP)
     }
 
     override suspend fun getProductDetails(context: Context, id: Long): Response<ProductDetails> {
@@ -47,6 +49,10 @@ class ProductDetailsRepo private constructor(
 
         if (getCurrencyWithUserEmail(context) != EGP) {
             productDetails.body()?.product?.variants?.get(0)?.price = (productDetails.body()?.product?.variants?.get(0)?.price.toString().toDouble() / 18).toString()
+        }
+
+        if (isUserLogin(context)) {
+            productDetails.body()?.product?.userId =  AppSharedPref.getInstance(context, PREFRENCE_File).getStringValue(USER_ID, "").toLong()
         }
 
         return productDetails
@@ -77,6 +83,6 @@ class ProductDetailsRepo private constructor(
     }
 
     override fun isUserLogin(context: Context): Boolean {
-        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getBooleanValue(IS_LOGIN, false)
+        return AppSharedPref.getInstance(context, PREFRENCE_File).getBooleanValue(IS_LOGIN, false)
     }
 }

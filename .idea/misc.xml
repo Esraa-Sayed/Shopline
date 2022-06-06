@@ -141,7 +141,9 @@
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/radio_flat_selector.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/radio_flat_text_selector.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/round_corner_search.xml" value="0.2203125" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/rounded_corner_gray.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/rounded_corners.xml" value="0.2203125" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/rounded_corners_white.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/rounded_rectangle.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/selected_dot.xml" value="0.2203125" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/drawable/tab_selector.xml" value="0.2203125" />
@@ -173,6 +175,7 @@
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/shopping_cart_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/shopping_cart_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/slide_item_container.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/layout/slide_product_details_item_container.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/AhmedAli/AndroidStudioProjects/Shopify/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
