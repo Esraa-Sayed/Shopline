@@ -126,7 +126,7 @@ class ShoppingCartFragment : Fragment(), Listner {
         binding.checkoutBtn.setOnClickListener {
             navController.navigate(
                 ShoppingCartFragmentDirections.actionShoppingCartFragmentToCheckoutFragment(
-                    productsCheckout = shoppingCartFragmentArgs.productDetail, viewModel.totalPrice.value?.toFloat()!!
+                    shoppingCartFragmentArgs.productDetail, 200F
                 )
             )
         }

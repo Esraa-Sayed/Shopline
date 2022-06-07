@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.Customer
+import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
@@ -58,11 +59,23 @@ class CheckoutViewModel(var _repo: CheckoutRepoInterface) : ViewModel() {
             }
         }
     }
+    fun getCurrency(context: Context): String{
+        return  _repo.getCurrency(context)
+    }
+    fun getUserId(context: Context): Long{
+        return  _repo.getUserID(context)
+    }
     private fun getUserEmailAndId(context: Context):Triple<String,String,Long>{
         val shared = AppSharedPref.getInstance(context,AppConstants.PREFRENCE_File)
         val email = shared.getStringValue(AppConstants.USER_EMAIL,"not found")
         val name = shared.getStringValue(AppConstants.USER_NAME,"not found")
         val id = shared.getLongValue(AppConstants.USER_ID,0)
         return Triple(email,name,id)
+    }
+
+    fun deleteCheckOutList(productDetail: Array<ProductDetail>) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            _repo.deleteCheckOutList(productDetail)
+        }
     }
 }
