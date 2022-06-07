@@ -71,7 +71,6 @@ class SearchViewModel(private val allProduct: List<Product>, private val searchT
             val products: List<Product>
             products = allProduct.filter{item -> item.title.contains(searchName, ignoreCase = true) }
             if(products.isEmpty()){
-                _changedProduct.postValue(listOf())
                 _noResult.postValue(true)
             }
             else{
