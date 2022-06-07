@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.CheckoutFragmentBinding
 import com.eCommerce.shopify.model.Addresse
+import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.LineItem
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.network.APIClient
@@ -42,6 +43,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     private lateinit var dialogPayment: Dialog
     private lateinit var addressesAdapter: AddressesAdapter
     private lateinit var dialogRecyclerView: RecyclerView
+    private lateinit var discountCodes: DiscountCodes
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -112,12 +114,16 @@ class CheckoutFragment : Fragment(), OnRowClicked {
             {"line_items":[{"variant_id":42851028271339,"quantity":1,"price": "90.00"}]*/
         var lineItems = listOf(LineItem(variant_id = 42851028271339, quantity = 5, price = "5252.00"))
         val order = Order(line_items = lineItems, shipping_address = Addresse(address1 = "Helwan,Arab elwalda"), billing_address = Addresse(address1 = "Helwan,Arab elwalda"), created_at = "1234355", processed_at = "2022-06-02T15:42:28+02:00")
-        viewModel.postOrderWithUserIdAndEmail(order,myView.context)
+       // viewModel.postOrderWithUserIdAndEmail(order,myView.context)
         viewModel.postOrderResponse.observe(viewLifecycleOwner, Observer {
             Log.e("TAG", "init I'm here************ : ${it.order.created_at}" )
         })
         viewModel.errorMsgResponse.observe(viewLifecycleOwner, Observer {
             Log.e("TAG", "initldsjflsk: $it" )
+        })
+        viewModel.getDiscountCodesResponse.observe(viewLifecycleOwner, Observer {
+            discountCodes = it
+            print(discountCodes.toString())
         })
         this.navController = findNavController()
         dialogAddress = Dialog(myView.context)

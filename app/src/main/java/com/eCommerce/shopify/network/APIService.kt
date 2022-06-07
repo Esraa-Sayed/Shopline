@@ -5,6 +5,7 @@ import retrofit2.Response
 import com.eCommerce.shopify.model.*
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
+import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import retrofit2.http.Query
 
@@ -47,4 +48,7 @@ interface APIService {
 
     @POST("orders.json")
     suspend fun postOrder(@Body order:OrderDetails):Response<OrderDetails>
+
+    @GET("price_rules/1027349774508/discount_codes.json")
+    suspend fun getDiscountCodes():Response<DiscountCodes>
 }

@@ -3,6 +3,7 @@ package com.eCommerce.shopify.network
 import com.eCommerce.shopify.model.*
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
+import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import retrofit2.Response
 
@@ -29,4 +30,5 @@ interface RemoteSource {
     suspend fun updateUser(id: Long, customer: Customer): Response<Customer>
 	
     suspend fun postOrder(order: OrderDetails):Response<OrderDetails>
+    suspend fun getDiscountCodes():Response<DiscountCodes>
 }

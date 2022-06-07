@@ -1,6 +1,7 @@
 package com.eCommerce.shopify.ui.checkout.repo
 
 import android.util.Log
+import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import com.eCommerce.shopify.network.RemoteSource
@@ -17,5 +18,9 @@ class CheckoutRepo private constructor(private var remoteSource: RemoteSource):C
         Log.d("dfsfdf:", order.toString())
         val orderDetails:OrderDetails = OrderDetails(order)
         return remoteSource.postOrder(orderDetails)
+    }
+
+    override suspend fun getDiscountCodes(): Response<DiscountCodes> {
+        return remoteSource.getDiscountCodes()
     }
 }

@@ -3,6 +3,7 @@ package com.eCommerce.shopify.network
 import com.eCommerce.shopify.model.*
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
+import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import retrofit2.Response
 
@@ -59,6 +60,10 @@ class APIClient private constructor(): RemoteSource {
 		
     override suspend fun postOrder(order: OrderDetails): Response<OrderDetails> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).postOrder(order)
+    }
+
+    override suspend fun getDiscountCodes(): Response<DiscountCodes> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).getDiscountCodes()
     }
 
     override suspend fun getUserAddresses(id: Long): Response<AddressesUserModel> {
