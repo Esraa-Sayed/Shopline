@@ -22,7 +22,7 @@ object AppConstants {
     const val CURRENCY: String = "Currency"
     const val EGP: String = "EGP"
 
-    const val SPLASH_TIME_OUT: Long = 3000
+    const val SPLASH_TIME_OUT: Long = 2000
     const val MIN = 0
     const val MAX = 5
     const val SHOES = "SHOES"
