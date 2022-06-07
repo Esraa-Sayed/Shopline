@@ -36,7 +36,7 @@ class ShopingCartAdapter(var listner: Listner, var productDetail: List<ProductDe
             productDetail?.get(position)?.let { it1 -> listner.checkToDelete(it1) }
         }
         holder._bindView.minusBtn.setOnClickListener {
-            if(productDetail?.get(position)?.amount!! > 0){
+            if(productDetail?.get(position)?.amount!! > 1){
                 productDetail?.get(position)?.let { it.amount-- }
                 holder._bindView.amount.text = productDetail?.get(position)?.amount.toString()
                 productDetail?.get(position)?.let { it1 -> listner.update(it1) }

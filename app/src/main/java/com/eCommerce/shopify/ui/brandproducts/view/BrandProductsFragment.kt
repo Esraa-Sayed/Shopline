@@ -24,6 +24,8 @@ import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFa
 import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
+import com.eCommerce.shopify.ui.product.view.ProductFragmentDirections
+import com.eCommerce.shopify.utils.AppConstants
 
 class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
@@ -36,6 +38,8 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
 
     private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var favoriteViewModelFactory: FavoriteViewModelFactory
+
+    private lateinit var allProduct: List<Product>
 
     private val args by navArgs<BrandProductsFragmentArgs>()
 
@@ -76,8 +80,10 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
         brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner){
             brandProductsAdapter.setBrandProductsList(it.products)
+            allProduct = it.products
             brandProductsAdapter.notifyDataSetChanged()
         }
+        listenToSearch()
 
         /*val productsList = listOf(
             Product("shirt",35.00,2.5,"https://image.shutterstock.com/image-photo/beautiful-brown-leather-female-bag-260nw-1079711900.jpg"),
@@ -89,6 +95,15 @@ class BrandProductsFragment : Fragment() ,OnProductClickListener{
         )*/
     }
 
+    private fun listenToSearch(){
+        binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
+
+            val action = BrandProductsFragmentDirections.actionBrandProductsFragmentToSearchFragment(
+                allProduct = allProduct.toTypedArray(), searchType = AppConstants.PRODUCT
+            )
+            navController.navigate(action)
+        }
+    }
     fun setupBrandProductsRecycler(){
         brandProductsAdapter = BrandProductsAdapter(requireContext(), emptyList(),this)
         gridLayoutManager = GridLayoutManager(requireContext(),2)

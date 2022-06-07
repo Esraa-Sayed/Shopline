@@ -1,10 +1,13 @@
 package com.eCommerce.shopify.model
 
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "favorites")
 data class Product(
     @SerializedName("admin_graphql_api_id")
@@ -37,4 +40,4 @@ data class Product(
     val vendor: String,
     var isFavorite:Boolean = false,
     val quantity:Int
-)
+): Parcelable

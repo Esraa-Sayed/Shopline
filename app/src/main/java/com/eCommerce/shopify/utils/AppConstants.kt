@@ -14,6 +14,7 @@ object AppConstants {
     const val BASE_URL: String = BuildConfig.BASE_URL
     const val API_KEY: String = BuildConfig.API_KEY
     const val PASSWORD: String = BuildConfig.PASSWORD
+    const val MAP_KEY: String = BuildConfig.MAP_KEY
     const val IS_LOGIN: String = "Is_login"
     const val PREFRENCE_File = "User_Data"
     const val USER_ID: String = "User_id"
@@ -21,6 +22,9 @@ object AppConstants {
     const val USER_NAME: String = "User_name"
     const val CURRENCY: String = "Currency"
     const val EGP: String = "EGP"
+    const val BRAND: String = "Brand"
+    const val PRODUCT: String = "Product"
+    const val CATEGORY: String = "Category"
 
     const val SPLASH_TIME_OUT: Long = 3000
     const val MIN = 0
