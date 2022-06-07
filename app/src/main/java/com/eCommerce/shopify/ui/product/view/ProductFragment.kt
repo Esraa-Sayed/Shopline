@@ -66,9 +66,17 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
         this.myView = view
         setupToolbar()
         gettingViewModelReady()
+        listenToSearch()
         handleUIEvents()
         handleToolbarEvent()
         initRecyclerView()
+    }
+
+    private fun listenToSearch(){
+        binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
+            val action = ProductFragmentDirections.actionProductFragmentToSearchFragment(allProduct = allProductList.toTypedArray(), searchType = AppConstants.PRODUCT)
+            mNavController.navigate(action)
+        }
     }
 
     private fun setupToolbar() {

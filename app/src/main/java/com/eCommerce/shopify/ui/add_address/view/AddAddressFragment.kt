@@ -10,7 +10,9 @@ import androidx.navigation.Navigation
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.AddAddressFragmentBinding
 import com.eCommerce.shopify.databinding.ShoppingCartFragmentBinding
+import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.add_address.view_model.AddAddressViewModel
+import com.eCommerce.shopify.ui.add_address.view_model.AddAddressViewModelFactory
 import com.eCommerce.shopify.ui.setting.repo.AddAddressRepo
 
 class AddAddressFragment : Fragment() {
@@ -46,9 +48,8 @@ class AddAddressFragment : Fragment() {
         binding.appBar.backArrow.setOnClickListener{
             navController.popBackStack()
         }
-        viewModel = ViewModelProvider(this).get(AddAddressViewModel::class.java)
-        viewModel.setRepo(AddAddressRepo())
-
+        val factory = AddAddressViewModelFactory(AddAddressRepo.getInstance(APIClient.getInstance()))
+        viewModel = ViewModelProvider(this, factory).get(AddAddressViewModel::class.java)
         addMapFragment()
     }
 

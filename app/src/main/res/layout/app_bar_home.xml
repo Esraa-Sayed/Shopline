@@ -130,7 +130,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/round_corner_search"
                 android:hint="Search here"
-                android:imeOptions="actionNone"
+                android:imeOptions="actionSearch"
                 android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
