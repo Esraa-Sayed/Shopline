@@ -46,7 +46,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     private lateinit var binding: CheckoutFragmentBinding
     private lateinit var myView: View
     private lateinit var navController: NavController
-    private lateinit var couponCode:String
+    private var couponCode:String? = null
     private lateinit var dialogAddress: Dialog
     private lateinit var dialogPayment: Dialog
     private lateinit var addressesAdapter: AddressesAdapter
@@ -173,7 +173,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
                     getString(R.string.cant_be_empty).also { binding.couponCode.error = it }
                 }else{
                     couponCode = binding.couponCode.text.toString()
-                    if (checkCouponCodeValidation(couponCode)){
+                    if (checkCouponCodeValidation(couponCode!!)){
                         showAlert(getString(R.string.The_code_has_been_added_successfully))
                         binding.couponCode.visibility = View.GONE
                         binding.checkValidate.isEnabled = false
@@ -199,7 +199,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         //******************************** لحد ما ثريا تخلص ال address ******************************
         val address = Addresse(address1 = "Helwan,Arab elwalda")
         val toDayDate = getTodayDate()
-        val discountCode = listOf(DiscountCode(code = couponCode))
+        val discountCode = listOf(DiscountCode(code = couponCode ?: ""))
         if (currency == "$")
             currency = "USD"
         val order = Order(line_items = lineItems, shipping_address = address,
