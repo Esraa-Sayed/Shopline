@@ -17,9 +17,15 @@ interface FavoriteDao {
     @Query("select * from favorites where id = :id")
     fun getFavoriteProduct(id: Long): LiveData<Product>
 
+    @Query("SELECT * FROM favorites WHERE userId = :userId")
+    fun getFavoriteWithUserId(userId:Long):LiveData<List<Product>>
+
     @Insert(onConflict = REPLACE)
     fun insertToFavorite(product: Product)
 
     @Delete
     fun deleteFromFavorite(product: Product)
+
+    @Query("DELETE from favorites")
+    fun deleteAllFavorites()
 }

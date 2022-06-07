@@ -1,7 +1,6 @@
 package com.eCommerce.shopify.ui.favorite.view
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FavoriteItemLayoutBinding
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.ui.OnProductClickListener
+import com.eCommerce.shopify.ui.brandproducts.view.OnProductClickListener
 
 class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
 
@@ -42,7 +41,7 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> 
         holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
         //holder.productRate.rating = favProducts[position].rate.toFloat()
 
-        holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick() }
+        holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick(favProducts[position].id) }
         holder.favoriteBtn.setOnClickListener {
             onClickHandler.onFavBtnClick(favProducts[position])
         }

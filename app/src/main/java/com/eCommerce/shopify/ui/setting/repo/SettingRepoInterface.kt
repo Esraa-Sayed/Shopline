@@ -4,7 +4,6 @@ import android.content.Context
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.UserData
 import retrofit2.Response
-import java.util.*
 
 interface SettingRepoInterface {
     fun getIsLogin(context: Context): Boolean

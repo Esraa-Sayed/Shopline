@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -137,7 +138,7 @@ class ProductDetailsFragment : Fragment() {
     private fun renderDataOnScreen(it: ProductDetails) {
         productDetail = it.product
         product = Product(it.product.adminGraphqlApiId, it.product.bodyHtml, it.product.createdAt,
-            it.product.handle, it.product.id, it.product.image, it.product.images,
+            it.product.handle, it.product.id, it.product.userId, it.product.image, it.product.images,
             it.product.options, it.product.productType, it.product.publishedAt,
             it.product.publishedScope, it.product.status, it.product.tags, it.product.title,
             it.product.updatedAt, it.product.variants, it.product.vendor, false, 0)
@@ -157,6 +158,10 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun handleUIActions() {
+        binding.appBarHome.backArrow.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding.cardViewIsFavorite.setOnClickListener {
             if (viewModel.isUserLogin(myView.context)) {
                 if (isFavoriteProduct) {

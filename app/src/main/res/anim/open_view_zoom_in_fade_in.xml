@@ -6,7 +6,7 @@
 
     <scale
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
-        android:duration="1500"
+        android:duration="800"
         android:fromXScale="0.0"
         android:toXScale="1.0"
         android:fromYScale="0.0"
@@ -16,7 +16,7 @@
 
     <alpha
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
-        android:duration="1500"
+        android:duration="800"
         android:fromAlpha="0"
         android:toAlpha="1" />
 

@@ -48,7 +48,7 @@
     <string name="enable">Enable</string>
     <string name="success_screen_title">Order Placed!</string>
     <string name="success_screen_msg">Your order was placed successfully. For more details, check All My Orders page under Profile tab</string>
-    <string name="btn_in_success_screen">my orders</string>
+    <string name="btn_in_success_screen">finish</string>
     <string name="ok">OK</string>
     <string name="shipping_address">SHIPPING ADDRESS</string>
     <string name="Checkout">Checkout</string>
@@ -110,4 +110,8 @@
     <string name="address2">Address</string>
     <string name="no_results_found">No results found</string>
 
+    <string name="reviews">Reviews</string>
+    <string name="phone_validation">invalid phone number</string>
+    <string name="loginWarning">You should be loged in!</string>
+    <string name="warning">Warning</string>
 </resources>

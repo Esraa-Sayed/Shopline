@@ -3,7 +3,6 @@ import android.os.Parcelable
 import com.eCommerce.shopify.model.Addresse
 import com.eCommerce.shopify.model.Customer
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
 @Parcelize
 data class Order(

@@ -3,7 +3,8 @@ package com.eCommerce.shopify.network
 import retrofit2.http.*
 import retrofit2.Response
 import com.eCommerce.shopify.model.*
-import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.model.Customer
+import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
 import retrofit2.http.Query
 

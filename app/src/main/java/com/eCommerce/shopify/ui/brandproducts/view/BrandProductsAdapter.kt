@@ -9,15 +9,14 @@ import com.bumptech.glide.Glide
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FavoriteItemLayoutBinding
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.ui.OnProductClickListener
 
 class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProductsViewHolder> {
 
     private var context: Context
     private var brandProducts:List<Product>
-    private var onClickHandler:OnProductClickListener
+    private var onClickHandler: OnProductClickListener
 
-    constructor(context: Context,brandProducts:List<Product>,clickHandler:OnProductClickListener){
+    constructor(context: Context,brandProducts:List<Product>,clickHandler: OnProductClickListener){
         this.context = context
         this.brandProducts = brandProducts
         this.onClickHandler = clickHandler
@@ -41,9 +40,17 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         Glide.with(context)
             .load(brandProducts[position].image?.src)
             .into(holder.productImg)
+        if(brandProducts[position].isFavorite){
+            holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
+            Log.i("TAG", "onBindViewHolder: adddddddddddddddddddddddddddddddded to favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+        }
+        else{
+            holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_border_group)
+            Log.i("TAG", "onBindViewHolder: remmmmmmmmmmmmmmmmmoooooooooooove from favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
+        }
         //holder.productRate.rating = brandProducts[position].rate.toFloat()
 
-        holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick() }
+        holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick(brandProducts[position].id) }
         holder.favoriteBtn.setOnClickListener {
             onClickHandler.onFavBtnClick(brandProducts[position])
             if(brandProducts[position].isFavorite){
