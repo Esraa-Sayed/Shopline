@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.AddressRowBinding
 import com.eCommerce.shopify.model.Addresse
 
-class AddressesAdapter(val context: Context, var addresses:List<Addresse>,var onRowClicked: OnRowClicked?):
+class AddressesAdapter(val context: Context, var addresses:List<Addresse>, var onRowClicked: OnRowClicked?):
     RecyclerView.Adapter<AddressesAdapter.AddressViewHolder>() {
 
 

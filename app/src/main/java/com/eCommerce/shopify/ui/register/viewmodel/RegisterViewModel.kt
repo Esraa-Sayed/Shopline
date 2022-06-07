@@ -1,7 +1,6 @@
 package com.eCommerce.shopify.ui.register.viewmodel
 
 import android.content.Context
-import android.net.wifi.WpsInfo.INVALID
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,8 +13,6 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.eCommerce.shopify.model.error.Error
-import org.json.JSONObject
-import retrofit2.Response
 
 class RegisterViewModel(private val repo: RegisterRepoInterface):ViewModel() {
 

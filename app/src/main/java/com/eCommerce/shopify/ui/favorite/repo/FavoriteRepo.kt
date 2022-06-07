@@ -21,8 +21,16 @@ class FavoriteRepo private constructor(private val localSource: LocalSourceInter
             AppConstants.IS_LOGIN, false)
     }
 
+    override fun getUserId(context: Context): Long {
+        return AppSharedPref.getInstance(context,AppConstants.PREFRENCE_File).getLongValue(AppConstants.USER_ID,0)
+    }
+
     override fun getAllFavorites(): LiveData<List<Product>> {
         return localSource.getAllFavorites()
+    }
+
+    override fun getFavoritesWithUserId(userId: Long): LiveData<List<Product>> {
+        return localSource.getFavoriteWithUserId(userId)
     }
 
     override fun insertToFavorite(product: Product) {

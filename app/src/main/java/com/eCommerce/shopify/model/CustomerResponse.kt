@@ -1,3 +1,5 @@
 package com.eCommerce.shopify.model
 
-data class CustomerResponse(val customer:Customer)
+import com.eCommerce.shopify.model.Customer
+
+data class CustomerResponse(val customer: Customer)

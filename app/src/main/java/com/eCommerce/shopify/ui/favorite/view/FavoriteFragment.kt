@@ -50,15 +50,19 @@ class FavoriteFragment : Fragment() , OnProductClickListener {
         this.navController = findNavController()
         setupToolbar()
         setupViewModel()
+
         val isLogedin = favoriteViewModel.getIsLogin(myView.context)
+
         if(isLogedin) {
             binding.notLoginConstraint.visibility = View.GONE
             setupFavRecycler()
-            favoriteViewModel.getAllFavorites().observe(viewLifecycleOwner){
+            val user_id = favoriteViewModel.getUserId(myView.context)
+            favoriteViewModel.getFavoritesWithUserId(user_id).observe(viewLifecycleOwner){
                 favAdapter.setFavProductList(it)
                 favAdapter.notifyDataSetChanged()
             }
         }
+
         else{
             binding.loginBtn.setOnClickListener {
                 navController.navigate(R.id.action_favoriteFragment_to_loginFragment)

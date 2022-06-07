@@ -1,7 +1,7 @@
 package com.eCommerce.shopify.model
 
 data class EmailMarketingConsent(
-    val consent_updated_at: Any,
+    val state: String,
     val opt_in_level: String,
-    val state: String
+    val consent_updated_at: Any? = null
 )

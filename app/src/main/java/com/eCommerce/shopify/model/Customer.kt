@@ -11,7 +11,7 @@ data class Customer(
     var currency: String? = null,
     var default_address: Addresse? = null,
     var email: String? = null,
-    var email_marketing_consent: EmailMarketingConsent? = null,
+    //var email_marketing_consent: EmailMarketingConsent,
     var first_name: String? = null,
     var id: Long? = null,
     var last_name: String? = null,
