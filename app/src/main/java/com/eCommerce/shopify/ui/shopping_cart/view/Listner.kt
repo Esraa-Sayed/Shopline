@@ -5,4 +5,6 @@ import com.eCommerce.shopify.model.ProductDetail
 interface Listner {
     fun update(productDetail: ProductDetail)
     fun checkToDelete(productDetail: ProductDetail)
+    fun decrementTotalPrice(product: ProductDetail)
+    fun incrementTotalPrice(product: ProductDetail)
 }
