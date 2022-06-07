@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
 import com.eCommerce.shopify.databinding.FragmentMainBinding
+import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.ui.main.repo.MainRepo
 import com.eCommerce.shopify.ui.main.viewmodel.MainViewModel
@@ -39,6 +40,8 @@ class MainFragment : Fragment() {
     private lateinit var navController: NavController
 
     private lateinit var productDetailList: List<ProductDetail>
+
+    private var searchTabName: String = AppConstants.BRAND
 
     //lateinit var navigationView: NavigationView
 
@@ -89,7 +92,9 @@ class MainFragment : Fragment() {
 
     private fun listenToSearch(){
         binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
-            navController.navigate(R.id.action_mainFragment_to_searchFragment)
+            navController.navigate(
+                MainFragmentDirections.actionMainFragmentToSearchFragment(allProduct = listOf<Product>().toTypedArray(), searchType = searchTabName)
+            )
         }
     }
 
@@ -159,10 +164,12 @@ class MainFragment : Fragment() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
                 R.id.navigation_home -> {
+                    searchTabName = AppConstants.BRAND
                     binding.appBarHome.textInputLayout.visibility = View.VISIBLE
                     binding.appBarHome.cardViewFavorite.visibility = View.VISIBLE
                 }
                 R.id.navigation_categories -> {
+                    searchTabName = AppConstants.CATEGORY
                     binding.appBarHome.textInputLayout.visibility = View.VISIBLE
                     binding.appBarHome.cardViewFavorite.visibility = View.VISIBLE
                 }

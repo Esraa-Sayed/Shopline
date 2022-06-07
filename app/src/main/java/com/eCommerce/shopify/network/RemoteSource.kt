@@ -30,5 +30,12 @@ interface RemoteSource {
     suspend fun updateUser(id: Long, customer: Customer): Response<Customer>
 	
     suspend fun postOrder(order: OrderDetails):Response<OrderDetails>
+
     suspend fun getDiscountCodes():Response<DiscountCodes>
+
+
+    suspend fun getAllProducts(): Response<Products>
+
+    suspend fun addAddress(id: Long): Response<Customer>
+
 }

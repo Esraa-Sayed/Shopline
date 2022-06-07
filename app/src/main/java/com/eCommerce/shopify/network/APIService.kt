@@ -26,6 +26,9 @@ interface APIService {
         @Path("id") id: Long
     ): Response<Products>
 
+    @GET("products.json")
+    suspend fun getAllProducts(): Response<Products>
+
     @GET("products/{id}.json")
     suspend fun getProductDetails(
         @Path("id") id: Long
@@ -43,12 +46,21 @@ interface APIService {
     @GET("customers/{id}/addresses.json")
     suspend fun getUserAddresses(@Path("id")id:Long):Response<AddressesUserModel>
 
+    //@Headers("Content-Type: application/json")
+    //, @Body customer: Customer
     @PUT("customers/{id}.json")
-    suspend fun updateUser(@Path("id")id:Long, @Body customer: Customer): Response<Customer>
+    suspend fun updateUser(@Path("id")id:Long): Response<Customer>
 
     @POST("orders.json")
     suspend fun postOrder(@Body order:OrderDetails):Response<OrderDetails>
 
+
     @GET("price_rules/1027349774508/discount_codes.json")
     suspend fun getDiscountCodes():Response<DiscountCodes>
+
+    //@Headers("Content-Type: application/json")
+    //, @Body body: Customer
+    @PUT("customers/{id}.json")
+    suspend fun addAddress(@Path("id") id: Long): Response<Customer>
+
 }

@@ -64,6 +64,13 @@ class APIClient private constructor(): RemoteSource {
 
     override suspend fun getDiscountCodes(): Response<DiscountCodes> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getDiscountCodes()
+
+    override suspend fun getAllProducts(): Response<Products> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).getAllProducts()
+    }
+
+    override suspend fun addAddress(id: Long): Response<Customer> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).addAddress(id)
     }
 
     override suspend fun getUserAddresses(id: Long): Response<AddressesUserModel> {

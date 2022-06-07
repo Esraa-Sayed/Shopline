@@ -27,7 +27,14 @@ import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepository
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFactory
+
+import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
+import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
+import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
+import com.eCommerce.shopify.ui.product.view.ProductFragmentDirections
+
 import com.eCommerce.shopify.ui.favorite.view.FavoriteFragmentDirections
+
 import com.eCommerce.shopify.utils.AppConstants
 
 class BrandProductsFragment : Fragment() , OnProductClickListener {
@@ -41,6 +48,8 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
 
     private lateinit var brandProductsViewModel: BrandProductsViewModel
     private lateinit var brandProductsViewModelFactory: BrandProductsViewModelFactory
+
+    private lateinit var allProduct: List<Product>
 
     private val args by navArgs<BrandProductsFragmentArgs>()
 
@@ -69,7 +78,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
         setupBrandProductsRecycler()
 
         val isLogedin = brandProductsViewModel.getIsLogin(myView.context)
-        if(isLogedin) {
+        if (isLogedin) {
             val user_id = brandProductsViewModel.getUserId(myView.context)
             brandProductsViewModel.getBrandProductsCollectionListWithFav(
                 args.brandTitle,
@@ -81,17 +90,16 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
                 brandProductsAdapter.setBrandProductsList(it.products)
                 brandProductsAdapter.notifyDataSetChanged()
             }
-        }
-        else{
+        } else {
             brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
-            brandProductsViewModel.brandProductsCollectionResponse2.observe(viewLifecycleOwner){
+            brandProductsViewModel.brandProductsCollectionResponse2.observe(viewLifecycleOwner) {
                 productsList = it.products
                 brandProductsAdapter.setBrandProductsList(it.products)
                 brandProductsAdapter.notifyDataSetChanged()
             }
-        }
 
-        brandProductsViewModel.errorMsgResponse.observe(viewLifecycleOwner){
+        }
+        brandProductsViewModel.errorMsgResponse.observe(viewLifecycleOwner) {
             AppConstants.showAlert(
                 myView.context,
                 R.string.error,
@@ -99,7 +107,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
                 R.drawable.ic_error
             )
         }
-
+        listenToSearch()
         binding.brandProductsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 binding.seekbarProgress.text = p1.toString()
@@ -122,9 +130,17 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             override fun onStartTrackingTouch(p0: SeekBar?) {}
 
             override fun onStopTrackingTouch(p0: SeekBar?) {}
-
         })
     }
+    private fun listenToSearch(){
+        binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
+            val action = BrandProductsFragmentDirections.actionBrandProductsFragmentToSearchFragment(
+                allProduct = productsList.toTypedArray(), searchType = AppConstants.PRODUCT
+            )
+            navController.navigate(action)
+        }
+    }
+
 
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)

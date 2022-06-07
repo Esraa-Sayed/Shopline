@@ -44,5 +44,5 @@ data class ProductDetail(
     val updatedAt: String,
     val variants: List<Variant>,
     val vendor: String,
-    var amount: Int = 0
+    var amount: Int = 1
 ): Parcelable

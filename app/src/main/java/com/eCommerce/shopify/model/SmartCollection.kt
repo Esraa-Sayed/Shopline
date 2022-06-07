@@ -1,8 +1,11 @@
 package com.eCommerce.shopify.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class SmartCollection(
     @SerializedName("admin_graphql_api_id")
     val adminGraphqlApiId: String,
@@ -19,9 +22,9 @@ data class SmartCollection(
     val rules: List<Rule>,
     @SerializedName("sort_order")
     val sortOrder: String,
-    @SerializedName("template_suffix")
-    val templateSuffix: Any,
+//    @SerializedName("template_suffix")
+//    val templateSuffix: Any,
     val title: String,
     @SerializedName("updated_at")
     val updatedAt: String
-)
+): Parcelable
