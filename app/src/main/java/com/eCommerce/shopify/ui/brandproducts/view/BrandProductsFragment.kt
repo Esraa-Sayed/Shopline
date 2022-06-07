@@ -77,15 +77,8 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
         setupViewModel()
         setupBrandProductsRecycler()
 
-
-        brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
-        brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner){
-            brandProductsAdapter.setBrandProductsList(it.products)
-            allProduct = it.products
-            brandProductsAdapter.notifyDataSetChanged()
-
         val isLogedin = brandProductsViewModel.getIsLogin(myView.context)
-        if(isLogedin) {
+        if (isLogedin) {
             val user_id = brandProductsViewModel.getUserId(myView.context)
             brandProductsViewModel.getBrandProductsCollectionListWithFav(
                 args.brandTitle,
@@ -97,19 +90,16 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
                 brandProductsAdapter.setBrandProductsList(it.products)
                 brandProductsAdapter.notifyDataSetChanged()
             }
-        }
-        else{
+        } else {
             brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
-            brandProductsViewModel.brandProductsCollectionResponse2.observe(viewLifecycleOwner){
+            brandProductsViewModel.brandProductsCollectionResponse2.observe(viewLifecycleOwner) {
                 productsList = it.products
                 brandProductsAdapter.setBrandProductsList(it.products)
                 brandProductsAdapter.notifyDataSetChanged()
             }
 
         }
-        listenToSearch()
-
-        brandProductsViewModel.errorMsgResponse.observe(viewLifecycleOwner){
+        brandProductsViewModel.errorMsgResponse.observe(viewLifecycleOwner) {
             AppConstants.showAlert(
                 myView.context,
                 R.string.error,
@@ -117,23 +107,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
                 R.drawable.ic_error
             )
         }
-
-
-    private fun listenToSearch(){
-        binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
-
-            val action = BrandProductsFragmentDirections.actionBrandProductsFragmentToSearchFragment(
-                allProduct = allProduct.toTypedArray(), searchType = AppConstants.PRODUCT
-            )
-            navController.navigate(action)
-        }
-    }
-    fun setupBrandProductsRecycler(){
-        brandProductsAdapter = BrandProductsAdapter(requireContext(), emptyList(),this)
-        gridLayoutManager = GridLayoutManager(requireContext(),2)
-        binding.brandProductsRecycler.adapter = brandProductsAdapter
-        binding.brandProductsRecycler.layoutManager = gridLayoutManager
-
+        listenToSearch()
         binding.brandProductsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 binding.seekbarProgress.text = p1.toString()
@@ -156,10 +130,17 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             override fun onStartTrackingTouch(p0: SeekBar?) {}
 
             override fun onStopTrackingTouch(p0: SeekBar?) {}
-
         })
-
     }
+    private fun listenToSearch(){
+        binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
+            val action = BrandProductsFragmentDirections.actionBrandProductsFragmentToSearchFragment(
+                allProduct = productsList.toTypedArray(), searchType = AppConstants.PRODUCT
+            )
+            navController.navigate(action)
+        }
+    }
+
 
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
