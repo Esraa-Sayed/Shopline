@@ -14,6 +14,7 @@ import android.widget.RadioButton
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
@@ -28,6 +29,7 @@ import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.OnRowClicked
 import com.eCommerce.shopify.ui.checkout.repo.CheckoutRepo
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModelFactory
+import com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragmentArgs
 
 class CheckoutFragment : Fragment(), OnRowClicked {
 
@@ -44,6 +46,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     private lateinit var addressesAdapter: AddressesAdapter
     private lateinit var dialogRecyclerView: RecyclerView
     private lateinit var discountCodes: DiscountCodes
+    private val checkoutFragmentArgs by navArgs<CheckoutFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,6 +57,8 @@ class CheckoutFragment : Fragment(), OnRowClicked {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.e("TAG", "onViewCreated:productsCheckout.size ${checkoutFragmentArgs.productsCheckout.size}" )
+        Log.e("TAG", "onViewCreated:checkoutFragmentArgs.totalPrice ${checkoutFragmentArgs.totalPrice}" )
         myView = view
         init()
         buttonsListener()

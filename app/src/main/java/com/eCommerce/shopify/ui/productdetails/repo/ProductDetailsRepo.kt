@@ -52,7 +52,8 @@ class ProductDetailsRepo private constructor(
         }
 
         if (isUserLogin(context)) {
-            productDetails.body()?.product?.userId =  AppSharedPref.getInstance(context, PREFRENCE_File).getStringValue(USER_ID, "").toLong()
+            productDetails.body()?.product?.userId =
+                AppSharedPref.getInstance(context, PREFRENCE_File).getLongValue(USER_ID, 0)
         }
 
         return productDetails

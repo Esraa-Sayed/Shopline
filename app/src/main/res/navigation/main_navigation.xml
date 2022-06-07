@@ -208,7 +208,20 @@
         tools:layout="@layout/checkout_fragment" >
         <action
             android:id="@+id/action_checkoutFragment_to_successFragment2"
-            app:destination="@id/successFragment2" />
+            app:destination="@id/successFragment2"
+            app:popUpTo="@id/checkoutFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="productsCheckout"
+            app:argType="com.eCommerce.shopify.model.ProductDetail[]" />
+        <argument
+            android:name="totalPrice"
+            app:argType="float"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment"
+            app:popUpTo="@id/checkoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/successFragment2"
