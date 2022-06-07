@@ -143,7 +143,12 @@ class ProductDetailsFragment : Fragment() {
             it.product.publishedScope, it.product.status, it.product.tags, it.product.title,
             it.product.updatedAt, it.product.variants, it.product.vendor, false, 0)
         handleUIViewPager(it.product.images)
-        binding.txtViewProductName.text = it.product.title
+        val words = it.product.title.lowercase().split(" ")
+        var productName = ""
+        words.forEach { word ->
+            productName += word.replaceFirstChar { it.uppercase() } + " "
+        }
+        binding.txtViewProductName.text = productName.trim()
         binding.txtViewProductPrice.text = it.product.variants[0].price
         binding.txtViewCurrency.text = viewModel.getCurrencyWithUserEmail(myView.context)
         binding.txtViewDescription.text = it.product.bodyHtml
