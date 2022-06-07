@@ -45,8 +45,7 @@ class HomeFragment : Fragment(), OnBrandClickListener {
         SliderItem(R.drawable.ad1),
         SliderItem(R.drawable.ad2),
         SliderItem(R.drawable.ad3),
-        SliderItem(R.drawable.ad4),
-        SliderItem(R.drawable.ad5)
+        SliderItem(R.drawable.ad4)
     )
     private var sliderHandler = Handler(Looper.getMainLooper())
 
