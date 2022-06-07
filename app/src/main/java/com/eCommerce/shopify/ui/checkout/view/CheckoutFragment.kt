@@ -32,6 +32,7 @@ import com.eCommerce.shopify.ui.checkout.repo.CheckoutRepo
 import com.eCommerce.shopify.ui.checkout.repo.LineItemAdapter
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModelFactory
+import com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragmentDirections
 import com.eCommerce.shopify.utils.AppConstants
 import java.text.SimpleDateFormat
 import java.util.*
@@ -158,7 +159,8 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     @SuppressLint("SetTextI18n")
     private fun buttonsListener() {
         binding.appBar.backArrow.setOnClickListener {
-            navController.navigateUp()
+            var action =  CheckoutFragmentDirections.actionCheckoutFragmentToShoppingCartFragment(checkoutFragmentArgs.productsCheckout)
+            navController.navigate(action)
         }
         binding.goToChooseAddress.setOnClickListener {
             dialogAddress.show()
