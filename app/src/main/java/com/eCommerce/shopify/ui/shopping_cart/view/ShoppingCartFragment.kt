@@ -96,15 +96,14 @@ class ShoppingCartFragment : Fragment(), Listner {
         }
     }
 
-    private fun setTotalPrice(){
-
-        viewModel.totalPrice.observe(viewLifecycleOwner, {
+    @SuppressLint("SetTextI18n")
+    private fun setTotalPrice() {
+        viewModel.totalPriceAsString.observe(viewLifecycleOwner, {
             binding.scTotalPrice.text = it
             if(viewModel.products.size == 0){
                 binding.checkoutBtn.visibility = View.GONE
             }
         })
-        //binding.scTotalPrice.text = viewModel.getTotalPrice(shoppingCartFragmentArgs.productDetail.toList(), requireContext())
     }
 
     private fun checkIfUserLoginAndInitInfo(): Boolean {
@@ -124,11 +123,16 @@ class ShoppingCartFragment : Fragment(), Listner {
 
     private fun addCheckoutListener() {
         binding.checkoutBtn.setOnClickListener {
-            navController.navigate(
-                ShoppingCartFragmentDirections.actionShoppingCartFragmentToCheckoutFragment(
-                    productsCheckout = shoppingCartFragmentArgs.productDetail, viewModel.totalPrice.value?.toFloat()!!
+            viewModel.totalPriceAsString.value?.split(" ")?.get(0)?.let { it2 ->
+                navController.navigate(
+                    it2?.let { it1 ->
+                        Log.i("Navigate-----------", it.toString())
+                        ShoppingCartFragmentDirections.actionShoppingCartFragmentToCheckoutFragment(
+                            productsCheckout = shoppingCartFragmentArgs.productDetail, it1.toFloat()
+                        )
+                    }
                 )
-            )
+            }
         }
     }
 
@@ -161,6 +165,18 @@ class ShoppingCartFragment : Fragment(), Listner {
                 }
             }
         })
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun decrementTotalPrice(product: ProductDetail) {
+        if(product.amount >= 2){
+            viewModel.updatePrice(product.variants[0].price.toDouble(), "-")
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun incrementTotalPrice(product: ProductDetail) {
+        viewModel.updatePrice(product.variants[0].price.toDouble(), "+")
     }
 
     private fun confirmDialog(title: String): LiveData<Boolean> {

@@ -14,10 +14,10 @@ import kotlinx.coroutines.launch
 class ShoppingCartViewModel(val context: Context, val repo: ShoppingCartRepoInterface, var products: MutableList<ProductDetail>) : ViewModel() {
 
     private var mutableTotalPrice: MutableLiveData<String> = MutableLiveData()
-    val totalPrice: LiveData<String> = mutableTotalPrice
+    val totalPriceAsString: LiveData<String> = mutableTotalPrice
 
     init {
-        getTotalPrice(products)
+        getTotalPriceAsString(products)
     }
     fun getIsLogin(): Boolean {
         return repo.getIsLogin(context = context)
@@ -31,20 +31,20 @@ class ShoppingCartViewModel(val context: Context, val repo: ShoppingCartRepoInte
 
     fun deleteProductFromShopingCart(productDetail: ProductDetail){
         viewModelScope.launch(Dispatchers.IO) {
+            updatePrice(productDetail.variants[0].price.toDouble() * productDetail.amount, "-")
             repo.deleteProductFromShopingCart(productDetail)
-            getTotalPrice(products)
         }
     }
 
     fun getCurrency(): String{
         return repo.getCurrencyFromSharedPref(context = context)
     }
-    fun getTotalPrice(productDetail: List<ProductDetail>){
+    fun getTotalPriceAsString(productDetail: List<ProductDetail>){
         var currency = getCurrency()
         var sumOfPrice = 0.0
         if(productDetail.size > 0){
             for (item in productDetail){
-                sumOfPrice += item.variants[0].price.toDouble()
+                sumOfPrice += item.variants[0].price.toDouble() * item.amount
             }
             var priceMultiplier = 1.0
             if(currency != AppConstants.EGP){
@@ -59,9 +59,20 @@ class ShoppingCartViewModel(val context: Context, val repo: ShoppingCartRepoInte
         }
     }
 
+    fun updatePrice(totalAmount: Double, operation: String){
+        when(operation){
+            "-" -> mutableTotalPrice.postValue((mutableTotalPrice.value?.split(" ")?.get(0)?.toDouble()
+                ?.minus(totalAmount)).toString() + " " + getCurrency())
+            "+" -> mutableTotalPrice.postValue((mutableTotalPrice.value?.split(" ")?.get(0)?.toDouble()
+                ?.plus(totalAmount)).toString() + " " + getCurrency())
+        }
+
+    }
+
     fun deleteProduct(productDetail: ProductDetail) {
         if (products.size >= 2){
             products.remove(productDetail)
+            getTotalPriceAsString(products)
         }
         else{
             products = mutableListOf()

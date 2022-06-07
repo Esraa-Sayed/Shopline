@@ -197,6 +197,7 @@ class ProductDetailsFragment : Fragment() {
                     viewModel.deleteProductFromShoppingCart(productDetail)
                     handleBag(false, getString(R.string.add_to_bag))
                 } else {
+                    productDetail.amount = 1
                     viewModel.insertProductInShoppingCart(productDetail)
                     handleBag(true, getString(R.string.remove_from_bag))
                 }

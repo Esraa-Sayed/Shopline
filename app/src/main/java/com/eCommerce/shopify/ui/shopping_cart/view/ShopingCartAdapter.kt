@@ -9,7 +9,7 @@ import com.eCommerce.shopify.databinding.ShoppingCartRowBinding
 import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.utils.AppConstants
 
-class ShopingCartAdapter(var listner: Listner, var productDetail: List<ProductDetail>?, val currency: String) : RecyclerView.Adapter<ShopingCartAdapter.ShoppingCartViewHolder>() {
+class ShopingCartAdapter(var listner: Listner, var productDetailList: List<ProductDetail>?, val currency: String) : RecyclerView.Adapter<ShopingCartAdapter.ShoppingCartViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingCartViewHolder {
@@ -23,40 +23,42 @@ class ShopingCartAdapter(var listner: Listner, var productDetail: List<ProductDe
         if(currency != AppConstants.EGP){
             priceMultiplier /= 10
         }
-        val priceDouble = ((productDetail?.get(position)?.variants?.get(0)?.price)?.toDouble() ?: 00.00) * priceMultiplier
+        val priceDouble = ((productDetailList?.get(position)?.variants?.get(0)?.price)?.toDouble() ?: 00.00) * priceMultiplier
         val price = String.format("%.2f", priceDouble) + " " + currency
 
-        productDetail?.get(position)?.let {
-            productDetail?.get(position)?.let { it1 ->
-                    holder.bind(productDetail?.get(position)!!.image.src, it.title, it1.amount,
+        productDetailList?.get(position)?.let {
+            productDetailList?.get(position)?.let { it1 ->
+                    holder.bind(productDetailList?.get(position)!!.image.src, it.title, it1.amount,
                         price)
             }
         }
         holder._bindView.scRowDeleteBtn.setOnClickListener{
-            productDetail?.get(position)?.let { it1 -> listner.checkToDelete(it1) }
+            productDetailList?.get(position)?.let { it1 -> listner.checkToDelete(it1) }
         }
         holder._bindView.minusBtn.setOnClickListener {
-            if(productDetail?.get(position)?.amount!! > 1){
-                productDetail?.get(position)?.let { it.amount-- }
-                holder._bindView.amount.text = productDetail?.get(position)?.amount.toString()
-                productDetail?.get(position)?.let { it1 -> listner.update(it1) }
+            if(productDetailList?.get(position)?.amount!! > 1){
+                productDetailList?.get(position)?.let { it.amount-- }
+                holder._bindView.amount.text = productDetailList?.get(position)?.amount.toString()
+                productDetailList?.get(position)?.let { it1 -> listner.update(it1) }
+                productDetailList?.get(position)?.let { it1 -> listner.decrementTotalPrice(it1) }
             }
         }
         holder._bindView.plusBtn.setOnClickListener {
-            productDetail?.get(position)?.let { it.amount++ }
-            holder._bindView.amount.text = productDetail?.get(position)?.amount.toString()
-            productDetail?.get(position)?.let { it1 -> listner.update(it1) }
+            productDetailList?.get(position)?.let { it.amount++ }
+            holder._bindView.amount.text = productDetailList?.get(position)?.amount.toString()
+            productDetailList?.get(position)?.let { it1 -> listner.update(it1) }
+            productDetailList?.get(position)?.let { it1 -> listner.incrementTotalPrice(it1) }
         }
     }
 
     override fun getItemCount(): Int {
         //return shoppingCarts.size
-        return productDetail!!.size
+        return productDetailList!!.size
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<ProductDetail>) {
-        productDetail = data
+        productDetailList = data
         notifyDataSetChanged()
     }
 
