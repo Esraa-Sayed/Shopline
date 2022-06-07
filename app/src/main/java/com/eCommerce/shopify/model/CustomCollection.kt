@@ -20,7 +20,7 @@ data class CustomCollection(
     val publishedScope: String,
     @SerializedName("sort_order")
     val sortOrder: String,
-    @SerializedName("template_suffix")
+//    @SerializedName("template_suffix")
     //val templateSuffix: Any,
     val title: String,
     @SerializedName("updated_at")
