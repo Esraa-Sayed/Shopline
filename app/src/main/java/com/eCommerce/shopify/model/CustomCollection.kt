@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class CustomCollection(
     @SerializedName("admin_graphql_api_id")
     val adminGraphqlApiId: String,
-    @SerializedName("body_html")
+    //@SerializedName("body_html")
     //val bodyHtml: Any,
     val handle: String,
     val id: Long,
