@@ -37,9 +37,6 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> 
         //title
         holder.productTitle.text = favProducts[position].title
 
-        //price
-        holder.productPrice.text = favProducts[position].variants[0].price
-
         //image
         Glide.with(context)
             .load(favProducts[position].image?.src)
@@ -52,6 +49,15 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> 
 
         //price currency
         holder.productCurrency.text = onClickHandler.currencyHandling()
+
+        //price
+        if(holder.productCurrency.text == "$") {
+            val priceInDollar = favProducts[position].variants[0].price.toDouble()/18.0
+            holder.productPrice.text = String.format("%.2f", priceInDollar)
+        }
+        else{
+            holder.productPrice.text = favProducts[position].variants[0].price
+        }
 
         //fav icon
         holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
