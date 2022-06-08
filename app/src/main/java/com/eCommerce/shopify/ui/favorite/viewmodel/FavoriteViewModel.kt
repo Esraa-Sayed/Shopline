@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepoInterface
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,15 +33,20 @@ class FavoriteViewModel (private val repo:FavoriteRepoInterface):ViewModel(){
     }
 
     fun insertToFavorite(product: Product){
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler){
             repo.insertToFavorite(product)
         }
     }
 
     fun deleteFromFavorite(product: Product){
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler){
             repo.deleteFromFavorite(product)
         }
     }
 
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, t ->
+        run {
+            t.printStackTrace()
+        }
+    }
 }

@@ -30,7 +30,7 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
     }
 
     fun getBrandProductsCollectionList(vendor:String){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO  + coroutineExceptionHandler) {
             val brandCollectionProducts = repo.getCollectionWithId(vendor)
 
             if (brandCollectionProducts.isSuccessful) {
