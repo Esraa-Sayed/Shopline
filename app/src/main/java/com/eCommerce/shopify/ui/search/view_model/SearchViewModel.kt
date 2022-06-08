@@ -13,7 +13,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val allProduct: List<Product>, private val searchType: String, private val repo: SearchRepoInterface) : ViewModel() {
+class SearchViewModel(private var allProduct: List<Product>, private val searchType: String, private val repo: SearchRepoInterface) : ViewModel() {
 
     private var _changedProduct: MutableLiveData<List<Product>> = MutableLiveData()
     var resultProduct: LiveData<List<Product>> = _changedProduct
@@ -59,6 +59,7 @@ class SearchViewModel(private val allProduct: List<Product>, private val searchT
             val productResponse = repo.getAllProducts()
             if (productResponse.isSuccessful) {
                 _changedProduct.postValue(productResponse.body()?.products)
+                allProduct = productResponse.body()?.products?: listOf()
             } else {
                 _errorMsgResponse.postValue(productResponse.message())
             }

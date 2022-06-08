@@ -93,7 +93,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
     }
 
     private fun getUserWishlist(){
-        viewModel.getAllFavorites().observe(viewLifecycleOwner, {
+        viewModel.getAllFavorites(requireContext()).observe(viewLifecycleOwner, {
             if (it.isNotEmpty()){
                 wishlistAdapter.setWishlist(it)
                 if(it.size > 4){

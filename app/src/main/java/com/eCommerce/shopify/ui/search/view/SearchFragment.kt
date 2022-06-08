@@ -108,9 +108,11 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
         viewModel?.noResult?.observe(viewLifecycleOwner,{
             if(it){
                 binding.noMatchResult.visibility = View.VISIBLE
+                binding.recyclerView.visibility = View.GONE
             }
             else{
                 binding.noMatchResult.visibility = View.GONE
+                binding.recyclerView.visibility = View.VISIBLE
             }
         })
     }

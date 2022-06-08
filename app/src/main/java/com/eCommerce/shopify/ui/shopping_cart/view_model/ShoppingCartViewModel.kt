@@ -69,6 +69,8 @@ class ShoppingCartViewModel(val context: Context, val repo: ShoppingCartRepoInte
 
     }
 
+
+
     fun deleteProduct(productDetail: ProductDetail) {
         if (products.size >= 2){
             products.remove(productDetail)
