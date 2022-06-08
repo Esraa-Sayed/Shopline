@@ -23,6 +23,10 @@ class FavoriteViewModel (private val repo:FavoriteRepoInterface):ViewModel(){
         return repo.getAllFavorites()
     }
 
+    fun getCustomerCurrency(requireContext: Context): String{
+        return repo.getCurrency(context = requireContext)
+    }
+
     fun getFavoritesWithUserId(userId: Long): LiveData<List<Product>> {
         return repo.getFavoritesWithUserId(userId)
     }

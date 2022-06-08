@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FavoriteItemLayoutBinding
 import com.eCommerce.shopify.model.Product
+import com.eCommerce.shopify.utils.AppConstants.MAX
+import com.eCommerce.shopify.utils.AppConstants.MIN
 
 class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProductsViewHolder> {
 
@@ -34,12 +36,26 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         holder: BrandProductsViewHolder,
         position: Int
     ) {
+        //title
         holder.productTitle.text = brandProducts[position].title
+
+        //price
         holder.productPrice.text = brandProducts[position].variants[0].price
-        //holder.productImg.setImageResource(R.drawable.t_shirt_pink)
+
+        //image
         Glide.with(context)
             .load(brandProducts[position].image?.src)
             .into(holder.productImg)
+
+        //rate
+        val randomRate: Double = MIN + Math.random() * (MAX - MIN)
+        holder.productRate.stepSize = 0.1f
+        holder.productRate.rating = randomRate.toFloat()
+
+        //price currency
+        holder.productCurrency.text = onClickHandler.currencyHandling()
+
+        //fav icon
         if(brandProducts[position].isFavorite){
             holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
             Log.i("TAG", "onBindViewHolder: adddddddddddddddddddddddddddddddded to favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
@@ -48,9 +64,11 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
             holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_border_group)
             Log.i("TAG", "onBindViewHolder: remmmmmmmmmmmmmmmmmoooooooooooove from favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
         }
-        //holder.productRate.rating = brandProducts[position].rate.toFloat()
 
+        //linear layout
         holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick(brandProducts[position].id) }
+
+        //fav btn
         holder.favoriteBtn.setOnClickListener {
             onClickHandler.onFavBtnClick(brandProducts[position])
             if(brandProducts[position].isFavorite){
@@ -62,6 +80,7 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
                 Log.i("TAG", "onBindViewHolder: remmmmmmmmmmmmmmmmmoooooooooooove from favvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv")
             }
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -79,6 +98,7 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         val productImg = itemBinding.productImg
         val productRate = itemBinding.productRate
         val favoriteBtn = itemBinding.favoriteBtn
+        val productCurrency = itemBinding.productCurrency
     }
 
 }

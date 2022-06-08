@@ -72,8 +72,12 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
         return repo.getIsLogin(context = requireContext)
     }
 
-    fun getUserId(requireContext: Context):Long{
+    fun getUserId(requireContext: Context): Long{
         return repo.getUserId(context = requireContext)
+    }
+
+    fun getCustomerCurrency(requireContext: Context): String{
+        return repo.getCurrency(context = requireContext)
     }
 
     fun insertToFavorite(product: Product){
