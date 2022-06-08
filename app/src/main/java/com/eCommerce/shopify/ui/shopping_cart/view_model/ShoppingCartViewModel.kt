@@ -1,6 +1,7 @@
 package com.eCommerce.shopify.ui.shopping_cart.view_model
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -60,11 +61,16 @@ class ShoppingCartViewModel(val context: Context, val repo: ShoppingCartRepoInte
     }
 
     fun updatePrice(totalAmount: Double, operation: String){
+        var amount = totalAmount
+        if(getCurrency() != "EGP"){
+            amount /= 20
+        }
+        Log.i("UPDATE_TOTAL_PRICE", amount.toString())
         when(operation){
             "-" -> mutableTotalPrice.postValue((mutableTotalPrice.value?.split(" ")?.get(0)?.toDouble()
-                ?.minus(totalAmount)).toString() + " " + getCurrency())
+                ?.minus(amount)).toString() + " " + getCurrency())
             "+" -> mutableTotalPrice.postValue((mutableTotalPrice.value?.split(" ")?.get(0)?.toDouble()
-                ?.plus(totalAmount)).toString() + " " + getCurrency())
+                ?.plus(amount)).toString() + " " + getCurrency())
         }
 
     }
