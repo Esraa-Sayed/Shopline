@@ -9,6 +9,8 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FavoriteItemLayoutBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.brandproducts.view.OnProductClickListener
+import com.eCommerce.shopify.utils.AppConstants.MAX
+import com.eCommerce.shopify.utils.AppConstants.MIN
 
 class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> {
 
@@ -32,19 +34,36 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> 
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
+        //title
         holder.productTitle.text = favProducts[position].title
+
+        //price
         holder.productPrice.text = favProducts[position].variants[0].price
-        //holder.productImg.setImageResource(R.drawable.t_shirt_pink)
+
+        //image
         Glide.with(context)
             .load(favProducts[position].image?.src)
             .into(holder.productImg)
-        holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
-        //holder.productRate.rating = favProducts[position].rate.toFloat()
 
+        //rate
+        val randomRate: Double = MIN + Math.random() * (MAX - MIN)
+        holder.productRate.stepSize = 0.1f
+        holder.productRate.rating = randomRate.toFloat()
+
+        //price currency
+        holder.productCurrency.text = onClickHandler.currencyHandling()
+
+        //fav icon
+        holder.favoriteBtn.setImageResource(R.drawable.ic_favorite_group)
+
+        //linear layout
         holder.linearLayout.setOnClickListener { onClickHandler.onProductItemClick(favProducts[position].id) }
+
+        //fav btn
         holder.favoriteBtn.setOnClickListener {
             onClickHandler.onFavBtnClick(favProducts[position])
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -62,5 +81,6 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder> 
         val productImg = itemBinding.productImg
         val productRate = itemBinding.productRate
         val favoriteBtn = itemBinding.favoriteBtn
+        val productCurrency = itemBinding.productCurrency
     }
 }

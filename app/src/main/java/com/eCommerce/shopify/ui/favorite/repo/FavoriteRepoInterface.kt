@@ -7,6 +7,7 @@ import com.eCommerce.shopify.model.Product
 interface FavoriteRepoInterface {
     fun getIsLogin(context: Context): Boolean
     fun getUserId(context: Context): Long
+    fun getCurrency(context: Context): String
     fun getAllFavorites(): LiveData<List<Product>>
     fun getFavoritesWithUserId(userId: Long): LiveData<List<Product>>
     fun insertToFavorite(product: Product)

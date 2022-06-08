@@ -49,8 +49,6 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
     private lateinit var brandProductsViewModel: BrandProductsViewModel
     private lateinit var brandProductsViewModelFactory: BrandProductsViewModelFactory
 
-    private lateinit var allProduct: List<Product>
-
     private val args by navArgs<BrandProductsFragmentArgs>()
 
     private var productsList:List<Product> = emptyList()
@@ -141,7 +139,6 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
         }
     }
 
-
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
         binding.appBarHome.toolbar.title = getString(R.string.products)
@@ -207,5 +204,9 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             dialog.setCanceledOnTouchOutside(true)
             dialog.show()
         }
+    }
+
+    override fun currencyHandling(): String {
+        return brandProductsViewModel.getCustomerCurrency(myView.context)
     }
 }

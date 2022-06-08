@@ -25,6 +25,10 @@ class FavoriteRepo private constructor(private val localSource: LocalSourceInter
         return AppSharedPref.getInstance(context,AppConstants.PREFRENCE_File).getLongValue(AppConstants.USER_ID,0)
     }
 
+    override fun getCurrency(context: Context): String {
+        return AppSharedPref.getInstance(context,AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY,AppConstants.EGP)
+    }
+
     override fun getAllFavorites(): LiveData<List<Product>> {
         return localSource.getAllFavorites()
     }
