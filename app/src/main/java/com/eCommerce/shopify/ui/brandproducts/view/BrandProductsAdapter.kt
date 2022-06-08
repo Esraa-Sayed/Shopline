@@ -39,9 +39,6 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
         //title
         holder.productTitle.text = brandProducts[position].title
 
-        //price
-        holder.productPrice.text = brandProducts[position].variants[0].price
-
         //image
         Glide.with(context)
             .load(brandProducts[position].image?.src)
@@ -54,6 +51,15 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
 
         //price currency
         holder.productCurrency.text = onClickHandler.currencyHandling()
+
+        //price
+        if(holder.productCurrency.text == "$") {
+            val priceInDollar = brandProducts[position].variants[0].price.toDouble()/18.0
+            holder.productPrice.text = String.format("%.2f", priceInDollar)
+        }
+        else{
+            holder.productPrice.text = brandProducts[position].variants[0].price
+        }
 
         //fav icon
         if(brandProducts[position].isFavorite){
