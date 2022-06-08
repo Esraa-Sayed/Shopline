@@ -117,4 +117,9 @@
     <string name="inforamtion">Information</string>
     <string name="NotAValidCode">Not a valid code</string>
     <string name="The_code_has_been_added_successfully">The code has been added successfully</string>
+    <string name="address_1">Address 1</string>
+    <string name="address_2">Address 2</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="please_enter_a_valid_data">Please enter a valid data</string>
 </resources>

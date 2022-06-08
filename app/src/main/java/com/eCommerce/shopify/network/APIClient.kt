@@ -5,6 +5,7 @@ import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
+import com.eCommerce.shopify.model.PostAddress
 import retrofit2.Response
 
 class APIClient private constructor(): RemoteSource {
@@ -69,9 +70,14 @@ class APIClient private constructor(): RemoteSource {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getAllProducts()
     }
 
-    override suspend fun addAddress(id: Long): Response<Customer> {
-        return BaseRetrofitHelper.getInstance().create(APIService::class.java).addAddress(id)
+    override suspend fun addAddress(userId: Long, address: PostAddress): Response<PostAddress> {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).addAddress(userId, address)
     }
+
+    override suspend fun deleteAddress(userId: Long, addressId: Long) {
+        return BaseRetrofitHelper.getInstance().create(APIService::class.java).deleteAddress(userId, addressId)
+    }
+
 
     override suspend fun getUserAddresses(id: Long): Response<AddressesUserModel> {
         return BaseRetrofitHelper.getInstance().create(APIService::class.java).getUserAddresses(id)

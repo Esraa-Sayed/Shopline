@@ -7,6 +7,7 @@ import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
+import com.eCommerce.shopify.model.PostAddress
 import retrofit2.http.Query
 
 
@@ -60,7 +61,10 @@ interface APIService {
 
     //@Headers("Content-Type: application/json")
     //, @Body body: Customer
-    @PUT("customers/{id}.json")
-    suspend fun addAddress(@Path("id") id: Long): Response<Customer>
+    @POST("customers/{id}/addresses.json")
+    suspend fun addAddress(@Path("id") userId: Long, @Body address: PostAddress): Response<PostAddress>
+
+    @DELETE("customers/{userid}/addresses/{addressid}.json")
+    suspend fun deleteAddress(@Path("userid") userId: Long, @Path("addressid") addressId: Long)
 
 }
