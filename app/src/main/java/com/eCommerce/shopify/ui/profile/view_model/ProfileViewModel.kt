@@ -52,8 +52,8 @@ class ProfileViewModel(val _repo: ProfileRepoInterface) : ViewModel() {
         return _repo.getIsLogin(context = requireContext)
     }
 
-    fun getAllFavorites(): LiveData<List<Product>>{
-        return _repo.getAllFavorites()
+    fun getAllFavorites(context: Context): LiveData<List<Product>>{
+        return _repo.getAllFavorites(context)
     }
 
     fun insertToFavorite(product: Product){

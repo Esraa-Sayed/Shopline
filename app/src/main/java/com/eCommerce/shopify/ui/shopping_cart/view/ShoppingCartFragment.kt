@@ -46,10 +46,9 @@ class ShoppingCartFragment : Fragment(), Listner {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = ShoppingCartFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,7 +61,7 @@ class ShoppingCartFragment : Fragment(), Listner {
             binding.checkoutBtn.visibility = View.GONE
         }
         var productDetails = mutableListOf<ProductDetail>()
-        if(shoppingCartFragmentArgs.productDetail.toList().size > 0){
+        if(shoppingCartFragmentArgs.productDetail.toList().isNotEmpty()){
             productDetails = shoppingCartFragmentArgs.productDetail.toList().toMutableList()
         }
 
@@ -107,7 +106,7 @@ class ShoppingCartFragment : Fragment(), Listner {
     }
 
     private fun checkIfUserLoginAndInitInfo(): Boolean {
-        var isLogin: Boolean = viewModel.getIsLogin()
+        val isLogin: Boolean = viewModel.getIsLogin()
         if (isLogin) {
             binding.scNoLogin.visibility = View.GONE
             binding.scLogin.visibility = View.VISIBLE
@@ -125,10 +124,11 @@ class ShoppingCartFragment : Fragment(), Listner {
         binding.checkoutBtn.setOnClickListener {
             viewModel.totalPriceAsString.value?.split(" ")?.get(0)?.let { it2 ->
                 navController.navigate(
-                    it2?.let { it1 ->
-                        Log.i("Navigate-----------", it.toString())
+                    it2.let { it1 ->
+                        Log.i("Navigate-----------", it1.toString())
+                        Log.i("Navigate-----------", viewModel.products.size.toString())
                         ShoppingCartFragmentDirections.actionShoppingCartFragmentToCheckoutFragment(
-                            productsCheckout = shoppingCartFragmentArgs.productDetail, it1.toFloat()
+                            productsCheckout = viewModel.products.toTypedArray(), it1.toFloat()
                         )
                     }
                 )
@@ -136,7 +136,7 @@ class ShoppingCartFragment : Fragment(), Listner {
         }
     }
 
-    fun initShoppingCartRecyclerView() {
+    private fun initShoppingCartRecyclerView() {
         adapter = ShopingCartAdapter(this, shoppingCartFragmentArgs.productDetail.toList(), viewModel.getCurrency())
         _binding?.scRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation = LinearLayoutManager.VERTICAL

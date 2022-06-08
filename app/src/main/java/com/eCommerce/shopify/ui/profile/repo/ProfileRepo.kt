@@ -33,8 +33,8 @@ class ProfileRepo(private val remoteSource: RemoteSource, private val localSourc
     override fun setIsLogin(context: Context, isLogin: Boolean) {
         AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).setValue(AppConstants.IS_LOGIN, false)
     }
-    override fun getAllFavorites(): LiveData<List<Product>> {
-        return localSource.getAllFavorites()
+    override fun getAllFavorites(context: Context): LiveData<List<Product>> {
+        return localSource.getFavoriteWithUserId(getUserId(context))
     }
 
     override fun insertToFavorite(product: Product) {
@@ -46,6 +46,9 @@ class ProfileRepo(private val remoteSource: RemoteSource, private val localSourc
     }
     override fun getUserName(context: Context): String {
         return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.USER_NAME, "NoName")
+    }
+    override fun getUserId(context: Context): Long {
+        return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getLongValue(AppConstants.USER_ID, 0)
     }
     override fun getCurrencyFromSharedPref(context: Context): String {
         return AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).getStringValue(AppConstants.CURRENCY, AppConstants.EGP)

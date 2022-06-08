@@ -11,9 +11,10 @@ interface ProfileRepoInterface {
     fun getUserIdFromSharedPref(context: Context,key: String, defaultValue: Long):Long
     fun getIsLogin(context: Context): Boolean
     fun setIsLogin(context: Context, isLogin: Boolean)
-    fun getAllFavorites(): LiveData<List<Product>>
+    fun getAllFavorites(context: Context): LiveData<List<Product>>
     fun insertToFavorite(product: Product)
     fun deleteFromFavorite(product: Product)
     fun getUserName(context: Context): String
     fun getCurrencyFromSharedPref(context: Context): String
+    fun getUserId(context: Context): Long
 }
