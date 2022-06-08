@@ -30,29 +30,106 @@
                 android:layout_height="match_parent"
                 android:background= "@color/white">
 
-                <FrameLayout
-                    android:id="@+id/map_framelayout"
+<!--                <FrameLayout-->
+<!--                    android:id="@+id/map_framelayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="300dp"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginHorizontal="10dp"-->
+<!--                    android:layout_marginVertical="10dp" >-->
+<!--                    <fragment-->
+<!--                        android:id="@+id/map_fragment"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:name="com.eCommerce.shopify.ui.add_address.view.MapsFragment" />-->
+<!--                </FrameLayout>-->
+
+                <TextView
+                    android:id="@+id/error_msg"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_alignParentTop="true"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp" >
-                    <fragment
-                        android:id="@+id/map_fragment"
+                    android:visibility="gone"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:gravity="center"
+                    android:text="@string/please_enter_a_valid_data"/>
+
+                <LinearLayout
+                    android:id="@+id/firstNameLinear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/error_msg"
+                    android:background="@drawable/rounded_corners"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="5dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:name="com.eCommerce.shopify.ui.add_address.view.MapsFragment" />
-                </FrameLayout>
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/firstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/light_blue"
+                            android:hint="@string/first_name"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:textSize="15sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lastNameLinear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/firstNameLinear"
+                    android:background="@drawable/rounded_corners"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="5dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/lastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/light_blue"
+                            android:hint="@string/last_name"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:textSize="15sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/countryLinear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/map_framelayout"
+                    android:layout_alignParentStart="true"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginTop="10dp"
+                    android:layout_below="@+id/lastNameLinear"
                     android:background="@drawable/rounded_corners"
                     android:orientation="horizontal"
                     android:paddingHorizontal="20dp"
@@ -85,6 +162,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="30dp"
                     android:paddingVertical="5dp"
+                    android:layout_alignParentStart="true"
                     android:paddingHorizontal="20dp"
                     android:layout_below="@+id/countryLinear">
 
@@ -106,41 +184,74 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/addressLinear"
+                    android:id="@+id/address_one_linear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rounded_corners"
-                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/cityLinear"
                     android:layout_marginHorizontal="30dp"
-                    android:paddingVertical="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_corners"
+                    android:orientation="horizontal"
+                    android:layout_alignParentStart="true"
                     android:paddingHorizontal="20dp"
-                    android:layout_below="@+id/cityLinear">
+                    android:paddingVertical="5dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <EditText
-                            android:id="@+id/addressName"
+                            android:id="@+id/address_one_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/light_blue"
-                            android:hint="@string/address2"
-                            android:textSize="15sp"
+                            android:hint="@string/address_1"
                             android:inputType="text"
                             android:maxLines="1"
-                            android:scrollHorizontally="true"/>
+                            android:scrollHorizontally="true"
+                            android:textSize="15sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/address_two_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/address_one_linear"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_corners"
+                    android:orientation="horizontal"
+                    android:layout_alignParentStart="true"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="5dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/address_two_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/light_blue"
+                            android:hint="@string/address_2"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:textSize="15sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/registerBtn"
+                    android:id="@+id/addAddress"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:layout_below="@+id/addressLinear"
+                    android:layout_below="@+id/address_two_linear"
                     android:layout_alignParentStart="true"
-                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginHorizontal="35dp"
                     android:layout_marginVertical="20dp"
                     android:background="@drawable/rounded_corners"
                     android:fontFamily="@font/cairo_bold"

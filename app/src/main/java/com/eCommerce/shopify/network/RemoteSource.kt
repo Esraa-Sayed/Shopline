@@ -5,7 +5,9 @@ import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.OrderDetails
+import com.eCommerce.shopify.model.PostAddress
 import retrofit2.Response
+import retrofit2.http.Path
 
 interface RemoteSource {
 
@@ -33,9 +35,10 @@ interface RemoteSource {
 
     suspend fun getDiscountCodes():Response<DiscountCodes>
 
-
     suspend fun getAllProducts(): Response<Products>
 
-    suspend fun addAddress(id: Long): Response<Customer>
+    suspend fun addAddress(userId: Long, address: PostAddress): Response<PostAddress>
+
+    suspend fun deleteAddress(userId: Long, addressId: Long)
 
 }
