@@ -15,6 +15,8 @@ object AppConstants {
     const val API_KEY: String = BuildConfig.API_KEY
     const val PASSWORD: String = BuildConfig.PASSWORD
     const val MAP_KEY: String = BuildConfig.MAP_KEY
+    const val PAY_PAL_KEY: String = BuildConfig.PAY_PAL_KEY
+    const val PAY_PAL_REO_CODE = 12
     const val IS_LOGIN: String = "Is_login"
     const val PREFRENCE_File = "User_Data"
     const val USER_ID: String = "User_id"

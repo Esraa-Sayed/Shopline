@@ -4,5 +4,4 @@ import com.eCommerce.shopify.model.Addresse
 
 interface OnRowClicked {
     fun onRowClickedListenerAddress(address: Addresse)
-
 }

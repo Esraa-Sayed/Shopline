@@ -1,7 +1,9 @@
 package com.eCommerce.shopify.ui.checkout.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +14,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,7 +27,6 @@ import com.eCommerce.shopify.databinding.CheckoutFragmentBinding
 import com.eCommerce.shopify.model.Addresse
 import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.DiscountCode
-import com.eCommerce.shopify.model.orderDetails.LineItem
 import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.AddressesAdapter
@@ -32,8 +35,12 @@ import com.eCommerce.shopify.ui.checkout.repo.CheckoutRepo
 import com.eCommerce.shopify.ui.checkout.repo.LineItemAdapter
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModelFactory
-import com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragmentDirections
 import com.eCommerce.shopify.utils.AppConstants
+import com.paypal.android.sdk.payments.PayPalConfiguration
+import com.paypal.android.sdk.payments.PayPalPayment
+import com.paypal.android.sdk.payments.PayPalService
+import com.paypal.android.sdk.payments.PaymentActivity
+import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -77,6 +84,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     @SuppressLint("SetTextI18n")
     fun init(){
         setUpViewModel()
+        setUpPayPal()
         paymentMethod = getString(R.string.Cash_on_delivery)
         currency = viewModel.getCurrency(myView.context)
         binding.discountValueFromApi.text = "0.0 $currency"
@@ -89,6 +97,9 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         viewModel = ViewModelProvider(this).get(CheckoutViewModel::class.java)
         binding.appBar.toolbar.title = "Checkout"
     }
+
+
+
     private fun setupPaymentMethodDialog() {
         dialogPayment.setContentView(R.layout.choose_payment_method_dialog)
         dialogPayment.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -99,11 +110,13 @@ class CheckoutFragment : Fragment(), OnRowClicked {
             cashOnDelivery.isChecked = true
             paypal.isChecked = false
             updateCheckoutPaymentMethod(true)
+            binding.paymentMethodIcon.setImageResource(R.drawable.ic_mastercard)
             dialogPayment.dismiss()
         }
         paypal.setOnClickListener {
             cashOnDelivery.isChecked = false
             paypal.isChecked = true
+            binding.paymentMethodIcon.setImageResource(R.drawable.paypal)
             updateCheckoutPaymentMethod(false)
             dialogPayment.dismiss()
         }
@@ -116,8 +129,11 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         }else{
             binding.paymentMethodText.text = getString(R.string.paypal)
             paymentMethod = getString(R.string.paypal)
+            payPalPaymentMethod()
         }
     }
+
+
 
     private fun setupAddressDialog() {
         dialogAddress.setContentView(R.layout.choose_address_dialog_checkout_screen)
@@ -240,6 +256,32 @@ class CheckoutFragment : Fragment(), OnRowClicked {
 
         val df = SimpleDateFormat("yyyy/MMM/dd", Locale.getDefault())
         return df.format(c)
+    }
+    //*************************************** payPalPaymentMethod **************************************************************
+    private fun payPalPaymentMethod() {
+        var payment = PayPalPayment(BigDecimal(100),"USD","Shopify",PayPalPayment.PAYMENT_INTENT_SALE)
+        val intent = Intent(activity,PaymentActivity::class.java)
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,payPalConfiguration)
+        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
+        requestPaymentMethod.launch(intent)
+    }
+    private val requestPaymentMethod =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                showAlert("Payment made successfully")
+                Log.e("TAG", ": *************requestPaymentMethod****************************" )
+            }
+        }
+    private val payPalConfiguration = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)
+        .clientId(AppConstants.PAY_PAL_KEY)
+    private fun setUpPayPal() {
+        var intent = Intent(activity,PayPalService::class.java)
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,payPalConfiguration)
+        myView.context.startService(intent)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        myView.context.stopService(Intent(activity,PayPalService::class.java))
     }
 
 }

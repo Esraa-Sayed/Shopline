@@ -43,16 +43,6 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
         myView = view
         init()
     }
-    fun noDataFound(){
-        bindingFragment.noOrdersFound.visibility = View.VISIBLE
-        bindingFragment.noOrdersFoundText.visibility = View.VISIBLE
-        bindingFragment.ordersRecyclerView.visibility = View.GONE
-    }
-    fun dataFound(){
-        bindingFragment.noOrdersFound.visibility = View.GONE
-        bindingFragment.noOrdersFoundText.visibility = View.GONE
-        bindingFragment.ordersRecyclerView.visibility = View.VISIBLE
-    }
     private fun init() {
         ordersViewModelFactory = OrdersViewModelFactory(
             OrdersRepo.getInstance(

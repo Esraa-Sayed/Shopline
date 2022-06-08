@@ -106,4 +106,6 @@ dependencies {
 
     // RoundedImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
+    //payPall
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
 }
