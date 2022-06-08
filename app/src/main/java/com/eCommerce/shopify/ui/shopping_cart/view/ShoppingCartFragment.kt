@@ -98,7 +98,7 @@ class ShoppingCartFragment : Fragment(), Listner {
     @SuppressLint("SetTextI18n")
     private fun setTotalPrice() {
         viewModel.totalPriceAsString.observe(viewLifecycleOwner, {
-            binding.scTotalPrice.text = it
+            binding.scTotalPrice.text = String.format("%.2f", it.split(" ")[0].toFloat()) + " " + viewModel.getCurrency()
             if(viewModel.products.size == 0){
                 binding.checkoutBtn.visibility = View.GONE
             }
@@ -169,7 +169,7 @@ class ShoppingCartFragment : Fragment(), Listner {
 
     @SuppressLint("SetTextI18n")
     override fun decrementTotalPrice(product: ProductDetail) {
-        if(product.amount >= 2){
+        if(product.amount >= 1){
             viewModel.updatePrice(product.variants[0].price.toDouble(), "-")
         }
     }
