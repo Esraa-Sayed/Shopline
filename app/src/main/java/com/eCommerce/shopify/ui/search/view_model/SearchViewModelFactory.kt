@@ -2,9 +2,7 @@ package com.eCommerce.shopify.ui.search.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.eCommerce.shopify.model.CustomCollection
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.SmartCollection
 import com.eCommerce.shopify.ui.search.repo.SearchRepoInterface
 import java.lang.IllegalArgumentException
 

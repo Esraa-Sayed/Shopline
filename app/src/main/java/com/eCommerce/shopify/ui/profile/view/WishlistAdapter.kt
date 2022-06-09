@@ -12,9 +12,9 @@ import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.utils.AppConstants
 
 
-class WishlistAdapter(val listener: OnProductListner, val currency: String) : RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>() {
+class WishlistAdapter(private val listener: OnProductListener, val currency: String) : RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>() {
 
-    var wishlist: List<Product> = mutableListOf()
+    private var wishlist: List<Product> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
         val itemBinding = ProfileWishlistRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,14 +22,14 @@ class WishlistAdapter(val listener: OnProductListner, val currency: String) : Re
     }
 
     override fun onBindViewHolder(holder: WishlistViewHolder, position: Int) {
-        var priceMultiplier: Double = 1.0
+        var priceMultiplier = 1.0
         if(currency != AppConstants.EGP){
-            priceMultiplier = priceMultiplier/10
+            priceMultiplier /= 20
         }
         val priceDouble = (wishlist[position].variants[0].price).toDouble() * priceMultiplier
         val price = String.format("%.2f", priceDouble) + " " + currency
         holder.bind(wishlist[position].image, wishlist[position].title,
-            price, wishlist[position].isFavorite)
+            price)
 //        holder.bind("https://media.istockphoto.com/photos/elegance-peach-vintage-dress-isolated-on-white-background-picture-id1217970962?k=20&m=1217970962&s=612x612&w=0&h=XJeWZiOrycXuEawk2SnjXqCFpjZ9mMUPNKJqnx82ziU=", "My item",
 //            145.5, true)
         holder._bindView.pWishlistRow.setOnClickListener{
@@ -54,15 +54,10 @@ class WishlistAdapter(val listener: OnProductListner, val currency: String) : Re
         notifyDataSetChanged()
     }
 
-    @JvmName("getWishlist1")
-    fun getWishlist(): List<Product>{
-        return wishlist
-    }
-
     class WishlistViewHolder(val _bindView: ProfileWishlistRowBinding)
         : RecyclerView.ViewHolder(_bindView.root) {
 
-        fun bind(imageUrl: ImageProduct?, name: String, price: String, isFavourite: Boolean){
+        fun bind(imageUrl: ImageProduct?, name: String, price: String){
             if (imageUrl !== null) {
                 Glide.with(_bindView.root.context)
                     .load(imageUrl.src)

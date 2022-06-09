@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/app_bar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/profile_login_constraintlayout"
+                    android:id="@+id/profile_login_constraint_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -69,7 +69,6 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/cairo_bold"
-                        android:text="Welcome Thoraya"
                         android:textColor="@color/dark_gray"
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +169,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <RelativeLayout
-                    android:id="@+id/profile_nologin_relativelayout"
+                    android:id="@+id/profile_no_login_relative_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -187,7 +186,8 @@
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
-                        android:src="@drawable/ic_img_auth_1" />
+                        android:src="@drawable/ic_img_auth_1"
+                        android:contentDescription="@string/no_login_image" />
 
                     <TextView
                         android:id="@+id/login_required_text"

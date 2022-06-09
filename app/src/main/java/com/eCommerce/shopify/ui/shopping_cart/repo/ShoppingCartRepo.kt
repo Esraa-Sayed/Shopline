@@ -23,11 +23,11 @@ class ShoppingCartRepo(val shoppingCartLocalSource: ShoppingCartLocalSourceInter
         AppSharedPref.getInstance(context, AppConstants.PREFRENCE_File).setValue(AppConstants.IS_LOGIN, false)
     }
 
-    override fun insertProductInShoppingCart(productDetail: ProductDetail) {
+    override fun updateProductInShoppingCart(productDetail: ProductDetail) {
         shoppingCartLocalSource.insertProductInShoppingCart(productDetail)
     }
 
-    override fun deleteProductFromShopingCart(productDetail: ProductDetail) {
+    override fun deleteProductFromShoppingCart(productDetail: ProductDetail) {
         shoppingCartLocalSource.deleteProductFromShoppingCart(productDetail)
     }
     override fun getCurrencyFromSharedPref(context: Context): String {

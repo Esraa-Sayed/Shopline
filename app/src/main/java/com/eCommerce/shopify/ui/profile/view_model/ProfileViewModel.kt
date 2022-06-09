@@ -15,17 +15,14 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(val _repo: ProfileRepoInterface) : ViewModel() {
 
-    private var _UserOrders = MutableLiveData<OrderModel>()
-    val UserOrders: LiveData<OrderModel> = _UserOrders
+    private var _userOrders = MutableLiveData<OrderModel>()
+    val userOrders: LiveData<OrderModel> = _userOrders
 
     private var _showProgressBar = MutableLiveData<Boolean>()
     val showProgressBar: LiveData<Boolean> = _showProgressBar
 
     private var _errorMsgResponse = MutableLiveData<String>()
     val errorMsgResponse: LiveData<String> = _errorMsgResponse
-
-    private var _favourites = MutableLiveData<List<Product>>()
-    val favourites: LiveData<List<Product>> = _favourites
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, t ->
         run {
@@ -39,7 +36,7 @@ class ProfileViewModel(val _repo: ProfileRepoInterface) : ViewModel() {
             val userId = _repo.getUserIdFromSharedPref(context, AppConstants.USER_ID,0)
             val user = _repo.getUserOrdersWithId(userId)
             if (user.isSuccessful) {
-                _UserOrders.postValue(user.body())
+                _userOrders.postValue(user.body())
                 _showProgressBar.postValue(true)
             } else {
                 _errorMsgResponse.postValue(user.message())

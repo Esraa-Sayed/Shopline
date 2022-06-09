@@ -27,12 +27,12 @@ class OrdersAdapter(private val context: Context, private var  orders:List<Order
         else
         {
            val price = order.total_price?.toDouble()?.div(20)
-           ("${price} $").also { holder.viewBinding.pRowOrderPrice.text = it }
+           ("$price $").also { holder.viewBinding.pRowOrderPrice.text = it }
         }
 
         holder.viewBinding.pRowOrderDate.text = order.created_at!!.split("T")[0]
 
-        holder.viewBinding.pOrdersRowCardview.setOnClickListener{
+        holder.viewBinding.pOrdersRowCardView.setOnClickListener{
             Log.e("TAG", "onBindViewHolder: YEss")
             onOrderRowClicked.onRowClickedListener(order)
         }

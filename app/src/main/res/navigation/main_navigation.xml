@@ -353,7 +353,15 @@
     <fragment
         android:id="@+id/addAddressFragment"
         android:name="com.eCommerce.shopify.ui.add_address.view.AddAddressFragment"
-        android:label="AddAddressFragment" />
+        android:label="AddAddressFragment" >
+        <action
+            android:id="@+id/action_addAddressFragment_to_addressesFragment"
+            app:destination="@id/addressesFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.eCommerce.shopify.ui.productdetails.view.ProductDetailsFragment"

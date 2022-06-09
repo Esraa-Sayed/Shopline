@@ -24,9 +24,6 @@ import com.eCommerce.shopify.ui.setting.view_model.SettingViewModelFactory
 
 class SettingFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SettingFragment()
-    }
 
     private lateinit var _binding: SettingFragmentBinding
     private val binding get() = _binding
@@ -41,14 +38,13 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = SettingFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val factory = SettingViewModelFactory(SettingRepo(APIClient.getInstance()))
-        viewModel = ViewModelProvider(this, factory).get(SettingViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[SettingViewModel::class.java]
         if(checkIfUserLoginAndInitInfo()){
             listenToAllBtn()
         }
@@ -78,15 +74,13 @@ class SettingFragment : Fragment() {
             mNavController.navigate(R.id.action_mainFragment_to_registerFragment2)
         }
     }
-
-    @SuppressLint("SetTextI18n", "ResourceAsColor")
     private fun checkIfUserLoginAndInitInfo(): Boolean{
-        var isLogin: Boolean = viewModel.getIsLogin(requireContext())
+        val isLogin: Boolean = viewModel.getIsLogin(requireContext())
         if(isLogin){
             binding.settingNoLogin.visibility = View.GONE
             binding.loginLayout.visibility = View.VISIBLE
             binding.settingPage.setBackgroundResource(R.color.titan_white)
-            binding.helloName.text = "Hello, " + viewModel.getUserName(requireContext())
+            binding.helloName.text = getString(R.string.hello).plus(viewModel.getUserName(requireContext()))
             binding.email.text = viewModel.getUserEmail(requireContext())
 
         }
@@ -179,7 +173,7 @@ class SettingFragment : Fragment() {
     }
 
     private fun listenToAboutUsBtn(){
-        binding.aboutusCardView.setOnClickListener{
+        binding.aboutUsCardView.setOnClickListener{
             val inflater = requireActivity().layoutInflater
             val dialog = Dialog(requireActivity())
             dialog.requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS)
@@ -212,7 +206,7 @@ class SettingFragment : Fragment() {
     }
 
     private fun confirmDialog(title: String): LiveData<Boolean>{
-        var isOk: MutableLiveData<Boolean> = MutableLiveData()
+        val isOk: MutableLiveData<Boolean> = MutableLiveData()
         val inflater = requireActivity().layoutInflater
         val dialog = Dialog(requireActivity())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

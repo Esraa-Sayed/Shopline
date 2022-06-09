@@ -1,12 +1,12 @@
 package com.eCommerce.shopify.ui.search.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -15,21 +15,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.SearchFragmentBinding
-import com.eCommerce.shopify.model.CustomCollection
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.SmartCollection
 import com.eCommerce.shopify.network.APIClient
-import com.eCommerce.shopify.network.APIService
-import com.eCommerce.shopify.ui.category.view.CategoryAdapter
-import com.eCommerce.shopify.ui.category.view.OnCategoryClickListener
-import com.eCommerce.shopify.ui.home.view.HomeBrandAdapter
-import com.eCommerce.shopify.ui.home.view.OnBrandClickListener
 import com.eCommerce.shopify.ui.product.view.OnCategoryProductClickListener
 import com.eCommerce.shopify.ui.product.view.ProductAdapter
 import com.eCommerce.shopify.ui.search.repo.SearchRepo
 import com.eCommerce.shopify.ui.search.view_model.SearchViewModel
 import com.eCommerce.shopify.ui.search.view_model.SearchViewModelFactory
-import com.eCommerce.shopify.ui.shopping_cart.view.ShoppingCartFragmentArgs
 import com.eCommerce.shopify.utils.AppConstants
 
 class SearchFragment : Fragment(), OnCategoryProductClickListener {
@@ -43,10 +35,6 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
     }
 
-    companion object {
-        fun newInstance() = SearchFragment()
-    }
-
     private var viewModel: SearchViewModel? = null
     private lateinit var binding: SearchFragmentBinding
     private var searchingName: MutableLiveData<String> = MutableLiveData()
@@ -54,7 +42,7 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = SearchFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -79,13 +67,13 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
 
     private fun gettingViewModelReady(){
         val factory = searchFragmentArgs.allProduct?.toList()?.let {
-            searchFragmentArgs?.searchType?.let { it1 ->
+            searchFragmentArgs.searchType?.let { it1 ->
                 SearchViewModelFactory(it,
                     it1, SearchRepo.getInstance(APIClient.getInstance()))
             }
         }
 
-        viewModel = factory?.let { ViewModelProvider(this, it).get(SearchViewModel::class.java) }
+        viewModel = factory?.let { ViewModelProvider(this, it)[SearchViewModel::class.java] }
 
         viewModel?.errorMsgResponse?.observe(viewLifecycleOwner, {
             AppConstants.showAlert(
@@ -124,10 +112,12 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
     }
     private fun observeOnSearchingDataToCallViewModelSearch(){
         searchingName.observe(viewLifecycleOwner, {
-            if(searchingName.value.isNullOrEmpty()){
+            if(it.isNullOrEmpty()){
+                Log.i("if null or empty", searchingName.value.toString())
                 viewModel?.search("")
             }
             else{
+                Log.i("if not null or empty", searchingName.value.toString())
                 viewModel?.search(searchingName.value.toString())
             }
 
