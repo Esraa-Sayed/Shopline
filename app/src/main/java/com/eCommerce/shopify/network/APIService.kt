@@ -62,7 +62,7 @@ interface APIService {
     //@Headers("Content-Type: application/json")
     //, @Body body: Customer
     @POST("customers/{id}/addresses.json")
-    suspend fun addAddress(@Path("id") userId: Long, @Body address: PostAddress): Response<PostAddress>
+    suspend fun addAddress(@Path("id") userId: Long, @Body address: PostAddress): Response<AddressesUserModel>
 
     @DELETE("customers/{userid}/addresses/{addressid}.json")
     suspend fun deleteAddress(@Path("userid") userId: Long, @Path("addressid") addressId: Long)

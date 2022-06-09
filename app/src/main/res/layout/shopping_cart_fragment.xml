@@ -42,7 +42,6 @@
             android:layout_marginStart="30dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/cairo_regular"
-            android:text="$10,458"
             android:textColor="@color/dark_gray"
             android:textSize="18sp" />
 
@@ -94,7 +93,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:src="@drawable/ic_img_auth_1" />
+            android:src="@drawable/ic_img_auth_1"
+            android:contentDescription="@string/no_login_image" />
 
         <TextView
             android:id="@+id/login_required_text"

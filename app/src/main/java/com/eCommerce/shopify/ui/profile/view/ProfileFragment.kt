@@ -23,17 +23,14 @@ import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModel
 import com.eCommerce.shopify.ui.profile.view_model.ProfileViewModelFactory
 import com.eCommerce.shopify.utils.AppConstants
 
-class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
+class ProfileFragment : Fragment(), OnOrderListener, OnProductListener {
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
     private lateinit var _binding: ProfileFragmentBinding
     private val binding get() = _binding
     private lateinit var viewModel: ProfileViewModel
-    lateinit var ordersAdapter: OrdersAdapter
-    lateinit var wishlistAdapter: WishlistAdapter
-    lateinit var currency: String
+    private lateinit var ordersAdapter: OrdersAdapter
+    private lateinit var wishlistAdapter: WishlistAdapter
+    private lateinit var currency: String
 
     private val mNavController by lazy {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
@@ -44,8 +41,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         savedInstanceState: Bundle?,
     ): View {
         _binding = ProfileFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,8 +49,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
         val remoteSource = ProfileRepo.getInstance(APIClient.getInstance(), LocalSource.getInstance(requireContext()))
         val profileFactory = ProfileViewModelFactory(remoteSource)
 
-        viewModel = ViewModelProvider(this, profileFactory)
-            .get(ProfileViewModel::class.java)
+        viewModel = ViewModelProvider(this, profileFactory)[ProfileViewModel::class.java]
 
         if (checkIfUserLogin()){
             currency = viewModel.getCurrencyFromSharedPref(requireContext())
@@ -71,13 +66,13 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
 
     private fun getUserOrders() {
         viewModel.getUserOrders(requireContext())
-        viewModel.UserOrders.observe(viewLifecycleOwner, {
+        viewModel.userOrders.observe(viewLifecycleOwner, {
             if (it.orders.isNotEmpty()){
                 ordersAdapter.setOrders(it.orders)
                 if(it.orders.size > 2){
                     binding.pMoreOrdersBtn.visibility = View.VISIBLE
                 }
-                binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+                binding.profileLoginConstraintLayout.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
             }
             Log.e("TAG", "getUserOrders: ${it.orders.size}" )
@@ -100,7 +95,7 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
                     binding.pMoreWishlistBtn.visibility = View.VISIBLE
                 }
             }
-            binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+            binding.profileLoginConstraintLayout.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
             Log.e("TAG", "getUserWishlist: ${it.size}" )
         })
@@ -112,18 +107,18 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
     }
 
     private fun initOrdersRecyclerView(){
-        ordersAdapter = OrdersAdapter(this, this, currency)
-        binding?.pOrdersRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
+        ordersAdapter = OrdersAdapter(this, currency)
+        binding.pOrdersRecyclerView.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation =  LinearLayoutManager.VERTICAL
         }
 
-        binding?.pOrdersRecyclerView?.adapter = ordersAdapter
+        binding.pOrdersRecyclerView.adapter = ordersAdapter
     }
     private fun initWishlistRecyclerView(){
         wishlistAdapter = WishlistAdapter(this, currency)
-        binding?.pWishlistRecyclerView?.layoutManager = GridLayoutManager(this.requireContext(), 2)
+        binding.pWishlistRecyclerView.layoutManager = GridLayoutManager(this.requireContext(), 2)
 
-        binding?.pWishlistRecyclerView?.adapter = wishlistAdapter
+        binding.pWishlistRecyclerView.adapter = wishlistAdapter
     }
 
     override fun onOrderClicked(order: Order) {
@@ -163,19 +158,19 @@ class ProfileFragment : Fragment(), OnOrderListner, OnProductListner {
     }
     @SuppressLint("SetTextI18n")
     private fun checkIfUserLogin(): Boolean {
-        var isLogin: Boolean = viewModel.getIsLogin(requireContext())
+        val isLogin: Boolean = viewModel.getIsLogin(requireContext())
         if(isLogin){
-            binding.profileNologinRelativelayout.visibility = View.GONE
-            binding.profileLoginConstraintlayout.visibility = View.VISIBLE
+            binding.profileNoLoginRelativeLayout.visibility = View.GONE
+            binding.profileLoginConstraintLayout.visibility = View.VISIBLE
             binding.profilePage.setBackgroundResource(R.color.titan_white)
             binding.pWelcomeNameText.text = "Welcome " + viewModel.getUserName(requireContext())
             getUserOrders()
             getUserWishlist()
         }
         else{
-            binding.profileNologinRelativelayout.visibility = View.VISIBLE
+            binding.profileNoLoginRelativeLayout.visibility = View.VISIBLE
             binding.profilePage.setBackgroundResource(R.color.white)
-            binding.profileLoginConstraintlayout.visibility = View.GONE
+            binding.profileLoginConstraintLayout.visibility = View.GONE
             binding.progressBar.visibility = View.GONE
         }
         return isLogin

@@ -26,7 +26,7 @@ import com.eCommerce.shopify.ui.shopping_cart.repo.ShoppingCartRepo
 import com.eCommerce.shopify.ui.shopping_cart.view_model.ShoppingCartViewModel
 import com.eCommerce.shopify.ui.shopping_cart.view_model.ShoppingCartViewModelFactory
 
-class ShoppingCartFragment : Fragment(), Listner {
+class ShoppingCartFragment : Fragment(), Listener {
     private var _binding: ShoppingCartFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -37,11 +37,7 @@ class ShoppingCartFragment : Fragment(), Listner {
     private val navController by lazy {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
     }
-    lateinit var adapter: ShopingCartAdapter
-
-    companion object {
-        fun newInstance() = ShoppingCartFragment()
-    }
+    lateinit var adapter: ShoppingCartAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +65,7 @@ class ShoppingCartFragment : Fragment(), Listner {
             ShoppingCartViewModelFactory(requireContext(), ShoppingCartRepo.getInstance(ShoppingCartLocalSource.getInstance(
                 requireContext())), productDetails)
 
-        viewModel = ViewModelProvider(this, factory).get(ShoppingCartViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory)[ShoppingCartViewModel::class.java]
         if (checkIfUserLoginAndInitInfo()) {
             initShoppingCartRecyclerView()
             addCheckoutListener()
@@ -97,8 +93,8 @@ class ShoppingCartFragment : Fragment(), Listner {
 
     @SuppressLint("SetTextI18n")
     private fun setTotalPrice() {
-        viewModel.totalPriceAsString.observe(viewLifecycleOwner, {
-            binding.scTotalPrice.text = String.format("%.2f", it.split(" ")[0].toFloat()) + " " + viewModel.getCurrency()
+        viewModel.totalPrice.observe(viewLifecycleOwner, {
+            binding.scTotalPrice.text = viewModel.getPriceWithCurrencyAsString(it)
             if(viewModel.products.size == 0){
                 binding.checkoutBtn.visibility = View.GONE
             }
@@ -122,22 +118,14 @@ class ShoppingCartFragment : Fragment(), Listner {
 
     private fun addCheckoutListener() {
         binding.checkoutBtn.setOnClickListener {
-            viewModel.totalPriceAsString.value?.split(" ")?.get(0)?.let { it2 ->
-                navController.navigate(
-                    it2.let { it1 ->
-                        Log.i("Navigate-----------", it1.toString())
-                        Log.i("Navigate-----------", viewModel.products.size.toString())
-                        ShoppingCartFragmentDirections.actionShoppingCartFragmentToCheckoutFragment(
-                            productsCheckout = viewModel.products.toTypedArray(), it1.toFloat()
-                        )
-                    }
-                )
+            navController.navigate( ShoppingCartFragmentDirections.actionShoppingCartFragmentToCheckoutFragment(
+                productsCheckout = viewModel.products.toTypedArray(), viewModel.totalPrice.value?.toFloat()?: 0F
+            ))
             }
         }
-    }
 
     private fun initShoppingCartRecyclerView() {
-        adapter = ShopingCartAdapter(this, shoppingCartFragmentArgs.productDetail.toList(), viewModel.getCurrency())
+        adapter = ShoppingCartAdapter(this, shoppingCartFragmentArgs.productDetail.toList(), viewModel.getCurrency())
         _binding?.scRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation = LinearLayoutManager.VERTICAL
         }
@@ -151,13 +139,13 @@ class ShoppingCartFragment : Fragment(), Listner {
     }
 
     override fun update(productDetail: ProductDetail) {
-        viewModel.insertProductInShoppingCart(productDetail)
+        viewModel.updateProductInShoppingCart(productDetail)
     }
 
     override fun checkToDelete(productDetail: ProductDetail) {
-        confirmDialog("Are you sure you want to delete it?").observe(viewLifecycleOwner, {
+        confirmDialog().observe(viewLifecycleOwner, {
             if(it == true){
-                viewModel.deleteProductFromShopingCart(productDetail)
+                viewModel.deleteProductFromShoppingCart(productDetail)
                 viewModel.deleteProduct(productDetail)
                 adapter.setData(viewModel.products)
                 if (shoppingCartFragmentArgs.productDetail.isEmpty()){
@@ -170,16 +158,16 @@ class ShoppingCartFragment : Fragment(), Listner {
     @SuppressLint("SetTextI18n")
     override fun decrementTotalPrice(product: ProductDetail) {
         if(product.amount >= 1){
-            viewModel.updatePrice(product.variants[0].price.toDouble(), "-")
+            viewModel.updateTotalPrice(amountOfPrice = product.variants[0].price.toDouble(), "-")
         }
     }
 
     @SuppressLint("SetTextI18n")
     override fun incrementTotalPrice(product: ProductDetail) {
-        viewModel.updatePrice(product.variants[0].price.toDouble(), "+")
+        viewModel.updateTotalPrice(amountOfPrice = product.variants[0].price.toDouble(), "+")
     }
 
-    private fun confirmDialog(title: String): LiveData<Boolean> {
+    private fun confirmDialog(): LiveData<Boolean> {
         val isOk: MutableLiveData<Boolean> = MutableLiveData()
         val inflater = requireActivity().layoutInflater
         val dialog = Dialog(requireActivity())
@@ -188,7 +176,7 @@ class ShoppingCartFragment : Fragment(), Listner {
         val bind : ConfirmDialogBinding = ConfirmDialogBinding .inflate(inflater)
         dialog.setContentView(bind.root)
         dialog.setTitle("Confirmation")
-        bind.confirmText.text = title
+        bind.confirmText.text = getString(R.string.sure_for_delete)
         bind.okBtn.setOnClickListener {
             with(isOk) { postValue(true) }
             Log.i("Confirm","in ok button")

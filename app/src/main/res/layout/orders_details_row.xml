@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_150sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/sc_row_cardview"
+    android:id="@+id/sc_row_card_view"
     android:backgroundTint="@color/white"
     app:cardCornerRadius="15dp"
     android:padding="@dimen/_10sdp"

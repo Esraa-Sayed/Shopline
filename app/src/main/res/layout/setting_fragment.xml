@@ -19,7 +19,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@android:color/transparent">
 
             <RelativeLayout
@@ -80,7 +80,6 @@
                                 android:layout_marginHorizontal="20dp"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/cairo_semi_bold"
-                                android:text="Hello, Thoraya Hamdy"
                                 android:textSize="18sp" />
 
                             <ImageView
@@ -90,7 +89,8 @@
                                 android:layout_below="@+id/hello_name"
                                 android:layout_marginStart="20dp"
                                 android:layout_marginTop="5dp"
-                                android:src="@drawable/ic_email" />
+                                android:src="@drawable/ic_email"
+                                android:contentDescription="@string/address_image" />
 
                             <TextView
                                 android:id="@+id/email"
@@ -101,7 +101,6 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_toEndOf="@+id/address_icon"
                                 android:fontFamily="@font/cairo_semi_bold"
-                                android:text="thorayahamdy743@gmail.com"
                                 android:textSize="16sp" />
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -133,7 +132,8 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_contact_us" />
+                                android:src="@drawable/ic_contact_us"
+                                android:contentDescription="@string/contact_us_image" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -176,7 +176,8 @@
                                 android:layout_alignParentStart="false"
                                 android:layout_alignParentBottom="false"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_address" />
+                                android:src="@drawable/ic_address"
+                                android:contentDescription="@string/address_image" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -218,7 +219,8 @@
                                 android:layout_width="23dp"
                                 android:layout_height="23dp"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_visa" />
+                                android:src="@drawable/ic_visa"
+                                android:contentDescription="@string/payment_image" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -233,7 +235,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/aboutus_card_view"
+                        android:id="@+id/about_us_card_view"
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
                         android:layout_marginHorizontal="10dp"
@@ -259,18 +261,19 @@
                             android:layout_marginVertical="10dp">
 
                             <ImageView
-                                android:id="@+id/aboutus_image"
+                                android:id="@+id/about_us_image"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_about" />
+                                android:src="@drawable/ic_about"
+                                android:contentDescription="@string/about_us_image_description" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_marginHorizontal="20dp"
-                                android:layout_toEndOf="@+id/aboutus_image"
+                                android:layout_toEndOf="@+id/about_us_image"
                                 android:fontFamily="@font/cairo_semi_bold"
                                 android:text="@string/about_us"
                                 android:textSize="18sp" />
@@ -304,7 +307,8 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_centerVertical="true"
-                                android:src="@drawable/ic_currency" />
+                                android:src="@drawable/ic_currency"
+                                android:contentDescription="@string/currency" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -340,7 +344,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_img_auth_1" />
+                    android:src="@drawable/ic_img_auth_1"
+                    android:contentDescription="@string/no_login_image" />
 
                 <TextView
                     android:id="@+id/login_required_text"

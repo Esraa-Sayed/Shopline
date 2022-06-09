@@ -71,7 +71,7 @@
     <string name="paypal">PayPal</string>
     <string name="Cash_on_delivery">Cash on delivery</string>
     <string name="city">City</string>
-    <string name="add_adress">Add Address</string>
+    <string name="add_address_btn">Add Address</string>
     <string name="_total">Total</string>
     <string name="error">Error</string>
     <string name="no_internet_access">No Internet Access</string>
@@ -122,4 +122,18 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="please_enter_a_valid_data">Please enter a valid data</string>
+    <string name="address_error_msg">Is not a valid country, or this address already Exist, please try again</string>
+    <string name="sure_for_delete">Are you sure you want to delete it?</string>
+    <string name="hello">\"Hello, \"</string>
+    <string name="about_us_image_description">About Us Image Description</string>
+    <string name="contact_us_image">contact us image</string>
+    <string name="email_shopify_gmail_com_phone_201234567891">email: shopify@gmail.com\nphone: +201234567891</string>
+    <string name="address_image">address image</string>
+    <string name="payment_image">payment image</string>
+    <string name="no_login_image">no login image</string>
+    <string name="delete_image">delete image</string>
+    <string name="minus_image">minus image</string>
+    <string name="_1">1</string>
+    <string name="plus_image">plus image</string>
+    <string name="favourite_image_btn">favourite image btn</string>
 </resources>

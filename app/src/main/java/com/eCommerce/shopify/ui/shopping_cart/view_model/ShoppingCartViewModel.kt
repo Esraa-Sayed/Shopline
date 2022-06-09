@@ -1,86 +1,80 @@
 package com.eCommerce.shopify.ui.shopping_cart.view_model
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.ui.shopping_cart.repo.ShoppingCartRepoInterface
-import com.eCommerce.shopify.utils.AppConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ShoppingCartViewModel(val context: Context, val repo: ShoppingCartRepoInterface, var products: MutableList<ProductDetail>) : ViewModel() {
 
-    private var mutableTotalPrice: MutableLiveData<String> = MutableLiveData()
-    val totalPriceAsString: LiveData<String> = mutableTotalPrice
+    private var mutableTotalPrice: MutableLiveData<Double> = MutableLiveData()
+    val totalPrice: LiveData<Double> = mutableTotalPrice
 
     init {
-        getTotalPriceAsString(products)
+        getTotalPrice(products)
     }
     fun getIsLogin(): Boolean {
         return repo.getIsLogin(context = context)
     }
-    fun insertProductInShoppingCart(productDetail: ProductDetail) {
+    fun updateProductInShoppingCart(productDetail: ProductDetail) {
         viewModelScope.launch(Dispatchers.IO) {
-            repo.insertProductInShoppingCart(productDetail)
+            repo.updateProductInShoppingCart(productDetail)
         }
 
     }
 
-    fun deleteProductFromShopingCart(productDetail: ProductDetail){
+    fun deleteProductFromShoppingCart(productDetail: ProductDetail){
         viewModelScope.launch(Dispatchers.IO) {
-            updatePrice(productDetail.variants[0].price.toDouble() * productDetail.amount, "-")
-            repo.deleteProductFromShopingCart(productDetail)
+            updateTotalPrice(productDetail.variants[0].price.toDouble() * productDetail.amount, "-")
+            repo.deleteProductFromShoppingCart(productDetail)
         }
     }
 
     fun getCurrency(): String{
         return repo.getCurrencyFromSharedPref(context = context)
     }
-    fun getTotalPriceAsString(productDetail: List<ProductDetail>){
-        var currency = getCurrency()
+    private fun getTotalPrice(productDetail: List<ProductDetail>){
         var sumOfPrice = 0.0
-        if(productDetail.size > 0){
+        if(productDetail.isNotEmpty()){
             for (item in productDetail){
-                sumOfPrice += item.variants[0].price.toDouble() * item.amount
+                sumOfPrice += (item.variants[0].price.toDouble() * item.amount)
             }
-            var priceMultiplier = 1.0
-            if(currency != AppConstants.EGP){
-                priceMultiplier /= 10
-            }
-            val priceDouble = sumOfPrice * priceMultiplier
-            val totalPrice = String.format("%.2f", priceDouble) + " " + currency
-            mutableTotalPrice.postValue(totalPrice)
+            mutableTotalPrice.postValue(getPriceWithCurrency(sumOfPrice))
         }
         else{
-            mutableTotalPrice.postValue("00.00")
+            mutableTotalPrice.postValue(00.00)
         }
     }
 
-    fun updatePrice(totalAmount: Double, operation: String){
-        var amount = totalAmount
-        if(getCurrency() != "EGP"){
-            amount /= 20
-        }
-        Log.i("UPDATE_TOTAL_PRICE", amount.toString())
+    fun updateTotalPrice(amountOfPrice: Double, operation: String){
         when(operation){
-            "-" -> mutableTotalPrice.postValue((mutableTotalPrice.value?.split(" ")?.get(0)?.toDouble()
-                ?.minus(amount)).toString() + " " + getCurrency())
-            "+" -> mutableTotalPrice.postValue((mutableTotalPrice.value?.split(" ")?.get(0)?.toDouble()
-                ?.plus(amount)).toString() + " " + getCurrency())
+            "+" -> mutableTotalPrice.postValue(mutableTotalPrice.value?.plus(getPriceWithCurrency(amountOfPrice)))
+            "-" -> mutableTotalPrice.postValue(mutableTotalPrice.value?.minus(getPriceWithCurrency(amountOfPrice)))
         }
-
     }
 
-
+    private fun getPriceWithCurrency(price: Double): Double{
+        var priceTemp = price
+        val currency = getCurrency()
+        if(currency != "EGP"){
+            priceTemp /= 20
+        }
+        return priceTemp
+    }
+    fun getPriceWithCurrencyAsString(price: Double): String{
+        val currency = getCurrency()
+        return String.format("%.2f", price).plus(" ").plus(currency)
+    }
 
     fun deleteProduct(productDetail: ProductDetail) {
         if (products.size >= 2){
             products.remove(productDetail)
-            getTotalPriceAsString(products)
+            getTotalPrice(products)
         }
         else{
             products = mutableListOf()

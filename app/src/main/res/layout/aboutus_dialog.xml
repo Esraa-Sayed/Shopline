@@ -17,19 +17,20 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/aboutus_image"
+            android:id="@+id/about_us_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_about" />
+            android:src="@drawable/ic_about"
+            android:contentDescription="@string/about_us_image_description" />
 
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/aboutus_image"
+            android:layout_below="@+id/about_us_image"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="10dp"
@@ -39,7 +40,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/aboutus_text"
+            android:id="@+id/about_us_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text"
@@ -52,10 +53,10 @@
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/textt"
+            android:id="@+id/team_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/aboutus_text"
+            android:layout_below="@+id/about_us_text"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="15dp"
@@ -69,7 +70,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textt"
+            android:layout_below="@+id/team_title_text"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/cairo_regular"
             android:gravity="center_horizontal"
@@ -79,13 +80,13 @@
         <Button
             android:id="@+id/dismiss_btn"
             android:layout_width="160dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_below="@+id/team_text"
             android:layout_centerHorizontal="true"
             android:layout_marginVertical="20dp"
             android:background="@drawable/rounded_rectangle"
             android:fontFamily="@font/cairo_semi_bold"
-            android:text="Dismiss"
+            android:text="@string/dismiss"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15sp" />
