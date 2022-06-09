@@ -16,6 +16,8 @@ interface BrandProductsRepositoryInterface {
 
     fun getUserId(context: Context): Long
 
+    fun getCurrency(context: Context): String
+
     fun getAllFavorites(): LiveData<List<Product>>
 
     fun getFavoritesWithUserId(userId: Long): LiveData<List<Product>>

@@ -30,7 +30,7 @@ class RegisterViewModel(private val repo: RegisterRepoInterface):ViewModel() {
     }
 
     fun postNewCustomer(customer: CustomerResponse){
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler){
             val newResponseCustomer = repo.registerCustomer(customer)
 
             if(newResponseCustomer.isSuccessful){

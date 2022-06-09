@@ -36,6 +36,8 @@ import com.eCommerce.shopify.ui.product.view.ProductFragmentDirections
 import com.eCommerce.shopify.ui.favorite.view.FavoriteFragmentDirections
 
 import com.eCommerce.shopify.utils.AppConstants
+import java.text.NumberFormat
+import java.util.*
 
 class BrandProductsFragment : Fragment() , OnProductClickListener {
 
@@ -48,8 +50,6 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
 
     private lateinit var brandProductsViewModel: BrandProductsViewModel
     private lateinit var brandProductsViewModelFactory: BrandProductsViewModelFactory
-
-    private lateinit var allProduct: List<Product>
 
     private val args by navArgs<BrandProductsFragmentArgs>()
 
@@ -108,7 +108,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             )
         }
         listenToSearch()
-        binding.brandProductsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+        /*binding.brandProductsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 binding.seekbarProgress.text = p1.toString()
                 if(!productsList.isEmpty()) {
@@ -130,7 +130,36 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             override fun onStartTrackingTouch(p0: SeekBar?) {}
 
             override fun onStopTrackingTouch(p0: SeekBar?) {}
-        })
+        })*/
+
+        binding.brandProductsRangedSeekbar.addOnChangeListener { slider, value, fromUser ->
+            brandProductsAdapter.setBrandProductsList(productsList.filter {
+                val values = binding.brandProductsRangedSeekbar.values
+                val price: Float = it.variants[0].price.toFloat()
+                price >= values[0] && price <= values[1]
+            })
+            brandProductsAdapter.notifyDataSetChanged()
+        }
+
+        val currentCurrency = brandProductsViewModel.getCustomerCurrency(myView.context)
+        if(currentCurrency == "$"){
+            binding.minValue.text = "0$"
+            val maxInDollar = 1000.0/18.0
+            binding.maxValue.text = "${String.format("%.2f", maxInDollar)}$"
+        }
+
+        binding.brandProductsRangedSeekbar.setLabelFormatter { value: Float ->
+            val format = NumberFormat.getCurrencyInstance()
+            format.maximumFractionDigits = 0
+            if(currentCurrency == "$") {
+                format.currency = Currency.getInstance("USD")
+            }
+            else{
+                format.currency = Currency.getInstance("EGP")
+            }
+            format.format(value.toDouble())
+        }
+
     }
     private fun listenToSearch(){
         binding.appBarHome.txtInputEditTextSearch.setOnClickListener{
@@ -141,19 +170,16 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
         }
     }
 
-
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
         binding.appBarHome.toolbar.title = getString(R.string.products)
+        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
     }
 
     private fun handleToolbarEvent() {
         binding.appBarHome.cardViewFavorite.setOnClickListener {
             navController.navigate(R.id.action_brandProductsFragment_to_favoriteFragment)
-        }
-
-        binding.appBarHome.cardViewShoppingCart.setOnClickListener {
-            navController.navigate(R.id.action_brandProductsFragment_to_shoppingCartFragment)
         }
     }
 
@@ -207,5 +233,9 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             dialog.setCanceledOnTouchOutside(true)
             dialog.show()
         }
+    }
+
+    override fun currencyHandling(): String {
+        return brandProductsViewModel.getCustomerCurrency(myView.context)
     }
 }

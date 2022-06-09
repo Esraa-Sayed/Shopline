@@ -54,5 +54,4 @@ object AppConstants {
         }
         return items
     }*/
-
 }

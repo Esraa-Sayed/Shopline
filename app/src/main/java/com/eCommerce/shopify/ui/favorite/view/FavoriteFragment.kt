@@ -105,4 +105,7 @@ class FavoriteFragment : Fragment() , OnProductClickListener {
         favoriteViewModel.deleteFromFavorite(product)
     }
 
+    override fun currencyHandling(): String {
+        return favoriteViewModel.getCustomerCurrency(myView.context)
+    }
 }
