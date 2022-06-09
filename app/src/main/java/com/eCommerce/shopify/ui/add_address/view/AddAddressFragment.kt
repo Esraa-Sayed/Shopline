@@ -60,7 +60,7 @@ class AddAddressFragment : Fragment() {
                 .setTitle("Add Address")
                 .setMessage("Address is added successfully")
                 .setPositiveButton(R.string.ok) { _, _ ->
-                    navController.navigate(R.id.action_addAddressFragment_to_addressesFragment)
+                    navController.popBackStack()
                 }
                 .show()
         })
