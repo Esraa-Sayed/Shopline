@@ -63,6 +63,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     private lateinit var currency:String
     private lateinit var totalPrice:String
     private lateinit var paymentMethod:String
+    private lateinit var address:Addresse
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -85,9 +86,9 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     }
     @SuppressLint("SetTextI18n")
     fun init(){
-
         setUpViewModel()
         setUpPayPal()
+        address = Addresse(address1 = "Helwan,Arab elwalda")
         paymentMethod = getString(R.string.Cash_on_delivery)
         currency = viewModel.getCurrency(myView.context)
         binding.discountValueFromApi.text = "0.0 $currency"
@@ -162,6 +163,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
                addressesAdapter.updateData(it.addresses)
                 binding.countryName.text = it.addresses[0].country
                 binding.city.text = it.addresses[0].city
+                address = it.addresses[0]
             }
         })
     }
@@ -178,6 +180,8 @@ class CheckoutFragment : Fragment(), OnRowClicked {
 
         viewModel.postOrderResponse.observe(viewLifecycleOwner, {
             Log.e("postOrder", "init POST ORDER I'm here************ : ${it.order.created_at}" )
+            viewModel.deleteCheckOutList(checkoutFragmentArgs.productsCheckout)
+            navController.navigate(R.id.action_checkoutFragment_to_successFragment2)
         })
         viewModel.errorMsgResponse.observe(viewLifecycleOwner, {
             Log.e("TAG", "initldsjflsk: $it" )
@@ -228,10 +232,8 @@ class CheckoutFragment : Fragment(), OnRowClicked {
 
     private fun placeOrder() {
         val lineItems = LineItemAdapter.convertProductDetailIntoLineItem(checkoutFragmentArgs.productsCheckout)
-        //******************************** لحد ما ثريا تخلص ال address ******************************
-        val address = Addresse(address1 = "Helwan,Arab elwalda")
         val toDayDate = getTodayDate()
-        val discountCode = listOf(DiscountCode(amount = "50", code = couponCode ?: ""))
+        val discountCode = listOf(DiscountCode(amount = "50", code = couponCode ?: "Not found"))
         if (currency == "$")
             currency = "USD"
         val order = Order(line_items = lineItems, shipping_address = address,
@@ -242,8 +244,6 @@ class CheckoutFragment : Fragment(), OnRowClicked {
                             presentment_currency = currency
                         )
         viewModel.postOrderWithUserIdAndEmail(order,myView.context)
-        viewModel.deleteCheckOutList(checkoutFragmentArgs.productsCheckout)
-        navController.navigate(R.id.action_checkoutFragment_to_successFragment2)
     }
 
     private fun checkCouponCodeValidation(couponCode: String): Boolean {
@@ -258,6 +258,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         dialogAddress.dismiss()
         binding.countryName.text = address.country
         binding.city.text = address.city
+        this.address = address
     }
     private fun showAlert(message:String){
         AppConstants.showAlert(
