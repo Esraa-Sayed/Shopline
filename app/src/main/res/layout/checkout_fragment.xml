@@ -85,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="36dp"
-                        android:text="@string/address"
+                        android:text="@string/city2"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -93,7 +93,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
                     <TextView
-                        android:id="@+id/fullAddress"
+                        android:id="@+id/city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Helwan"

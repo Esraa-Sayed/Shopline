@@ -20,6 +20,7 @@ class AddressesAdapter(val context: Context, var addresses:List<Addresse>, var o
        val address = addresses[position]
         holder.binding.countryName.text = address.country
         holder.binding.fullAddress.text = address.address1.toString()
+        holder.binding.cityAddress.text = address.city
         holder.itemView.setOnClickListener {
             onRowClicked?.onRowClickedListenerAddress(address)
         }

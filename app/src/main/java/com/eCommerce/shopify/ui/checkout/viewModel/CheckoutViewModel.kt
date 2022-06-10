@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eCommerce.shopify.model.AddressesUserModel
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.discount.DiscountCodes
@@ -16,7 +17,6 @@ import com.eCommerce.shopify.utils.AppSharedPref
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class CheckoutViewModel(var _repo: CheckoutRepoInterface) : ViewModel() {
     private var _postOrderResponse = MutableLiveData<OrderDetails>()
@@ -27,6 +27,9 @@ class CheckoutViewModel(var _repo: CheckoutRepoInterface) : ViewModel() {
 
     private var _getDiscountCodesResponse = MutableLiveData<DiscountCodes>()
     val getDiscountCodesResponse: LiveData<DiscountCodes> = _getDiscountCodesResponse
+
+    private var _userAddresses = MutableLiveData<AddressesUserModel>()
+    val userAddresses: LiveData<AddressesUserModel> = _userAddresses
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, t ->
         run {
@@ -76,6 +79,17 @@ class CheckoutViewModel(var _repo: CheckoutRepoInterface) : ViewModel() {
     fun deleteCheckOutList(productDetail: Array<ProductDetail>) {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             _repo.deleteCheckOutList(productDetail)
+        }
+    }
+    fun getUserAddresses(context: Context) {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            val userId = _repo.getUserID(context)
+            val user = _repo.getUserAddressesWithId(userId)
+            if (user.isSuccessful) {
+                _userAddresses.postValue(user.body())
+            } else {
+                _errorMsgResponse.postValue(user.message())
+            }
         }
     }
 }

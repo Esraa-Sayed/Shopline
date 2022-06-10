@@ -76,13 +76,16 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         Log.e("TAG", "onViewCreated:productsCheckout.size ${checkoutFragmentArgs.productsCheckout.size}" )
         Log.e("TAG", "onViewCreated:checkoutFragmentArgs.totalPrice ${checkoutFragmentArgs.totalPrice}" )
         myView = view
+
         init()
         buttonsListener()
         setupAddressDialog()
+        getUserAddresses()
         setupPaymentMethodDialog()
     }
     @SuppressLint("SetTextI18n")
     fun init(){
+
         setUpViewModel()
         setUpPayPal()
         paymentMethod = getString(R.string.Cash_on_delivery)
@@ -96,6 +99,8 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         dialogPayment = Dialog(myView.context)
         viewModel = ViewModelProvider(this).get(CheckoutViewModel::class.java)
         binding.appBar.toolbar.title = "Checkout"
+
+
     }
 
 
@@ -139,6 +144,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         dialogAddress.setContentView(R.layout.choose_address_dialog_checkout_screen)
         dialogAddress.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialogRecyclerView = dialogAddress.findViewById(R.id.checkoutScreenChooseAddressRecyclerView)
+        getUserAddresses()
         addressesAdapter = AddressesAdapter(myView.context, emptyList(),this)
         val layoutManag = LinearLayoutManager(activity)
         dialogRecyclerView.apply {
@@ -149,6 +155,16 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         }
     }
 
+    private fun getUserAddresses() {
+        viewModel.getUserAddresses(myView.context)
+        viewModel.userAddresses.observe(viewLifecycleOwner,{
+            if (it != null) {
+               addressesAdapter.updateData(it.addresses)
+                binding.countryName.text = it.addresses[0].country
+                binding.city.text = it.addresses[0].city
+            }
+        })
+    }
 
 
     private fun setUpViewModel() {
@@ -241,7 +257,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
     override fun onRowClickedListenerAddress(address: Addresse) {
         dialogAddress.dismiss()
         binding.countryName.text = address.country
-        binding.fullAddress.text = address.address1.toString()
+        binding.city.text = address.city
     }
     private fun showAlert(message:String){
         AppConstants.showAlert(

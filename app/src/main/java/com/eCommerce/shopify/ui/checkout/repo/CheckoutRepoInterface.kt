@@ -13,4 +13,5 @@ interface CheckoutRepoInterface {
     fun getCurrency(context: Context): String
     fun getUserID(context: Context): Long
     fun deleteCheckOutList(productDetail: Array<ProductDetail>)
+    suspend fun getUserAddressesWithId(userId:Long): Response<AddressesUserModel>
 }

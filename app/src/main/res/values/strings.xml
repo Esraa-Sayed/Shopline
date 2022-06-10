@@ -136,4 +136,6 @@
     <string name="_1">1</string>
     <string name="plus_image">plus image</string>
     <string name="favourite_image_btn">favourite image btn</string>
+    <string name="country2">Country:</string>
+    <string name="city2">City:</string>
 </resources>

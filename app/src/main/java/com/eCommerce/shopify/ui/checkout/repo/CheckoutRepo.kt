@@ -3,6 +3,7 @@ package com.eCommerce.shopify.ui.checkout.repo
 import android.content.Context
 import android.util.Log
 import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
+import com.eCommerce.shopify.model.AddressesUserModel
 import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.Order
@@ -48,5 +49,8 @@ class CheckoutRepo private constructor(
         for (product in productDetail) {
             shoppingCartLocalSource.deleteProductFromShoppingCart(product)
         }
+    }
+    override suspend fun getUserAddressesWithId(userId: Long): Response<AddressesUserModel> {
+        return remoteSource.getUserAddresses(userId)
     }
 }
