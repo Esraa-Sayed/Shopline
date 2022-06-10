@@ -231,7 +231,7 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         //******************************** لحد ما ثريا تخلص ال address ******************************
         val address = Addresse(address1 = "Helwan,Arab elwalda")
         val toDayDate = getTodayDate()
-        val discountCode = listOf(DiscountCode(code = couponCode ?: ""))
+        val discountCode = listOf(DiscountCode(amount = "50", code = couponCode ?: ""))
         if (currency == "$")
             currency = "USD"
         val order = Order(line_items = lineItems, shipping_address = address,
