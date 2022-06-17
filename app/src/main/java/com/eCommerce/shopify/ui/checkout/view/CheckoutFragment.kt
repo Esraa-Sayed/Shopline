@@ -274,7 +274,7 @@ class CheckoutFragment : Fragment(){
     }
     //*************************************** payPalPaymentMethod **************************************************************
     private fun payPalPaymentMethod() {
-        var payment = PayPalPayment(BigDecimal(100),"USD","Shopify",PayPalPayment.PAYMENT_INTENT_SALE)
+        var payment = PayPalPayment(BigDecimal(totalPrice.split(" ")[0]),"USD","Shopify",PayPalPayment.PAYMENT_INTENT_SALE)
         val intent = Intent(activity,PaymentActivity::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,payPalConfiguration)
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)

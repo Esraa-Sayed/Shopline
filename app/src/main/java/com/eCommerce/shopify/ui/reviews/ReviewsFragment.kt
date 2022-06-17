@@ -50,11 +50,10 @@ class ReviewsFragment : Fragment() {
     }
 
     private fun setupToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
-        binding.appBarHome.cardViewFavorite.visibility = View.GONE
-        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
-        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
-        binding.appBarHome.toolbar.title = getString(R.string.reviews)
+        (activity as AppCompatActivity).setSupportActionBar(binding.appBar.toolbar)
+
+        binding.appBar.toolbar.title = getString(R.string.reviews)
+        binding.appBar.backArrow.setOnClickListener { navController.popBackStack() }
     }
 
     private fun initRecyclerView() {

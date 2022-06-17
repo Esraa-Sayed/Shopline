@@ -90,7 +90,7 @@ class LoginFragment : Fragment() {
         })
         viewModel.getUserData(email)
         viewModel.UserDataResponse.observe(viewLifecycleOwner){
-
+            setLoginButtonEnableOrDisable(true)
             if(it.customers.isNotEmpty()){
                 viewModel.UserDataResponse.removeObservers(viewLifecycleOwner)
                 if(it.customers[0].tags == password){
@@ -99,7 +99,6 @@ class LoginFragment : Fragment() {
                 }
                 else{
                     showErrorMessage(getString(R.string.EmailOrPasswordIsIncorrect))
-                    setLoginButtonEnableOrDisable(true)
                 }
             }
             else{
