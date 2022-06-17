@@ -28,23 +28,22 @@ import com.eCommerce.shopify.model.Addresse
 import com.eCommerce.shopify.model.discount.DiscountCodes
 import com.eCommerce.shopify.model.orderDetails.DiscountCode
 import com.eCommerce.shopify.model.orderDetails.Order
+import com.eCommerce.shopify.model.payPalResponse.payPalResponse
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.AddressesAdapter
-import com.eCommerce.shopify.ui.AddressAndCheckoutAdapter.OnRowClicked
 import com.eCommerce.shopify.ui.checkout.repo.CheckoutRepo
 import com.eCommerce.shopify.ui.checkout.repo.LineItemAdapter
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModel
 import com.eCommerce.shopify.ui.checkout.viewModel.CheckoutViewModelFactory
 import com.eCommerce.shopify.utils.AppConstants
-import com.paypal.android.sdk.payments.PayPalConfiguration
-import com.paypal.android.sdk.payments.PayPalPayment
-import com.paypal.android.sdk.payments.PayPalService
-import com.paypal.android.sdk.payments.PaymentActivity
+import com.google.gson.Gson
+import com.paypal.android.sdk.payments.*
+import org.json.JSONException
 import java.math.BigDecimal
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CheckoutFragment : Fragment(), OnRowClicked {
+class CheckoutFragment : Fragment(){
 
 
     private lateinit var viewModel: CheckoutViewModel
@@ -146,7 +145,13 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         dialogAddress.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialogRecyclerView = dialogAddress.findViewById(R.id.checkoutScreenChooseAddressRecyclerView)
         getUserAddresses()
-        addressesAdapter = AddressesAdapter(myView.context, emptyList(),this)
+
+        addressesAdapter = AddressesAdapter(myView.context, emptyList()){
+            dialogAddress.dismiss()
+            binding.countryName.text = it.country
+            binding.city.text = it.city
+            this.address = it
+        }
         val layoutManag = LinearLayoutManager(activity)
         dialogRecyclerView.apply {
             setHasFixedSize(true)
@@ -253,13 +258,6 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         }
         return false
     }
-
-    override fun onRowClickedListenerAddress(address: Addresse) {
-        dialogAddress.dismiss()
-        binding.countryName.text = address.country
-        binding.city.text = address.city
-        this.address = address
-    }
     private fun showAlert(message:String){
         AppConstants.showAlert(
             myView.context,
@@ -283,10 +281,36 @@ class CheckoutFragment : Fragment(), OnRowClicked {
         requestPaymentMethod.launch(intent)
     }
     private val requestPaymentMethod =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                showAlert("Payment made successfully")
-                Log.e("TAG", ": *************requestPaymentMethod****************************" )
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { data ->
+            if (data.resultCode == Activity.RESULT_OK) {
+
+                val auth = data?.data?.getParcelableExtra<PayPalAuthorization>(PayPalProfileSharingActivity.EXTRA_RESULT_AUTHORIZATION)
+                val confirm = data?.data?.getParcelableExtra<PaymentConfirmation>(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
+                if (confirm != null) {
+                    try {
+                        Log.e("TAG", ": auth ${auth}" )
+                        val resultConfirm = confirm.toJSONObject().toString(4)
+                        val gson = Gson()
+                        val resultConfirmData = gson.fromJson(resultConfirm, payPalResponse::class.java)
+                        Log.e("TAG", "data result ${resultConfirmData.response.id}")
+
+                    }catch (e: JSONException) {
+                        Log.e("TAG", "an extremely unlikely failure occurred: ", e)
+                        Toast.makeText(context,
+                            "Payment failed please try Again!",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }else if (data.resultCode == Activity.RESULT_CANCELED) {
+                Log.i("TAG", "The user canceled.")
+                Toast.makeText(context, "Payment Canceled!", Toast.LENGTH_SHORT).show()
+
+            } else if (data.resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
+                Log.i(
+                    "TAG",
+                    "An invalid Payment or PayPalConfiguration was submitted. Please see the docs."
+                )
+                Toast.makeText(context, "Invalid Payment Data!", Toast.LENGTH_SHORT).show()
             }
         }
     private val payPalConfiguration = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK)

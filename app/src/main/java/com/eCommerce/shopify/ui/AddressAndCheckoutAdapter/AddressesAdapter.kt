@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eCommerce.shopify.databinding.AddressRowBinding
 import com.eCommerce.shopify.model.Addresse
 
-class AddressesAdapter(val context: Context, var addresses:List<Addresse>, var onRowClicked: OnRowClicked?):
+class AddressesAdapter(val context: Context, var addresses:List<Addresse>, var onRowClicked: ((Addresse)->Unit)?):
     RecyclerView.Adapter<AddressesAdapter.AddressViewHolder>() {
 
 
@@ -22,13 +22,12 @@ class AddressesAdapter(val context: Context, var addresses:List<Addresse>, var o
         holder.binding.fullAddress.text = address.address1.toString()
         holder.binding.cityAddress.text = address.city
         holder.itemView.setOnClickListener {
-            onRowClicked?.onRowClickedListenerAddress(address)
+            //onRowClicked?.onRowClickedListenerAddress(address)
+            onRowClicked?.let { it1 -> it1(address) }
         }
     }
 
-    override fun getItemCount(): Int {
-        return addresses.size
-    }
+    override fun getItemCount() =  addresses.size
     fun updateData(addresses:List<Addresse>){
         this.addresses = addresses
         notifyDataSetChanged()

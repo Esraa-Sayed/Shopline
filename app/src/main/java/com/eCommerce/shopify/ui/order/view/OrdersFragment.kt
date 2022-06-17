@@ -22,7 +22,7 @@ import com.eCommerce.shopify.ui.order.viewModel.OrdersViewModelFactory
 import com.eCommerce.shopify.ui.orderDetails.view.OrdersDetailsFragmentArgs
 import com.eCommerce.shopify.utils.AppConstants
 
-class OrdersFragment : Fragment(),OnOrderRowClicked {
+class OrdersFragment : Fragment() {
     private lateinit var bindingFragment: OrdersFragmentBinding
     private lateinit var viewModel: OrdersViewModel
     private lateinit var ordersViewModelFactory: OrdersViewModelFactory
@@ -53,7 +53,13 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
 
         getString(R.string.orders).also { bindingFragment.appBar.toolbar.title = it }
 
-        ordersAdapter = OrdersAdapter(myView.context, emptyList(),viewModel.getCurrency(myView.context),this)
+        ordersAdapter = OrdersAdapter(myView.context, emptyList(),viewModel.getCurrency(myView.context)){
+            val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment2(
+                it.created_at!!,
+                it.customer!!.first_name?:"Not found",
+                it.line_items!!.toTypedArray())
+            findNavController().navigate(action)
+        }
         var linearManager = LinearLayoutManager(activity)
         bindingFragment.ordersRecyclerView.apply {
             setHasFixedSize(true)
@@ -87,12 +93,5 @@ class OrdersFragment : Fragment(),OnOrderRowClicked {
                 R.drawable.ic_error
             )
         })*/
-    }
-    override fun onRowClickedListener(order: Order) {
-        val action = OrdersFragmentDirections.actionOrdersFragmentToOrdersDetailsFragment2(
-            order.created_at!!,
-            order.customer!!.first_name?:"Not found",
-            order.line_items!!.toTypedArray())
-        findNavController().navigate(action)
     }
 }

@@ -10,7 +10,7 @@ import com.eCommerce.shopify.model.orderDetails.Order
 import com.eCommerce.shopify.utils.AppConstants
 import kotlin.math.pow
 
-class OrdersAdapter(private val context: Context, private var  orders:List<Order>,private var userCurrency: String,private var onOrderRowClicked:OnOrderRowClicked): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
+class OrdersAdapter(private val context: Context, private var  orders:List<Order>,private var userCurrency: String,private var onOrderRowClicked:(Order)->Unit): RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -34,14 +34,12 @@ class OrdersAdapter(private val context: Context, private var  orders:List<Order
 
         holder.viewBinding.pOrdersRowCardView.setOnClickListener{
             Log.e("TAG", "onBindViewHolder: YEss")
-            onOrderRowClicked.onRowClickedListener(order)
+           // onOrderRowClicked.onRowClickedListener(order)
+            onOrderRowClicked(order)
         }
     }
 
-    override fun getItemCount(): Int {
-        return orders.size
-    }
-
+    override fun getItemCount() = orders.size
     fun updateData(orders:List<Order>){
         this.orders = orders
         notifyDataSetChanged()
