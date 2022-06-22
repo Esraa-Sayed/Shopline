@@ -24,6 +24,19 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/backArrow"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_left_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="@+id/toolbar"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
@@ -36,12 +49,11 @@
                     android:layout_marginBottom="8dp"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/cardViewShoppingCart"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cardViewFavorite"
+                    app:layout_constraintStart_toEndOf="@+id/backArrow"
                     app:layout_constraintTop_toTopOf="parent"
                     app:popupTheme="@style/Theme.Shopify.PopupOverlay"
                     app:titleCentered="true" />
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardViewFavorite"
                     android:layout_width="50dp"
@@ -61,50 +73,6 @@
                         android:textAlignment="center"
                         app:srcCompat="@drawable/ic_favorite_border"
                         tools:ignore="ContentDescription" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardViewShoppingCart"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="8dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/cardViewFavorite"
-                    app:layout_constraintEnd_toStartOf="@+id/cardViewFavorite"
-                    app:layout_constraintTop_toTopOf="@+id/cardViewFavorite">
-
-                    <ImageView
-                        android:id="@+id/imgViewShoppingCart"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        app:srcCompat="@drawable/ic_shopping_cart"
-                        tools:ignore="ContentDescription" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardViewShoppingCartCount"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="-12dp"
-                    android:layout_marginBottom="-12dp"
-                    android:backgroundTint="@color/plum"
-                    android:visibility="gone"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/cardViewShoppingCart"
-                    app:layout_constraintEnd_toStartOf="@+id/cardViewShoppingCart">
-
-                    <TextView
-                        android:id="@+id/txtViewCartCount"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@color/white" />
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -131,8 +99,8 @@
                 android:background="@drawable/round_corner_search"
                 android:hint="Search here"
                 android:imeOptions="actionSearch"
+                android:focusable="true"
                 android:inputType="text"
-                android:focusable="false"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 

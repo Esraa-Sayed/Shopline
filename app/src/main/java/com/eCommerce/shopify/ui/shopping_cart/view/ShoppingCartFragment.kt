@@ -125,6 +125,11 @@ class ShoppingCartFragment : Fragment(), Listener {
         }
 
     private fun initShoppingCartRecyclerView() {
+        if(shoppingCartFragmentArgs.productDetail.isEmpty()){
+            binding.scLogin.visibility = View.GONE
+            binding.scNoCart.visibility = View.VISIBLE
+            binding.shoppingCartPage.setBackgroundResource(R.color.white)
+        }
         adapter = ShoppingCartAdapter(this, shoppingCartFragmentArgs.productDetail.toList(), viewModel.getCurrency())
         _binding?.scRecyclerView?.layoutManager = LinearLayoutManager(this.requireContext()).apply {
             orientation = LinearLayoutManager.VERTICAL
