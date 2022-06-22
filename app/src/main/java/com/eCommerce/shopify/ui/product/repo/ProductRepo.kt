@@ -7,6 +7,7 @@ import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.Products
 import com.eCommerce.shopify.model.UserData
 import com.eCommerce.shopify.network.RemoteSource
+import com.eCommerce.shopify.utils.AppConstants
 import com.eCommerce.shopify.utils.AppConstants.PREFRENCE_File
 import com.eCommerce.shopify.utils.AppConstants.USER_EMAIL
 import com.eCommerce.shopify.utils.AppSharedPref
@@ -30,4 +31,8 @@ class ProductRepo private constructor(
 
     override val allProductInShoppingCart: LiveData<List<ProductDetail>>
         get() = shoppingCartLocalSource.allProductInShoppingCart
+
+    override fun isUserLogin(context: Context): Boolean {
+        return AppSharedPref.getInstance(context, PREFRENCE_File).getBooleanValue(AppConstants.IS_LOGIN, false)
+    }
 }

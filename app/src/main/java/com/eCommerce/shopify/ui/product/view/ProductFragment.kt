@@ -1,6 +1,7 @@
 package com.eCommerce.shopify.ui.product.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -131,15 +132,20 @@ class ProductFragment : Fragment(), OnCategoryProductClickListener {
             renderDataOnScreen(allProductList)
         }
 
-        viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                productDetailList = it
-                binding.appBarHome.txtViewCartCount.text = it.size.toString()
-                binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
-            } else {
-                productDetailList = listOf()
-                binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+        if (viewModel.isUserLogin(myView.context)) {
+            viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    productDetailList = it
+                    binding.appBarHome.txtViewCartCount.text = it.size.toString()
+                    binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
+                } else {
+                    productDetailList = listOf()
+                    binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+                }
             }
+        } else {
+            productDetailList = listOf()
+            binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
         }
     }
 

@@ -29,6 +29,8 @@ class SettingFragment : Fragment() {
     private val binding get() = _binding
     private lateinit var viewModel: SettingViewModel
 
+    private lateinit var myView: View
+
     private val mNavController by lazy {
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
     }
@@ -43,6 +45,9 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        myView = view
+
         val factory = SettingViewModelFactory(SettingRepo(APIClient.getInstance()))
         viewModel = ViewModelProvider(this, factory)[SettingViewModel::class.java]
         if(checkIfUserLoginAndInitInfo()){
@@ -75,13 +80,13 @@ class SettingFragment : Fragment() {
         }
     }
     private fun checkIfUserLoginAndInitInfo(): Boolean{
-        val isLogin: Boolean = viewModel.getIsLogin(requireContext())
+        val isLogin: Boolean = viewModel.getIsLogin(myView.context)
         if(isLogin){
             binding.settingNoLogin.visibility = View.GONE
             binding.loginLayout.visibility = View.VISIBLE
             binding.settingPage.setBackgroundResource(R.color.titan_white)
-            binding.helloName.text = getString(R.string.hello).plus(viewModel.getUserName(requireContext()))
-            binding.email.text = viewModel.getUserEmail(requireContext())
+            binding.helloName.text = getString(R.string.hello).plus(viewModel.getUserName(myView.context))
+            binding.email.text = viewModel.getUserEmail(myView.context)
 
         }
         else{
@@ -102,7 +107,7 @@ class SettingFragment : Fragment() {
             dialog.setTitle("Confirmation")
             bind.confirmText.text = getString(R.string.sure_logout)
             bind.okBtn.setOnClickListener {
-                viewModel.setIsLogin(requireContext(), false)
+                viewModel.setIsLogin(myView.context, false)
                 checkIfUserLoginAndInitInfo()
                 print("in ok button")
                 dialog.dismiss()
@@ -126,7 +131,7 @@ class SettingFragment : Fragment() {
     private fun listenToCurrencyBtn(){
         binding.currencyCardView.setOnClickListener {
 
-            val currency = viewModel.getCurrencyFromSharedPref(requireContext())
+            val currency = viewModel.getCurrencyFromSharedPref(myView.context)
             val inflater = requireActivity().layoutInflater
             val dialog = Dialog(requireActivity())
             dialog.requestWindowFeature(Window.FEATURE_CONTENT_TRANSITIONS)
@@ -145,7 +150,7 @@ class SettingFragment : Fragment() {
                     Log.i("CURRENCY",currency)
                     confirmDialog("Are you sure you want to change currency to $ ?").observe(viewLifecycleOwner, {
                         if(it == true){
-                            viewModel.setCurrencyToSharedPref(requireContext(), "$")
+                            viewModel.setCurrencyToSharedPref(myView.context, "$")
                             Log.i("CURRENCY", currency)
                         }
                     })
@@ -153,15 +158,15 @@ class SettingFragment : Fragment() {
                 dialog.dismiss()
             }
             bind.egpBtn.setOnClickListener{
-                if(viewModel.getCurrencyFromSharedPref(requireContext()) == "EGP"){
+                if(viewModel.getCurrencyFromSharedPref(myView.context) == "EGP"){
                     confirmDialog("The currency already EGP !!         ")
                 }
                 else{
-                    Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                    Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(myView.context))
                     confirmDialog("Are you sure you want to change currency to EGP ?").observe(viewLifecycleOwner, {
                         if(it == true){
-                            viewModel.setCurrencyToSharedPref(requireContext(), "EGP")
-                            Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(requireContext()))
+                            viewModel.setCurrencyToSharedPref(myView.context, "EGP")
+                            Log.i("CURRENCY",viewModel.getCurrencyFromSharedPref(myView.context))
                         }
                     })
                 }

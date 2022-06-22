@@ -115,16 +115,21 @@ class MainFragment : Fragment() {
             )
         })
 
-        viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
-            if (it.isNotEmpty()) {
-                productDetailList = it
-                Log.i("Produact Detail", productDetailList.toString())
-                binding.appBarHome.txtViewCartCount.text = it.size.toString()
-                binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
-            } else {
-                productDetailList = listOf()
-                binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+        if (viewModel.isUserLogin(myView.context)) {
+            viewModel.getAllProductInShoppingCartList().observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    productDetailList = it
+                    Log.i("Produact Detail", productDetailList.toString())
+                    binding.appBarHome.txtViewCartCount.text = it.size.toString()
+                    binding.appBarHome.cardViewShoppingCartCount.visibility = View.VISIBLE
+                } else {
+                    productDetailList = listOf()
+                    binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
+                }
             }
+        } else {
+            productDetailList = listOf()
+            binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
         }
     }
 
