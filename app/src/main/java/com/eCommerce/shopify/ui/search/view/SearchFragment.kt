@@ -50,8 +50,6 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
-        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
         setupToolbar()
         listenToBackBtn()
         gettingViewModelReady()
@@ -60,6 +58,7 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
         listenToFavoriteBtn()
         observeOnSearchingDataToCallViewModelSearch()
     }
+
 
     private fun setupToolbar() {
         binding.appBarHome.toolbar.title = "Search"
@@ -134,9 +133,9 @@ class SearchFragment : Fragment(), OnCategoryProductClickListener {
     }
 
     private fun listenToBackBtn(){
-//        binding.appBarHome.backBtn.setOnClickListener{
-//           navController.navigate(R.id.navigation_home)
-//        }
+        binding.appBarHome.backArrow.setOnClickListener{
+           navController.popBackStack()
+        }
     }
 
     private fun listenToFavoriteBtn(){
