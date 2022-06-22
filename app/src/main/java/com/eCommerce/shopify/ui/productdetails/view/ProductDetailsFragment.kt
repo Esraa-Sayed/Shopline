@@ -1,5 +1,8 @@
 package com.eCommerce.shopify.ui.productdetails.view
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.favorite.LocalSource
 import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
@@ -35,7 +39,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.math.abs
 
-class ProductDetailsFragment : Fragment() {
+class ProductDetailsFragment : Fragment(), OnImageClickListener {
 
     private lateinit var productDetailsViewModelFactory: ProductDetailsViewModelFactory
     private lateinit var viewModel: ProductDetailsViewModel
@@ -60,6 +64,8 @@ class ProductDetailsFragment : Fragment() {
     private var isAddingToShoppingCart = false
     private lateinit var product: Product
     private lateinit var productDetail: ProductDetail
+
+    private lateinit var dialog: Dialog
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -233,7 +239,7 @@ class ProductDetailsFragment : Fragment() {
 
     private fun handleUIViewPager(images: List<ImageProduct>) {
         sliderImages = images
-        binding.viewPagerAdsSlider.adapter = SliderProductDetailsAdapter(myView.context, images)
+        binding.viewPagerAdsSlider.adapter = SliderProductDetailsAdapter(myView.context, images, this)
         binding.viewPagerAdsSlider.clipToPadding = false
         binding.viewPagerAdsSlider.clipChildren = false
         binding.viewPagerAdsSlider.offscreenPageLimit = 3
@@ -281,5 +287,18 @@ class ProductDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onImageClick(position: Int) {
+        dialog = Dialog(myView.context)
+        dialog.setContentView(R.layout.product_details_image)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        Glide
+            .with(myView.context)
+            .load(sliderImages[position].src)
+            .into(dialog.findViewById(R.id.imgViewProductImage))
+
+        dialog.show()
     }
 }

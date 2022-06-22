@@ -15,6 +15,7 @@ import com.eCommerce.shopify.utils.AppConstants.PREFRENCE_File
 import com.eCommerce.shopify.utils.AppConstants.USER_ID
 import com.eCommerce.shopify.utils.AppSharedPref
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 class ProductDetailsRepo private constructor(
     private var remoteSource: RemoteSource,
@@ -48,7 +49,7 @@ class ProductDetailsRepo private constructor(
         val productDetails = remoteSource.getProductDetails(id)
 
         if (getCurrencyWithUserEmail(context) != EGP) {
-            productDetails.body()?.product?.variants?.get(0)?.price = (productDetails.body()?.product?.variants?.get(0)?.price.toString().toDouble() / 18).toString()
+            productDetails.body()?.product?.variants?.get(0)?.price = (((productDetails.body()?.product?.variants?.get(0)?.price.toString().toDouble() / 18) * 100).roundToInt() / 100.0).toString()
         }
 
         if (isUserLogin(context)) {

@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.main.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,5 +22,9 @@ class MainViewModel(private val _repo: MainRepoInterface) : ViewModel() {
 
     fun getAllProductInShoppingCartList(): LiveData<List<ProductDetail>> {
         return _repo.allProductInShoppingCart
+    }
+
+    fun isUserLogin(context: Context): Boolean {
+        return _repo.isUserLogin(context)
     }
 }

@@ -13,7 +13,8 @@ import com.makeramen.roundedimageview.RoundedImageView
 
 class SliderProductDetailsAdapter(
     private var context: Context,
-    private var sliderItems: List<ImageProduct>
+    private var sliderItems: List<ImageProduct>,
+    private var onImageClickListener: OnImageClickListener
 ) : RecyclerView.Adapter<SliderProductDetailsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,6 +29,10 @@ class SliderProductDetailsAdapter(
                 .with(context)
                 .load(sliderItems[position].src)
                 .into(it)
+        }
+
+        holder.itemView.setOnClickListener {
+            onImageClickListener.onImageClick(position)
         }
     }
 
