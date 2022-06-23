@@ -46,9 +46,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Navigation Component
     def nav_version = "2.4.2"
@@ -108,4 +105,34 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     //payPall
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+
+    // Dependencies for local unit tests
+    def junit_version = "4.12"
+    testImplementation "junit:junit:$junit_version"
+
+    // AndroidX Test - Instrumented testing
+    def test_ext_kotlin_runner_version = "1.1.3" // 1.1.1
+    def espresso_version = "3.4.0" // 3.2.0-beta01
+    androidTestImplementation "androidx.test.ext:junit:$test_ext_kotlin_runner_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+
+    // Kotlin
+    testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.3.2'
+    testImplementation 'io.mockk:mockk:1.9.3.kotlin12'
+
+    // AndroidX Test - JVM testing
+    def androidX_test_ext_kotlin_runner_version = "1.1.1"
+    def androidX_test_core_version = "1.2.0"
+    def robolectric_version = "4.3.1"
+    testImplementation "androidx.test.ext:junit-ktx:$androidX_test_ext_kotlin_runner_version" // for AndroidJUnit4
+    testImplementation "androidx.test:core-ktx:$androidX_test_core_version"
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+
+    //Testing Live Data
+    def arch_testing_version = "2.0.0"
+    testImplementation "androidx.arch.core:core-testing:$arch_testing_version" // for InstanceTaskExecutor
+
+    //Coroutine Testing
+    def coroutines_test_version = "1.3.7"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
 }
