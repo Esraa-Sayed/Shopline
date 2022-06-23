@@ -142,4 +142,5 @@
     <string name="NoCountryFound">No country found</string>
     <string name="NoCityFound">No city found</string>
     <string name="NoAddressFound">No address found</string>
+    <string name="empty_wishlist">Empty Wishlist</string>
 </resources>

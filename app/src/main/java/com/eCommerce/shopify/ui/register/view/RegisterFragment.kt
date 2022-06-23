@@ -1,16 +1,21 @@
 package com.eCommerce.shopify.ui.register.view
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.databinding.FragmentRegisterBinding
+import com.eCommerce.shopify.databinding.GoToLoginDialogBinding
 import com.eCommerce.shopify.model.Customer
 import com.eCommerce.shopify.model.CustomerResponse
 import com.eCommerce.shopify.model.EmailMarketingConsent
@@ -113,7 +118,22 @@ class RegisterFragment : Fragment() {
                 if(!it.customer.email.isNullOrEmpty()) {
                     Log.i("TAG", "register ssssssuccessssssssssssfulllllllyyy " + it.customer.email)
                     registerViewModel.saveDataInSharedPref(myView.context,it.customer.email!!,it.customer.id!!,it.customer.first_name!!)
-                    navController.navigate(R.id.action_registerFragment_to_mainFragment)
+
+                    val inflater = requireActivity().layoutInflater
+                    val dialog = Dialog(requireActivity())
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
+                    dialog.setContentView(bind.root)
+                    dialog.setTitle(getString(R.string.warning))
+                    bind.warningTitle.text = "Registered Successfully"
+                    bind.okBtn.setOnClickListener {
+                        navController.navigate(R.id.action_registerFragment_to_mainFragment)
+                        dialog.dismiss()
+                    }
+                    bind.goToLogin.visibility = View.GONE
+                    dialog.setCanceledOnTouchOutside(true)
+                    dialog.show()
                 }
                 else{
                     Log.i("TAG", "Response is null or empety!!!!!")

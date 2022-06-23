@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -54,32 +55,20 @@ class FavoriteFragment : Fragment() , OnProductClickListener {
         val isLogedin = favoriteViewModel.getIsLogin(myView.context)
 
         if(isLogedin) {
-            binding.notLoginConstraint.visibility = View.GONE
-            setupFavRecycler()
-            val user_id = favoriteViewModel.getUserId(myView.context)
-            favoriteViewModel.getFavoritesWithUserId(user_id).observe(viewLifecycleOwner){
-                favAdapter.setFavProductList(it)
-                favAdapter.notifyDataSetChanged()
-            }
+            showFavorites()
+        }
+        else{
+            handleRegisterAndLoginBtn()
         }
 
-        else{
-            binding.loginBtn.setOnClickListener {
-                navController.navigate(R.id.action_favoriteFragment_to_loginFragment)
-            }
-
-            binding.registerBtn.setOnClickListener {
-                navController.navigate(R.id.action_favoriteFragment_to_registerFragment)
-            }
+        binding.appBarHome.backArrow.setOnClickListener {
+            navController.navigateUp()
         }
 
     }
 
     private fun setupToolbar() {
         (activity as AppCompatActivity).setSupportActionBar(binding.appBarHome.toolbar)
-        binding.appBarHome.cardViewFavorite.visibility = View.GONE
-        binding.appBarHome.cardViewShoppingCart.visibility = View.GONE
-        binding.appBarHome.cardViewShoppingCartCount.visibility = View.GONE
         binding.appBarHome.toolbar.title = getString(R.string.wishlist)
     }
 
@@ -95,6 +84,26 @@ class FavoriteFragment : Fragment() , OnProductClickListener {
         binding.favRecycler.layoutManager = gridManager
     }
 
+    fun showFavorites(){
+        binding.notLoginConstraint.visibility = View.GONE
+        setupFavRecycler()
+        val user_id = favoriteViewModel.getUserId(myView.context)
+        favoriteViewModel.getFavoritesWithUserId(user_id).observe(viewLifecycleOwner){
+            if(it.size != 0) binding.linearEmptyFavorite.visibility = View.GONE
+            favAdapter.setFavProductList(it)
+            favAdapter.notifyDataSetChanged()
+        }
+    }
+
+    fun handleRegisterAndLoginBtn(){
+        binding.loginBtn.setOnClickListener {
+            navController.navigate(R.id.action_favoriteFragment_to_loginFragment)
+        }
+        binding.registerBtn.setOnClickListener {
+            navController.navigate(R.id.action_favoriteFragment_to_registerFragment)
+        }
+    }
+
     override fun onProductItemClick(productId:Long) {
         val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment(productId)
         navController.navigate(action)
@@ -103,6 +112,12 @@ class FavoriteFragment : Fragment() , OnProductClickListener {
     override fun onFavBtnClick(product: Product) {
         product.isFavorite = false
         favoriteViewModel.deleteFromFavorite(product)
+        val user_id = favoriteViewModel.getUserId(myView.context)
+        favoriteViewModel.getFavoritesWithUserId(user_id).observe(viewLifecycleOwner){
+            if(it.size == 0) binding.linearEmptyFavorite.visibility = View.VISIBLE
+            favAdapter.setFavProductList(it)
+            favAdapter.notifyDataSetChanged()
+        }
     }
 
     override fun currencyHandling(): String {
