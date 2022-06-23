@@ -164,11 +164,18 @@ class CheckoutFragment : Fragment(){
     private fun getUserAddresses() {
         viewModel.getUserAddresses(myView.context)
         viewModel.userAddresses.observe(viewLifecycleOwner,{
-            if (it != null) {
-               addressesAdapter.updateData(it.addresses)
+            if (!it.addresses.isNullOrEmpty()) {
+                addressesAdapter.updateData(it.addresses)
                 binding.countryName.text = it.addresses[0].country
                 binding.city.text = it.addresses[0].city
                 address = it.addresses[0]
+            }
+            else{
+                binding.countryName.text = getString(R.string.NoCountryFound)
+                binding.city.text = getString(R.string.NoCityFound)
+                var addresse = Addresse(getString(R.string.NoAddressFound),getString(R.string.NoAddressFound),getString(R.string.NoCityFound), country = getString(R.string.NoCountryFound))
+                address = addresse
+                addressesAdapter.updateData(listOf(addresse))
             }
         })
     }
@@ -236,19 +243,29 @@ class CheckoutFragment : Fragment(){
     }
 
     private fun placeOrder() {
-        val lineItems = LineItemAdapter.convertProductDetailIntoLineItem(checkoutFragmentArgs.productsCheckout)
-        val toDayDate = getTodayDate()
-        val discountCode = listOf(DiscountCode(amount = "50", code = couponCode ?: "Not found"))
-        if (currency == "$")
-            currency = "USD"
-        val order = Order(line_items = lineItems, shipping_address = address,
-                            billing_address = address, created_at = toDayDate,
-                            processed_at = toDayDate, currency = currency,
-                            current_total_price = totalPrice,user_id = viewModel.getUserId(myView.context),
-                            discount_codes = discountCode , payment_gateway_names = listOf(paymentMethod),
-                            presentment_currency = currency
-                        )
-        viewModel.postOrderWithUserIdAndEmail(order,myView.context)
+        if(getString(R.string.NoAddressFound) == address.address1){
+            AppConstants.showAlert(myView.context,
+                R.string.error,
+                "There's no address found",
+                R.drawable.ic_error)
+        }
+        else {
+            val lineItems =
+                LineItemAdapter.convertProductDetailIntoLineItem(checkoutFragmentArgs.productsCheckout)
+            val toDayDate = getTodayDate()
+            val discountCode = listOf(DiscountCode(amount = "50", code = couponCode ?: "Not found"))
+            if (currency == "$")
+                currency = "USD"
+            val order = Order(
+                line_items = lineItems, shipping_address = address,
+                billing_address = address, created_at = toDayDate,
+                processed_at = toDayDate, currency = currency,
+                current_total_price = totalPrice, user_id = viewModel.getUserId(myView.context),
+                discount_codes = discountCode, payment_gateway_names = listOf(paymentMethod),
+                presentment_currency = currency
+            )
+            viewModel.postOrderWithUserIdAndEmail(order, myView.context)
+        }
     }
 
     private fun checkCouponCodeValidation(couponCode: String): Boolean {

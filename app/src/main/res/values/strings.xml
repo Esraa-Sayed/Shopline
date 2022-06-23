@@ -139,4 +139,7 @@
     <string name="country2">Country:</string>
     <string name="city2">City:</string>
     <string name="your_cart_is_empty">Your cart is empty</string>
+    <string name="NoCountryFound">No country found</string>
+    <string name="NoCityFound">No city found</string>
+    <string name="NoAddressFound">No address found</string>
 </resources>
