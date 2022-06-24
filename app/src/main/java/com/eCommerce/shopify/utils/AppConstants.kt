@@ -1,11 +1,18 @@
 package com.eCommerce.shopify.utils
 
+import android.app.Activity
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.View
+import android.view.Window
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.DialogTitle
 import com.eCommerce.shopify.BuildConfig
 import com.eCommerce.shopify.R
+import com.eCommerce.shopify.databinding.GoToLoginDialogBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.orderDetails.LineItem
 
@@ -42,6 +49,27 @@ object AppConstants {
             .setPositiveButton(R.string.ok) { _, _ -> }
             .setIcon(icon)
             .show()
+    }
+
+    fun showDialog(requireActivity:Activity,dialogTitle:String,dialogMessage:String,goToLoginHandle:() -> Unit){
+        val inflater = requireActivity.layoutInflater
+        val dialog = Dialog(requireActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
+        dialog.setContentView(bind.root)
+        dialog.setTitle(dialogTitle)
+        bind.warningTitle.text = dialogMessage
+        bind.okBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        bind.goToLogin.setOnClickListener{
+            goToLoginHandle()
+            //mNavController.navigate(R.id.action_productDetailsFragment_to_loginFragment)
+            dialog.dismiss()
+        }
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.show()
     }
 
     fun playAnimation(view: View, context: Context, animation: Int) {

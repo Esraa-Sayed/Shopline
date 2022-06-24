@@ -9,6 +9,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -35,6 +36,7 @@ import com.eCommerce.shopify.ui.productdetails.viewmodel.ProductDetailsViewModel
 import com.eCommerce.shopify.ui.reviews.Review
 import com.eCommerce.shopify.ui.reviews.ReviewsAdapter
 import com.eCommerce.shopify.utils.AppConstants.showAlert
+import com.eCommerce.shopify.utils.AppConstants.showDialog
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlin.math.abs
@@ -121,12 +123,17 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
         })
         viewModel.productDetailsResponse.observe(viewLifecycleOwner) {
             renderDataOnScreen(it)
-            viewModel.getFavoriteProduct(it.product.id).observe(viewLifecycleOwner) { product ->
-                if (product == null) {
-                    handleFavorite(false, R.drawable.ic_favorite_border)
-                } else {
-                    handleFavorite(true, R.drawable.ic_favorite)
+            if(viewModel.isUserLogin(myView.context)){
+                viewModel.getFavoriteProduct(it.product.id,viewModel.getUserId(myView.context)).observe(viewLifecycleOwner) { product ->
+                    if (product == null) {
+                        handleFavorite(false, R.drawable.ic_favorite_border)
+                    } else {
+                        handleFavorite(true, R.drawable.ic_favorite)
+                    }
                 }
+            }
+            else{
+                handleFavorite(false, R.drawable.ic_favorite_border)
             }
             viewModel.getProductInShoppingCart(it.product.id).observe(viewLifecycleOwner) { productInBag ->
                 if (productInBag == null) {
@@ -183,11 +190,11 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
                     handleFavorite(true, R.drawable.ic_favorite)
                 }
             } else {
-                showAlert(
-                    myView.context,
-                    R.string.error,
-                    getString(R.string.login_error),
-                    R.drawable.ic_error
+                showDialog(
+                    requireActivity(),
+                    getString(R.string.warning),
+                    getString(R.string.loginWarning),
+                    ::navigateToLogin
                 )
             }
         }
@@ -208,14 +215,18 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
                     handleBag(true, getString(R.string.remove_from_bag))
                 }
             } else {
-                showAlert(
-                    myView.context,
-                    R.string.error,
-                    getString(R.string.login_error),
-                    R.drawable.ic_error
+                showDialog(
+                    requireActivity(),
+                    getString(R.string.warning),
+                    getString(R.string.loginWarning),
+                    ::navigateToLogin
                 )
             }
         }
+    }
+
+    private fun navigateToLogin(){
+        mNavController.navigate(R.id.action_productDetailsFragment_to_loginFragment)
     }
 
     private fun handleFavorite(isAddToFav: Boolean, imgResourceId: Int) {

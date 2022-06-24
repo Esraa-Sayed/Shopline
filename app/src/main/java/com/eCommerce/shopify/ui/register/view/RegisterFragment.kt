@@ -126,7 +126,7 @@ class RegisterFragment : Fragment() {
                     val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
                     dialog.setContentView(bind.root)
                     dialog.setTitle(getString(R.string.warning))
-                    bind.warningTitle.text = "Registered Successfully"
+                    bind.warningTitle.text = getString(R.string.register_successfully)
                     bind.okBtn.setOnClickListener {
                         navController.navigate(R.id.action_registerFragment_to_mainFragment)
                         dialog.dismiss()

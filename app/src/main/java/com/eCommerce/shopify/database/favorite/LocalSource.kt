@@ -35,6 +35,10 @@ class LocalSource(context: Context): LocalSourceInterface {
         return favoriteDao.getFavoriteWithUserId(userId)
     }
 
+    override fun getOneFavoriteWithUserId(id: Long, userId: Long): LiveData<Product> {
+        return favoriteDao.getOneFavoriteWithUserId(id,userId)
+    }
+
     override fun insertToFavorite(product: Product) {
         return favoriteDao.insertToFavorite(product)
     }
