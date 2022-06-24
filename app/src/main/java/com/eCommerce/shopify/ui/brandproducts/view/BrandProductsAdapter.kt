@@ -45,9 +45,10 @@ class BrandProductsAdapter:RecyclerView.Adapter<BrandProductsAdapter.BrandProduc
             .into(holder.productImg)
 
         //rate
-        val randomRate: Double = MIN + Math.random() * (MAX - MIN)
+        //val randomRate: Double = MIN + Math.random() * (MAX - MIN)
         holder.productRate.stepSize = 0.1f
-        holder.productRate.rating = randomRate.toFloat()
+        holder.productRate.rating = brandProducts[position].rate.toFloat()
+        Log.i("TAG", "onBindViewHolder: ${brandProducts[position].rate}")
 
         //price currency
         holder.productCurrency.text = onClickHandler.currencyHandling()

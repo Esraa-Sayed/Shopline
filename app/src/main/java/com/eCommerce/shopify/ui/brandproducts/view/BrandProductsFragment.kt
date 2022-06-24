@@ -108,29 +108,6 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             )
         }
         listenToSearch()
-        /*binding.brandProductsSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                binding.seekbarProgress.text = p1.toString()
-                if(!productsList.isEmpty()) {
-                    if(p1 == 0){
-                        brandProductsAdapter.setBrandProductsList(productsList)
-                        brandProductsAdapter.notifyDataSetChanged()
-                    }
-                    else {
-                        Log.i("TAG", "onProgressChanged: $p1")
-                        brandProductsAdapter.setBrandProductsList(productsList.filter {
-                            val price: Double = it.variants[0].price.toDouble()
-                            price.toInt() == p1
-                        })
-                        brandProductsAdapter.notifyDataSetChanged()
-                    }
-                }
-            }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {}
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {}
-        })*/
 
         binding.brandProductsRangedSeekbar.addOnChangeListener { slider, value, fromUser ->
             brandProductsAdapter.setBrandProductsList(productsList.filter {

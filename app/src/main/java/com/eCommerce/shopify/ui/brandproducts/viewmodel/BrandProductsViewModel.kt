@@ -7,9 +7,12 @@ import com.eCommerce.shopify.model.BrandProductsResponse
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepositoryInterface
 import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepoInterface
+import com.eCommerce.shopify.utils.AppConstants
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.eCommerce.shopify.utils.AppConstants.MAX
+import com.eCommerce.shopify.utils.AppConstants.MIN
 
 class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface) : ViewModel() {
 
@@ -35,7 +38,12 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
 
             if (brandCollectionProducts.isSuccessful) {
                 //Log.d("asssssss:", collectionBrands.toString())
-                _brandProductsCollectionResponse2.postValue(brandCollectionProducts.body())
+                val brandCollectionProductsBody = brandCollectionProducts.body() as BrandProductsResponse
+                for(oneItem in brandCollectionProductsBody.products){
+                    val randomRate: Double = MIN + Math.random() * (MAX - MIN)
+                    oneItem.rate = randomRate
+                }
+                _brandProductsCollectionResponse2.postValue(brandCollectionProductsBody)
             } else {
                 //Log.d("assssssshh:", collectionBrands.toString())
                 _errorMsgResponse.postValue(brandCollectionProducts.message())

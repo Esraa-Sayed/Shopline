@@ -40,5 +40,6 @@ data class Product(
     val variants: List<Variant>,
     val vendor: String,
     var isFavorite:Boolean = false,
-    val quantity:Int
+    val quantity:Int,
+    var rate:Double = 0.0
 ): Parcelable
