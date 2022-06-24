@@ -3,7 +3,9 @@ package com.eCommerce.shopify.ui.productdetails.repo
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.eCommerce.shopify.database.favorite.LocalSource
+import com.eCommerce.shopify.database.favorite.LocalSourceInterface
 import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
+import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSourceInterface
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.ProductDetails
@@ -19,13 +21,13 @@ import kotlin.math.roundToInt
 
 class ProductDetailsRepo private constructor(
     private var remoteSource: RemoteSource,
-    private var localSource: LocalSource,
-    private var shoppingCartLocalSource: ShoppingCartLocalSource
+    private var localSource: LocalSourceInterface,
+    private var shoppingCartLocalSource: ShoppingCartLocalSourceInterface
 ) : ProductDetailsRepoInterface {
 
     companion object {
         private var instance: ProductDetailsRepoInterface? = null
-        fun getInstance(remoteSource: RemoteSource, localSource: LocalSource, shoppingCartLocalSource: ShoppingCartLocalSource): ProductDetailsRepoInterface {
+        fun getInstance(remoteSource: RemoteSource, localSource: LocalSourceInterface, shoppingCartLocalSource: ShoppingCartLocalSourceInterface): ProductDetailsRepoInterface {
             return instance ?: ProductDetailsRepo(remoteSource, localSource, shoppingCartLocalSource)
         }
     }
