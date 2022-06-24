@@ -1,10 +1,7 @@
 package com.eCommerce.shopify.ui.productdetails.viewmodel
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.ProductDetail
 import com.eCommerce.shopify.model.ProductDetails
@@ -55,8 +52,8 @@ class ProductDetailsViewModel(private val _repo: ProductDetailsRepoInterface) : 
         }
     }
 
-    fun getFavoriteProduct(id: Long): LiveData<Product> {
-        return _repo.getFavoriteProduct(id)
+    fun getFavoriteProduct(id: Long,userId: Long): LiveData<Product> {
+        return _repo.getFavoriteProduct(id,userId)
     }
 
     fun insertToFavorite(product: Product) {
@@ -90,4 +87,9 @@ class ProductDetailsViewModel(private val _repo: ProductDetailsRepoInterface) : 
     fun isUserLogin(context: Context): Boolean {
         return _repo.isUserLogin(context)
     }
+
+    fun getUserId(requireContext: Context): Long{
+        return _repo.getUserId(requireContext)
+    }
+
 }

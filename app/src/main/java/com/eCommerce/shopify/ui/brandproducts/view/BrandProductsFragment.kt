@@ -1,16 +1,10 @@
 package com.eCommerce.shopify.ui.brandproducts.view
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.SeekBar
 import androidx.navigation.fragment.navArgs
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -19,22 +13,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.favorite.LocalSource
-import com.eCommerce.shopify.databinding.ConfirmDialogBinding
 import com.eCommerce.shopify.databinding.FragmentBrandProductsBinding
-import com.eCommerce.shopify.databinding.GoToLoginDialogBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.network.APIClient
 import com.eCommerce.shopify.ui.brandproducts.repo.BrandProductsRepository
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModel
 import com.eCommerce.shopify.ui.brandproducts.viewmodel.BrandProductsViewModelFactory
-
-import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
-import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
-import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
-import com.eCommerce.shopify.ui.product.view.ProductFragmentDirections
-
-import com.eCommerce.shopify.ui.favorite.view.FavoriteFragmentDirections
-
 import com.eCommerce.shopify.utils.AppConstants
 import java.text.NumberFormat
 import java.util.*
@@ -193,23 +177,17 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             }
         }
         else{
-            val inflater = requireActivity().layoutInflater
-            val dialog = Dialog(requireActivity())
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
-            dialog.setContentView(bind.root)
-            dialog.setTitle(getString(R.string.warning))
-            bind.okBtn.setOnClickListener {
-                dialog.dismiss()
-            }
-            bind.goToLogin.setOnClickListener{
-                navController.navigate(R.id.action_brandProductsFragment_to_loginFragment)
-                dialog.dismiss()
-            }
-            dialog.setCanceledOnTouchOutside(true)
-            dialog.show()
+            AppConstants.showDialog(
+                requireActivity(),
+                getString(R.string.warning),
+                getString(R.string.loginWarning),
+                ::navigateToLogin
+            )
         }
+    }
+
+    private fun navigateToLogin(){
+        navController.navigate(R.id.action_brandProductsFragment_to_loginFragment)
     }
 
     override fun currencyHandling(): String {

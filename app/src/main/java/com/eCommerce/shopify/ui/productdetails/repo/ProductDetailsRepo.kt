@@ -60,8 +60,8 @@ class ProductDetailsRepo private constructor(
         return productDetails
     }
 
-    override fun getFavoriteProduct(id: Long): LiveData<Product> {
-        return localSource.getFavoriteProduct(id)
+    override fun getFavoriteProduct(id: Long,userId: Long): LiveData<Product> {
+        return localSource.getOneFavoriteWithUserId(id,userId)
     }
 
     override fun insertToFavorite(product: Product) {
@@ -86,5 +86,9 @@ class ProductDetailsRepo private constructor(
 
     override fun isUserLogin(context: Context): Boolean {
         return AppSharedPref.getInstance(context, PREFRENCE_File).getBooleanValue(IS_LOGIN, false)
+    }
+
+    override fun getUserId(context: Context): Long {
+        return AppSharedPref.getInstance(context,PREFRENCE_File).getLongValue(AppConstants.USER_ID,0)
     }
 }
