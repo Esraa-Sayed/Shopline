@@ -85,6 +85,9 @@ class CheckoutFragment : Fragment(){
     }
     @SuppressLint("SetTextI18n")
     fun init(){
+        discountCodes = DiscountCodes(listOf(com.eCommerce.shopify.model.discount.DiscountCode("","",1234,1233,"",0)))
+       //just to try it
+        getDiscountCodes()
         setUpViewModel()
         setUpPayPal()
         address = Addresse(address1 = "Helwan,Arab elwalda")
@@ -103,6 +106,19 @@ class CheckoutFragment : Fragment(){
 
     }
 
+    private fun getDiscountCodes() {
+        var discountCode = com.eCommerce.shopify.model.discount.DiscountCode("ESA_10","24/6/2022",1027349774508,1027349774508,"24/6/2022",0)
+        var discountCodesTest: MutableList<com.eCommerce.shopify.model.discount.DiscountCode> = emptyList<com.eCommerce.shopify.model.discount.DiscountCode>().toMutableList()
+
+        discountCodesTest.add(discountCode)
+        discountCode = com.eCommerce.shopify.model.discount.DiscountCode("TRADE_10","24/6/2022",1027349774509,1027349774508,"24/6/2022",0)
+        discountCodesTest.add(discountCode)
+        discountCode = com.eCommerce.shopify.model.discount.DiscountCode("SALE_10","24/6/2022",1027349774500,1027349774508,"24/6/2022",0)
+        discountCodesTest.add(discountCode)
+        discountCode = com.eCommerce.shopify.model.discount.DiscountCode("SHOPIFY_10","24/6/2022",1027349774520,1027349774508,"24/6/2022",0)
+        discountCodesTest.add(discountCode)
+        discountCodes = DiscountCodes(discountCodesTest)
+    }
 
 
     private fun setupPaymentMethodDialog() {
@@ -188,7 +204,7 @@ class CheckoutFragment : Fragment(){
             )
         )
         viewModel = ViewModelProvider(this, checkoutViewModelFactory)[CheckoutViewModel::class.java]
-        viewModel.getDiscountCodes()
+        //viewModel.getDiscountCodes()
 
         viewModel.postOrderResponse.observe(viewLifecycleOwner, {
             Log.e("postOrder", "init POST ORDER I'm here************ : ${it.order.created_at}" )
@@ -225,10 +241,10 @@ class CheckoutFragment : Fragment(){
                         showAlert(getString(R.string.The_code_has_been_added_successfully))
                         binding.couponCode.visibility = View.GONE
                         binding.checkValidate.isEnabled = false
-                        binding.discountValueFromApi.text = "50 $currency"
+                        binding.discountValueFromApi.text = "10 $currency"
                         binding.couponCodeTextAfterValidation.visibility = View.VISIBLE
                         binding.couponCodeTextAfterValidation.text = couponCode
-                        totalPrice = "${checkoutFragmentArgs.totalPrice.minus(50)} $currency"
+                        totalPrice = "${checkoutFragmentArgs.totalPrice.minus(10)} $currency"
                         binding.totalAmountTextView.text = totalPrice
                     }else{
                         showAlert(getString(R.string.NotAValidCode))
@@ -253,14 +269,21 @@ class CheckoutFragment : Fragment(){
             val lineItems =
                 LineItemAdapter.convertProductDetailIntoLineItem(checkoutFragmentArgs.productsCheckout)
             val toDayDate = getTodayDate()
-            val discountCode = listOf(DiscountCode(amount = "50", code = couponCode ?: "Not found"))
+            var amount:String? = null
+            if (couponCode.isNullOrEmpty()){
+                amount = "0"
+            }
+            else{
+                amount = "10"
+            }
+            val discountCode = listOf(DiscountCode(amount = amount, code = couponCode ?: "Not found"))
             if (currency == "$")
                 currency = "USD"
             val order = Order(
                 line_items = lineItems, shipping_address = address,
                 billing_address = address, created_at = toDayDate,
                 processed_at = toDayDate, currency = currency,
-                current_total_price = totalPrice, user_id = viewModel.getUserId(myView.context),
+                current_total_price = totalPrice,total_price = (totalPrice.split(" ")[0]).toFloat(), user_id = viewModel.getUserId(myView.context),
                 discount_codes = discountCode, payment_gateway_names = listOf(paymentMethod),
                 presentment_currency = currency
             )
@@ -269,6 +292,7 @@ class CheckoutFragment : Fragment(){
     }
 
     private fun checkCouponCodeValidation(couponCode: String): Boolean {
+
         for (item in   discountCodes.discount_codes){
             if (item.code == couponCode)
                 return true

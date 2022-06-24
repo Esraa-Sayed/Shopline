@@ -67,7 +67,7 @@ data class Order(
     val total_line_items_price: String? = null,
     val total_line_items_price_set: TotalLineItemsPriceSet? = null,
     val total_outstanding: String? = null,
-    val total_price: String? = null,
+    val total_price: Float? = null,
     val total_price_set: TotalPriceSet? = null,
     val total_price_usd: String? = null,
     val total_shipping_price_set: TotalShippingPriceSet? = null,
