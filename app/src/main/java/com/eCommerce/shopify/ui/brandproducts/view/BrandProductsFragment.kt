@@ -71,14 +71,14 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             )
             brandProductsViewModel.brandProductsCollectionResponse.observe(viewLifecycleOwner) {
                 productsList = it.products
-                brandProductsAdapter.setBrandProductsList(it.products)
+                brandProductsAdapter.setBrandProductsList(productsList)
                 brandProductsAdapter.notifyDataSetChanged()
             }
         } else {
             brandProductsViewModel.getBrandProductsCollectionList(args.brandTitle)
             brandProductsViewModel.brandProductsCollectionResponse2.observe(viewLifecycleOwner) {
                 productsList = it.products
-                brandProductsAdapter.setBrandProductsList(it.products)
+                brandProductsAdapter.setBrandProductsList(productsList)
                 brandProductsAdapter.notifyDataSetChanged()
             }
 
