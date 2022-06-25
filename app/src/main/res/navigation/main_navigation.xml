@@ -151,6 +151,9 @@
         <action
             android:id="@+id/action_shoppingCartFragment_to_checkoutFragment"
             app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
             app:popUpTo="@id/shoppingCartFragment"
             app:popUpToInclusive="true" />
         <action

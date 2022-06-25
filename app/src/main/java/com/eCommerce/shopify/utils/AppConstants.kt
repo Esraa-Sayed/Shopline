@@ -51,7 +51,7 @@ object AppConstants {
             .show()
     }
 
-    fun showDialog(requireActivity:Activity,dialogTitle:String,dialogMessage:String,goToLoginHandle:() -> Unit){
+    fun showDialog(requireActivity:Activity,dialogTitle:String,dialogMessage:String,btnName:String,goToLoginHandle:() -> Unit){
         val inflater = requireActivity.layoutInflater
         val dialog = Dialog(requireActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -60,12 +60,13 @@ object AppConstants {
         dialog.setContentView(bind.root)
         dialog.setTitle(dialogTitle)
         bind.warningTitle.text = dialogMessage
+        bind.goToLogin.text = btnName
+        bind.okBtn.text = requireActivity.getString(R.string.cancel)
         bind.okBtn.setOnClickListener {
             dialog.dismiss()
         }
         bind.goToLogin.setOnClickListener{
             goToLoginHandle()
-            //mNavController.navigate(R.id.action_productDetailsFragment_to_loginFragment)
             dialog.dismiss()
         }
         dialog.setCanceledOnTouchOutside(true)

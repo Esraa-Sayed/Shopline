@@ -71,8 +71,9 @@ class BrandProductsViewModel(private val repo: BrandProductsRepositoryInterface)
                         }
                     }
                 }
+                _brandProductsCollectionResponse.postValue(it)
             }
-            _brandProductsCollectionResponse.postValue(it)
+
         }
     }
 
