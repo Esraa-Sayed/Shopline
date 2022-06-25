@@ -109,6 +109,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
             binding.maxValue.text = "${String.format("%.2f", maxInDollar)}$"
         }
 
+
         binding.brandProductsRangedSeekbar.setLabelFormatter { value: Float ->
             val format = NumberFormat.getCurrencyInstance()
             format.maximumFractionDigits = 0
@@ -181,6 +182,7 @@ class BrandProductsFragment : Fragment() , OnProductClickListener {
                 requireActivity(),
                 getString(R.string.warning),
                 getString(R.string.loginWarning),
+                getString(R.string.login),
                 ::navigateToLogin
             )
         }

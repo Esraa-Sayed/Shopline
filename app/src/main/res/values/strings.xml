@@ -100,8 +100,8 @@
     <string name="payment_Method">Payment Method</string>
     <string name="contact_us">Contact Us</string>
     <string name="about_us">About Us</string>
-    <string name="add_to_bag">Add To Bag</string>
-    <string name="remove_from_bag">Remove From Bag</string>
+    <string name="add_to_bag">Add To Cart</string>
+    <string name="remove_from_bag">Remove From Cart</string>
     <string name="quantity">Quantity:</string>
     <string name="login_error">You need to login first!</string>
     <string name="register2">Register</string>
@@ -112,7 +112,7 @@
 
     <string name="reviews">Reviews</string>
     <string name="phone_validation">invalid phone number</string>
-    <string name="loginWarning">You should be loged in!</string>
+    <string name="loginWarning">Login Required!</string>
     <string name="warning">Warning</string>
     <string name="inforamtion">Information</string>
     <string name="NotAValidCode">Not a valid code</string>
@@ -144,4 +144,7 @@
     <string name="NoAddressFound">No address found</string>
     <string name="empty_wishlist">Empty Wishlist</string>
     <string name="register_successfully">Registered Successfully</string>
+    <string name="delete">remove</string>
+    <string name="deleteWarning">Are you sure to remove this item from Wishlist?</string>
+    <string name="deleteWarningCart">Are you sure to remove this item from Cart?</string>
 </resources>

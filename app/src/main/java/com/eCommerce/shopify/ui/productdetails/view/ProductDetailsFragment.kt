@@ -1,5 +1,6 @@
 package com.eCommerce.shopify.ui.productdetails.view
 
+import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -25,6 +26,7 @@ import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.favorite.LocalSource
 import com.eCommerce.shopify.database.shoppingcart.ShoppingCartLocalSource
 import com.eCommerce.shopify.databinding.FragmentProductDetailsBinding
+import com.eCommerce.shopify.databinding.GoToLoginDialogBinding
 import com.eCommerce.shopify.model.ImageProduct
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.model.ProductDetail
@@ -183,8 +185,13 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
         binding.cardViewIsFavorite.setOnClickListener {
             if (viewModel.isUserLogin(myView.context)) {
                 if (isFavoriteProduct) {
-                    viewModel.deleteFromFavorite(product)
-                    handleFavorite(false, R.drawable.ic_favorite_border)
+                    showDeleteDialog(
+                        requireActivity(),
+                        getString(R.string.warning),
+                        getString(R.string.deleteWarning),
+                        getString(R.string.delete),
+                        ::removeFromFav
+                    )
                 } else {
                     viewModel.insertToFavorite(product)
                     handleFavorite(true, R.drawable.ic_favorite)
@@ -194,6 +201,7 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
                     requireActivity(),
                     getString(R.string.warning),
                     getString(R.string.loginWarning),
+                    getString(R.string.login),
                     ::navigateToLogin
                 )
             }
@@ -207,8 +215,13 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
         binding.btnReviewsAddToBag.setOnClickListener {
             if (viewModel.isUserLogin(myView.context)) {
                 if (isAddingToShoppingCart) {
-                    viewModel.deleteProductFromShoppingCart(productDetail)
-                    handleBag(false, getString(R.string.add_to_bag))
+                    showDeleteDialog(
+                        requireActivity(),
+                        getString(R.string.warning),
+                        getString(R.string.deleteWarningCart),
+                        getString(R.string.delete),
+                        ::removeFromBag
+                    )
                 } else {
                     productDetail.amount = 1
                     viewModel.insertProductInShoppingCart(productDetail)
@@ -219,10 +232,21 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
                     requireActivity(),
                     getString(R.string.warning),
                     getString(R.string.loginWarning),
+                    getString(R.string.login),
                     ::navigateToLogin
                 )
             }
         }
+    }
+
+    fun removeFromFav(){
+        viewModel.deleteFromFavorite(product)
+        handleFavorite(false, R.drawable.ic_favorite_border)
+    }
+
+    fun removeFromBag(){
+        viewModel.deleteProductFromShoppingCart(productDetail)
+        handleBag(false, getString(R.string.add_to_bag))
     }
 
     private fun navigateToLogin(){
@@ -310,6 +334,28 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
             .load(sliderImages[position].src)
             .into(dialog.findViewById(R.id.imgViewProductImage))
 
+        dialog.show()
+    }
+
+    fun showDeleteDialog(requireActivity: Activity, dialogTitle:String, dialogMessage:String, btnName:String, deleteHandle:() -> Unit){
+        val inflater = requireActivity.layoutInflater
+        val dialog = Dialog(requireActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
+        dialog.setContentView(bind.root)
+        dialog.setTitle(dialogTitle)
+        bind.warningTitle.text = dialogMessage
+        bind.goToLogin.text = btnName
+        bind.okBtn.text = getString(R.string.cancel)
+        bind.okBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        bind.goToLogin.setOnClickListener{
+            deleteHandle()
+            dialog.dismiss()
+        }
+        dialog.setCanceledOnTouchOutside(true)
         dialog.show()
     }
 }

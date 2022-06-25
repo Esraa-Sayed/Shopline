@@ -1,10 +1,14 @@
 package com.eCommerce.shopify.ui.favorite.view
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
@@ -14,11 +18,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.eCommerce.shopify.R
 import com.eCommerce.shopify.database.favorite.LocalSource
 import com.eCommerce.shopify.databinding.FragmentFavoriteBinding
+import com.eCommerce.shopify.databinding.GoToLoginDialogBinding
 import com.eCommerce.shopify.model.Product
 import com.eCommerce.shopify.ui.brandproducts.view.OnProductClickListener
 import com.eCommerce.shopify.ui.favorite.repo.FavoriteRepo
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModel
 import com.eCommerce.shopify.ui.favorite.viewmodel.FavoriteViewModelFactory
+import com.eCommerce.shopify.utils.AppConstants.showDialog
 
 class FavoriteFragment : Fragment() , OnProductClickListener {
 
@@ -110,6 +116,28 @@ class FavoriteFragment : Fragment() , OnProductClickListener {
     }
 
     override fun onFavBtnClick(product: Product) {
+        val inflater = requireActivity().layoutInflater
+        val dialog = Dialog(requireActivity())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
+        dialog.setContentView(bind.root)
+        dialog.setTitle(getString(R.string.warning))
+        bind.warningTitle.text = getString(R.string.deleteWarning)
+        bind.goToLogin.text = getString(R.string.delete)
+        bind.okBtn.text = getString(R.string.cancel)
+        bind.okBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        bind.goToLogin.setOnClickListener{
+            ifDeleteFav(product)
+            dialog.dismiss()
+        }
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.show()
+    }
+
+    fun ifDeleteFav(product: Product){
         product.isFavorite = false
         favoriteViewModel.deleteFromFavorite(product)
         val user_id = favoriteViewModel.getUserId(myView.context)
