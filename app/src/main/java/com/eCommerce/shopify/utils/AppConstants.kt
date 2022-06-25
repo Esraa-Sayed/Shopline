@@ -61,6 +61,7 @@ object AppConstants {
         dialog.setTitle(dialogTitle)
         bind.warningTitle.text = dialogMessage
         bind.goToLogin.text = btnName
+        bind.okBtn.text = requireActivity.getString(R.string.cancel)
         bind.okBtn.setOnClickListener {
             dialog.dismiss()
         }

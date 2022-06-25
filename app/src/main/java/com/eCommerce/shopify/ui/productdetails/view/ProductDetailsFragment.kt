@@ -185,7 +185,7 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
         binding.cardViewIsFavorite.setOnClickListener {
             if (viewModel.isUserLogin(myView.context)) {
                 if (isFavoriteProduct) {
-                    showDeleteDialog(
+                    showDialog(
                         requireActivity(),
                         getString(R.string.warning),
                         getString(R.string.deleteWarning),
@@ -215,7 +215,7 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
         binding.btnReviewsAddToBag.setOnClickListener {
             if (viewModel.isUserLogin(myView.context)) {
                 if (isAddingToShoppingCart) {
-                    showDeleteDialog(
+                    showDialog(
                         requireActivity(),
                         getString(R.string.warning),
                         getString(R.string.deleteWarningCart),
