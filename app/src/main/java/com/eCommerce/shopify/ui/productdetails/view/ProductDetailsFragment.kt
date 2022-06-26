@@ -169,9 +169,9 @@ class ProductDetailsFragment : Fragment(), OnImageClickListener {
         binding.txtViewDescription.text = it.product.bodyHtml
 
         val reviewsList = listOf(
-            Review("hana",3.0,"https://image.shutterstock.com/image-photo/profile-picture-smiling-millennial-asian-260nw-1836020740.jpg","ya3ni mesh 7elw awi"),
-            Review("7ala",3.5,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOUbxyj7wgPREiPY2ApXyrI0P7sg-v30CY1g&usqp=CAU","7elw nos nos hhhhhhh"),
-            Review("soha",4.0,"https://wallpapercave.com/wp/wp7810667.jpg","yalla kowais w 5alas"),
+            Review("Emad Nashaat",2.5,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa69_HGc_i3MXKCPZzCfAjBZC4bXJsn0rS0Ufe6H-ctZz5FbIVaPkd1jCPTpKwPruIT3Q&usqp=CAU","the material wasn't good"),
+            Review("Asmaa Galal",3.0,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5WYwjOWQCZ3g-4zrImh6lIDS7q50T4sE7S-_OeljDtY3M6pqAYqFNpKzi-t33hglOahk&usqp=CAU","good product but the packaging was bad"),
+            Review("Hoda Ahmed",4.0,"https://cdn3.vectorstock.com/i/1000x1000/88/92/face-young-woman-in-frame-circular-avatar-vector-28828892.jpg","Very good quality like the description"),
         )
 
         reviewsAdapter.setDataToAdapter(reviewsList)

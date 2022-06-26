@@ -67,6 +67,40 @@ class RegisterFragment : Fragment() {
         binding.backInRegister.setOnClickListener {
             navController.popBackStack()
         }
+
+        registerViewModel.errorMsgResponse.observe(viewLifecycleOwner){
+            Log.i("TAG", "errrrrrrrrrrrror in post user!!!!!")
+            //registerViewModel.errorMsgResponse.removeObservers(viewLifecycleOwner)
+            showErrorMessage(it)
+            //registerViewModel.errorMsgResponse.removeObservers(viewLifecycleOwner)
+        }
+
+        registerViewModel.customerRespoonse.observe(viewLifecycleOwner) {
+            if(!it.customer.email.isNullOrEmpty()) {
+                Log.i("TAG", "register ssssssuccessssssssssssfulllllllyyy " + it.customer.email)
+                registerViewModel.saveDataInSharedPref(myView.context,it.customer.email!!,it.customer.id!!,it.customer.first_name!!)
+
+                val inflater = requireActivity().layoutInflater
+                val dialog = Dialog(requireActivity())
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
+                dialog.setContentView(bind.root)
+                dialog.setTitle(getString(R.string.warning))
+                bind.warningTitle.text = getString(R.string.register_successfully)
+                bind.okBtn.setOnClickListener {
+                    navController.navigate(R.id.action_registerFragment_to_mainFragment)
+                    dialog.dismiss()
+                }
+                bind.goToLogin.visibility = View.GONE
+                dialog.setCanceledOnTouchOutside(true)
+                dialog.show()
+            }
+            else{
+                Log.i("TAG", "Response is null or empety!!!!!")
+                showErrorMessage("there is some invalid data!")
+            }
+        }
     }
 
     fun setupViewModel(){
@@ -107,39 +141,8 @@ class RegisterFragment : Fragment() {
             incommingCustomer = CustomerResponse(subIncommingCustomer)
 
             Log.i("TAG", "registrationHandling:105")
-            registerViewModel.errorMsgResponse.observe(viewLifecycleOwner){
-                Log.i("TAG", "errrrrrrrrrrrror in post user!!!!!")
-                //registerViewModel.errorMsgResponse.removeObservers(viewLifecycleOwner)
-                showErrorMessage(it)
-                registerViewModel.errorMsgResponse.removeObservers(viewLifecycleOwner)
-            }
-            registerViewModel.postNewCustomer(incommingCustomer as CustomerResponse)
-            registerViewModel.customerRespoonse.observe(viewLifecycleOwner) {
-                if(!it.customer.email.isNullOrEmpty()) {
-                    Log.i("TAG", "register ssssssuccessssssssssssfulllllllyyy " + it.customer.email)
-                    registerViewModel.saveDataInSharedPref(myView.context,it.customer.email!!,it.customer.id!!,it.customer.first_name!!)
 
-                    val inflater = requireActivity().layoutInflater
-                    val dialog = Dialog(requireActivity())
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                    val bind : GoToLoginDialogBinding = GoToLoginDialogBinding.inflate(inflater)
-                    dialog.setContentView(bind.root)
-                    dialog.setTitle(getString(R.string.warning))
-                    bind.warningTitle.text = getString(R.string.register_successfully)
-                    bind.okBtn.setOnClickListener {
-                        navController.navigate(R.id.action_registerFragment_to_mainFragment)
-                        dialog.dismiss()
-                    }
-                    bind.goToLogin.visibility = View.GONE
-                    dialog.setCanceledOnTouchOutside(true)
-                    dialog.show()
-                }
-                else{
-                    Log.i("TAG", "Response is null or empety!!!!!")
-                    showErrorMessage("there is some invalid data!")
-                }
-            }
+            registerViewModel.postNewCustomer(incommingCustomer as CustomerResponse)
         }
     }
 

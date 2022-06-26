@@ -40,10 +40,14 @@ class ReviewsFragment : Fragment() {
         initRecyclerView()
 
         val reviewsList = listOf(
-            Review("hana",3.0,"https://image.shutterstock.com/image-photo/profile-picture-smiling-millennial-asian-260nw-1836020740.jpg","ya3ni mesh 7elw awi"),
-            Review("7ala",3.5,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOUbxyj7wgPREiPY2ApXyrI0P7sg-v30CY1g&usqp=CAU","7elw nos nos hhhhhhh"),
-            Review("soha",4.0,"https://wallpapercave.com/wp/wp7810667.jpg","yalla kowais w 5alas"),
-            Review("nour",4.5,"https://i.pinimg.com/736x/d8/ea/1b/d8ea1be3acc5102e993e8b1780f6a569.jpg","aho ay 7aga w el salam")
+            Review("Emad Nashaat",2.5,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa69_HGc_i3MXKCPZzCfAjBZC4bXJsn0rS0Ufe6H-ctZz5FbIVaPkd1jCPTpKwPruIT3Q&usqp=CAU","the material wasn't good"),
+            Review("Asmaa Galal",3.0,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5WYwjOWQCZ3g-4zrImh6lIDS7q50T4sE7S-_OeljDtY3M6pqAYqFNpKzi-t33hglOahk&usqp=CAU","good product but the packaging was bad"),
+            Review("Hoda Ahmed",4.0,"https://cdn3.vectorstock.com/i/1000x1000/88/92/face-young-woman-in-frame-circular-avatar-vector-28828892.jpg","Very good quality like the description"),
+            Review("Saef Mohamed",4.5,"https://static.vecteezy.com/system/resources/previews/004/477/337/non_2x/face-young-man-in-frame-circular-avatar-character-icon-free-vector.jpg","Nice product and wonderful price"),
+            Review("Anas Elhady",3.5,"https://library.kissclipart.com/20180919/xae/kissclipart-male-avatar-icon-clipart-computer-icons-avatar-104635e37f6b2f94.png","I wear these to work all day. They are comfortable. They look cool and size fits well as expected."),
+            Review("Roqaya Ali",4.0,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ2VgiLlAKs-BEY4sd-qiTehWu3Ke59p2_n7twjMLSFbANDQ5n-LTlc7vvX_VWrrFAc4I&usqp=CAU","Great product and equally impressive customer services, very impressed with this transaction. Thanks"),
+            Review("Sahar Samy",1.0,"https://img.freepik.com/free-vector/woman-profile-cartoon_18591-58477.jpg","tight on the shoes, hurts after wearing it for an hour"),
+            Review("John Manuel",3.0,"https://www.nicepng.com/png/detail/174-1748863_jack-bayley-avatar-vector-icon-boy.png","Look almost repaired. Glue around front of trainers And large size 8 almost a 9")
         )
 
         reviewsAdapter.setDataToAdapter(reviewsList)
