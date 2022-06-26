@@ -150,7 +150,6 @@ class CheckoutFragment : Fragment(){
         }else{
             binding.paymentMethodText.text = getString(R.string.paypal)
             paymentMethod = getString(R.string.paypal)
-            payPalPaymentMethod()
         }
     }
 
@@ -253,6 +252,8 @@ class CheckoutFragment : Fragment(){
                 }
         }
         binding.placeOrder.setOnClickListener {
+            if(paymentMethod == getString(R.string.paypal))
+               payPalPaymentMethod()
             placeOrder()
         }
 
