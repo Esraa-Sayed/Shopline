@@ -10,6 +10,7 @@ https://user-images.githubusercontent.com/53404081/176023405-1d13bed5-9d12-432a-
 </p>
 
 ## Project functionality:
+  * Kotlin
   * MVVM
   * Room
   * Retrofit
