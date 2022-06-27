@@ -16,8 +16,7 @@ https://user-images.githubusercontent.com/53404081/176023405-1d13bed5-9d12-432a-
   * Retrofit
   * Gson
   * Coroutine
-  * Coroutine worker
-  * Notification
+  * Live data
   * Glide
   * Navigation component
   * minSdk 27
