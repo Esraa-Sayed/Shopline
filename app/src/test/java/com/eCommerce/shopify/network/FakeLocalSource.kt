@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.eCommerce.shopify.database.favorite.LocalSourceInterface
 import com.eCommerce.shopify.model.Product
-import com.eCommerce.shopify.model.ProductDetail
 
 class FakeLocalSource: LocalSourceInterface {
 
@@ -26,6 +25,10 @@ class FakeLocalSource: LocalSourceInterface {
     }
 
     override fun getFavoriteWithUserId(userId: Long): LiveData<List<Product>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getOneFavoriteWithUserId(id: Long, userId: Long): LiveData<Product> {
         TODO("Not yet implemented")
     }
 
